@@ -146,7 +146,7 @@ EOD;
 
 		return <<<EOD
 <a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}">{$media}</a>
-<hr/>Published: {$publishedFormatted} - Duration: {$video['duration']}<hr/>{$description}
+<hr/>Published: {$publishedFormatted} - Duration: {$video['duration']}<hr/><p>{$description}</p>
 EOD;	
 	}
 
