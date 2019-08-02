@@ -200,7 +200,7 @@ class Fetch {
 	}
 
 	/**
-	 * Build API URL for a fetch type
+	 * Handle API errors
 	 *
 	 * @param object $response API response
 	 * @throws Exception
