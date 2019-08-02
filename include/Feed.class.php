@@ -129,7 +129,7 @@ EOD;
 		$publishedFormatted = $published->format(constant('DATE_FORMAT'));
 
 		$media = <<<EOD
-<a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}"><img src="{$video['thumbnail']}/></a>
+<a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}"><img src="{$video['thumbnail']}"/></a>
 EOD;
 
 		if ($this->embedVideos === true) {
