@@ -1,0 +1,68 @@
+<?php
+
+class Config {
+
+	/**
+	 * Check PHP version and loaded extensions
+	 *
+	 * @throws Exception if PHP version is not supported or extension is not loaded
+	 */
+	public static function checkInstall() {
+
+		if(version_compare(PHP_VERSION, '7.1.0') === -1) {
+			throw new Exception('BetterYouTubeRss requires at least PHP version 7.1.0!');
+		}
+	
+		if(!extension_loaded('curl')) {
+			throw new Exception('Extension Error: cURL extension not loaded.');	
+		}
+		
+		if(!extension_loaded('openssl')) {
+			throw new Exception('Extension Error: openssl extension not loaded.');
+		}
+
+		if(!extension_loaded('json')) {
+			throw new Exception('Extension Error: JSON extension not loaded.');
+		}
+	}
+
+	/**
+	 * Check config constants
+	 *
+	 * @throws Exception if constant is invalid
+	 */
+	public static function checkConfig() {
+
+		if (empty(constant('YOUTUBE_API_KEY'))) {
+			throw new Exception('Config Error: YouTube API key must be set. [YOUTUBE_API_KEY]');
+		}
+
+		if (!is_bool(constant('YOUTUBE_EMBED_PRIVACY'))) {
+			throw new Exception('Config Error: YouTube Embed Privacy option must be a boolean. [YOUTUBE_EMBED_PRIVACY]');
+		}
+
+		if (!is_bool(constant('RAW_API_ERRORS'))) {
+			throw new Exception('Config Error: Raw API Errors option must be a boolean. [RAW_API_ERRORS]');
+		}
+
+		if (empty(constant('TIMEZONE'))) {
+			throw new Exception('Config Error: Timezone must be set. [TIMEZONE]');
+		}
+
+		if (empty(constant('DATE_FORMAT'))) {
+			throw new Exception('Config Error: DateTime format must be set. [DATE_FORMAT]');
+		}
+
+		if (!is_int(constant('RESULTS_LIMIT'))) {
+			throw new Exception('Config Error: Results limit option must be a integer. [RESULTS_LIMIT]');
+		}
+
+		if ((constant('RESULTS_LIMIT') < 1) || (constant('RESULTS_LIMIT') > 50)) {
+			throw new Exception('Config Error: Results limit option must be a integer between 1 and 50, inclusive. [RESULTS_LIMIT]');
+		}
+
+		if (!is_bool(constant('DISABLE_CACHE'))) {
+			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
+		}
+	}
+}
