@@ -1,0 +1,29 @@
+<?php
+
+// YouTube API Key
+// https://developers.google.com/youtube/v3/getting-started
+define('YOUTUBE_API_KEY', '');
+
+// YouTube Embed Privacy
+// Use the youtube-nocookie.com domain when embeding videos. 
+define('YOUTUBE_EMBED_PRIVACY', true);
+
+// Raw API Errors
+// Display raw API errors
+define('RAW_API_ERRORS', true);
+
+// Timezone
+// https://www.php.net/manual/en/timezones.php
+define('TIMEZONE', 'Europe/London');
+
+// Date Format
+// https://www.php.net/manual/en/function.date.php
+define('DATE_FORMAT', 'F j, Y');
+
+// Results Limit
+// Limit number of videos fetched from YouTube API.
+// Acceptable values are 1 to 50, inclusive.
+define('RESULTS_LIMIT', 25);
+
+// Disable Cache
+define('DISABLE_CACHE', false);
