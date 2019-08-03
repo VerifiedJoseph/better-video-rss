@@ -1,7 +1,6 @@
 <?php
 
-class Helper {
-
+class Helper {	
 	/**
 	 * Parse video duration
 	 *
@@ -11,7 +10,7 @@ class Helper {
 	public static function parseVideoDuration($duration, $allowNegative = true) {
 		$matches = array();
 
-		if(preg_match('/^(-|)?P([0-9]+Y|)?([0-9]+M|)?([0-9]+D|)?T?([0-9]+H|)?([0-9]+M|)?([0-9]+S|)?$/', $duration, $matches)) {       
+		if(preg_match('/^(-|)?P([0-9]+Y|)?([0-9]+M|)?([0-9]+D|)?T?([0-9]+H|)?([0-9]+M|)?([0-9]+S|)?$/', $duration, $matches)) {
 
 			foreach($matches as &$match) {
 				$match = preg_replace('/((?!([0-9]|-)).)*/', '', $match);
@@ -22,12 +21,12 @@ class Helper {
 
 			// Fetch duration parts
 			$m = ($allowNegative) ? $matches[1] : '';
-			$result['year']   = intval($m.$matches[2]);
-			$result['month']  = intval($m.$matches[3]);
-			$result['day']    = intval($m.$matches[4]);
-			$result['hour']   = intval($m.$matches[5]);
-			$result['minute'] = intval($m.$matches[6]);
-			$result['second'] = intval($m.$matches[7]);     
+			$result['year']   = intval($m . $matches[2]);
+			$result['month']  = intval($m . $matches[3]);
+			$result['day']    = intval($m . $matches[4]);
+			$result['hour']   = intval($m . $matches[5]);
+			$result['minute'] = intval($m . $matches[6]);
+			$result['second'] = intval($m . $matches[7]);
 
 			if ($result['hour'] < 10) {
 				$result['hour'] = 0 . $result['hour'];
@@ -42,12 +41,12 @@ class Helper {
 			}
 
 			if($result['hour'] > 0) {
-				$result = $result['hour']. ":" . $result['minute'] . ":" .  $result['second'];
-			
+				$result = $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
+
 			} else {
-				$result = $result['minute'] . ":" .  $result['second']; 
+				$result = $result['minute'] . ':' . $result['second'];
 			}
-		
+
 			return $result;
 		}
 

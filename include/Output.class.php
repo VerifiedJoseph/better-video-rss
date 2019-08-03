@@ -1,7 +1,6 @@
 <?php
 
-class Output {
-
+class Output {	
 	/**
 	 * Outpot error message
 	 */

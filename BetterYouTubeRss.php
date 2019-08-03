@@ -13,7 +13,7 @@ try {
 
 	Config::checkInstall();
 	Config::checkConfig();
-	
+
 	$betterRss = new BetterYouTubeRss();
 
 	$cache = new Cache(

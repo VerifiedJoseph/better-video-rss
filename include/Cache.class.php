@@ -5,7 +5,7 @@ class Cache {
 	/** @var string $name Cache filename */
 	private $name = '';
 	private $data = array(
-		'channel' => array(), 
+		'channel' => array(),
 		'playlist' => array(),
 		'videos' => array()
 	);
@@ -34,7 +34,7 @@ class Cache {
 		$this->data['channel']['id'] = $channelId;
 		$this->setName($channelId);
 	}
-	
+
 	/**
 	 * Return cache data
 	 *
@@ -52,7 +52,7 @@ class Cache {
 		if (Config::get('DisableCache') === true) {
 			return false;
 		}
-		
+
 		if (!is_dir($this->folder)) {
 			mkdir($this->folder, 0700);
 		}
@@ -61,7 +61,7 @@ class Cache {
 
 		if (file_exists($this->path)) {
 			$handle = fopen($this->path, 'r');
-	
+
 			if ($handle !== false) {
 				$contents = fread($handle, filesize($this->path));
 				fclose($handle);
@@ -73,7 +73,7 @@ class Cache {
 
 	/**
 	 * Check if cache part has expired
-	 * 
+	 *
 	 * @param string $part Name of cache part
 	 */
 	public function expired(string $part) {
@@ -95,7 +95,7 @@ class Cache {
 
 	/**
 	 * Update cache data array
-	 * 
+	 *
 	 * @param string $part Name of cache part
 	 * @param array $data Data to update
 	 */
@@ -114,7 +114,7 @@ class Cache {
 		}
 
 		$data = json_encode($this->data, true);
-		$file = fopen($this->path, "w");
+		$file = fopen($this->path, 'w');
 
 		fwrite($file, $data);
 		fclose($file);

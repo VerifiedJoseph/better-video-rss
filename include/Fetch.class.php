@@ -6,7 +6,7 @@ class Fetch {
 
 	/** @var string $endpoint YouTube API Endpoint */
 	private $endpoint = 'https://www.googleapis.com/youtube/v3/';
-	
+
 	/** @var array $data */
 	private $data = array();
 
@@ -80,7 +80,7 @@ class Fetch {
 
 		$statusCode = $curl->getHttpStatusCode();
 		$errorCode = $curl->getCurlErrorCode();
-	
+
 		if ($errorCode !== 0) {
 			throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
 		}
@@ -88,7 +88,7 @@ class Fetch {
 		if ($statusCode === 412) {
 			return array();
 		}
-		
+
 		if ($statusCode !== 200) {
 			$this->handleApiError($curl->response);
 		}
@@ -119,7 +119,7 @@ class Fetch {
 			$channel['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
 			$channel['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
 
-			$this->data['channel'] = array_merge($this->data['channel'], $channel);	
+			$this->data['channel'] = array_merge($this->data['channel'], $channel);
 		}
 
 		if ($this->fetchType === 'playlist') {
@@ -148,7 +148,7 @@ class Fetch {
 				$video['description'] = $item->snippet->description;
 				$video['published'] = $item->snippet->publishedAt;
 				$video['tags'] = array();
-			
+
 				if (isset($item->snippet->tags)) {
 					$video['tags'] = $item->snippet->tags;
 				}
@@ -157,8 +157,8 @@ class Fetch {
 
 				if (isset($item->snippet->thumbnails->maxres)) {
 					$video['thumbnail'] = $item->snippet->thumbnails->maxres->url;
-	
-				} else if (isset($item->snippet->thumbnails->standard)) {
+
+				} elseif (isset($item->snippet->thumbnails->standard)) {
 					$video['thumbnail'] = $item->snippet->thumbnails->standard->url;
 
 				} else {
@@ -171,7 +171,7 @@ class Fetch {
 			$this->data['videos'] = array_merge($this->data['videos'], $videos);
 		}
 	}
-	
+
 	/**
 	 * Build API URL for a fetch type
 	 *
@@ -213,7 +213,7 @@ class Fetch {
 
 			throw new Exception(
 				"API Error \n"
-				. "Fetch: " . $this->fetchType
+				. 'Fetch: ' . $this->fetchType
 				. "\n" . $raw
 			);
 		}
@@ -222,8 +222,8 @@ class Fetch {
 			'API Error'
 			. "\n Fetch:   " . $this->fetchType
 			. "\n Message: " . $error->message
-			. "\n Domain:  " . $error->domain 
-			. "\n Reason:  " . $error->reason 
+			. "\n Domain:  " . $error->domain
+			. "\n Reason:  " . $error->reason
 		);
 	}
 }

@@ -14,7 +14,7 @@ class Feed {
 	 * Constructor
 	 *
 	 * @param array $data Cache/fetch data
-	 * @param boolean $embedVideos Embed YouTube videos in feed 
+	 * @param boolean $embedVideos Embed YouTube videos in feed
 	 */
 	public function __construct(array $data, bool $embedVideos = false) {
 		$this->data = $data;
@@ -108,7 +108,7 @@ EOD;
 
 		foreach($categories as $category) {
 			$category = $this->xmlEncode($category);
-	
+
 			$itemCategories .= <<<EOD
 <category>{$category}</category>
 EOD;
@@ -149,7 +149,7 @@ EOD;
 		return <<<EOD
 <a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}">{$media}</a>
 <hr/>Published: {$publishedFormatted} - Duration: {$video['duration']}<hr/><p>{$description}</p>
-EOD;	
+EOD;
 	}
 
 	/**
@@ -170,7 +170,7 @@ EOD;
 
 		foreach ($lines as $index => $line) {
 			if(preg_match($this->urlRegex, $line, $matches)) {
-				$line = str_replace($matches[0], '<a target="_blank" href="' . $matches[0] . '">' . $matches[0] . '</a>',  $line);			
+				$line = str_replace($matches[0], '<a target="_blank" href="' . $matches[0] . '">' . $matches[0] . '</a>', $line);
 			}
 
 			$formatted .= $line . '<br/>';

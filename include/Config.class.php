@@ -22,11 +22,11 @@ class Config {
 		if(version_compare(PHP_VERSION, '7.1.0') === -1) {
 			throw new Exception('BetterYouTubeRss requires at least PHP version 7.1.0!');
 		}
-	
+
 		if(!extension_loaded('curl')) {
-			throw new Exception('Extension Error: cURL extension not loaded.');	
+			throw new Exception('Extension Error: cURL extension not loaded.');
 		}
-		
+
 		if(!extension_loaded('openssl')) {
 			throw new Exception('Extension Error: openssl extension not loaded.');
 		}
@@ -75,11 +75,11 @@ class Config {
 			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
 		}
 	}
-	
+
 	public static function get(string $key) {
 
 		if (!isset(self::$keys[$key])) {
-			throw new Exception('Invalid config key given:'. $key);
+			throw new Exception('Invalid config key given:' . $key);
 		}
 
 		return constant(self::$keys[$key]);

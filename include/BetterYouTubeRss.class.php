@@ -30,10 +30,10 @@ class BetterYouTubeRss {
 		$this->channelId = $_GET['channel_id'];
 
 		if (isset($_GET['embed_videos'])) {
-			$embedVideos = filter_var($_GET['embed_videos'], FILTER_VALIDATE_BOOLEAN);  
+			$embedVideos = filter_var($_GET['embed_videos'], FILTER_VALIDATE_BOOLEAN);
 		}
 	}
-	
+
 	/**
 	 * Return Channel ID
 	 *
@@ -42,7 +42,7 @@ class BetterYouTubeRss {
 	public function getChannelId() {
 		return $this->channelId;
 	}
-	
+
 	/**
 	 * Return embed video status
 	 *
@@ -51,7 +51,7 @@ class BetterYouTubeRss {
 	public function getEmbedStatus() {
 		return $this->embedVideos;
 	}
-	
+
 	/**
 	 * Return cache and fetch parts
 	 *
