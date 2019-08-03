@@ -43,7 +43,9 @@ class Feed {
 		<link>{$feedUrl}</link>
 		<description>{$feedDescription}</description>
 		<pubDate>{$feedUpdated}</pubDate>
-		<image>{$feedImage}</image>
+		<image>
+			<url>{$feedImage}</url>
+		</image>
 		{$items}
 	</channel>
 	</rss>
