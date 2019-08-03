@@ -185,7 +185,7 @@ class Fetch {
 		}
 
 		if ($this->fetchType === 'playlist') {
-			$parameters = 'playlistItems?part=snippet,contentDetails&maxResults=' . constant('RESULTS_LIMIT') . '&playlistId='
+			$parameters = 'playlistItems?part=snippet,contentDetails&maxResults=' . Config::get('ResultsLimit') . '&playlistId='
 				. $this->data['channel']['playlist'] . '&fields=etag,items(contentDetails(videoId))';
 		}
 
@@ -196,7 +196,7 @@ class Fetch {
 				. $ids . '&fields=etag,items(id,snippet(title,description,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
 		}
 
-		return $this->endpoint . $parameters . '&key=' . constant('YOUTUBE_API_KEY');
+		return $this->endpoint . $parameters . '&key=' . Config::get('YouTubeApiKey');;
 	}
 
 	/**
@@ -208,7 +208,7 @@ class Fetch {
 	private function handleApiError($response) {
 		$error = $response->error->errors[0];
 
-		if (constant('RAW_API_ERRORS') === true) {
+		if (config::get('RawApiErrors') === true) {
 			$raw = json_encode($response->error, JSON_PRETTY_PRINT);
 
 			throw new Exception(

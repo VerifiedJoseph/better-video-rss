@@ -49,7 +49,7 @@ class Cache {
 	 */
 	public function load() {
 
-		if (constant('DISABLE_CACHE') === true) {
+		if (Config::get('DisableCache') === true) {
 			return false;
 		}
 		
@@ -78,7 +78,7 @@ class Cache {
 	 */
 	public function expired(string $part) {
 
-		if (constant('DISABLE_CACHE') === true) {
+		if (Config::get('DisableCache') === true) {
 			return true;
 		}
 
@@ -109,7 +109,7 @@ class Cache {
 	 */
 	public function save() {
 
-		if (constant('DISABLE_CACHE') === true) {
+		if (Config::get('DisableCache') === true) {
 			return false;
 		}
 

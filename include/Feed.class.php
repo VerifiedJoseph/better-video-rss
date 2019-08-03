@@ -127,8 +127,8 @@ EOD;
 
 		$description = $this->formatDescription($video['description']);
 
-		$published = new DateTime($video['published'], new DateTimeZone(constant('TIMEZONE')));
-		$publishedFormatted = $published->format(constant('DATE_FORMAT'));
+		$published = new DateTime($video['published'], new DateTimeZone(config::get('Timezone')));
+		$publishedFormatted = $published->format(config::get('DateFormat'));
 
 		$media = <<<EOD
 <a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}"><img src="{$video['thumbnail']}"/></a>
@@ -137,7 +137,7 @@ EOD;
 		if ($this->embedVideos === true) {
 			$url = $this->embedUrl;
 
-			if (constant('YOUTUBE_EMBED_PRIVACY')) {
+			if (config::get('YouTubeEmbedPrivacy')) {
 				$url = $this->embedUrlNoCookie;
 			}
 
