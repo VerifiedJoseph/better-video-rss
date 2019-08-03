@@ -2,6 +2,16 @@
 
 class Config {
 
+	private static $keys = array(
+		'YouTubeApiKey' => 'YOUTUBE_API_KEY',
+		'YouTubeEmbedPrivacy' => 'YOUTUBE_EMBED_PRIVACY',
+		'RawApiErrors' => 'RAW_API_ERRORS',
+		'Timezone' => 'TIMEZONE',
+		'DateFormat' => 'DATE_FORMAT',
+		'ResultsLimit' => 'RESULTS_LIMIT',
+		'DisableCache' => 'DISABLE_CACHE'
+	);
+
 	/**
 	 * Check PHP version and loaded extensions
 	 *
@@ -64,5 +74,14 @@ class Config {
 		if (!is_bool(constant('DISABLE_CACHE'))) {
 			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
 		}
+	}
+	
+	public static function get(string $key) {
+
+		if (!isset(self::$keys[$key])) {
+			throw new Exception('Invalid config key given:'. $key);
+		}
+
+		return constant(self::$keys[$key]);
 	}
 }
