@@ -71,7 +71,7 @@ class Fetch {
 
 		// Set if-Match header
 		if (!empty($etag)) {
-			$curl->setHeader('If-Match', $etag);
+			$curl->setHeader('If-None-Match', $etag);
 		}
 
 		$curl->get(
@@ -85,7 +85,7 @@ class Fetch {
 			throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
 		}
 
-		if ($statusCode === 412) {
+		if ($statusCode === 304) {
 			return array();
 		}
 
