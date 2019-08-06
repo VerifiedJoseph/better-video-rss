@@ -10,10 +10,12 @@ class Cache {
 		'videos' => array()
 	);
 
+	// TODO: Move to config file?
 	private $expiresIn = array(
 		'channel' => '+10 days',
 		'playlist' => '+10 minutes',
 		'videos' => '+10 minutes',
+		'videoItems' => '+4 hours'
 	);
 
 	/** @var string $path Cache file path */
@@ -164,5 +166,25 @@ class Cache {
 	 */
 	private function setName(string $channelId) {
 		$this->name = hash('sha256', $channelId);
+	}
+	
+	/**
+	 * Set cache expire date for each video
+	 *
+	 * @param array $data
+	 * @return array $videos
+	 */
+	private function setVideoExpireDate(array $data) {
+		
+		$videos = array(
+			'items' => array()
+		);
+
+		foreach ($data['items'] as $video) {
+			$video['expires'] = strtotime($this->expiresIn['videoItems']);
+			$videos['items'][$video['id']] = $video;
+		}
+
+		return $videos;
 	}
 }
