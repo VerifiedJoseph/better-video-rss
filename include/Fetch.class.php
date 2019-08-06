@@ -200,7 +200,7 @@ class Fetch {
 				. $ids . '&fields=etag,items(id,snippet(title,description,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
 		}
 
-		return $this->endpoint . $parameters . '&key=' . Config::get('YouTubeApiKey');
+		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YouTubeApiKey');
 	}
 
 	/**
