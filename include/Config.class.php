@@ -9,6 +9,7 @@ class Config {
 		'Timezone' => 'TIMEZONE',
 		'DateFormat' => 'DATE_FORMAT',
 		'ResultsLimit' => 'RESULTS_LIMIT',
+		'CacheDirectory' => 'CACHE_DIR',
 		'DisableCache' => 'DISABLE_CACHE'
 	);
 
