@@ -132,13 +132,16 @@ class Cache {
 	public function update(string $part, array $data = array()) {
 
 		$this->cacheUpdated = true;
-		
+
 		if ($part === 'videos') {
 			$data = $this->setVideoExpireDate($data);
+
 			$this->data['videos']['items'] = array_merge(
 				$this->data['videos']['items'],
 				$data['items']
 			);
+
+			$this->orderVideos();
 
 		} else {
 			$this->data[$part] = $data;
@@ -188,5 +191,24 @@ class Cache {
 		}
 
 		return $videos;
+	}
+	
+	/**
+	 * Order video item by the playlist order
+	 *
+	 * Video items that do not have a video ID in the playlist array are removed.
+	 * 
+	 * @param array $data
+	 * @return array $videos
+	 */
+	private function orderVideos() {
+
+		$videos = array();
+
+		foreach ($this->data['playlist']['videos'] as $videoId) {
+			$videos[$videoId] = $data['items']['videos'][$videoId];
+		}
+
+		$data['items'] = $videos;
 	}
 }
