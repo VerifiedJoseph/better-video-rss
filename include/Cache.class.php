@@ -60,10 +60,6 @@ class Cache {
 			return false;
 		}
 
-		if (!is_dir($this->folder)) {
-			mkdir($this->folder, 0700);
-		}
-
 		$this->path = $this->folder . '/' . $this->name . $this->fileExt;
 
 		if (file_exists($this->path)) {
