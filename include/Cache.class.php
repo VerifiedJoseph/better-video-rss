@@ -194,7 +194,7 @@ class Cache {
 	}
 	
 	/**
-	 * Order video item by the playlist order
+	 * Order video items by the playlist order
 	 *
 	 * Video items that do not have a video ID in the playlist array are removed.
 	 * 
