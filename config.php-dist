@@ -25,5 +25,9 @@ define('DATE_FORMAT', 'F j, Y');
 // Acceptable values are 1 to 50, inclusive.
 define('RESULTS_LIMIT', 25);
 
+// Cache directory
+// Name of the directory that cache files are saved to.
+define('CACHE_DIR', 'cache');
+
 // Disable Cache
 define('DISABLE_CACHE', false);
