@@ -206,9 +206,9 @@ class Cache {
 		$videos = array();
 
 		foreach ($this->data['playlist']['videos'] as $videoId) {
-			$videos[$videoId] = $data['items']['videos'][$videoId];
+			$videos[$videoId] = $this->data['videos']['items'][$videoId];
 		}
 
-		$data['items'] = $videos;
+		$this->data['videos']['items'] = $videos;
 	}
 }
