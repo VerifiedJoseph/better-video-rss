@@ -23,9 +23,6 @@ class Cache {
 	/** @var string $path Cache file path */
 	private $path = '';
 
-	/** @var string $folder Cache folder */
-	private $folder = 'cache';
-
 	/** @var string $path Cache file extension */
 	private $fileExt = '.cache';
 
@@ -60,7 +57,7 @@ class Cache {
 			return false;
 		}
 
-		$this->path = $this->folder . '/' . $this->name . $this->fileExt;
+		$this->path = Config::get('CacheDirectory') . '/' . $this->name . $this->fileExt;
 
 		if (file_exists($this->path)) {
 			$handle = fopen($this->path, 'r');
