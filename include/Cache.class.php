@@ -7,13 +7,17 @@ class Cache {
 	private $data = array(
 		'channel' => array(),
 		'playlist' => array(),
-		'videos' => array()
+		'videos' => array(
+			'items' => array()
+		)
 	);
 
+	// TODO: Move to config file?
 	private $expiresIn = array(
 		'channel' => '+10 days',
 		'playlist' => '+10 minutes',
 		'videos' => '+10 minutes',
+		'videoItems' => '+4 hours'
 	);
 
 	/** @var string $path Cache file path */
@@ -25,6 +29,9 @@ class Cache {
 	/** @var string $path Cache file extension */
 	private $fileExt = '.cache';
 
+	/** @var boolean $cacheUpdated Cache update status */
+	private $cacheUpdated = false;
+	
 	/**
 	 * Constructor
 	 *
@@ -72,6 +79,29 @@ class Cache {
 	}
 
 	/**
+	 * Returns list of expired videos
+	 *
+	 * @return string
+	 */
+	public function getExpiredVideos() {
+
+		$ExpiredVideos = array();
+
+		if (empty($this->data['videos']['items']) || Config::get('DisableCache') === true) {
+			return implode(',', $this->data['playlist']['videos']);
+		}
+
+		foreach ($this->data['playlist']['videos'] as $id) {
+
+			if (!isset($this->data['videos']['items'][$id]) || time() > $this->data['videos']['items'][$id]['expires']) {
+				$ExpiredVideos[] = $id;	
+			}
+		}
+
+		return implode(',', $ExpiredVideos);
+	}
+
+	/**
 	 * Check if cache part has expired
 	 *
 	 * @param string $part Name of cache part
@@ -100,7 +130,23 @@ class Cache {
 	 * @param array $data Data to update
 	 */
 	public function update(string $part, array $data = array()) {
-		$this->data[$part] = $data;
+
+		$this->cacheUpdated = true;
+
+		if ($part === 'videos') {
+			$data = $this->setVideoExpireDate($data);
+
+			$this->data['videos']['items'] = array_merge(
+				$this->data['videos']['items'],
+				$data['items']
+			);
+
+			$this->orderVideos();
+
+		} else {
+			$this->data[$part] = $data;
+		}
+
 		$this->data[$part]['expires'] = strtotime($this->expiresIn[$part]);
 	}
 
@@ -109,15 +155,13 @@ class Cache {
 	 */
 	public function save() {
 
-		if (Config::get('DisableCache') === true) {
-			return false;
+		if ($this->cacheUpdated === true) {
+			$data = json_encode($this->data);
+			$file = fopen($this->path, 'w');
+
+			fwrite($file, $data);
+			fclose($file);
 		}
-
-		$data = json_encode($this->data, true);
-		$file = fopen($this->path, 'w');
-
-		fwrite($file, $data);
-		fclose($file);
 	}
 
 	/**
@@ -127,5 +171,44 @@ class Cache {
 	 */
 	private function setName(string $channelId) {
 		$this->name = hash('sha256', $channelId);
+	}
+	
+	/**
+	 * Set cache expire date for each video
+	 *
+	 * @param array $data
+	 * @return array $videos
+	 */
+	private function setVideoExpireDate(array $data) {
+		
+		$videos = array(
+			'items' => array()
+		);
+
+		foreach ($data['items'] as $video) {
+			$video['expires'] = strtotime($this->expiresIn['videoItems']);
+			$videos['items'][$video['id']] = $video;
+		}
+
+		return $videos;
+	}
+	
+	/**
+	 * Order video items by the playlist order
+	 *
+	 * Video items that do not have a video ID in the playlist array are removed.
+	 * 
+	 * @param array $data
+	 * @return array $videos
+	 */
+	private function orderVideos() {
+
+		$videos = array();
+
+		foreach ($this->data['playlist']['videos'] as $videoId) {
+			$videos[$videoId] = $this->data['videos']['items'][$videoId];
+		}
+
+		$this->data['videos']['items'] = $videos;
 	}
 }

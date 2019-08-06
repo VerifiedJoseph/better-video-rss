@@ -27,8 +27,18 @@ try {
 	);
 
 	foreach($betterRss->getParts() as $part) {
+		$parameter = '';
+
 		if ($cache->expired($part)) {
-			$fetch->part($part);
+			if ($part === 'videos') {
+				$parameter = $cache->getExpiredVideos();
+				
+				if (empty($parameter)) {
+					continue;
+				}
+			}
+
+			$fetch->part($part, $parameter);
 			$cache->update($part, $fetch->getData($part));
 		}
 	}
