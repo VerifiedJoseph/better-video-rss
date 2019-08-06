@@ -7,7 +7,9 @@ class Cache {
 	private $data = array(
 		'channel' => array(),
 		'playlist' => array(),
-		'videos' => array()
+		'videos' => array(
+			'items' => array()
+		)
 	);
 
 	// TODO: Move to config file?
