@@ -72,6 +72,18 @@ class Config {
 			throw new Exception('Config Error: Results limit option must be a integer between 1 and 50, inclusive. [RESULTS_LIMIT]');
 		}
 
+		if (empty(constant('CACHE_DIR'))) {
+			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
+		}
+
+		if (!is_dir(constant('CACHE_DIR')) && !mkdir(constant('CACHE_DIR'), 0700)) {
+			throw new Exception('Config Error: Could not create cache directory. [CACHE_DIR]');
+		}
+		
+		if (is_dir(constant('CACHE_DIR')) && !is_writable(constant('CACHE_DIR'))) {
+			throw new Exception('Config Error: Cache directory is not writable. [CACHE_DIR]');
+		}
+		
 		if (!is_bool(constant('DISABLE_CACHE'))) {
 			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
 		}
