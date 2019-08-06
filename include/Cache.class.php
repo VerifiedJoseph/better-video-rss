@@ -25,6 +25,9 @@ class Cache {
 	/** @var string $path Cache file extension */
 	private $fileExt = '.cache';
 
+	/** @var boolean $cacheUpdated Cache update status */
+	private $cacheUpdated = false;
+	
 	/**
 	 * Constructor
 	 *
@@ -122,15 +125,13 @@ class Cache {
 	 */
 	public function save() {
 
-		if (Config::get('DisableCache') === true) {
-			return false;
+		if ($this->cacheUpdated === true) {
+			$data = json_encode($this->data);
+			$file = fopen($this->path, 'w');
+
+			fwrite($file, $data);
+			fclose($file);
 		}
-
-		$data = json_encode($this->data, true);
-		$file = fopen($this->path, 'w');
-
-		fwrite($file, $data);
-		fclose($file);
 	}
 
 	/**
