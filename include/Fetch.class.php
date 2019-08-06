@@ -42,7 +42,7 @@ class Fetch {
 	 *
 	 * @param string $part Name part
 	 */
-	public function part(string $part) {
+	public function part(string $part, string $parameter = '') {
 
 		$this->fetchType = $part;
 		$etag = '';
@@ -51,7 +51,7 @@ class Fetch {
 			$etag = $this->data[$this->fetchType]['etag'];
 		}
 
-		$response = $this->fetch($etag);
+		$response = $this->fetch($etag, $parameter);
 
 		if (!empty($response)) {
 			$this->handleResponse($response);
@@ -65,7 +65,7 @@ class Fetch {
 	 * @return array|object
 	 * @throws Exception If a curl error has occurred.
 	 */
-	private function fetch(string $etag = null) {
+	private function fetch(string $etag = '', string $parameter = '') {
 
 		$curl = new Curl();
 
@@ -75,7 +75,7 @@ class Fetch {
 		}
 
 		$curl->get(
-			$this->buildApiUrl()
+			$this->buildApiUrl($parameter)
 		);
 
 		$statusCode = $curl->getHttpStatusCode();
@@ -165,10 +165,14 @@ class Fetch {
 					$video['thumbnail']  = 'https://i.ytimg.com/vi/' . $item->id . '/default.jpg';
 				}
 
-				$videos['items'][] = $video;
+				$videos['items'][$video['id']] = $video;
 			}
-
-			$this->data['videos'] = array_merge($this->data['videos'], $videos);
+			
+			if (!empty($videos['items'])) {
+				$this->data['videos'] = array_merge($this->data['videos'], $videos);	
+			} else {
+				$this->data['videos'] = $videos;
+			}
 		}
 	}
 
@@ -177,7 +181,7 @@ class Fetch {
 	 *
 	 * @return string Returns API URL
 	 */
-	private function buildApiUrl() {
+	private function buildApiUrl(string $parameter = '') {
 
 		if ($this->fetchType === 'channel') {
 			$parameters = 'channels?part=snippet,contentDetails&id='
@@ -190,13 +194,13 @@ class Fetch {
 		}
 
 		if ($this->fetchType === 'videos') {
-			$ids = implode(',', $this->data['playlist']['videos']);
+			$ids = $parameter;
 
 			$parameters = 'videos?part=id,snippet,contentDetails&id='
 				. $ids . '&fields=etag,items(id,snippet(title,description,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
 		}
 
-		return $this->endpoint . $parameters . '&key=' . Config::get('YouTubeApiKey');;
+		return $this->endpoint . $parameters . '&key=' . Config::get('YouTubeApiKey');
 	}
 
 	/**

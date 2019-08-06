@@ -100,7 +100,20 @@ class Cache {
 	 * @param array $data Data to update
 	 */
 	public function update(string $part, array $data = array()) {
-		$this->data[$part] = $data;
+
+		$this->cacheUpdated = true;
+		
+		if ($part === 'videos') {
+			$data = $this->setVideoExpireDate($data);
+			$this->data['videos']['items'] = array_merge(
+				$this->data['videos']['items'],
+				$data['items']
+			);
+
+		} else {
+			$this->data[$part] = $data;
+		}
+
 		$this->data[$part]['expires'] = strtotime($this->expiresIn[$part]);
 	}
 
