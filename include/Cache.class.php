@@ -137,6 +137,7 @@ class Cache {
 			$this->data[$part] = $data;
 		}
 
+		$this->data[$part]['fetched'] = strtotime('now');
 		$this->data[$part]['expires'] = strtotime($this->expiresIn[$part]);
 	}
 
