@@ -17,7 +17,7 @@ class Cache {
 		'channel' => '+10 days',
 		'playlist' => '+10 minutes',
 		'videos' => '+10 minutes',
-		'videoItems' => '+4 hours'
+		'videoItems' => '+6 hours'
 	);
 
 	/** @var string $path Cache file path */
