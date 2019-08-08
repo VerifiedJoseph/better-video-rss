@@ -10,6 +10,7 @@ class Config {
 		'DateFormat' => 'DATE_FORMAT',
 		'ResultsLimit' => 'RESULTS_LIMIT',
 		'CacheDirectory' => 'CACHE_DIR',
+		'CacheFilenameExt' => 'CACHE_FILENAME_EXT',
 		'DisableCache' => 'DISABLE_CACHE',
 		'EnableCacheViewer' => 'ENABLE_CACHE_VIEWER'
 	);
