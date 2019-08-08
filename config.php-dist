@@ -31,3 +31,6 @@ define('CACHE_DIR', 'cache');
 
 // Disable Cache
 define('DISABLE_CACHE', false);
+
+// Enable cache viewer
+define('ENABLE_CACHE_VIEWER', false);
