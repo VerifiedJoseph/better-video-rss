@@ -89,7 +89,7 @@ class Config {
 		if (empty(constant('CACHE_FILENAME_EXT'))) {
 			throw new Exception('Config Error: Cache filename extension must be set. [CACHE_FILENAME_EXT]');
 		}
-		
+
 		if (!is_bool(constant('DISABLE_CACHE'))) {
 			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
 		}

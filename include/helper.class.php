@@ -1,6 +1,6 @@
 <?php
 
-class Helper {	
+class Helper {
 	/**
 	 * Parse video duration
 	 *
