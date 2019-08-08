@@ -137,6 +137,7 @@ class Cache {
 			$this->data[$part] = $data;
 		}
 
+		$this->data[$part]['fetched'] = strtotime('now');
 		$this->data[$part]['expires'] = strtotime($this->expiresIn[$part]);
 	}
 
@@ -176,6 +177,7 @@ class Cache {
 		);
 
 		foreach ($data['items'] as $video) {
+			$video['fetched'] = strtotime('now');
 			$video['expires'] = strtotime($this->expiresIn['videoItems']);
 			$videos['items'][$video['id']] = $video;
 		}
