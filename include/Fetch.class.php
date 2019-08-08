@@ -167,9 +167,9 @@ class Fetch {
 
 				$videos['items'][$video['id']] = $video;
 			}
-			
+
 			if (!empty($videos['items'])) {
-				$this->data['videos'] = array_merge($this->data['videos'], $videos);	
+				$this->data['videos'] = array_merge($this->data['videos'], $videos);
 			} else {
 				$this->data['videos'] = $videos;
 			}

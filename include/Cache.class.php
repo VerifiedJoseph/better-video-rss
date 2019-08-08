@@ -25,7 +25,7 @@ class Cache {
 
 	/** @var boolean $cacheUpdated Cache update status */
 	private $cacheUpdated = false;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -84,7 +84,7 @@ class Cache {
 		foreach ($this->data['playlist']['videos'] as $id) {
 
 			if (!isset($this->data['videos']['items'][$id]) || time() > $this->data['videos']['items'][$id]['expires']) {
-				$ExpiredVideos[] = $id;	
+				$ExpiredVideos[] = $id;
 			}
 		}
 
@@ -163,7 +163,7 @@ class Cache {
 	private function setName(string $channelId) {
 		$this->name = hash('sha256', $channelId);
 	}
-	
+
 	/**
 	 * Set cache expire date for each video
 	 *
@@ -171,7 +171,7 @@ class Cache {
 	 * @return array $videos
 	 */
 	private function setVideoExpireDate(array $data) {
-		
+
 		$videos = array(
 			'items' => array()
 		);
@@ -184,12 +184,12 @@ class Cache {
 
 		return $videos;
 	}
-	
+
 	/**
 	 * Order video items by the playlist order
 	 *
 	 * Video items that do not have a video ID in the playlist array are removed.
-	 * 
+	 *
 	 * @param array $data
 	 * @return array $videos
 	 */
