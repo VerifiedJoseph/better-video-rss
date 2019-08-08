@@ -10,6 +10,7 @@ class Config {
 		'DateFormat' => 'DATE_FORMAT',
 		'ResultsLimit' => 'RESULTS_LIMIT',
 		'CacheDirectory' => 'CACHE_DIR',
+		'CacheFilenameExt' => 'CACHE_FILENAME_EXT',
 		'DisableCache' => 'DISABLE_CACHE',
 		'EnableCacheViewer' => 'ENABLE_CACHE_VIEWER'
 	);
@@ -85,6 +86,10 @@ class Config {
 			throw new Exception('Config Error: Cache directory is not writable. [CACHE_DIR]');
 		}
 
+		if (empty(constant('CACHE_FILENAME_EXT'))) {
+			throw new Exception('Config Error: Cache filename extension must be set. [CACHE_FILENAME_EXT]');
+		}
+		
 		if (!is_bool(constant('DISABLE_CACHE'))) {
 			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
 		}

@@ -29,6 +29,9 @@ define('RESULTS_LIMIT', 25);
 // Name of the directory that cache files are saved to.
 define('CACHE_DIR', 'cache');
 
+// Cache filename extension
+define('CACHE_FILENAME_EXT', 'cache');
+
 // Disable Cache
 define('DISABLE_CACHE', false);
 

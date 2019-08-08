@@ -17,11 +17,6 @@ class CacheViewer {
 	private $data = array();
 
 	/**
-	 * @var string $path Cache file extension
-	 */
-	private $fileExt = '.cache';
-
-	/**
 	 * Constructor
 	 *
 	 * @throws Exception If EnableCacheViewer is false.
@@ -68,7 +63,7 @@ class CacheViewer {
 	 */
 	private function loadFiles() {
 
-		$regex = '/' . preg_quote($this->fileExt) . '$/';
+		$regex = '/' . preg_quote(Config::get('CacheFilenameExt')) . '$/';
 
 		$directoryPath = '..' . DIRECTORY_SEPARATOR . Config::get('CacheDirectory');
 		$cacheDirectory = new RecursiveDirectoryIterator($directoryPath);
