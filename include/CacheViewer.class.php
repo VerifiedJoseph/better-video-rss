@@ -63,7 +63,7 @@ class CacheViewer {
 	 */
 	private function loadFiles() {
 
-		$regex = '/' . preg_quote(Config::get('CacheFilenameExt')) . '$/';
+		$regex = '/.' . preg_quote(Config::get('CacheFilenameExt')) . '$/';
 
 		$directoryPath = '..' . DIRECTORY_SEPARATOR . Config::get('CacheDirectory');
 		$cacheDirectory = new RecursiveDirectoryIterator($directoryPath);
@@ -85,7 +85,7 @@ class CacheViewer {
 
 			$data = json_decode($contents, true);
 			$this->data[] = array(
-			'id' => $file->getBasename('.cache'),
+			'id' => $file->getBasename('.' . Config::get('CacheFilenameExt')),
 			'modified' => $file->getMTime(),
 			'size' => $file->getSize(),
 			'contents' => $data

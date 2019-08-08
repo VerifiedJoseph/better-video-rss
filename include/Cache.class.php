@@ -54,7 +54,7 @@ class Cache {
 			return false;
 		}
 
-		$this->path = Config::get('CacheDirectory') . '/' . $this->name . Config::get('CacheFilenameExt');
+		$this->path = Config::get('CacheDirectory') . '/' . $this->name . '.' . Config::get('CacheFilenameExt');
 
 		if (file_exists($this->path)) {
 			$handle = fopen($this->path, 'r');
