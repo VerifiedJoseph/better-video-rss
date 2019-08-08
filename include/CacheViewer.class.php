@@ -213,6 +213,7 @@ HTML;
 		<strong>URL</strong>: <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
 		<strong>Published</strong>: {$channel['published']}<br>
 		<strong>Playlist ID</strong>: {$channel['playlist']}<br>
+		<strong>Fetched:</strong> {$this->convertUnixTime($channel['fetched'])}<br>
 		<strong>Expires</strong>: {$this->convertUnixTime($channel['expires'])}<br>
 	</td>
 	<td>
@@ -247,7 +248,8 @@ HTML;
 	<td>
 		<strong>Video IDs:</strong><br>
 		<textarea cols="140" rows="2" readonly>{$videoIDs}</textarea>
-		<br><strong>Expires:</strong> {$this->convertUnixTime($playlist['expires'])}<br>
+		<strong>Fetched:</strong> {$this->convertUnixTime($playlist['fetched'])}<br>
+		<strong>Expires:</strong> {$this->convertUnixTime($playlist['expires'])}<br>
 	</td>
 </tr>
 </table>
@@ -278,6 +280,7 @@ HTML;
 		<strong>URL</strong>: <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
 		<strong>Published</strong>: {$video['published']}<br>
 		<strong>Duration</strong>: {$video['duration']}<br>
+		<strong>Fetched:</strong> {$this->convertUnixTime($video['fetched'])}<br>
 		<strong>Expires</strong>: {$this->convertUnixTime($video['expires'])}<br>
 	</td>
 	<td>
