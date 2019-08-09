@@ -316,8 +316,11 @@ HTML;
 	 * @param  string $timestamp Unix timestamp
 	 * @return string
 	 */
-	private function convertUnixTime(int $timestamp = 0) {
-		$dt = new DateTime($video['published'], new DateTimeZone(config::get('Timezone')));
+	private function convertUnixTime(int $timestamp = 0) {	
+		$dt = new DateTime();
+		$dt->setTimestamp($timestamp);
+		$dt->setTimezone(new DateTimeZone(config::get('Timezone')));
+
 		return $formatted = $dt->format('Y-m-d H:i:s');
 	}
 
