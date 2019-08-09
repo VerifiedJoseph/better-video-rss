@@ -317,7 +317,8 @@ HTML;
 	 * @return string
 	 */
 	private function convertUnixTime(int $timestamp = 0) {
-		return date('Y-m-d H:i:s', $timestamp);
+		$dt = new DateTime($video['published'], new DateTimeZone(config::get('Timezone')));
+		return $formatted = $dt->format('Y-m-d H:i:s');
 	}
 
 	/**
