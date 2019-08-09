@@ -34,6 +34,7 @@ class Cache {
 	public function __construct(string $channelId) {
 		$this->data['channel']['id'] = $channelId;
 		$this->setName($channelId);
+		$this->setPath();
 	}
 
 	/**
@@ -53,8 +54,6 @@ class Cache {
 		if (Config::get('DisableCache') === true) {
 			return false;
 		}
-
-		$this->path = Config::get('CacheDirectory') . '/' . $this->name . '.' . Config::get('CacheFilenameExt');
 
 		if (file_exists($this->path)) {
 			$handle = fopen($this->path, 'r');
@@ -164,6 +163,13 @@ class Cache {
 		$this->name = hash('sha256', $channelId);
 	}
 
+	/**
+	 * Set cache file path
+	 */
+	private function setPath() {
+		$this->path = Config::get('CacheDirectory') . DIRECTORY_SEPARATOR . $this->name . '.' . Config::get('CacheFilenameExt');
+	}
+	
 	/**
 	 * Set cache expire date for each video
 	 *
