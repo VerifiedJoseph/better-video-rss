@@ -105,6 +105,8 @@ class CacheViewer {
 
 		foreach ($this->data as $index => $data) {
 
+			$size = FileHelper::readableFileSize($data['size']);
+			
 			$tbody .= <<<HTML
 <tr style="text-align:center">
 	<td id="{$data['id']}">$index</td>
@@ -114,7 +116,7 @@ class CacheViewer {
 		</span>
 	</td>
 	<td>{$this->convertUnixTime($data['modified'])}</td>
-	<td>{$data['modified']}</td>
+	<td>{$size}</td>
 	<td><a href="?id={$data['id']}#{$data['id']}">View Data</a>/<a href="?id={$data['id']}&raw#{$data['id']}">View Raw</a></td>
 </tr>
 HTML;
