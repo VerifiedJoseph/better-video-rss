@@ -17,6 +17,11 @@ class CacheViewer {
 	private $data = array();
 
 	/**
+	 * @var int $cacheSize Total size of the cache files
+	 */
+	private $cacheSize = 0;
+
+	/**
 	 * Constructor
 	 *
 	 * @throws Exception If EnableCacheViewer is false.
@@ -90,6 +95,8 @@ class CacheViewer {
 			'size' => $file->getSize(),
 			'contents' => $data
 			);
+			
+			$this->cacheSize += $file->getSize();
 		}
 	}
 
@@ -101,6 +108,7 @@ class CacheViewer {
 	private function display() {
 
 		$fileCount = count($this->data);
+		$cacheSize = FileHelper::readableFileSize($this->cacheSize);
 		$tbody = '';
 
 		foreach ($this->data as $index => $data) {
@@ -136,7 +144,20 @@ HTML;
 <body>
 	<div id="header">Cache Viewer</div>
 	<div id="main">
-		Cache files: {$fileCount}
+		<table style="width:200px; margin-bottom: 10px;">
+			<thead>
+				<tr>
+					<th>Files</th>
+					<th>Size</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr style="text-align:center">
+					<td>{$fileCount}</td>
+					<td>{$cacheSize}</td>
+				</tr>
+			</tbody>
+		</table>
 		<table style="width:1145px;">
 			<thead>
 				<tr>
