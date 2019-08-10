@@ -115,7 +115,7 @@ class Fetch {
 			$channel['url'] = 'https://youtube.com/channel/' . $this->data['channel']['id'];
 			$channel['title'] = $response->items['0']->snippet->title;
 			$channel['description'] = $response->items['0']->snippet->description;
-			$channel['published'] = $response->items['0']->snippet->publishedAt;
+			$channel['published'] = strtotime($response->items['0']->snippet->publishedAt);
 			$channel['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
 			$channel['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
 
@@ -146,7 +146,7 @@ class Fetch {
 				$video['url'] = 'https://youtube.com/watch?v=' . $item->id;
 				$video['title'] = $item->snippet->title;
 				$video['description'] = $item->snippet->description;
-				$video['published'] = $item->snippet->publishedAt;
+				$video['published'] = strtotime($item->snippet->publishedAt);
 				$video['tags'] = array();
 
 				if (isset($item->snippet->tags)) {
