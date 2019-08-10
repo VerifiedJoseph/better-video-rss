@@ -1,5 +1,8 @@
 <?php
 
+// Absolute File Path
+define('ABSOLUTE_PATH', __DIR__);
+
 // YouTube API Key
 // https://developers.google.com/youtube/v3/getting-started
 define('YOUTUBE_API_KEY', '');
