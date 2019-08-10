@@ -117,7 +117,7 @@ class CacheViewer {
 			$size = FileHelper::readableFileSize($data['size']);
 
 			$tbody .= <<<HTML
-<tr>
+<tr class="center">
 	<td id="{$data['id']}">$index</td>
 	<td>{$data['id']}<br>
 		<span style="font-size:13px;">
@@ -166,7 +166,7 @@ HTML;
 				</tr>
 			</thead>
 			<tbody>
-				<tr style="text-align:center">
+				<tr class="center">
 					<td>{$fileCount}</td>
 					<td>{$cacheSize}</td>
 				</tr>
@@ -174,7 +174,7 @@ HTML;
 		</table>
 		<table style="width:1150px;">
 			<thead>
-				<tr>
+				<tr class="center">
 					<th>#</th>
 					<th>Cache ID</th>
 					<th>Last Modified</th>

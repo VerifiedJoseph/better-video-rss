@@ -58,7 +58,7 @@ table th {
 	padding: 4px;
 }
 
-table tr {
+table tr.center {
 	text-align:center;
 }
 
