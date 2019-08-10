@@ -214,7 +214,7 @@ HTML;
 		} else {
 
 			$tdData = <<<HTML
-<a style="float: right;" href="cache-viewer.php#{$data['id']}">[Close]</a>
+<a style="float: right;" href="cache-viewer.php">[Close]</a>
 {$this->displayChannel($data['contents']['channel'])}<br/>
 {$this->displayplaylist($data['contents']['playlist'])}<br>
 {$this->displayVideos($data['contents']['videos'])}<br/>
