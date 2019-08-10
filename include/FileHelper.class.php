@@ -24,22 +24,22 @@ class FileHelper {
 	 * @return string $string Readable file size
 	 */
 	public static function readableFileSize (int $bytes = 0) {
-	
+
 		if ($bytes >= self::$byteCountGb) { // 1GB or greater
 			$string = round($bytes / self::$byteCountGb, self::$numDecimalPlaces) . ' GB';
 
 		} elseif ($bytes >= self::$byteCountMb) { // 1MB or greater
 			$string = round($bytes / self::$byteCountMb, self::$numDecimalPlaces) . ' MB';
-		
+
 		} elseif ($bytes >= self::$byteCountKb) { // 1KB or greater
 			$string = round($bytes / self::$byteCountKb, self::$numDecimalPlaces) . ' KB';
-		
+
 		} elseif ($bytes > self::$minByteCount) { // Greater than 1 byte
 			$string = $bytes . ' bytes';
 
 		} elseif ($bytes === self::$minByteCount) { // 1 byte
 			$string = $bytes . ' byte';
-		
+
 		} else { // 0 bytes
 			$string = '0 bytes';
 		}
