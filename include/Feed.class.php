@@ -30,7 +30,9 @@ class Feed {
 		$feedTitle = $this->xmlEncode($this->data['channel']['title']);
 		$feedAuthor = $this->xmlEncode($this->data['channel']['title']);
 		$feedUrl = $this->xmlEncode($this->data['channel']['url']);
-		$feedUpdated = $this->xmlEncode(gmdate('r', strtotime('now')));
+		$feedUpdated = $this->xmlEncode(
+			Helper::convertUnixTime(strtotime('now'), 'r')
+		);
 		$feedImage = $this->xmlEncode($this->data['channel']['thumbnail']);
 
 		$items = $this->buildItmes();
@@ -75,7 +77,9 @@ EOD;
 
 			$itemTitle = $this->xmlEncode($video['title']);
 			$itemUrl = $this->xmlEncode($video['url']);
-			$itemTimestamp = $this->xmlEncode(gmdate('r', strtotime($video['published'])));
+			$itemTimestamp = $this->xmlEncode(
+				Helper::convertUnixTime($video['published'], 'r')
+			);
 			$itemEnclosure = $this->xmlEncode($video['thumbnail']);
 			$itemCategories = $this->buildCategories($video['tags']);
 			$itemContent = $this->xmlEncode($this->buildContent($video));
@@ -126,9 +130,7 @@ EOD;
 	private function buildContent(array $video) {
 
 		$description = $this->formatDescription($video['description']);
-
-		$published = new DateTime($video['published'], new DateTimeZone(config::get('Timezone')));
-		$publishedFormatted = $published->format(config::get('DateFormat'));
+		$published = Helper::convertUnixTime($video['published'], config::get('DateFormat'));
 
 		$media = <<<EOD
 <a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}"><img src="{$video['thumbnail']}"/></a>
@@ -148,7 +150,7 @@ EOD;
 
 		return <<<EOD
 <a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}">{$media}</a>
-<hr/>Published: {$publishedFormatted} - Duration: {$video['duration']}<hr/><p>{$description}</p>
+<hr/>Published: {$published} - Duration: {$video['duration']}<hr/><p>{$description}</p>
 EOD;
 	}
 
