@@ -16,6 +16,15 @@ class Config {
 		'EnableCacheViewer' => 'ENABLE_CACHE_VIEWER'
 	);
 
+	/** @var int $mkdirMode mkdir() access mode */
+	private static $mkdirMode = 0700;
+
+	/** @var int $minResults Minimum number of results allowed */
+	private static $minResults = 1;
+
+	/** @var int $maxResults Maximum number of results allowed */
+	private static $maxResults = 50;
+	
 	/**
 	 * Check PHP version and loaded extensions
 	 *
@@ -73,7 +82,7 @@ class Config {
 			throw new Exception('Config Error: Results limit option must be a integer. [RESULTS_LIMIT]');
 		}
 
-		if ((constant('RESULTS_LIMIT') < 1) || (constant('RESULTS_LIMIT') > 50)) {
+		if ((constant('RESULTS_LIMIT') < self::$minResults) || (constant('RESULTS_LIMIT') > self::$maxResults)) {
 			throw new Exception('Config Error: Results limit option must be a integer between 1 and 50, inclusive. [RESULTS_LIMIT]');
 		}
 
@@ -81,7 +90,7 @@ class Config {
 			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
 		}
 
-		if (!is_dir($cacheDir) && !mkdir($cacheDir, 0700)) {
+		if (!is_dir($cacheDir) && !mkdir($cacheDir, self::$mkdirMode)) {
 			throw new Exception('Config Error: Could not create cache directory. [CACHE_DIR]');
 		}
 
