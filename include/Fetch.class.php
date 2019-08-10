@@ -189,7 +189,7 @@ class Fetch {
 		}
 
 		if ($this->fetchType === 'playlist') {
-			$parameters = 'playlistItems?part=snippet,contentDetails&maxResults=' . Config::get('ResultsLimit') . '&playlistId='
+			$parameters = 'playlistItems?part=contentDetails&maxResults=' . Config::get('ResultsLimit') . '&playlistId='
 				. $this->data['channel']['playlist'] . '&fields=etag,items(contentDetails(videoId))';
 		}
 
