@@ -113,8 +113,9 @@ class CacheViewer {
 
 		foreach ($this->data as $index => $data) {
 
+			$modified = Helper::convertUnixTime($data['modified']);
 			$size = FileHelper::readableFileSize($data['size']);
-			
+
 			$tbody .= <<<HTML
 <tr>
 	<td id="{$data['id']}">$index</td>
@@ -123,7 +124,7 @@ class CacheViewer {
 			(Channel ID: {$data['contents']['channel']['id']} Title: {$data['contents']['channel']['title']})
 		</span>
 	</td>
-	<td>{$this->convertUnixTime($data['modified'])}</td>
+	<td>{$modified}</td>
 	<td>{$size}</td>
 	<td style="width:170px;">
 	<div style="float:left;">
@@ -239,6 +240,9 @@ HTML;
 	 */
 	private function displayChannel(array $channel) {
 
+		$fetched = Helper::convertUnixTime($channel['fetched']);
+		$expires = Helper::convertUnixTime($channel['expires']);
+
 		$html = <<<HTML
 <strong>Channel:</strong>
 <table style="width: 1153px;">
@@ -249,8 +253,8 @@ HTML;
 		<strong>URL</strong>: <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
 		<strong>Published</strong>: {$channel['published']}<br>
 		<strong>Playlist ID</strong>: {$channel['playlist']}<br>
-		<strong>Fetched:</strong> {$this->convertUnixTime($channel['fetched'])}<br>
-		<strong>Expires</strong>: {$this->convertUnixTime($channel['expires'])}<br>
+		<strong>Fetched:</strong> $fetched<br>
+		<strong>Expires</strong>: $expires<br>
 	</td>
 	<td>
 		<strong>Description</strong>:<br>
@@ -277,6 +281,9 @@ HTML;
 
 		$videoIDs = implode(' ', $playlist['videos']);
 
+		$fetched = Helper::convertUnixTime($playlist['fetched']);
+		$expires = Helper::convertUnixTime($playlist['expires']);
+
 		$html = <<<HTML
 <strong>Playlist:</strong>
 <table style="width: 1153px;">
@@ -284,8 +291,8 @@ HTML;
 	<td>
 		<strong>Video IDs:</strong><br>
 		<textarea cols="140" rows="2" readonly>{$videoIDs}</textarea>
-		<strong>Fetched:</strong> {$this->convertUnixTime($playlist['fetched'])}<br>
-		<strong>Expires:</strong> {$this->convertUnixTime($playlist['expires'])}<br>
+		<strong>Fetched:</strong> $fetched<br>
+		<strong>Expires</strong>: $expires<br>
 	</td>
 </tr>
 </table>
@@ -309,6 +316,10 @@ HTML;
 
 			$tags = implode(', ', $video['tags']);
 			$tagCount = count($video['tags']);
+
+			$fetched = Helper::convertUnixTime($video['fetched']);
+			$expires = Helper::convertUnixTime($video['expires']);
+
 			$videoHtml .= <<<HTML
 <tr>
 	<td style="width:440px;">
@@ -316,8 +327,8 @@ HTML;
 		<strong>URL</strong>: <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
 		<strong>Published</strong>: {$video['published']}<br>
 		<strong>Duration</strong>: {$video['duration']}<br>
-		<strong>Fetched:</strong> {$this->convertUnixTime($video['fetched'])}<br>
-		<strong>Expires</strong>: {$this->convertUnixTime($video['expires'])}<br>
+		<strong>Fetched:</strong> {$fetched}<br>
+		<strong>Expires</strong>: {$expires}<br>
 	</td>
 	<td>
 		<strong>Description</strong>:<br>
