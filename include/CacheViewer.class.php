@@ -357,20 +357,6 @@ HTML;
 	}
 
 	/**
-	 * Convert Unix timestamp into a readable format
-	 *
-	 * @param  string $timestamp Unix timestamp
-	 * @return string
-	 */
-	private function convertUnixTime(int $timestamp = 0) {	
-		$dt = new DateTime();
-		$dt->setTimestamp($timestamp);
-		$dt->setTimezone(new DateTimeZone(config::get('Timezone')));
-
-		return $formatted = $dt->format('Y-m-d H:i:s');
-	}
-
-	/**
 	 * Order cache files by date modified
 	 */
 	private function orderByModified() {
