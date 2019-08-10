@@ -70,7 +70,7 @@ class CacheViewer {
 
 		$regex = '/.' . preg_quote(Config::get('CacheFilenameExt')) . '$/';
 
-		$directoryPath = '..' . DIRECTORY_SEPARATOR . Config::get('CacheDirectory');
+		$directoryPath = Config::get('AbsolutePath') . DIRECTORY_SEPARATOR . Config::get('CacheDirectory');
 		$cacheDirectory = new RecursiveDirectoryIterator($directoryPath);
 		$cacheFiles = new RegexIterator($cacheDirectory, $regex);
 
