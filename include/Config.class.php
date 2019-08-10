@@ -3,6 +3,7 @@
 class Config {
 
 	private static $keys = array(
+		'AbsolutePath' => 'ABSOLUTE_PATH',
 		'YouTubeApiKey' => 'YOUTUBE_API_KEY',
 		'YouTubeEmbedPrivacy' => 'YOUTUBE_EMBED_PRIVACY',
 		'RawApiErrors' => 'RAW_API_ERRORS',
@@ -46,6 +47,8 @@ class Config {
 	 */
 	public static function checkConfig() {
 
+		$cacheDir = constant('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . constant('CACHE_DIR');
+
 		if (empty(constant('YOUTUBE_API_KEY'))) {
 			throw new Exception('Config Error: YouTube API key must be set. [YOUTUBE_API_KEY]');
 		}
@@ -78,11 +81,11 @@ class Config {
 			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
 		}
 
-		if (!is_dir(constant('CACHE_DIR')) && !mkdir(constant('CACHE_DIR'), 0700)) {
+		if (!is_dir($cacheDir) && !mkdir($cacheDir, 0700)) {
 			throw new Exception('Config Error: Could not create cache directory. [CACHE_DIR]');
 		}
 
-		if (is_dir(constant('CACHE_DIR')) && !is_writable(constant('CACHE_DIR'))) {
+		if (is_dir($cacheDir) && !is_writable($cacheDir)) {
 			throw new Exception('Config Error: Cache directory is not writable. [CACHE_DIR]');
 		}
 
