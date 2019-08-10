@@ -46,16 +46,16 @@ class CacheViewer {
 	 */
 	private function checkInputs() {
 
-		if (isset($_GET['id'])) {
+		if (isset($_POST['id'])) {
 
-			if (empty($_GET['id'])) {
+			if (empty($_POST['id'])) {
 				throw new Exception('No cache ID parameter given.');
 			}
 
-			$this->cacheId = $_GET['id'];
+			$this->cacheId = $_POST['id'];
 		}
 
-		if (isset($_GET['raw'])) {
+		if (isset($_POST['raw'])) {
 			$this->showRaw = true;
 		}
 
@@ -116,7 +116,7 @@ class CacheViewer {
 			$size = FileHelper::readableFileSize($data['size']);
 			
 			$tbody .= <<<HTML
-<tr style="text-align:center">
+<tr>
 	<td id="{$data['id']}">$index</td>
 	<td>{$data['id']}<br>
 		<span style="font-size:13px;">
@@ -125,7 +125,20 @@ class CacheViewer {
 	</td>
 	<td>{$this->convertUnixTime($data['modified'])}</td>
 	<td>{$size}</td>
-	<td><a href="?id={$data['id']}#{$data['id']}">View Data</a>/<a href="?id={$data['id']}&raw#{$data['id']}">View Raw</a></td>
+	<td style="width:170px;">
+	<div style="float:left;">
+		<form action="#{$data['id']}" method="post">
+			<input name="id" type="hidden" value="{$data['id']}">
+			<button type="submit">View Data</button>
+		</form>
+	</div>
+	<div style="float: right;">
+		<form action="#{$data['id']}" method="post">
+			<input name="id" type="hidden" value="{$data['id']}">
+			<input name="raw" type="hidden">
+			<button type="submit">View Raw</button>
+		</form>
+	</div>
 </tr>
 HTML;
 
@@ -158,14 +171,14 @@ HTML;
 				</tr>
 			</tbody>
 		</table>
-		<table style="width:1145px;">
+		<table style="width:1150px;">
 			<thead>
 				<tr>
 					<th>#</th>
 					<th>Cache ID</th>
 					<th>Last Modified</th>
 					<th>Size</th>
-					<th></th>
+					<th>View</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -194,7 +207,7 @@ HTML;
 			$json = json_encode($data['contents'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
 			$tdData = <<<HTML
-<a style="float: right;" href="cache-viewer.php#{$data['id']}">[Close]</a>
+<a style="float: right;" href="cache-viewer.php">[Close]</a>
 <textarea cols="140" rows="50">{$json}</textarea>
 HTML;
 		} else {
@@ -321,7 +334,6 @@ HTML;
 		<textarea cols="140" rows="2" readonly="">{$tags}</textarea>
 	</td>
 </tr>
-
 HTML;
 		}
 

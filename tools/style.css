@@ -58,9 +58,13 @@ table th {
 	padding: 4px;
 }
 
-table td{
-	border-top : 1px solid #808080;
+table tr {
+	text-align:center;
+}
+
+table td {
+	border-top: 1px solid #808080;
 	border-right: 1px solid #808080;
-	padding : 4px 4px;
-	vertical-align : top ;
+	padding: 4px 4px;
+	vertical-align: middle;
 }
