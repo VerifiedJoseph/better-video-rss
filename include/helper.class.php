@@ -52,4 +52,19 @@ class Helper {
 
 		return false;
 	}
+
+	/**
+	 * Convert Unix timestamp into a readable format
+	 *
+	 * @param string $timestamp Unix timestamp
+	 * @param string $format DaeTime format
+	 * @return string
+	 */
+	public static function convertUnixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s') {
+		$dt = new DateTime();
+		$dt->setTimestamp($timestamp);
+		$dt->setTimezone(new DateTimeZone(config::get('Timezone')));
+
+		return $dt->format($format);
+	}
 }
