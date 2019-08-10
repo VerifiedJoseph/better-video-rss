@@ -167,9 +167,10 @@ class Cache {
 	 * Set cache file path
 	 */
 	private function setPath() {
-		$this->path = Config::get('CacheDirectory') . DIRECTORY_SEPARATOR . $this->name . '.' . Config::get('CacheFilenameExt');
+		$this->path = Config::get('AbsolutePath') . DIRECTORY_SEPARATOR . 
+			Config::get('CacheDirectory') . DIRECTORY_SEPARATOR . $this->name . '.' . Config::get('CacheFilenameExt');
 	}
-	
+
 	/**
 	 * Set cache expire date for each video
 	 *
