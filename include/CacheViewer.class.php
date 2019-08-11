@@ -99,10 +99,10 @@ class CacheViewer {
 
 			$data = json_decode($contents, true);
 			$this->data[] = array(
-			'id' => $file->getBasename('.' . Config::get('CacheFilenameExt')),
-			'modified' => $file->getMTime(),
-			'size' => $file->getSize(),
-			'contents' => $data
+				'id' => $file->getBasename('.' . Config::get('CacheFilenameExt')),
+				'modified' => $file->getMTime(),
+				'size' => $file->getSize(),
+				'contents' => $data
 			);
 			
 			$this->cacheSize += $file->getSize();
