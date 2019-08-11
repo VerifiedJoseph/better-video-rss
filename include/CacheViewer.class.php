@@ -2,7 +2,7 @@
 
 class CacheViewer {
 	/**
-	 * @var array $cacheId Current cache file ID
+	 * @var string $cacheId Current cache file ID
 	 */
 	private $cacheId = '';
 
@@ -10,6 +10,11 @@ class CacheViewer {
 	 * @var boolean $showRaw Show raw cache file data
 	 */
 	private $showRaw = false;
+	
+	/**
+	 * @var boolean $showXml Show feed XML
+	 */
+	private $showXml = false;
 
 	/**
 	 * @var array $data Data from cache files
@@ -57,6 +62,10 @@ class CacheViewer {
 
 		if (isset($_POST['raw'])) {
 			$this->showRaw = true;
+		}
+		
+		if (isset($_POST['xml'])) {
+			$this->showXml = true;
 		}
 
 	}
@@ -140,6 +149,13 @@ class CacheViewer {
 			<button type="submit">View Raw</button>
 		</form>
 	</div>
+	<div style="float:left;">
+		<form action="#{$data['id']}" method="post">
+			<input name="id" type="hidden" value="{$data['id']}">
+			<input name="xml" type="hidden">
+			<button style="width:80px;" type="submit">View XML</button>
+		</form>
+	</div>
 </tr>
 HTML;
 
@@ -204,17 +220,27 @@ HTML;
 
 		$tr = '';
 
+			$tdData = <<<HTML
+<a style="float: right;" href="cache-viewer.php">[Close]</a>
+HTML;
+
 		if ($this->showRaw === true) {
 			$json = json_encode($data['contents'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-			$tdData = <<<HTML
-<a style="float: right;" href="cache-viewer.php">[Close]</a>
+			$tdData .= <<<HTML
 <textarea cols="140" rows="50">{$json}</textarea>
 HTML;
+		} elseif ($this->showXml === true) {
+
+			$feed = new Feed($data['contents'], false);
+			$feed->build();
+
+			$tdData .= <<<HTML
+<textarea cols="140" rows="50">{$feed->get()}</textarea>
+HTML;	
 		} else {
 
-			$tdData = <<<HTML
-<a style="float: right;" href="cache-viewer.php">[Close]</a>
+			$tdData .= <<<HTML
 {$this->displayChannel($data['contents']['channel'])}<br/>
 {$this->displayplaylist($data['contents']['playlist'])}<br>
 {$this->displayVideos($data['contents']['videos'])}<br/>
