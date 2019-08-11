@@ -7,6 +7,9 @@ class Fetch {
 	/** @var string $endpoint YouTube API Endpoint */
 	private $endpoint = 'https://www.googleapis.com/youtube/v3/';
 
+	/** @var string $feedEndpoint YouTube RSS Feed Endpoint */
+	private $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml?channel_id=';
+
 	/** @var array $data */
 	private $data = array();
 
@@ -51,11 +54,40 @@ class Fetch {
 			$etag = $this->data[$this->fetchType]['etag'];
 		}
 
-		$response = $this->fetch($etag, $parameter);
+			$response = $this->fetch($etag, $parameter);
+		}
 
 		if (!empty($response)) {
 			$this->handleResponse($response);
 		}
+	}
+
+	/**
+	 * Fetch YouTube Channel RSS feed
+	 *
+	 * @param string $channelId YouTube Channel ID
+	 * @return object
+	 * @throws Exception If a curl error has occurred.
+	 */
+	private function fetchFeed(string $channelId) {
+
+		$url = $this->feedEndpoint . $channelId;
+
+		$curl = new Curl();
+		$curl->get($url);
+
+		$statusCode = $curl->getHttpStatusCode();
+		$errorCode = $curl->getCurlErrorCode();
+
+		if ($errorCode !== 0) {
+			throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
+		}
+
+		if ($statusCode !== 200) {
+			throw new Exception('Failed to fetch: ' . $url);
+		}
+
+		return $curl->response;
 	}
 
 	/**
