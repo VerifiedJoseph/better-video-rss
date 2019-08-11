@@ -274,20 +274,20 @@ HTML;
 <table style="width: 1153px;">
 <tr>
 	<td>
-		<strong>ID</strong>: {$channel['id']}<br>
-		<strong>Title</strong>: {$channel['title']}<br>
-		<strong>URL</strong>: <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
-		<strong>Published</strong>: {$channel['published']}<br>
-		<strong>Playlist ID</strong>: {$channel['playlist']}<br>
+		<strong>ID:</strong> {$channel['id']}<br>
+		<strong>Title:</strong> {$channel['title']}<br>
+		<strong>URL:</strong> <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
+		<strong>Published:</strong> {$channel['published']}<br>
+		<strong>Playlist ID:</strong> {$channel['playlist']}<br>
 		<strong>Fetched:</strong> $fetched<br>
-		<strong>Expires</strong>: $expires<br>
+		<strong>Expires:</strong> $expires<br>
 	</td>
 	<td>
-		<strong>Description</strong>:<br>
+		<strong>Description:</strong><br>
 		<textarea cols="70" rows="4" readonly>{$channel['description']}</textarea>
 	</td>
 	<td>
-		<strong>Thumbnail</strong>:<br>
+		<strong>Thumbnail:</strong><br>
 		<img src="{$channel['thumbnail']}"/></a>
 	</td>
 </tr>
@@ -318,7 +318,7 @@ HTML;
 		<strong>Video IDs:</strong><br>
 		<textarea cols="140" rows="2" readonly>{$videoIDs}</textarea>
 		<strong>Fetched:</strong> $fetched<br>
-		<strong>Expires</strong>: $expires<br>
+		<strong>Expires:</strong> $expires<br>
 	</td>
 </tr>
 </table>
@@ -349,19 +349,19 @@ HTML;
 			$videoHtml .= <<<HTML
 <tr>
 	<td style="width:440px;">
-		<strong>Title</strong>: {$video['title']}<br>
-		<strong>URL</strong>: <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
-		<strong>Published</strong>: {$video['published']}<br>
-		<strong>Duration</strong>: {$video['duration']}<br>
+		<strong>Title:</strong> {$video['title']}<br>
+		<strong>URL:</strong> <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
+		<strong>Published:</strong> {$video['published']}<br>
+		<strong>Duration:</strong> {$video['duration']}<br>
 		<strong>Fetched:</strong> {$fetched}<br>
-		<strong>Expires</strong>: {$expires}<br>
+		<strong>Expires:</strong> {$expires}<br>
 	</td>
 	<td>
 		<strong>Description</strong>:<br>
 		<textarea cols="70" rows="5" readonly>{$video['description']}</textarea>
 	</td>
 	<td>
-		<strong>Thumbnail</strong>:<br>
+		<strong>Thumbnail:</strong><br>
 		<a target="_blank" title="{$video['thumbnail']}" href="{$video['thumbnail']}"><img style="width:100px;" src="{$video['thumbnail']}"/></a>
 	</td>
 </tr>
