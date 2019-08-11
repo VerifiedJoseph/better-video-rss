@@ -266,6 +266,7 @@ HTML;
 
 		$fetched = Helper::convertUnixTime($channel['fetched']);
 		$expires = Helper::convertUnixTime($channel['expires']);
+		$published = Helper::convertUnixTime($channel['published']);
 
 		$html = <<<HTML
 <strong>Channel:</strong>
@@ -275,7 +276,7 @@ HTML;
 		<strong>ID:</strong> {$channel['id']}<br>
 		<strong>Title:</strong> {$channel['title']}<br>
 		<strong>URL:</strong> <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
-		<strong>Published:</strong> {$channel['published']}<br>
+		<strong>Published:</strong> {$published}<br>
 		<strong>Playlist ID:</strong> {$channel['playlist']}<br>
 		<strong>Fetched:</strong> $fetched<br>
 		<strong>Expires:</strong> $expires<br>
@@ -343,13 +344,14 @@ HTML;
 
 			$fetched = Helper::convertUnixTime($video['fetched']);
 			$expires = Helper::convertUnixTime($video['expires']);
+			$published = Helper::convertUnixTime($video['published']);
 
 			$videoHtml .= <<<HTML
 <tr>
 	<td style="width:440px;">
 		<strong>Title:</strong> {$video['title']}<br>
 		<strong>URL:</strong> <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
-		<strong>Published:</strong> {$video['published']}<br>
+		<strong>Published:</strong> {$published}<br>
 		<strong>Duration:</strong> {$video['duration']}<br>
 		<strong>Fetched:</strong> {$fetched}<br>
 		<strong>Expires:</strong> {$expires}<br>
