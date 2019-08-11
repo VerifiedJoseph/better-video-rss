@@ -40,10 +40,6 @@ class Config {
 			throw new Exception('Extension Error: cURL extension not loaded.');
 		}
 
-		if(!extension_loaded('openssl')) {
-			throw new Exception('Extension Error: openssl extension not loaded.');
-		}
-
 		if(!extension_loaded('json')) {
 			throw new Exception('Extension Error: JSON extension not loaded.');
 		}
