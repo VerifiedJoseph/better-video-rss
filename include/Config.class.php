@@ -25,7 +25,7 @@ class Config {
 
 	/** @var int $maxResults Maximum number of results allowed */
 	private static $maxResults = 50;
-	
+
 	/**
 	 * Check PHP version and loaded extensions
 	 *
@@ -106,7 +106,7 @@ class Config {
 		if (!is_bool(constant('ENABLE_CACHE_VIEWER'))) {
 			throw new Exception('Config Error: Enable cache viewer option must be a boolean. [ENABLE_CACHE_VIEWER]');
 		}
-		
+
 		if (!is_bool(constant('ENABLE_HYBRID_MODE'))) {
 			throw new Exception('Config Error: Enable hybrid mode option must be a boolean. [ENABLE_HYBRID_MODE]');
 		}

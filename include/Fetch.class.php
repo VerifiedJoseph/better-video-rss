@@ -53,7 +53,7 @@ class Fetch {
 		if (Config::get('HybridMode') === true && $part === 'playlist') {
 			$this->fetchType = 'feed';
 			$response = $this->fetchFeed($parameter);
-		
+
 		} else {
 
 			if (isset($this->data[$this->fetchType]['etag'])) {

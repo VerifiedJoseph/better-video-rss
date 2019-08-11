@@ -41,7 +41,6 @@ class CacheViewer {
 		$this->loadFiles();
 		$this->orderByModified();
 		$this->display();
-
 	}
 
 	/**
@@ -67,7 +66,6 @@ class CacheViewer {
 		if (isset($_POST['xml'])) {
 			$this->showXml = true;
 		}
-
 	}
 
 	/**
