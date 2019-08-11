@@ -30,6 +30,11 @@ try {
 		$parameter = '';
 
 		if ($cache->expired($part)) {
+
+			if (Config::get('HybridMode') === true && $part === 'playlist') {
+				$parameter = $betterRss->getChannelId();
+			}
+
 			if ($part === 'videos') {
 				$parameter = $cache->getExpiredVideos();
 

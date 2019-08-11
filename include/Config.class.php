@@ -13,7 +13,8 @@ class Config {
 		'CacheDirectory' => 'CACHE_DIR',
 		'CacheFilenameExt' => 'CACHE_FILENAME_EXT',
 		'DisableCache' => 'DISABLE_CACHE',
-		'EnableCacheViewer' => 'ENABLE_CACHE_VIEWER'
+		'EnableCacheViewer' => 'ENABLE_CACHE_VIEWER',
+		'HybridMode' => 'ENABLE_HYBRID_MODE'
 	);
 
 	/** @var int $mkdirMode mkdir() access mode */
@@ -104,6 +105,10 @@ class Config {
 
 		if (!is_bool(constant('ENABLE_CACHE_VIEWER'))) {
 			throw new Exception('Config Error: Enable cache viewer option must be a boolean. [ENABLE_CACHE_VIEWER]');
+		}
+		
+		if (!is_bool(constant('ENABLE_HYBRID_MODE'))) {
+			throw new Exception('Config Error: Enable hybrid mode option must be a boolean. [ENABLE_HYBRID_MODE]');
 		}
 	}
 
