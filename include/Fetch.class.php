@@ -154,6 +154,17 @@ class Fetch {
 			$this->data['channel'] = array_merge($this->data['channel'], $channel);
 		}
 
+		if ($this->fetchType === 'feed') {
+			$feed = array();
+			$feed['videos'] = array();
+
+			foreach ($response->entry as $entry) {
+				$feed['videos'][] = str_replace('yt:video:', '', $entry->id);
+			}
+
+			$this->data['playlist'] = array_merge($this->data['playlist'], $feed);
+		}
+
 		if ($this->fetchType === 'playlist') {
 			$playlist = array();
 			$playlist['etag'] = $response->etag;
