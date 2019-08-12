@@ -21,6 +21,7 @@ Hybrid Mode uses YouTube's channel RSS feeds and the YouTube Data API to generat
 * PHP Extensions:
 	* JSON [https://secure.php.net/manual/en/refs.xml.php](https://www.php.net/manual/en/book.json.php)
 	* cURL [https://secure.php.net/manual/en/book.curl.php](https://secure.php.net/manual/en/book.curl.php)
+	* mbstring [https://secure.php.net/manual/en/book.mbstring.php](https://secure.php.net/manual/en/book.mbstring.php)
 
 ## Dependencies
 (Via [Composer](https://getcomposer.org/))
