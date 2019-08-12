@@ -45,6 +45,10 @@ class Config {
 		if(!extension_loaded('json')) {
 			throw new Exception('Extension Error: JSON extension not loaded.');
 		}
+
+		if(!extension_loaded('mbstring')) {
+			throw new Exception('Extension Error: Mbstring extension not loaded.');
+		}
 	}
 
 	/**
