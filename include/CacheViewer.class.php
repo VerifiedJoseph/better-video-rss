@@ -175,7 +175,7 @@ HTML;
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-	<div id="header">Cache Viewer</div>
+	<div id="header"><a href="index.php">Tools</a> &#187; Cache Viewer</div>
 	<div id="main">
 		<table style="width:200px; margin-bottom: 10px;">
 			<thead>

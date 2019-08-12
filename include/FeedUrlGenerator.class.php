@@ -84,7 +84,7 @@ HTML;
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-	<div id="header">Feed URL Generator</div>
+	<div id="header"><a href="index.php">Tools</a> &#187; Feed URL Generator</div>
 	<div id="main">
 		<form action="" method="post">
 			<input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title">
