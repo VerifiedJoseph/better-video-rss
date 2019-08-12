@@ -4,6 +4,7 @@ class Config {
 
 	private static $keys = array(
 		'AbsolutePath' => 'ABSOLUTE_PATH',
+		'SelfUrlPath' => 'SELF_URL_PATH',
 		'YouTubeApiKey' => 'YOUTUBE_API_KEY',
 		'YouTubeEmbedPrivacy' => 'YOUTUBE_EMBED_PRIVACY',
 		'RawApiErrors' => 'RAW_API_ERRORS',
@@ -54,6 +55,10 @@ class Config {
 	public static function checkConfig() {
 
 		$cacheDir = constant('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . constant('CACHE_DIR');
+
+		if (empty(constant('SELF_URL_PATH'))) {
+			throw new Exception('Config Error: Self URL path must be set. [SELF_URL_PATH]');
+		}
 
 		if (empty(constant('YOUTUBE_API_KEY'))) {
 			throw new Exception('Config Error: YouTube API key must be set. [YOUTUBE_API_KEY]');

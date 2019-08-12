@@ -64,8 +64,9 @@ class FeedUrlGenerator {
 		$error = '';
 
 		if (!empty($this->channelId) && $this->error === false) {
+			$url = Config::get('SelfUrlPath') . 'BetterYouTubeRss.php?channel_id=' . $this->channelId;
 			$link = <<<HTML
-<p>Feed URL: <a href="../BetterYouTubeRss.php?channel_id={$this->channelId}">../BetterYouTubeRss.php?channel_id={$this->channelId}</a></p>
+<p>Feed URL: <a href="{$url}">{$url}</a></p>
 HTML;
 		}
 
