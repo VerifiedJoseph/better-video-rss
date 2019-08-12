@@ -29,12 +29,17 @@ class CacheViewer {
 	/**
 	 * Constructor
 	 *
-	 * @throws Exception If EnableCacheViewer is false.
+	 * @throws Exception if EnableCacheViewer is false
+	 * @throws Exception if DisableCache is true
 	 */
 	public function __construct() {
 
 		if (!Config::get('EnableCacheViewer')) {
 			throw new Exception('Cache viewer is disabled.');
+		}
+
+		if (Config::get('DisableCache') === true) {
+			throw new Exception('Cache viewer not available. Cache is disabled.');
 		}
 
 		$this->checkInputs();
