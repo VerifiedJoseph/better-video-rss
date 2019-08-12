@@ -26,6 +26,7 @@ define('DATE_FORMAT', 'F j, Y');
 // Results Limit
 // Limit number of videos fetched from YouTube API.
 // Acceptable values are 1 to 50, inclusive.
+// When hybrid mode is enabled 15 results will be retured regardless of the 'RESULTS_LIMIT' value.
 define('RESULTS_LIMIT', 25);
 
 // Cache directory

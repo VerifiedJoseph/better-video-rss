@@ -12,7 +12,7 @@ Channel responses are cached for 10 days, playlists for 15 mintues and videos fo
 Caching can be disabled via the `DISABLE_CACHE` value in the config file.
 
 ## Hybrid Mode
-Hybrid Mode uses YouTube's channel RSS feeds and the YouTube Data API to generate feeds. Enabling hybrid mode will reduce the number of requests made to the YouTube API. Hybrid Mode can be enabled via the `ENABLE_HYBRID_MODE` value in the config file.
+Hybrid Mode uses YouTube's channel RSS feeds and the YouTube Data API to generate feeds. Enabling hybrid mode will reduce the number of requests made to the YouTube API, but will limit the number of videos returned to 15. Hybrid Mode can be enabled via the `ENABLE_HYBRID_MODE` value in the config file.
 
 ## Requirements
 
