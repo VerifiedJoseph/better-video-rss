@@ -121,6 +121,6 @@ class Config {
 			throw new Exception('Invalid config key given:' . $key);
 		}
 
-		return constant(self::$keys[$key]);
+		return constant($key);
 	}
 }
