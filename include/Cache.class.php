@@ -51,7 +51,7 @@ class Cache {
 	 */
 	public function load() {
 
-		if (Config::get('DisableCache') === true) {
+		if (Config::get('DISABLE_CACHE') === true) {
 			return false;
 		}
 
@@ -76,7 +76,7 @@ class Cache {
 
 		$ExpiredVideos = array();
 
-		if (empty($this->data['videos']['items']) || Config::get('DisableCache') === true) {
+		if (empty($this->data['videos']['items']) || Config::get('DISABLE_CACHE') === true) {
 			return implode(',', $this->data['playlist']['videos']);
 		}
 
@@ -97,7 +97,7 @@ class Cache {
 	 */
 	public function expired(string $part) {
 
-		if (Config::get('DisableCache') === true) {
+		if (Config::get('DISABLE_CACHE') === true) {
 			return true;
 		}
 
@@ -167,8 +167,8 @@ class Cache {
 	 * Set cache file path
 	 */
 	private function setPath() {
-		$this->path = Config::get('AbsolutePath') . DIRECTORY_SEPARATOR . 
-			Config::get('CacheDirectory') . DIRECTORY_SEPARATOR . $this->name . '.' . Config::get('CacheFilenameExt');
+		$this->path = Config::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . 
+			Config::get('CacheDirectory') . DIRECTORY_SEPARATOR . $this->name . '.' . Config::get('CACHE_FILENAME_EXT'');
 	}
 
 	/**
