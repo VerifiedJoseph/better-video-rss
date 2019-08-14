@@ -121,6 +121,13 @@ class Config {
 		}
 	}
 
+	/**
+	 * Return config option value
+	 *
+	 * @param string $key Config option key
+	 * @return constant
+	 * @throws Exception if config key is invalid
+	 */
 	public static function get(string $key) {
 
 		if (!isset(self::$keys[$key])) {
