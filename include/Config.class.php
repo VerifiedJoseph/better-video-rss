@@ -117,7 +117,7 @@ class Config {
 	 */
 	public static function get(string $key) {
 
-		if (!isset(self::$keys[$key])) {
+		if (!defined($key)) {
 			throw new Exception('Invalid config key given:' . $key);
 		}
 
