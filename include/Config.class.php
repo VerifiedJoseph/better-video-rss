@@ -18,6 +18,9 @@ class Config {
 		'HybridMode' => 'ENABLE_HYBRID_MODE'
 	);
 
+	/** @var string $minPhpVersion Minimum PHP version */
+	private static $minPhpVersion = '7.1.0';
+	
 	/** @var int $mkdirMode mkdir() access mode */
 	private static $mkdirMode = 0700;
 
@@ -34,8 +37,8 @@ class Config {
 	 */
 	public static function checkInstall() {
 
-		if(version_compare(PHP_VERSION, '7.1.0') === -1) {
-			throw new Exception('BetterYouTubeRss requires at least PHP version 7.1.0!');
+		if(version_compare(PHP_VERSION, self::$minPhpVersion) === -1) {
+			throw new Exception('BetterYouTubeRss requires at least PHP version ' . self::$minPhpVersion . '!');
 		}
 
 		if(!extension_loaded('curl')) {
