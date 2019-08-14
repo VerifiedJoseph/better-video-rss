@@ -139,7 +139,7 @@ EOD;
 		if ($this->embedVideos === true) {
 			$url = $this->embedUrl;
 
-			if (config::get('YouTubeEmbedPrivacy')) {
+			if (config::get('YOUTUBE_EMBED_PRIVACY')) {
 				$url = $this->embedUrlNoCookie;
 			}
 
