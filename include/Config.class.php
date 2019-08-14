@@ -2,22 +2,6 @@
 
 class Config {
 
-	private static $keys = array(
-		'AbsolutePath' => 'ABSOLUTE_PATH',
-		'SelfUrlPath' => 'SELF_URL_PATH',
-		'YouTubeApiKey' => 'YOUTUBE_API_KEY',
-		'YouTubeEmbedPrivacy' => 'YOUTUBE_EMBED_PRIVACY',
-		'RawApiErrors' => 'RAW_API_ERRORS',
-		'Timezone' => 'TIMEZONE',
-		'DateFormat' => 'DATE_FORMAT',
-		'ResultsLimit' => 'RESULTS_LIMIT',
-		'CacheDirectory' => 'CACHE_DIR',
-		'CacheFilenameExt' => 'CACHE_FILENAME_EXT',
-		'DisableCache' => 'DISABLE_CACHE',
-		'EnableCacheViewer' => 'ENABLE_CACHE_VIEWER',
-		'HybridMode' => 'ENABLE_HYBRID_MODE'
-	);
-
 	/** @var string $minPhpVersion Minimum PHP version */
 	private static $minPhpVersion = '7.1.0';
 	
@@ -133,10 +117,10 @@ class Config {
 	 */
 	public static function get(string $key) {
 
-		if (!isset(self::$keys[$key])) {
+		if (!defined($key)) {
 			throw new Exception('Invalid config key given:' . $key);
 		}
 
-		return constant(self::$keys[$key]);
+		return constant($key);
 	}
 }

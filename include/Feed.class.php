@@ -130,7 +130,7 @@ EOD;
 	private function buildContent(array $video) {
 
 		$description = $this->formatDescription($video['description']);
-		$published = Helper::convertUnixTime($video['published'], config::get('DateFormat'));
+		$published = Helper::convertUnixTime($video['published'], config::get('DATE_FORMAT'));
 
 		$media = <<<EOD
 <a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}"><img src="{$video['thumbnail']}"/></a>
@@ -139,7 +139,7 @@ EOD;
 		if ($this->embedVideos === true) {
 			$url = $this->embedUrl;
 
-			if (config::get('YouTubeEmbedPrivacy')) {
+			if (config::get('YOUTUBE_EMBED_PRIVACY')) {
 				$url = $this->embedUrlNoCookie;
 			}
 

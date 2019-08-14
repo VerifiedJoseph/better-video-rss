@@ -31,7 +31,7 @@ try {
 
 		if ($cache->expired($part)) {
 
-			if (Config::get('HybridMode') === true && $part === 'playlist') {
+			if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
 				$parameter = $betterRss->getChannelId();
 			}
 

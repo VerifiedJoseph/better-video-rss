@@ -50,7 +50,7 @@ class Fetch {
 		$this->fetchType = $part;
 		$etag = '';
 
-		if (Config::get('HybridMode') === true && $part === 'playlist') {
+		if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
 			$this->fetchType = 'feed';
 			$response = $this->fetchFeed($parameter);
 
@@ -238,7 +238,7 @@ class Fetch {
 		}
 
 		if ($this->fetchType === 'playlist') {
-			$parameters = 'playlistItems?part=contentDetails&maxResults=' . Config::get('ResultsLimit') . '&playlistId='
+			$parameters = 'playlistItems?part=contentDetails&maxResults=' . Config::get('RESULTS_LIMIT') . '&playlistId='
 				. $this->data['channel']['playlist'] . '&fields=etag,items(contentDetails(videoId))';
 		}
 
@@ -249,7 +249,7 @@ class Fetch {
 				. $ids . '&fields=etag,items(id,snippet(title,description,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
 		}
 
-		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YouTubeApiKey');
+		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 	}
 
 	/**
@@ -261,7 +261,7 @@ class Fetch {
 	private function handleApiError($response) {
 		$error = $response->error->errors[0];
 
-		if (config::get('RawApiErrors') === true) {
+		if (config::get('RAW_API_ERRORS') === true) {
 			$raw = json_encode($response->error, JSON_PRETTY_PRINT);
 
 			throw new Exception(
