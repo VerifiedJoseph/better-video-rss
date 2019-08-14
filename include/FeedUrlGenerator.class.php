@@ -56,7 +56,7 @@ class FeedUrlGenerator {
 	/**
 	 * Display HTML
 	 *
-	 * @return string $html
+	 * @echo string $html
 	 */
 	private function display() {
 
@@ -131,9 +131,9 @@ HTML;
 	 * Is query string a channel ID
 	 *
 	 8 param string $query Query string
-	 * @throws Exception If a curl error has occurred
-	 * @throws Exception If a API error has occurred
-	 * @throws Exception If the channel was not found
+	 * @throws Exception if a curl error has occurred
+	 * @throws Exception if a API error has occurred
+	 * @throws Exception if the channel was not found
 	 */
 	private function searchApi(string $query) {
 

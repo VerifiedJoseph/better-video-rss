@@ -67,7 +67,7 @@ EOD;
 	/**
 	 * Build feed itmes
 	 *
-	 * @return string Returns feed items
+	 * @return string Items as XML
 	 */
 	private function buildItmes() {
 
@@ -103,8 +103,8 @@ EOD;
 	/**
 	 * Build item categories
 	 *
-	 * @param array $categorie Item categories
-	 * @return string Returns item categories
+	 * @param array $categories Item categories
+	 * @return string Categories as XML
 	 */
 	private function buildCategories(array $categories) {
 
@@ -125,7 +125,7 @@ EOD;
 	 * Build item content (description)
 	 *
 	 * @param array $video Video data
-	 * @return string Returns item conten
+	 * @return string Item content as HTML 
 	 */
 	private function buildContent(array $video) {
 
@@ -159,7 +159,7 @@ EOD;
 	 * Converts URLs to HTMl links
 	 *
 	 * @param string $description
-	 * @return string Returns formatted video description
+	 * @return string Formatted video description
 	 */
 	private function formatDescription(string $description) {
 
@@ -185,7 +185,7 @@ EOD;
 	 * Convert special characters to HTML entities
 	 *
 	 * @param string $text
-	 * @return string Returns string with onvert characters
+	 * @return string String with encoded characters
 	 */
 	private function xmlEncode($text) {
 		return htmlspecialchars($text, ENT_XML1);

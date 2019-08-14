@@ -4,6 +4,8 @@ class Cache {
 
 	/** @var string $name Cache filename */
 	private $name = '';
+	
+	/** @var array $data Cache data */
 	private $data = array(
 		'channel' => array(),
 		'playlist' => array(),
@@ -94,6 +96,7 @@ class Cache {
 	 * Check if cache part has expired
 	 *
 	 * @param string $part Name of cache part
+	 * @return boolean
 	 */
 	public function expired(string $part) {
 

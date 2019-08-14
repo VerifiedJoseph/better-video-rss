@@ -4,6 +4,8 @@ class BetterYouTubeRss {
 
 	/** @var string $channelId YouTube channel ID */
 	private $channelId = '';
+	
+	/** @var boolean $embedVideos Embed videos status */
 	private $embedVideos = false;
 
 	/** @var array $parts Cache and fetch parts */

@@ -2,7 +2,7 @@
 
 class Helper {
 	/**
-	 * Parse video duration
+	 * Parse ISO 8601 video duration to hours, minutes and seconds
 	 *
 	 * @param string $duration ISO 8601 duration
 	 * @param string $allowNegative Allow a negative duration
