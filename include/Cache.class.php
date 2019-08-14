@@ -84,7 +84,7 @@ class Cache {
 
 		foreach ($this->data['playlist']['videos'] as $id) {
 
-			if (!isset($this->data['videos']['items'][$id]) || time() > $this->data['videos']['items'][$id]['expires']) {
+			if (!isset($this->data['videos']['items'][$id]) || time() >= $this->data['videos']['items'][$id]['expires']) {
 				$ExpiredVideos[] = $id;
 			}
 		}
@@ -108,7 +108,7 @@ class Cache {
 			return true;
 		}
 
-		if (time() > $this->data[$part]['expires']) {
+		if (time() >= $this->data[$part]['expires']) {
 			return true;
 		}
 
