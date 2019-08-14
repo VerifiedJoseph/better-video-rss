@@ -29,16 +29,16 @@ class CacheViewer {
 	/**
 	 * Constructor
 	 *
-	 * @throws Exception if EnableCacheViewer is false
-	 * @throws Exception if DisableCache is true
+	 * @throws Exception if ENABLE_CACHE_VIEWER is false
+	 * @throws Exception if DISABLE_CACHE is true
 	 */
 	public function __construct() {
 
-		if (!Config::get('EnableCacheViewer')) {
+		if (!Config::get('ENABLE_CACHE_VIEWER')) {
 			throw new Exception('Cache viewer is disabled.');
 		}
 
-		if (Config::get('DisableCache') === true) {
+		if (Config::get('DISABLE_CACHE') === true) {
 			throw new Exception('Cache viewer not available. Cache is disabled.');
 		}
 
@@ -80,9 +80,9 @@ class CacheViewer {
 	 */
 	private function loadFiles() {
 
-		$regex = '/.' . preg_quote(Config::get('CacheFilenameExt')) . '$/';
+		$regex = '/.' . preg_quote(Config::get('CACHE_FILENAME_EXT')) . '$/';
 
-		$directoryPath = Config::get('AbsolutePath') . DIRECTORY_SEPARATOR . Config::get('CacheDirectory');
+		$directoryPath = Config::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . Config::get('CACHE_DIR');
 		$cacheDirectory = new RecursiveDirectoryIterator($directoryPath);
 		$cacheFiles = new RegexIterator($cacheDirectory, $regex);
 
@@ -102,7 +102,7 @@ class CacheViewer {
 
 			$data = json_decode($contents, true);
 			$this->data[] = array(
-				'id' => $file->getBasename('.' . Config::get('CacheFilenameExt')),
+				'id' => $file->getBasename('.' . Config::get('CACHE_FILENAME_EXT')),
 				'modified' => $file->getMTime(),
 				'size' => $file->getSize(),
 				'contents' => $data

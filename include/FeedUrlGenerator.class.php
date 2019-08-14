@@ -64,7 +64,7 @@ class FeedUrlGenerator {
 		$error = '';
 
 		if (!empty($this->channelId) && $this->error === false) {
-			$url = Config::get('SelfUrlPath') . 'BetterYouTubeRss.php?channel_id=' . $this->channelId;
+			$url = Config::get('SELF_URL_PATH') . 'BetterYouTubeRss.php?channel_id=' . $this->channelId;
 			$link = <<<HTML
 <p>Feed URL: <a href="{$url}">{$url}</a></p>
 HTML;
@@ -140,7 +140,7 @@ HTML;
 		try {
 
 			$url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&fields=items(snippet(channelId))&q=' .
-				urlencode($query) . '&type=channel&maxResults=1&prettyPrint=false&key=' . Config::get('YouTubeApiKey');
+				urlencode($query) . '&type=channel&maxResults=1&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 
 			$curl = new Curl();
 			$curl->get($url);

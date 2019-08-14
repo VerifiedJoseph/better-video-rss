@@ -63,7 +63,7 @@ class Helper {
 	public static function convertUnixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s') {
 		$dt = new DateTime();
 		$dt->setTimestamp($timestamp);
-		$dt->setTimezone(new DateTimeZone(config::get('Timezone')));
+		$dt->setTimezone(new DateTimeZone(config::get('TIMEZONE')));
 
 		return $dt->format($format);
 	}
