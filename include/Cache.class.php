@@ -53,11 +53,7 @@ class Cache {
 	 */
 	public function load() {
 
-		if (Config::get('DISABLE_CACHE') === true) {
-			return false;
-		}
-
-		if (file_exists($this->path)) {
+		if (file_exists($this->path) && Config::get('DISABLE_CACHE') === false) {
 			$handle = fopen($this->path, 'r');
 
 			if ($handle !== false) {
