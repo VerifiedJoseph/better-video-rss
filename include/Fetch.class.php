@@ -211,7 +211,7 @@ class Fetch {
 					$video['thumbnail'] = $item->snippet->thumbnails->standard->url;
 
 				} else {
-					$video['thumbnail']  = 'https://i.ytimg.com/vi/' . $item->id . '/default.jpg';
+					$video['thumbnail']  = 'https://i.ytimg.com/vi/' . $item->id . '/hqdefault.jpg';
 				}
 
 				$videos['items'][$video['id']] = $video;
