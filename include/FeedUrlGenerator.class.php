@@ -115,7 +115,7 @@ HTML;
 	/**
 	 * Is query string a channel ID
 	 *
-	 8 param string $query Query string
+	 * @param string $query Query string
 	 * @return boolean
 	 */
 	private function isChannelId(string $query) {
@@ -130,7 +130,7 @@ HTML;
 	/**
 	 * Is query string a channel ID
 	 *
-	 8 param string $query Query string
+	 * @param string $query Query string
 	 * @throws Exception if a curl error has occurred
 	 * @throws Exception if a API error has occurred
 	 * @throws Exception if the channel was not found
