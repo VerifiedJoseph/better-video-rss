@@ -238,7 +238,10 @@ HTML;
 			$feed = new Feed($data['contents'], false);
 			$feed->build();
 
+			$feedurl = Config::get('SELF_URL_PATH') . 'BetterYouTubeRss.php?channel_id='. $data['contents']['channel']['id'];
+
 			$tdData .= <<<HTML
+Feed URL: <a target="_blank" href="{$feedurl}">{$feedurl}<a/>
 <textarea cols="140" rows="50">{$feed->get()}</textarea>
 HTML;	
 		} else {
