@@ -105,7 +105,7 @@ EOD;
 		$published = Helper::convertUnixTime($video['published'], config::get('DATE_FORMAT'));
 
 		$media = <<<EOD
-<a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}"><img src="{$video['thumbnail']}"/></a>
+<img src="{$video['thumbnail']}"/>
 EOD;
 
 		if ($this->embedVideos === true) {
