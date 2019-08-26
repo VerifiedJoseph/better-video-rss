@@ -50,7 +50,7 @@ try {
 
 	$cache->save();
 
-	$feed = new Feed(
+	$feed = new FeedXml(
 		$cache->getData(),
 		$betterRss->getEmbedStatus()
 	);
