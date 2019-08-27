@@ -15,6 +15,7 @@ try {
 	Config::checkConfig();
 
 	$generator = new FeedUrlGenerator();
+	$generator->display(false);
 
 } catch (Exception $e) {
 	Output::Error($e->getMessage());
