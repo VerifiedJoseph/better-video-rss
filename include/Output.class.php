@@ -12,8 +12,6 @@ class Output {
 	/**
 	 * Outpot RSS feed
 	 */
-	public static function feed(string $feed) {
-		header('content-type: text/xml');
 		echo $feed;
 	}
 }
