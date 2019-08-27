@@ -86,7 +86,7 @@ class BetterYouTubeRss {
 	public function generateIndex() {
 		
 		$generator = new FeedUrlGenerator();
-		$generator->display(true);
+		$generator->display();
 		
 	}
 	
