@@ -25,14 +25,16 @@ class BetterYouTubeRss {
 	 */
 	private function checkInputs() {
 
-		if (empty($_GET['channel_id'])) {
+		if (isset($_GET['channel_id']) && empty($_GET['channel_id'])) {
 			throw new Exception('No channel ID parameter given.');
 		}
 
-		$this->channelId = $_GET['channel_id'];
+		if (!empty($_GET['channel_id'])) {
+			$this->channelId = $_GET['channel_id'];
+		}
 
 		if (isset($_GET['embed_videos'])) {
-			$embedVideos = filter_var($_GET['embed_videos'], FILTER_VALIDATE_BOOLEAN);
+			$this->embedVideos = filter_var($_GET['embed_videos'], FILTER_VALIDATE_BOOLEAN);
 		}
 	}
 
