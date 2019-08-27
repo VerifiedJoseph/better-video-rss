@@ -14,33 +14,32 @@ class FeedHtml extends Feed {
 		$feedUpdated = Helper::convertUnixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['channel']['thumbnail'];
 
+		$rssLink = Config::get('SELF_URL_PATH') . 'BetterYouTubeRss.php?channel_id='. $this->data['channel']['id'];
+
 		$items = $this->buildItmes();
 
 		$this->feed = <<<EOD
-		
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>{$feedTitle}</title>
 	<meta name="robots" content="noindex, follow">
+	<link rel="stylesheet" type="text/css" href="tools/style.css" />
 </head>
 <body>
+	<div id="header" class="center">
+		<a href="https://youtube.com/channel/{$this->data['channel']['id']}">{$feedTitle}</a>
+	</div>
+	<div id="main">
+		<div id="items">
+			<div class="item">
+				Feed type: <a href="{$rssLink}"><button>RSS</button></a>
+			</div>
+			{$items}
+		</div>
+	</div>
 </body>
 </html>
-
-<?xml version="1.0" encoding="utf-8"?>
-	<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-	<channel>
-		<title>{$feedTitle}</title>
-		<link>{$feedUrl}</link>
-		<description>{$feedDescription}</description>
-		<pubDate>{$feedUpdated}</pubDate>
-		<image>
-			<url>{$feedImage}</url>
-		</image>
-		{$items}
-	</channel>
-	</rss>
 EOD;
 
 	}
@@ -56,25 +55,20 @@ EOD;
 
 		foreach ($this->data['videos']['items'] as $video) {
 
-			$itemTitle = $this->xmlEncode($video['title']);
-			$itemUrl = $this->xmlEncode($video['url']);
-			$itemTimestamp = $this->xmlEncode(
-				Helper::convertUnixTime($video['published'], 'r')
-			);
-			$itemEnclosure = $this->xmlEncode($video['thumbnail']);
+			$itemTitle = $video['title'];
+			$itemUrl = $video['url'];
+			$itemEnclosure = $video['thumbnail'];
 			$itemCategories = $this->buildCategories($video['tags']);
-			$itemContent = $this->xmlEncode($this->buildContent($video));
+			$itemContent = $this->buildContent($video);
 
 			$items .= <<<EOD
-<item>
-	<title>{$itemTitle} ({$video['duration']})</title>
-	<pubDate>{$itemTimestamp}</pubDate>
-	<link>{$itemUrl}</link>
-	<guid isPermaLink="true">{$itemUrl}</guid>
-	<content:encoded>{$itemContent}</content:encoded>
-	<enclosure url="{$itemEnclosure}" type="image/jpeg" />
-	{$itemCategories}
-</item>
+<div class="item">
+	<div class="title">
+		<h2><a href="{$itemUrl}">{$itemTitle} ({$video['duration']})</a></h2>
+	</div>
+{$itemContent}
+{$itemCategories}
+			</div>
 EOD;
 		}
 
@@ -89,17 +83,17 @@ EOD;
 	 */
 	protected function buildCategories(array $categories) {
 
-		$itemCategories = '';
+		$itemCategories = '<strong>Categories:</strong> <ul>';
 
 		foreach($categories as $category) {
 			$category = $this->xmlEncode($category);
 
 			$itemCategories .= <<<EOD
-<category>{$category}</category>
+<li>{$category}</li>
 EOD;
 		}
 
-		return $itemCategories;
+		return $itemCategories . '</ul>';
 	}
 
 	/**
