@@ -66,7 +66,7 @@ class FeedUrlGenerator {
 	 *
 	 * @echo string $html
 	 */
-	public function display(bool $index = false) {
+	public function display() {
 
 		$link = '';
 		$error = '';
@@ -89,7 +89,6 @@ HTML;
 HTML;
 		}
 
-		if ($index === true) {
 			$html = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -120,29 +119,6 @@ HTML;
 </body>
 </html>
 HTML;
-		} else {
-		
-			$html = <<<HTML
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Feed URL Generator</title>
-	<link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-	<div id="header"><a href="index.php">Tools</a> &#187; Feed URL Generator</div>
-	<div id="main">
-		<form action="" method="post">
-			<input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title">
-			<button style="width:80px;" type="submit">Generate</button><br>
-			Embed videos: <input type="checkbox" name="embed_videos" value="yes">
-		</form><br>
-		{$link}{$error}
-	</div>
-</body>
-</html>
-HTML;	
-		}
 
 		echo $html;
 	}
