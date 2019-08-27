@@ -16,6 +16,14 @@ class Output {
 		header('content-type: text/xml; charset=UTF-8');
 		echo $feed;
 	}
+
+	/**
+	 * Output JSON
+	 */
+	public static function json(string $feed) {
+		header('content-type: application/json');
+		echo $feed;
+	}
 		echo $feed;
 	}
 }
