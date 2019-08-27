@@ -235,7 +235,7 @@ HTML;
 HTML;
 		} elseif ($this->showXml === true) {
 
-			$feed = new Feed($data['contents'], false);
+			$feed = new FeedXml($data['contents'], false);
 			$feed->build();
 
 			$feedurl = Config::get('SELF_URL_PATH') . 'BetterYouTubeRss.php?channel_id='. $data['contents']['channel']['id'];
