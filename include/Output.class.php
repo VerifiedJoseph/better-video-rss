@@ -24,6 +24,12 @@ class Output {
 		header('content-type: application/json');
 		echo $feed;
 	}
+
+	/**
+	 * Output HTML
+	 */
+	public static function html(string $feed) {
+		header('content-type: text/html; charset=UTF-8');
 		echo $feed;
 	}
 }
