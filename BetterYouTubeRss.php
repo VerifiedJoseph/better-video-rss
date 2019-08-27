@@ -56,7 +56,7 @@ try {
 	);
 
 	$feed->build();
-	Output::feed($feed->get());
+	Output::xml($feed->get());
 
 } catch (Exception $e) {
 	Output::Error($e->getMessage());
