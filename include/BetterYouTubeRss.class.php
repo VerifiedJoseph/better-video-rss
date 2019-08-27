@@ -36,6 +36,58 @@ class BetterYouTubeRss {
 		}
 	}
 
+	public function generateFeed() {
+		
+		$cache = new Cache(
+			$this->getChannelId()
+		);
+
+		$cache->load();
+
+		$fetch = new Fetch(
+			$cache->getData()
+		);
+
+		foreach($betterRss->getParts() as $part) {
+			$parameter = '';
+
+			if ($cache->expired($part)) {
+
+				if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
+					$parameter = $this->getChannelId();
+				}
+
+				if ($part === 'videos') {
+					$parameter = $cache->getExpiredVideos();
+
+					if (empty($parameter)) {
+						continue;
+					}
+				}
+
+				$fetch->part($part, $parameter);
+				$cache->update($part, $fetch->getData($part));
+			}
+		}
+
+		$cache->save();
+
+		$feed = new FeedXml(
+			$cache->getData(),
+			$this->getEmbedStatus()
+		);
+
+		$feed->build();
+		Output::xml($feed->get());
+	}
+	
+	public function generateIndex() {
+		
+		$generator = new FeedUrlGenerator();
+		$generator->display(true);
+		
+	}
+	
 	/**
 	 * Return Channel ID
 	 *
