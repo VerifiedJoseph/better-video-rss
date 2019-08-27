@@ -12,6 +12,10 @@ class Output {
 	/**
 	 * Outpot RSS feed
 	 */
+	public static function xml(string $feed) {
+		header('content-type: text/xml; charset=UTF-8');
+		echo $feed;
+	}
 		echo $feed;
 	}
 }
