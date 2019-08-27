@@ -72,7 +72,7 @@ class FeedUrlGenerator {
 		$error = '';
 
 		if (!empty($this->channelId) && $this->error === false) {
-			$url = Config::get('SELF_URL_PATH') . 'BetterYouTubeRss.php?channel_id=' . $this->channelId;
+			$url = Config::get('SELF_URL_PATH') . '?channel_id=' . $this->channelId;
 			
 			if ($this->embedVideos === true) {
 				$url .= '&embed_videos=true';

@@ -14,7 +14,7 @@ class FeedHtml extends Feed {
 		$feedUpdated = Helper::convertUnixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['channel']['thumbnail'];
 
-		$rssLink = Config::get('SELF_URL_PATH') . 'BetterYouTubeRss.php?channel_id='. $this->data['channel']['id'];
+		$rssLink = Config::get('SELF_URL_PATH') . '?channel_id='. $this->data['channel']['id'];
 
 		$items = $this->buildItmes();
 
