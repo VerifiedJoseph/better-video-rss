@@ -9,7 +9,6 @@
 	<div id="main">
 		<ul>
 			<li><a href="cache-viewer.php">Cache Viewer</a></li>
-			<li><a href="feed-url-generator.php">Feed URL Generator</a></li>
 		</ul>
 	</div>
 </body>
