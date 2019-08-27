@@ -37,8 +37,6 @@ class FeedUrlGenerator {
 		if (!empty($this->query)) {
 			$this->findChannel();
 		}
-
-		$this->display();
 	}
 
 	/**
@@ -68,13 +66,18 @@ class FeedUrlGenerator {
 	 *
 	 * @echo string $html
 	 */
-	private function display() {
+	public function display(bool $index = false) {
 
 		$link = '';
 		$error = '';
 
 		if (!empty($this->channelId) && $this->error === false) {
 			$url = Config::get('SELF_URL_PATH') . 'BetterYouTubeRss.php?channel_id=' . $this->channelId;
+			
+			if ($this->embedVideos === true) {
+				$url .= '&embed_videos=true';
+			}
+			
 			$link = <<<HTML
 <p>Feed URL: <a href="{$url}">{$url}</a></p>
 HTML;
@@ -86,7 +89,40 @@ HTML;
 HTML;
 		}
 
-		$html = <<<HTML
+		if ($index === true) {
+			$html = <<<HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>BetterYouTubeRss</title>
+	<meta name="robots" content="noindex, follow">
+	<link rel="stylesheet" type="text/css" href="tools/style.css" />
+</head>
+<body>
+	<div id="header" class="center">
+		BetterYouTubeRss
+	</div>
+	<div id="main">
+		<div id="items">
+			<div class="item">
+				<form action="" method="post">
+					Channel: <input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title"><br>
+					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
+					<button style="width:80px;" type="submit">Generate</button>
+				</form><br>
+				{$link}{$error}
+			</div>
+			<div class="item">
+				<a href="tools">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterYouTubeRss">Source Code</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+HTML;
+		} else {
+		
+			$html = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,13 +134,15 @@ HTML;
 	<div id="main">
 		<form action="" method="post">
 			<input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title">
-			<button style="width:80px;" type="submit">Generate</button>
+			<button style="width:80px;" type="submit">Generate</button><br>
+			Embed videos: <input type="checkbox" name="embed_videos" value="yes">
 		</form><br>
 		{$link}{$error}
 	</div>
 </body>
 </html>
-HTML;
+HTML;	
+		}
 
 		echo $html;
 	}
