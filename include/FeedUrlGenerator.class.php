@@ -8,6 +8,11 @@ class FeedUrlGenerator {
 	 */
 	private $query = '';
 
+	/** 
+	 * @var boolean $embedVideos Embed videos status 
+	 */
+	private $embedVideos = false;
+	
 	/**
 	 * @var string $channelId YouTube channel ID
 	 */
@@ -50,6 +55,11 @@ class FeedUrlGenerator {
 			}
 
 			$this->query = $_POST['query'];
+			
+			if (isset($_POST['embed_videos'])) {
+				$this->embedVideos = true;
+			}
+			
 		}
 	}
 
