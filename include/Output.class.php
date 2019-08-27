@@ -2,7 +2,7 @@
 
 class Output {
 	/**
-	 * Outpot error message
+	 * Output error message
 	 */
 	public static function error(string $message) {
 		header('Content-Type: text/plain');
@@ -10,7 +10,7 @@ class Output {
 	}
 
 	/**
-	 * Outpot RSS feed
+	 * Output XML
 	 */
 	public static function xml(string $feed) {
 		header('content-type: text/xml; charset=UTF-8');
