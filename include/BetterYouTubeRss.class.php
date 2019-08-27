@@ -50,7 +50,7 @@ class BetterYouTubeRss {
 			$cache->getData()
 		);
 
-		foreach($betterRss->getParts() as $part) {
+		foreach($this->getParts() as $part) {
 			$parameter = '';
 
 			if ($cache->expired($part)) {
