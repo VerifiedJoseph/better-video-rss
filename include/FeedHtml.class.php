@@ -16,6 +16,10 @@ class FeedHtml extends Feed {
 
 		$rssLink = Config::get('SELF_URL_PATH') . '?channel_id='. $this->data['channel']['id'];
 
+		if ($this->embedVideos === true) {
+			$rssLink .= '&embed_videos=true'; 
+		}
+
 		$items = $this->buildItmes();
 
 		$this->feed = <<<EOD
