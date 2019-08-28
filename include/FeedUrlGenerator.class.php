@@ -19,6 +19,16 @@ class FeedUrlGenerator {
 	private $channelId = '';
 
 	/**
+	 * @var string $feedFormat Feed Format 
+	 */
+	private $feedFormat = 'rss';
+
+	/**
+	 * @var array $supportedFormats Supported feed formats 
+	 */
+	private $supportedFormats = array('rss', 'html');
+
+	/**
 	 * @var boolean $error Error status
 	 */
 	private $error = false;
@@ -51,7 +61,11 @@ class FeedUrlGenerator {
 			if (empty($_POST['query'])) {
 				throw new Exception('Query parameter not given.');
 			}
-
+			
+			if (isset($_POST['format']) && in_array($_POST['format'], $this->supportedFormats)) {
+				$this->feedFormat = $_POST['format'];
+			}
+			
 			$this->query = $_POST['query'];
 			
 			if (isset($_POST['embed_videos'])) {
@@ -72,7 +86,7 @@ class FeedUrlGenerator {
 		$error = '';
 
 		if (!empty($this->channelId) && $this->error === false) {
-			$url = Config::get('SELF_URL_PATH') . '?channel_id=' . $this->channelId;
+			$url = Config::get('SELF_URL_PATH') . '?channel_id=' . $this->channelId . '&format=' . $this->feedFormat;
 			
 			if ($this->embedVideos === true) {
 				$url .= '&embed_videos=true';
@@ -107,6 +121,11 @@ HTML;
 				<form action="" method="post">
 					Channel: <input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title"><br>
 					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
+					Feed format: 
+					<select name="format">
+						<option value="rss">RSS</option>
+						<option value="html">html</option>
+					</select><br/>
 					<button style="width:80px;" type="submit">Generate</button>
 				</form><br>
 				{$link}{$error}
