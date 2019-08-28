@@ -95,7 +95,7 @@ HTML;
 <head>
 	<title>BetterYouTubeRss</title>
 	<meta name="robots" content="noindex, follow">
-	<link rel="stylesheet" type="text/css" href="tools/style.css" />
+	<link rel="stylesheet" type="text/css" href="static/style.css" />
 </head>
 <body>
 	<div id="header" class="center">
