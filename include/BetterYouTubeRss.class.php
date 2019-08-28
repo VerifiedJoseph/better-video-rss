@@ -7,7 +7,15 @@ class BetterYouTubeRss {
 	
 	/** @var boolean $embedVideos Embed videos status */
 	private $embedVideos = false;
+	
+	/** @var string $feedFormat Feed format */
+	private $feedFormat = 'rss';
 
+	/**
+	 * @var array $supportedFormats Supported feed formats 
+	 */
+	private $supportedFeedFormats = array('rss', 'html');
+	
 	/** @var array $parts Cache and fetch parts */
 	private $parts = array('channel', 'playlist', 'videos');
 
@@ -29,6 +37,10 @@ class BetterYouTubeRss {
 			throw new Exception('No channel ID parameter given.');
 		}
 
+		if (isset($_GET['format']) && in_array($_GET['format'], $this->supportedFeedFormats)) {
+			$this->feedFormat = $_GET['format'];
+		}
+		
 		if (!empty($_GET['channel_id'])) {
 			$this->channelId = $_GET['channel_id'];
 		}
@@ -74,13 +86,28 @@ class BetterYouTubeRss {
 
 		$cache->save();
 
-		$feed = new FeedXml(
-			$cache->getData(),
-			$this->getEmbedStatus()
-		);
+		switch ($this->feedFormat) {
+    		case 'rss':
 
-		$feed->build();
-		Output::xml($feed->get());
+				$feed = new FeedXml(
+					$cache->getData(),
+					$this->getEmbedStatus()
+				);
+
+				$feed->build();
+				Output::xml($feed->get());
+
+        		break;
+			case 'html':
+
+				$feed = new FeedHtml(
+					$cache->getData(),
+					$this->getEmbedStatus()
+				);
+	
+				$feed->build();
+				Output::html($feed->get());
+		}
 	}
 	
 	public function generateIndex() {

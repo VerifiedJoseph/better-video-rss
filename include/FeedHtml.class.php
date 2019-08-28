@@ -16,6 +16,10 @@ class FeedHtml extends Feed {
 
 		$rssLink = Config::get('SELF_URL_PATH') . '?channel_id='. $this->data['channel']['id'];
 
+		if ($this->embedVideos === true) {
+			$rssLink .= '&embed_videos=true'; 
+		}
+
 		$items = $this->buildItmes();
 
 		$this->feed = <<<EOD
@@ -33,7 +37,7 @@ class FeedHtml extends Feed {
 	<div id="main">
 		<div id="items">
 			<div class="item">
-				Feed type: <a href="{$rssLink}"><button>RSS</button></a>
+				Feed format: <a href="{$rssLink}&format=rss"><button>RSS</button></a> <a href="{$rssLink}&format=html"><button>HTML</button></a>
 			</div>
 			{$items}
 		</div>
