@@ -6,7 +6,7 @@ class Config {
 	private static $minPhpVersion = '7.1.0';
 	
 	/** @var int $mkdirMode mkdir() access mode */
-	private static $mkdirMode = 0700;
+	private static $mkdirMode = 0755;
 
 	/** @var int $minResults Minimum number of results allowed */
 	private static $minResults = 1;
