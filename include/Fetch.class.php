@@ -72,7 +72,7 @@ class Fetch {
 	}
 
 	/**
-	 * Fetch YouTube Channel RSS feed
+	 * Fetch YouTube RSS feed
 	 *
 	 * @param string $id YouTube channel or playlist ID
 	 * @return object
