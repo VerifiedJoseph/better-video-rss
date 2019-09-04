@@ -2,9 +2,6 @@
 
 class BetterYouTubeRss {
 
-	/** @var string $channelId YouTube channel ID */
-	private $channelId = '';
-	
 	/** @var string $feedId YouTube channel or playlist ID */
 	private $feedId = '';
 
