@@ -59,7 +59,14 @@ class FeedUrlGenerator {
 		$this->checkInputs();
 
 		if (!empty($this->query)) {
-			$this->findChannel();
+
+			if ($this->feedType === 'channel') {
+				$this->findChannel();
+			}
+
+			if ($this->feedType === 'playlist') {
+				$this->findPlaylist();
+			}
 		}
 	}
 
