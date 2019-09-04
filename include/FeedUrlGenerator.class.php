@@ -66,7 +66,8 @@ class FeedUrlGenerator {
 	/**
 	 * Check user inputs
 	 *
-	 * @throws Exception if a query is not given
+	 * @throws Exception if a query parameter is not given
+	 * @throws Exception if a type parameter is not given
 	 */
 	private function checkInputs() {
 
@@ -74,6 +75,14 @@ class FeedUrlGenerator {
 
 			if (empty($_POST['query'])) {
 				throw new Exception('Query parameter not given.');
+			}
+			
+			if (empty($_POST['type'])) {
+				throw new Exception('Type parameter not given.');
+			}
+			
+			if (isset($_POST['type']) && in_array($_POST['type'], $this->supportedTypes)) {
+				$this->feedType = $_POST['type'];
 			}
 			
 			if (isset($_POST['format']) && in_array($_POST['format'], $this->supportedFormats)) {
