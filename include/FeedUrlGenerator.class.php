@@ -18,9 +18,9 @@ class FeedUrlGenerator {
 	private $embedVideos = false;
 	
 	/**
-	 * @var string $channelId YouTube channel ID
+	 * @var string $feedId YouTube channel or playlist ID
 	 */
-	private $channelId = '';
+	private $feedId = '';
 
 	/**
 	 * @var string $feedFormat Feed Format 
