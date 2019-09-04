@@ -183,6 +183,21 @@ HTML;
 
 		return false;
 	}
+	
+	/**
+	 * Is query string a playlist ID
+	 *
+	 * @param string $query Query string
+	 * @return boolean
+	 */
+	private function isPlaylistId(string $query) {
+
+		if (substr($query, 0, 2) === 'PL' && mb_strlen($query, 'utf8') >= 34) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Is query string a channel ID
