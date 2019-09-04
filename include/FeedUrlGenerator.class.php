@@ -162,7 +162,20 @@ HTML;
 	private function findChannel() {
 
 		if ($this->isChannelId($this->query) === true) {
-			$this->channelId = $this->query;
+			$this->feedId = $this->query;
+
+		} else {
+			$this->searchApi($this->query);
+		}
+	}
+
+	/**
+	 * Find playlist
+	 */
+	private function findPlaylist() {
+
+		if ($this->isPlaylistId($this->query) === true) {
+			$this->feedId = $this->query;
 
 		} else {
 			$this->searchApi($this->query);
