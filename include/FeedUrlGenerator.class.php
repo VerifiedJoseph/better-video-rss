@@ -3,42 +3,42 @@
 use \Curl\Curl;
 
 class FeedUrlGenerator {
-	
+
 	/** @var string $apiEndpoint YouTube API Endpoint */
 	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
-	
+
 	/**
 	 * @var string $query Search query
 	 */
 	private $query = '';
 
-	/** 
-	 * @var boolean $embedVideos Embed videos status 
+	/**
+	 * @var boolean $embedVideos Embed videos status
 	 */
 	private $embedVideos = false;
-	
+
 	/**
 	 * @var string $feedId YouTube channel or playlist ID
 	 */
 	private $feedId = '';
-	
-	/** 
-	 * @var string $feedType Feed type (channel or playlist) 
+
+	/**
+	 * @var string $feedType Feed type (channel or playlist)
 	 */
 	private $feedType = 'channel';
 
-	/** 
+	/**
 	 * @var array $supportedTypes Supported feed types
 	 */
 	private $supportedTypes = array('channel', 'playlist');
-	
+
 	/**
-	 * @var string $feedFormat Feed Format 
+	 * @var string $feedFormat Feed Format
 	 */
 	private $feedFormat = 'rss';
 
 	/**
-	 * @var array $supportedFormats Supported feed formats 
+	 * @var array $supportedFormats Supported feed formats
 	 */
 	private $supportedFormats = array('rss', 'html');
 
@@ -83,25 +83,25 @@ class FeedUrlGenerator {
 			if (empty($_POST['query'])) {
 				throw new Exception('Query parameter not given.');
 			}
-			
+
 			if (empty($_POST['type'])) {
 				throw new Exception('Type parameter not given.');
 			}
-			
+
 			if (isset($_POST['type']) && in_array($_POST['type'], $this->supportedTypes)) {
 				$this->feedType = $_POST['type'];
 			}
-			
+
 			if (isset($_POST['format']) && in_array($_POST['format'], $this->supportedFormats)) {
 				$this->feedFormat = $_POST['format'];
 			}
-			
+
 			$this->query = $_POST['query'];
-			
+
 			if (isset($_POST['embed_videos'])) {
 				$this->embedVideos = true;
 			}
-			
+
 		}
 	}
 
@@ -132,7 +132,7 @@ HTML;
 
 			$error = <<<HTML
 <p>{$this->errorMessage}</p>
-HTML;		
+HTML;
 		}
 
 		if ($this->feedType === 'channel') {
@@ -241,7 +241,7 @@ HTML;
 
 		return false;
 	}
-	
+
 	/**
 	 * Is query string a playlist ID
 	 *
@@ -270,12 +270,12 @@ HTML;
 		try {
 
 			if ($this->feedType === 'channel') {
-				$url = $this->apiEndpoint . 'search?part=snippet&fields=items(snippet(channelId))&q=' 
+				$url = $this->apiEndpoint . 'search?part=snippet&fields=items(snippet(channelId))&q='
 					. urlencode($query) . '&type=channel';
 			}
 
 			if ($this->feedType === 'playlist') {
-				$url =  $this->apiEndpoint . 'search?part=snippet&fields=items(id(playlistId))&q=' 
+				$url = $this->apiEndpoint . 'search?part=snippet&fields=items(id(playlistId))&q='
 					. urlencode($query) . '&type=playlist';
 			}
 
@@ -303,7 +303,7 @@ HTML;
 			if ($this->feedType === 'channel') {
 				$this->feedId = $response->items['0']->snippet->channelId;
 			}
-			
+
 			if ($this->feedType === 'playlist') {
 				$this->feedId = $response->items['0']->id->playlistId;
 			}
