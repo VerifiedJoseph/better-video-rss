@@ -44,8 +44,24 @@ class BetterYouTubeRss {
 			$this->feedFormat = $_GET['format'];
 		}
 		
-		if (!empty($_GET['channel_id'])) {
-			$this->channelId = $_GET['channel_id'];
+		if (isset($_GET['channel_id'])) {
+
+			if (empty($_GET['channel_id'])) {
+				throw new Exception('No channel ID parameter given.');
+			}
+
+			$this->feedId = $_GET['channel_id'];
+			$this->feedType = 'channel';
+		}
+		
+		if (isset($_GET['playlist_id'])) {
+
+			if (empty($_GET['playlist_id'])) {
+				throw new Exception('No channel ID parameter given.');
+			}
+
+			$this->feedId = $_GET['playlist_id'];
+			$this->feedType = 'playlist';
 		}
 
 		if (isset($_GET['embed_videos'])) {
