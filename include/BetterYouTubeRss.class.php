@@ -36,10 +36,6 @@ class BetterYouTubeRss {
 	 */
 	private function checkInputs() {
 
-		if (isset($_GET['channel_id']) && empty($_GET['channel_id'])) {
-			throw new Exception('No channel ID parameter given.');
-		}
-
 		if (isset($_GET['format']) && in_array($_GET['format'], $this->supportedFeedFormats)) {
 			$this->feedFormat = $_GET['format'];
 		}
