@@ -2,22 +2,25 @@
 
 class BetterYouTubeRss {
 
-	/** @var string $channelId YouTube channel ID */
-	private $channelId = '';
-	
+	/** @var string $feedId YouTube channel or playlist ID */
+	private $feedId = '';
+
+	/** @var string $feedType Feed type (channel or playlist) */
+	private $feedType = 'channel';
+
 	/** @var boolean $embedVideos Embed videos status */
 	private $embedVideos = false;
-	
+
 	/** @var string $feedFormat Feed format */
 	private $feedFormat = 'rss';
 
 	/**
-	 * @var array $supportedFormats Supported feed formats 
+	 * @var array $supportedFormats Supported feed formats
 	 */
 	private $supportedFeedFormats = array('rss', 'html');
-	
+
 	/** @var array $parts Cache and fetch parts */
-	private $parts = array('channel', 'playlist', 'videos');
+	private $parts = array('details', 'playlist', 'videos');
 
 	/**
 	 * Constructor
@@ -29,20 +32,33 @@ class BetterYouTubeRss {
 	/**
 	 * Check user inputs
 	 *
-	 * @throws Exception If a channel ID is not given.
+	 * @throws Exception if a empty channel ID parameter is given.
+	 * @throws Exception if a empty playlist ID parameter is given.
 	 */
 	private function checkInputs() {
-
-		if (isset($_GET['channel_id']) && empty($_GET['channel_id'])) {
-			throw new Exception('No channel ID parameter given.');
-		}
 
 		if (isset($_GET['format']) && in_array($_GET['format'], $this->supportedFeedFormats)) {
 			$this->feedFormat = $_GET['format'];
 		}
-		
-		if (!empty($_GET['channel_id'])) {
-			$this->channelId = $_GET['channel_id'];
+
+		if (isset($_GET['channel_id'])) {
+
+			if (empty($_GET['channel_id'])) {
+				throw new Exception('No channel ID parameter given.');
+			}
+
+			$this->feedId = $_GET['channel_id'];
+			$this->feedType = 'channel';
+		}
+
+		if (isset($_GET['playlist_id'])) {
+
+			if (empty($_GET['playlist_id'])) {
+				throw new Exception('No playlist ID parameter given.');
+			}
+
+			$this->feedId = $_GET['playlist_id'];
+			$this->feedType = 'playlist';
 		}
 
 		if (isset($_GET['embed_videos'])) {
@@ -51,9 +67,10 @@ class BetterYouTubeRss {
 	}
 
 	public function generateFeed() {
-		
+
 		$cache = new Cache(
-			$this->getChannelId()
+			$this->getFeedId(),
+			$this->getFeedType()
 		);
 
 		$cache->load();
@@ -68,7 +85,7 @@ class BetterYouTubeRss {
 			if ($cache->expired($part)) {
 
 				if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
-					$parameter = $this->getChannelId();
+					$parameter = $this->getFeedId();
 				}
 
 				if ($part === 'videos') {
@@ -87,7 +104,7 @@ class BetterYouTubeRss {
 		$cache->save();
 
 		switch ($this->feedFormat) {
-    		case 'rss':
+			case 'rss':
 
 				$feed = new FeedXml(
 					$cache->getData(),
@@ -97,33 +114,42 @@ class BetterYouTubeRss {
 				$feed->build();
 				Output::xml($feed->get());
 
-        		break;
+				break;
 			case 'html':
 
 				$feed = new FeedHtml(
 					$cache->getData(),
 					$this->getEmbedStatus()
 				);
-	
+
 				$feed->build();
 				Output::html($feed->get());
 		}
 	}
-	
+
 	public function generateIndex() {
-		
+
 		$generator = new FeedUrlGenerator();
 		$generator->display();
-		
+
 	}
-	
+
 	/**
-	 * Return Channel ID
+	 * Return Feed type
 	 *
 	 * @return string
 	 */
-	public function getChannelId() {
-		return $this->channelId;
+	public function getFeedType() {
+		return $this->feedType;
+	}
+
+	/**
+	 * Return feed ID
+	 *
+	 * @return string
+	 */
+	public function getFeedId() {
+		return $this->feedId;
 	}
 
 	/**

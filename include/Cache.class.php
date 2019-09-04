@@ -7,7 +7,7 @@ class Cache {
 	
 	/** @var array $data Cache data */
 	private $data = array(
-		'channel' => array(),
+		'details' => array(),
 		'playlist' => array(),
 		'videos' => array(
 			'items' => array()
@@ -16,7 +16,7 @@ class Cache {
 
 	// TODO: Move to config file?
 	private $expiresIn = array(
-		'channel' => '+10 days',
+		'details' => '+10 days',
 		'playlist' => '+10 minutes',
 		'videos' => '+10 minutes',
 		'videoItems' => '+6 hours'
@@ -33,9 +33,10 @@ class Cache {
 	 *
 	 * @param string $channelid YouTube Channel ID
 	 */
-	public function __construct(string $channelId) {
-		$this->data['channel']['id'] = $channelId;
-		$this->setName($channelId);
+	public function __construct(string $feedId, string $feedType) {
+		$this->data['details']['id'] = $feedId;
+		$this->data['details']['type'] = $feedType;
+		$this->setName($feedId);
 		$this->setPath();
 	}
 

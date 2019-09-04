@@ -15,10 +15,10 @@ try {
 	Config::checkConfig();
 
 	$betterRss = new BetterYouTubeRss();
-	
-	if (!empty($betterRss->getChannelId())) {
+
+	if (!empty($betterRss->getFeedId())) {
 		$betterRss->generateFeed();
-	
+
 	} else {
 		$betterRss->generateIndex();
 	}

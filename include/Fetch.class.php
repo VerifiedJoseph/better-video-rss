@@ -4,11 +4,14 @@ use \Curl\Curl;
 
 class Fetch {
 
-	/** @var string $endpoint YouTube API Endpoint */
-	private $endpoint = 'https://www.googleapis.com/youtube/v3/';
+	/** @var string $endpoint YouTube.com Endpoint */
+	private $endpoint = 'https://www.youtube.com';
+
+	/** @var string $apiEndpoint YouTube API Endpoint */
+	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
 
 	/** @var string $feedEndpoint YouTube RSS Feed Endpoint */
-	private $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml?channel_id=';
+	private $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml';
 
 	/** @var array $data */
 	private $data = array();
@@ -69,15 +72,15 @@ class Fetch {
 	}
 
 	/**
-	 * Fetch YouTube Channel RSS feed
+	 * Fetch YouTube RSS feed
 	 *
-	 * @param string $channelId YouTube Channel ID
+	 * @param string $id YouTube channel or playlist ID
 	 * @return object
 	 * @throws Exception If a curl error has occurred.
 	 */
-	private function fetchFeed(string $channelId) {
+	private function fetchFeed(string $id) {
 
-		$url = $this->feedEndpoint . $channelId;
+		$url = $this->feedEndpoint . '?' . $this->data['details']['type'] . '_id=' . $id;
 
 		$curl = new Curl();
 		$curl->get($url);
@@ -138,26 +141,36 @@ class Fetch {
 	 * Handle API response
 	 *
 	 * @param object $response API response
-	 * @throws Exception If items array in $response is empty when fetch type is 'channel'.
+	 * @throws Exception If items array in $response is empty when fetch type is 'details'.
 	 */
 	private function handleResponse($response) {
 
-		if ($this->fetchType === 'channel') {
+		if ($this->fetchType === 'details') {
 
 			if (empty($response->items)) {
-				throw new Exception('Channel Not Found');
+				throw new Exception($this->data['details']['type'] . ' not found.');
 			}
 
-			$channel = array();
-			$channel['etag'] = $response->etag;
-			$channel['url'] = 'https://youtube.com/channel/' . $this->data['channel']['id'];
-			$channel['title'] = $response->items['0']->snippet->title;
-			$channel['description'] = $response->items['0']->snippet->description;
-			$channel['published'] = strtotime($response->items['0']->snippet->publishedAt);
-			$channel['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
-			$channel['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
+			$details = array();
+			$details['etag'] = $response->etag;
 
-			$this->data['channel'] = array_merge($this->data['channel'], $channel);
+			$details['title'] = $response->items['0']->snippet->title;
+			$details['description'] = $response->items['0']->snippet->description;
+			$details['published'] = strtotime($response->items['0']->snippet->publishedAt);
+
+			if ($this->data['details']['type'] === 'channel') {
+				$details['url'] = $this->endpoint . '/channel/' . $this->data['details']['id'];
+				$details['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
+			}
+
+			if ($this->data['details']['type'] === 'playlist') {
+				$details['url'] = $this->endpoint . '/playlist?list=' . $this->data['details']['id'];
+				$details['playlist'] = $response->items['0']->id;
+			}
+
+			$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
+
+			$this->data['details'] = array_merge($this->data['details'], $details);
 		}
 
 		if ($this->fetchType === 'feed') {
@@ -192,7 +205,7 @@ class Fetch {
 				$video = array();
 
 				$video['id'] = $item->id;
-				$video['url'] = 'https://youtube.com/watch?v=' . $item->id;
+				$video['url'] = $this->endpoint . '/watch?v=' . $item->id;
 				$video['title'] = $item->snippet->title;
 				$video['description'] = $item->snippet->description;
 				$video['published'] = strtotime($item->snippet->publishedAt);
@@ -232,14 +245,22 @@ class Fetch {
 	 */
 	private function buildApiUrl(string $parameter = '') {
 
-		if ($this->fetchType === 'channel') {
-			$parameters = 'channels?part=snippet,contentDetails&id='
-				. $this->data['channel']['id'] . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
+		if ($this->fetchType === 'details') {
+
+			if ($this->data['details']['type'] === 'channel') {
+				$parameters = 'channels?part=snippet,contentDetails&id='
+					. $this->data['details']['id'] . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
+			}
+
+			if ($this->data['details']['type'] === 'playlist') {
+				$parameters = 'playlists?part=snippet,contentDetails&id='
+					. $this->data['details']['id'] . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';
+			}
 		}
 
 		if ($this->fetchType === 'playlist') {
 			$parameters = 'playlistItems?part=contentDetails&maxResults=' . Config::get('RESULTS_LIMIT') . '&playlistId='
-				. $this->data['channel']['playlist'] . '&fields=etag,items(contentDetails(videoId))';
+				. $this->data['details']['playlist'] . '&fields=etag,items(contentDetails(videoId))';
 		}
 
 		if ($this->fetchType === 'videos') {
@@ -249,7 +270,7 @@ class Fetch {
 				. $ids . '&fields=etag,items(id,snippet(title,description,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
 		}
 
-		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
+		return $this->apiEndpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 	}
 
 	/**
