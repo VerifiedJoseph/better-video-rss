@@ -32,7 +32,8 @@ class BetterYouTubeRss {
 	/**
 	 * Check user inputs
 	 *
-	 * @throws Exception If a channel ID is not given.
+	 * @throws Exception if a empty channel ID parameter is given.
+	 * @throws Exception if a empty playlist ID parameter is given.
 	 */
 	private function checkInputs() {
 
@@ -53,7 +54,7 @@ class BetterYouTubeRss {
 		if (isset($_GET['playlist_id'])) {
 
 			if (empty($_GET['playlist_id'])) {
-				throw new Exception('No channel ID parameter given.');
+				throw new Exception('No playlist ID parameter given.');
 			}
 
 			$this->feedId = $_GET['playlist_id'];
