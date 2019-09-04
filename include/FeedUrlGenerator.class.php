@@ -120,7 +120,7 @@ class FeedUrlGenerator {
 		$playlistError = '';
 
 		if (!empty($this->feedId) && $this->error === false) {
-			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '=' . $this->feedId . '&format=' . $this->feedFormat;
+			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '_id=' . $this->feedId . '&format=' . $this->feedFormat;
 
 			if ($this->embedVideos === true) {
 				$url .= '&embed_videos=true';
