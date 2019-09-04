@@ -11,7 +11,7 @@ class Fetch {
 	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
 
 	/** @var string $feedEndpoint YouTube RSS Feed Endpoint */
-	private $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml?channel_id=';
+	private $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml';
 
 	/** @var array $data */
 	private $data = array();
