@@ -133,9 +133,10 @@ class CacheViewer {
 	<td id="{$data['id']}">$index</td>
 	<td>{$data['id']}<br>
 		<span style="font-size:13px;">
-			(Channel ID: {$data['contents']['channel']['id']} Title: {$data['contents']['channel']['title']})
+			(ID: {$data['contents']['details']['id']} Title: {$data['contents']['details']['title']})
 		</span>
 	</td>
+	<td>{$data['contents']['details']['type']}</td>	
 	<td>{$modified}</td>
 	<td>{$size}</td>
 	<td style="width:170px;">
@@ -196,6 +197,7 @@ HTML;
 				<tr class="center">
 					<th>#</th>
 					<th>Cache ID</th>
+					<th>Type</th>
 					<th>Last Modified</th>
 					<th>Size</th>
 					<th>View</th>
@@ -238,7 +240,7 @@ HTML;
 			$feed = new FeedXml($data['contents'], false);
 			$feed->build();
 
-			$feedurl = Config::get('SELF_URL_PATH') . '?channel_id='. $data['contents']['channel']['id'];
+			$feedurl = Config::get('SELF_URL_PATH') . '?' . $data['contents']['details']['type'] . '_id='. $data['contents']['details']['id'];
 
 			$tdData .= <<<HTML
 Feed URL: <a target="_blank" href="{$feedurl}">{$feedurl}<a/>
@@ -247,7 +249,7 @@ HTML;
 		} else {
 
 			$tdData .= <<<HTML
-{$this->displayChannel($data['contents']['channel'])}<br/>
+{$this->displayChannel($data['contents']['details'])}<br/>
 {$this->displayplaylist($data['contents']['playlist'])}<br>
 {$this->displayVideos($data['contents']['videos'])}<br/>
 HTML;
@@ -255,7 +257,7 @@ HTML;
 
 		$tr = <<<HTML
 <tr>
-	<td colspan="5">
+	<td colspan="6">
 		{$tdData}
 	</td>
 </tr>
@@ -277,7 +279,7 @@ HTML;
 		$published = Helper::convertUnixTime($channel['published']);
 
 		$html = <<<HTML
-<strong>Channel:</strong>
+<strong>Details:</strong>
 <table style="width: 1153px;">
 <tr>
 	<td>
