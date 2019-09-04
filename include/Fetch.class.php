@@ -4,6 +4,9 @@ use \Curl\Curl;
 
 class Fetch {
 
+	/** @var string $endpoint YouTube.com Endpoint */
+	private $endpoint = 'https://www.youtube.com';
+	
 	/** @var string $apiEndpoint YouTube API Endpoint */
 	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
 
@@ -193,6 +196,7 @@ class Fetch {
 
 				$video['id'] = $item->id;
 				$video['url'] = 'https://youtube.com/watch?v=' . $item->id;
+				$video['url'] =  $this->endpoint . '/watch?v=' . $item->id;
 				$video['title'] = $item->snippet->title;
 				$video['description'] = $item->snippet->description;
 				$video['published'] = strtotime($item->snippet->publishedAt);
