@@ -1,18 +1,16 @@
 # BetterYouTubeRss 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-BetterYouTubeRss is a PHP script for generating YouTube channel RSS feeds using the [YouTube Data API](https://developers.google.com/youtube/v3/).
+BetterYouTubeRss is a PHP script for generating YouTube channel and playlist RSS feeds using the [YouTube Data API](https://developers.google.com/youtube/v3/).
 
 ## API Key
 A valid [YouTube API key](https://developers.google.com/youtube/registering_an_application) is required.
 
 ## Caching
-To reduce API requests, responses from the YouTube Data API are cached.
-Channel responses are cached for 10 days, playlists for 15 mintues and videos for 6 hours.
-Caching can be disabled via the `DISABLE_CACHE` value in the config file.
+To reduce API requests, responses from the YouTube Data API are cached. Caching can be disabled via the `DISABLE_CACHE` value in the config file.
 
 ## Hybrid Mode
-Hybrid Mode uses YouTube's channel RSS feeds and the YouTube Data API to generate feeds. Enabling hybrid mode will reduce the number of requests made to the YouTube API, but will limit the number of videos returned to 15. Hybrid Mode can be enabled via the `ENABLE_HYBRID_MODE` value in the config file.
+Hybrid Mode uses YouTube's RSS feeds and the YouTube Data API to generate feeds. Enabling hybrid mode will reduce the number of requests made to the YouTube API, but will limit the number of videos returned to 15. Hybrid Mode can be enabled via the `ENABLE_HYBRID_MODE` value in the config file.
 
 ## Requirements
 
