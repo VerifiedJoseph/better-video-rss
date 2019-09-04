@@ -74,13 +74,13 @@ class Fetch {
 	/**
 	 * Fetch YouTube Channel RSS feed
 	 *
-	 * @param string $channelId YouTube Channel ID
+	 * @param string $id YouTube channel or playlist ID
 	 * @return object
 	 * @throws Exception If a curl error has occurred.
 	 */
-	private function fetchFeed(string $channelId) {
+	private function fetchFeed(string $id) {
 
-		$url = $this->feedEndpoint . $channelId;
+		$url = $this->feedEndpoint . '?' . $this->data['details']['type'] . '_id=' . $id;
 
 		$curl = new Curl();
 		$curl->get($url);
