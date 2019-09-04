@@ -224,8 +224,17 @@ HTML;
 
 		try {
 
-			$url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&fields=items(snippet(channelId))&q=' .
-				urlencode($query) . '&type=channel&maxResults=1&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
+			if ($this->feedType === 'channel') {
+				$url = $this->apiEndpoint . 'search?part=snippet&fields=items(snippet(channelId))&q=' 
+					. urlencode($query) . '&type=channel';
+			}
+
+			if ($this->feedType === 'playlist') {
+				$url =  $this->apiEndpoint . 'search?part=snippet&fields=items(id(playlistId))&q=' 
+					. urlencode($query) . '&type=playlist';
+			}
+
+			$url .= '&maxResults=1&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 
 			$curl = new Curl();
 			$curl->get($url);
@@ -243,10 +252,16 @@ HTML;
 			}
 
 			if (empty($response->items)) {
-				throw new Exception('Channel not found');
+				throw new Exception($this->feedType . ' not found');
 			}
 
-			$this->channelId = $response->items['0']->snippet->channelId;
+			if ($this->feedType === 'channel') {
+				$this->feedId = $response->items['0']->snippet->channelId;
+			}
+			
+			if ($this->feedType === 'playlist') {
+				$this->feedId = $response->items['0']->id->playlistId;
+			}
 
 		} catch (Exception $e) {
 			$this->error = true;
