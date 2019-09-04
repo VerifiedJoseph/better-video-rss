@@ -4,7 +4,7 @@ class Config {
 
 	/** @var string $minPhpVersion Minimum PHP version */
 	private static $minPhpVersion = '7.1.0';
-	
+
 	/** @var int $mkdirMode mkdir() access mode */
 	private static $mkdirMode = 0775;
 

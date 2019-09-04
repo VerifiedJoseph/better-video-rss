@@ -54,7 +54,7 @@ abstract class Feed {
 	 * Build item content (description)
 	 *
 	 * @param array $video Video data
-	 * @return string Item content as HTML 
+	 * @return string Item content as HTML
 	 */
 	abstract protected function buildContent(array $video);
 

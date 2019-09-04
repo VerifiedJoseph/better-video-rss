@@ -1,12 +1,11 @@
 <?php
 
 class FeedHtml extends Feed {
-
 	/**
 	 * Build feed
 	 */
 	public function build() {
-		
+
 		$feedDescription = $this->data['details']['description'];
 		$feedTitle = $this->data['details']['title'];
 		$feedAuthor = $this->data['details']['title'];
@@ -14,10 +13,10 @@ class FeedHtml extends Feed {
 		$feedUpdated = Helper::convertUnixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
-		$rssLink = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id='. $this->data['details']['id'];
+		$rssLink = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'];
 
 		if ($this->embedVideos === true) {
-			$rssLink .= '&embed_videos=true'; 
+			$rssLink .= '&embed_videos=true';
 		}
 
 		$items = $this->buildItmes();
@@ -104,7 +103,7 @@ EOD;
 	 * Build item content (description)
 	 *
 	 * @param array $video Video data
-	 * @return string Item content as HTML 
+	 * @return string Item content as HTML
 	 */
 	protected function buildContent(array $video) {
 

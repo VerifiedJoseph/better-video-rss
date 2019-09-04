@@ -1,12 +1,11 @@
 <?php
 
 class FeedXml extends Feed {
-
 	/**
 	 * Build feed
 	 */
 	public function build() {
-		
+
 		$feedDescription = $this->xmlEncode($this->data['details']['description']);
 		$feedTitle = $this->xmlEncode($this->data['details']['title']);
 		$feedAuthor = $this->xmlEncode($this->data['details']['title']);
@@ -97,7 +96,7 @@ EOD;
 	 * Build item content (description)
 	 *
 	 * @param array $video Video data
-	 * @return string Item content as HTML 
+	 * @return string Item content as HTML
 	 */
 	protected function buildContent(array $video) {
 

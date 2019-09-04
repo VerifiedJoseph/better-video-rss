@@ -10,15 +10,15 @@ class BetterYouTubeRss {
 
 	/** @var boolean $embedVideos Embed videos status */
 	private $embedVideos = false;
-	
+
 	/** @var string $feedFormat Feed format */
 	private $feedFormat = 'rss';
 
 	/**
-	 * @var array $supportedFormats Supported feed formats 
+	 * @var array $supportedFormats Supported feed formats
 	 */
 	private $supportedFeedFormats = array('rss', 'html');
-	
+
 	/** @var array $parts Cache and fetch parts */
 	private $parts = array('details', 'playlist', 'videos');
 
@@ -40,7 +40,7 @@ class BetterYouTubeRss {
 		if (isset($_GET['format']) && in_array($_GET['format'], $this->supportedFeedFormats)) {
 			$this->feedFormat = $_GET['format'];
 		}
-		
+
 		if (isset($_GET['channel_id'])) {
 
 			if (empty($_GET['channel_id'])) {
@@ -50,7 +50,7 @@ class BetterYouTubeRss {
 			$this->feedId = $_GET['channel_id'];
 			$this->feedType = 'channel';
 		}
-		
+
 		if (isset($_GET['playlist_id'])) {
 
 			if (empty($_GET['playlist_id'])) {
@@ -67,7 +67,7 @@ class BetterYouTubeRss {
 	}
 
 	public function generateFeed() {
-		
+
 		$cache = new Cache(
 			$this->getFeedId(),
 			$this->getFeedType()
@@ -104,7 +104,7 @@ class BetterYouTubeRss {
 		$cache->save();
 
 		switch ($this->feedFormat) {
-    		case 'rss':
+			case 'rss':
 
 				$feed = new FeedXml(
 					$cache->getData(),
@@ -114,24 +114,24 @@ class BetterYouTubeRss {
 				$feed->build();
 				Output::xml($feed->get());
 
-        		break;
+				break;
 			case 'html':
 
 				$feed = new FeedHtml(
 					$cache->getData(),
 					$this->getEmbedStatus()
 				);
-	
+
 				$feed->build();
 				Output::html($feed->get());
 		}
 	}
-	
+
 	public function generateIndex() {
-		
+
 		$generator = new FeedUrlGenerator();
 		$generator->display();
-		
+
 	}
 
 	/**

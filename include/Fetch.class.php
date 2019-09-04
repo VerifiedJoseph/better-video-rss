@@ -6,7 +6,7 @@ class Fetch {
 
 	/** @var string $endpoint YouTube.com Endpoint */
 	private $endpoint = 'https://www.youtube.com';
-	
+
 	/** @var string $apiEndpoint YouTube API Endpoint */
 	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
 
@@ -157,17 +157,17 @@ class Fetch {
 			$details['title'] = $response->items['0']->snippet->title;
 			$details['description'] = $response->items['0']->snippet->description;
 			$details['published'] = strtotime($response->items['0']->snippet->publishedAt);
-			
+
 			if ($this->data['details']['type'] === 'channel') {
 				$details['url'] = $this->endpoint . '/channel/' . $this->data['details']['id'];
 				$details['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
 			}
-			
+
 			if ($this->data['details']['type'] === 'playlist') {
-				$details['url'] =  $this->endpoint . '/playlist?list=' . $this->data['details']['id'];
+				$details['url'] = $this->endpoint . '/playlist?list=' . $this->data['details']['id'];
 				$details['playlist'] = $response->items['0']->id;
 			}
-			
+
 			$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
 
 			$this->data['details'] = array_merge($this->data['details'], $details);
@@ -205,7 +205,7 @@ class Fetch {
 				$video = array();
 
 				$video['id'] = $item->id;
-				$video['url'] =  $this->endpoint . '/watch?v=' . $item->id;
+				$video['url'] = $this->endpoint . '/watch?v=' . $item->id;
 				$video['title'] = $item->snippet->title;
 				$video['description'] = $item->snippet->description;
 				$video['published'] = strtotime($item->snippet->publishedAt);
@@ -246,15 +246,15 @@ class Fetch {
 	private function buildApiUrl(string $parameter = '') {
 
 		if ($this->fetchType === 'details') {
-			
+
 			if ($this->data['details']['type'] === 'channel') {
 				$parameters = 'channels?part=snippet,contentDetails&id='
-					. $this->data['details']['id'] . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';	
+					. $this->data['details']['id'] . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
 			}
 
 			if ($this->data['details']['type'] === 'playlist') {
 				$parameters = 'playlists?part=snippet,contentDetails&id='
-					. $this->data['details']['id'] . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';	
+					. $this->data['details']['id'] . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';
 			}
 		}
 
