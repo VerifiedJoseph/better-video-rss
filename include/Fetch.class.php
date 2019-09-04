@@ -236,14 +236,22 @@ class Fetch {
 	 */
 	private function buildApiUrl(string $parameter = '') {
 
-		if ($this->fetchType === 'channel') {
-			$parameters = 'channels?part=snippet,contentDetails&id='
-				. $this->data['channel']['id'] . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
+		if ($this->fetchType === 'details') {
+			
+			if ($this->data['details']['type'] === 'channel') {
+				$parameters = 'channels?part=snippet,contentDetails&id='
+					. $this->data['details']['id'] . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';	
+			}
+
+			if ($this->data['details']['type'] === 'playlist') {
+				$parameters = 'playlists?part=snippet,contentDetails&id='
+					. $this->data['details']['id'] . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';	
+			}
 		}
 
 		if ($this->fetchType === 'playlist') {
 			$parameters = 'playlistItems?part=contentDetails&maxResults=' . Config::get('RESULTS_LIMIT') . '&playlistId='
-				. $this->data['channel']['playlist'] . '&fields=etag,items(contentDetails(videoId))';
+				. $this->data['details']['playlist'] . '&fields=etag,items(contentDetails(videoId))';
 		}
 
 		if ($this->fetchType === 'videos') {
