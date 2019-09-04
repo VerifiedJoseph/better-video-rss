@@ -33,9 +33,10 @@ class Cache {
 	 *
 	 * @param string $channelid YouTube Channel ID
 	 */
-	public function __construct(string $channelId) {
-		$this->data['channel']['id'] = $channelId;
-		$this->setName($channelId);
+	public function __construct(string $feedId, string $feedType) {
+		$this->data['details']['id'] = $feedId;
+		$this->data['details']['type'] = $feedType;
+		$this->setName($feedId);
 		$this->setPath();
 	}
 
