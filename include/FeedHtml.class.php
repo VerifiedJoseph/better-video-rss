@@ -7,14 +7,14 @@ class FeedHtml extends Feed {
 	 */
 	public function build() {
 		
-		$feedDescription = $this->data['channel']['description'];
-		$feedTitle = $this->data['channel']['title'];
-		$feedAuthor = $this->data['channel']['title'];
-		$feedUrl = $this->data['channel']['url'];
+		$feedDescription = $this->data['details']['description'];
+		$feedTitle = $this->data['details']['title'];
+		$feedAuthor = $this->data['details']['title'];
+		$feedUrl = $this->data['details']['url'];
 		$feedUpdated = Helper::convertUnixTime(strtotime('now'), 'r');
-		$feedImage = $this->data['channel']['thumbnail'];
+		$feedImage = $this->data['details']['thumbnail'];
 
-		$rssLink = Config::get('SELF_URL_PATH') . '?channel_id='. $this->data['channel']['id'];
+		$rssLink = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id='. $this->data['details']['id'];
 
 		if ($this->embedVideos === true) {
 			$rssLink .= '&embed_videos=true'; 
@@ -32,7 +32,7 @@ class FeedHtml extends Feed {
 </head>
 <body>
 	<div id="header" class="center">
-		<a href="https://youtube.com/channel/{$this->data['channel']['id']}">{$feedTitle}</a>
+		<a href="{$feedUrl}">{$feedTitle}</a>
 	</div>
 	<div id="main">
 		<div id="items">
