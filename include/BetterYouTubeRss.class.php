@@ -5,6 +5,12 @@ class BetterYouTubeRss {
 	/** @var string $channelId YouTube channel ID */
 	private $channelId = '';
 	
+	/** @var string $feedId YouTube channel or playlist ID */
+	private $feedId = '';
+
+	/** @var string $feedType Feed type (channel or playlist) */
+	private $feedType = 'channel';
+
 	/** @var boolean $embedVideos Embed videos status */
 	private $embedVideos = false;
 	
