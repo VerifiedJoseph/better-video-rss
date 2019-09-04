@@ -7,14 +7,14 @@ class FeedXml extends Feed {
 	 */
 	public function build() {
 		
-		$feedDescription = $this->xmlEncode($this->data['channel']['description']);
-		$feedTitle = $this->xmlEncode($this->data['channel']['title']);
-		$feedAuthor = $this->xmlEncode($this->data['channel']['title']);
-		$feedUrl = $this->xmlEncode($this->data['channel']['url']);
+		$feedDescription = $this->xmlEncode($this->data['details']['description']);
+		$feedTitle = $this->xmlEncode($this->data['details']['title']);
+		$feedAuthor = $this->xmlEncode($this->data['details']['title']);
+		$feedUrl = $this->xmlEncode($this->data['details']['url']);
 		$feedUpdated = $this->xmlEncode(
 			Helper::convertUnixTime(strtotime('now'), 'r')
 		);
-		$feedImage = $this->xmlEncode($this->data['channel']['thumbnail']);
+		$feedImage = $this->xmlEncode($this->data['details']['thumbnail']);
 
 		$items = $this->buildItmes();
 
