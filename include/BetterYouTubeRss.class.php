@@ -60,6 +60,7 @@ class BetterYouTubeRss {
 		
 		$cache = new Cache(
 			$this->getFeedId(),
+			$this->getFeedType()
 		);
 
 		$cache->load();
@@ -122,7 +123,16 @@ class BetterYouTubeRss {
 		$generator->display();
 		
 	}
-	
+
+	/**
+	 * Return Feed type
+	 *
+	 * @return string
+	 */
+	public function getFeedType() {
+		return $this->feedType;
+	}
+
 	/**
 	 * Return feed ID
 	 *
