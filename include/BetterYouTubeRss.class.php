@@ -59,7 +59,7 @@ class BetterYouTubeRss {
 	public function generateFeed() {
 		
 		$cache = new Cache(
-			$this->getChannelId()
+			$this->getFeedId(),
 		);
 
 		$cache->load();
@@ -74,7 +74,7 @@ class BetterYouTubeRss {
 			if ($cache->expired($part)) {
 
 				if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
-					$parameter = $this->getChannelId();
+					$parameter = $this->getFeedId();
 				}
 
 				if ($part === 'videos') {
@@ -124,12 +124,12 @@ class BetterYouTubeRss {
 	}
 	
 	/**
-	 * Return Channel ID
+	 * Return feed ID
 	 *
 	 * @return string
 	 */
-	public function getChannelId() {
-		return $this->channelId;
+	public function getFeedId() {
+		return $this->feedId;
 	}
 
 	/**
