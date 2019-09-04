@@ -21,7 +21,17 @@ class FeedUrlGenerator {
 	 * @var string $feedId YouTube channel or playlist ID
 	 */
 	private $feedId = '';
+	
+	/** 
+	 * @var string $feedType Feed type (channel or playlist) 
+	 */
+	private $feedType = 'channel';
 
+	/** 
+	 * @var array $supportedTypes Supported feed types
+	 */
+	private $supportedTypes = array('channel', 'playlist');
+	
 	/**
 	 * @var string $feedFormat Feed Format 
 	 */
