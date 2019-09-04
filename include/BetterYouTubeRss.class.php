@@ -20,7 +20,7 @@ class BetterYouTubeRss {
 	private $supportedFeedFormats = array('rss', 'html');
 	
 	/** @var array $parts Cache and fetch parts */
-	private $parts = array('channel', 'playlist', 'videos');
+	private $parts = array('details', 'playlist', 'videos');
 
 	/**
 	 * Constructor
