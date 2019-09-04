@@ -4,8 +4,8 @@ use \Curl\Curl;
 
 class Fetch {
 
-	/** @var string $endpoint YouTube API Endpoint */
-	private $endpoint = 'https://www.googleapis.com/youtube/v3/';
+	/** @var string $apiEndpoint YouTube API Endpoint */
+	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
 
 	/** @var string $feedEndpoint YouTube RSS Feed Endpoint */
 	private $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml?channel_id=';
@@ -249,7 +249,7 @@ class Fetch {
 				. $ids . '&fields=etag,items(id,snippet(title,description,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
 		}
 
-		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
+		return $this->apiEndpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 	}
 
 	/**
