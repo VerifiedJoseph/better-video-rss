@@ -98,23 +98,35 @@ class FeedUrlGenerator {
 
 		$link = '';
 		$error = '';
+		$channelLink = '';
+		$channelError = '';
+		$playlistLink = '';
+		$playlistError = '';
 
-		if (!empty($this->channelId) && $this->error === false) {
-			$url = Config::get('SELF_URL_PATH') . '?channel_id=' . $this->channelId . '&format=' . $this->feedFormat;
-			
+		if (!empty($this->feedId) && $this->error === false) {
+			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '=' . $this->feedId . '&format=' . $this->feedFormat;
+
 			if ($this->embedVideos === true) {
 				$url .= '&embed_videos=true';
 			}
-			
+
 			$link = <<<HTML
 <p>Feed URL: <a href="{$url}">{$url}</a></p>
 HTML;
+
+			$error = <<<HTML
+<p>{$this->errorMessage}</p>
+HTML;		
 		}
 
-		if ($this->error) {
-			$link = <<<HTML
-<p>{$this->errorMessage}</p>
-HTML;
+		if ($this->feedType === 'channel') {
+			$channelLink = $link;
+			$channelError = $error;
+		}
+
+		if ($this->feedType === 'playlist') {
+			$playlistLink = $link;
+			$playlistError = $error;
 		}
 
 			$html = <<<HTML
@@ -132,6 +144,7 @@ HTML;
 	<div id="main">
 		<div id="items">
 			<div class="item">
+				<h2>Channel</h2>
 				<form action="" method="post">
 					Channel: <input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title"><br>
 					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
@@ -140,9 +153,25 @@ HTML;
 						<option value="rss">RSS</option>
 						<option value="html">html</option>
 					</select><br/>
+					<input type="hidden" name="type" value="channel">
 					<button style="width:80px;" type="submit">Generate</button>
 				</form><br>
-				{$link}{$error}
+				{$channelLink}{$channelError}
+			</div>
+			<div class="item">
+				<h2>Playlist</h2>
+				<form action="" method="post">
+					Playlist: <input style="width:280px;" name="query" type="input" placeholder="Playlist ID or title"><br>
+					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
+					Feed format: 
+					<select name="format">
+						<option value="rss">RSS</option>
+						<option value="html">html</option>
+					</select><br/>
+					<input type="hidden" name="type" value="playlist">
+					<button style="width:80px;" type="submit">Generate</button>
+				</form><br>
+				{$playlistLink}{$playlistError}
 			</div>
 			<div class="item">
 				<a href="tools">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterYouTubeRss">Source Code</a>
