@@ -1,6 +1,6 @@
 <?php
 
-class FeedXml extends Feed {
+class XmlFormat extends Format {
 	/**
 	 * Build feed
 	 */
