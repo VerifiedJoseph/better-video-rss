@@ -71,4 +71,19 @@ class Helper {
 
 		return $dt->format($format);
 	}
+
+	/**
+	 * Convert URLs to HTML links
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function convertUrls(string $string) {
+
+		return preg_replace(
+			self::$urlRegex,
+			'<a href="$1" target="_blank">$1</a>',
+			$string
+		);
+	}
 }
