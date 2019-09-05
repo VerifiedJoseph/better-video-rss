@@ -237,14 +237,14 @@ HTML;
 HTML;
 		} elseif ($this->showXml === true) {
 
-			$feed = new FeedXml($data['contents'], false);
-			$feed->build();
+			$format = new XmlFormat($data['contents'], false);
+			$format->build();
 
 			$feedurl = Config::get('SELF_URL_PATH') . '?' . $data['contents']['details']['type'] . '_id='. $data['contents']['details']['id'];
 
 			$tdData .= <<<HTML
 Feed URL: <a target="_blank" href="{$feedurl}">{$feedurl}<a/>
-<textarea cols="140" rows="50">{$feed->get()}</textarea>
+<textarea cols="140" rows="50">{$format->get()}</textarea>
 HTML;	
 		} else {
 
