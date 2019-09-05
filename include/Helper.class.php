@@ -1,6 +1,10 @@
 <?php
 
 class Helper {
+	
+	/** @var int $urlRegex URL regex */
+	private static $urlRegex = '/(https?:\/\/(?:www\.)?(?:[a-zA-Z0-9-.]{2,256}\.[a-z]{2,20})(\:[0-9]{2,4})?(?:\/[a-zA-Z0-9@:%_\+.,~#"!?&\/\/=\-*]+|\/)?)/ims';
+	
 	/**
 	 * Parse ISO 8601 video duration to hours, minutes and seconds
 	 *
@@ -66,5 +70,20 @@ class Helper {
 		$dt->setTimezone(new DateTimeZone(config::get('TIMEZONE')));
 
 		return $dt->format($format);
+	}
+
+	/**
+	 * Convert URLs to HTML links
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function convertUrls(string $string) {
+
+		return preg_replace(
+			self::$urlRegex,
+			'<a href="$1" target="_blank">$1</a>',
+			$string
+		);
 	}
 }
