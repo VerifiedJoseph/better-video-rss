@@ -62,6 +62,9 @@ abstract class Format {
 	 * @param array $video Video data
 	 */
 	protected function buildContent(array $video) {
+
+		$description = nl2br($video['description']);
+		$description = Helper::convertUrls($description);
 		$published = Helper::convertUnixTime($video['published'], config::get('DATE_FORMAT'));
 
 		$media = <<<EOD
