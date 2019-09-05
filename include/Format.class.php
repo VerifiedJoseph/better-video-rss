@@ -62,8 +62,6 @@ abstract class Format {
 	 * @param array $video Video data
 	 */
 	protected function buildContent(array $video) {
-		
-		$description = $this->formatDescription($video['description']);
 		$published = Helper::convertUnixTime($video['published'], config::get('DATE_FORMAT'));
 
 		$media = <<<EOD
@@ -85,32 +83,6 @@ EOD;
 		return <<<EOD
 {$media}<hr/>Published: {$published} - Duration: {$video['duration']}<hr/><p>{$description}</p>
 EOD;
-	}
-
-	/**
-	 * Format video description
-	 * Converts URLs to HTMl links
-	 *
-	 * @param string $description
-	 */
-	protected function formatDescription(string $description) {
-
-		if (empty($description)) {
-			return ' ';
-		}
-
-		$formatted = '';
-		$lines = explode("\n", $description);
-
-		foreach ($lines as $index => $line) {
-			if(preg_match($this->urlRegex, $line, $matches)) {
-				$line = str_replace($matches[0], '<a target="_blank" href="' . $matches[0] . '">' . $matches[0] . '</a>', $line);
-			}
-
-			$formatted .= $line . '<br/>';
-		}
-
-		return $formatted;
 	}
 
 	/**
