@@ -4,7 +4,7 @@ abstract class Format {
 
 	/** @var array $data Feed data */
 	protected $data = array();
-	
+
 	/** @var string $feed Formatted feed data */
 	protected $feed = '';
 
@@ -13,7 +13,7 @@ abstract class Format {
 
 	/** @var string $embedUrl YouTube URL */
 	protected $embedUrl = 'https://www.youtube.com';
-	
+
 	/** @var string $embedUrlNoCookie YouTube no cookie URL */
 	protected $embedUrlNoCookie = 'https://www.youtube-nocookie.com';
 
