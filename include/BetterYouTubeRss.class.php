@@ -106,24 +106,24 @@ class BetterYouTubeRss {
 		switch ($this->feedFormat) {
 			case 'rss':
 
-				$feed = new FeedXml(
+				$format = new XmlFormat(
 					$cache->getData(),
 					$this->getEmbedStatus()
 				);
 
-				$feed->build();
-				Output::xml($feed->get());
+				$format->build();
+				Output::xml($format->get());
 
 				break;
 			case 'html':
 
-				$feed = new FeedHtml(
+				$format = new HtmlFormat(
 					$cache->getData(),
 					$this->getEmbedStatus()
 				);
 
-				$feed->build();
-				Output::html($feed->get());
+				$format->build();
+				Output::html($format->get());
 		}
 	}
 

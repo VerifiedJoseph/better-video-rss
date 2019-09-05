@@ -1,6 +1,6 @@
 <?php
 
-abstract class Feed {
+abstract class Format {
 
 	protected $data = array();
 	protected $feed = '';
