@@ -40,7 +40,7 @@ class FeedUrlGenerator {
 	/**
 	 * @var array $supportedFormats Supported feed formats
 	 */
-	private $supportedFormats = array('rss', 'html');
+	private $supportedFormats = array('rss', 'html', 'json');
 
 	/**
 	 * @var boolean $error Error status
@@ -168,6 +168,7 @@ HTML;
 					<select name="format">
 						<option value="rss">RSS</option>
 						<option value="html">html</option>
+						<option value="json">json</option>
 					</select><br/>
 					<input type="hidden" name="type" value="channel">
 					<button style="width:80px;" type="submit">Generate</button>
@@ -183,6 +184,7 @@ HTML;
 					<select name="format">
 						<option value="rss">RSS</option>
 						<option value="html">html</option>
+						<option value="json">json</option>
 					</select><br/>
 					<input type="hidden" name="type" value="playlist">
 					<button style="width:80px;" type="submit">Generate</button>
