@@ -124,6 +124,8 @@ class BetterYouTubeRss {
 
 				$format->build();
 				Output::html($format->get());
+
+				break;
 			case 'json':
 
 				$format = new JsonFormat(
