@@ -17,7 +17,7 @@ class BetterYouTubeRss {
 	/**
 	 * @var array $supportedFormats Supported feed formats
 	 */
-	private $supportedFeedFormats = array('rss', 'html');
+	private $supportedFeedFormats = array('rss', 'html', 'json');
 
 	/** @var array $parts Cache and fetch parts */
 	private $parts = array('details', 'playlist', 'videos');
@@ -124,6 +124,15 @@ class BetterYouTubeRss {
 
 				$format->build();
 				Output::html($format->get());
+			case 'json':
+
+				$format = new JsonFormat(
+					$cache->getData(),
+					$this->getEmbedStatus()
+				);
+
+				$format->build();
+				Output::json($format->get());
 		}
 	}
 
