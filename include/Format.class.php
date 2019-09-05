@@ -2,12 +2,19 @@
 
 abstract class Format {
 
+	/** @var array $data Feed data */
 	protected $data = array();
+	
+	/** @var string $feed Formatted feed data */
 	protected $feed = '';
 
+	/** @var string $urlRegex URL regex */
 	protected $urlRegex = '/https?:\/\/(?:www\.)?(?:[a-zA-Z0-9-.]{2,256}\.[a-z]{2,20})(\:[0-9]{2,4})?(?:\/[a-zA-Z0-9@:%_\+.,~#"!?&\/\/=\-*]+|\/)?/';
 
+	/** @var string $embedUrl YouTube URL */
 	protected $embedUrl = 'https://www.youtube.com';
+	
+	/** @var string $embedUrlNoCookie YouTube no cookie URL */
 	protected $embedUrlNoCookie = 'https://www.youtube-nocookie.com';
 
 	/**
@@ -46,7 +53,6 @@ abstract class Format {
 	 * Build item categories
 	 *
 	 * @param array $categories Item categories
-	 * @return string Categories as XML
 	 */
 	abstract protected function buildCategories(array $categories);
 
@@ -54,7 +60,6 @@ abstract class Format {
 	 * Build item content (description)
 	 *
 	 * @param array $video Video data
-	 * @return string Item content as HTML
 	 */
 	abstract protected function buildContent(array $video);
 
@@ -63,7 +68,6 @@ abstract class Format {
 	 * Converts URLs to HTMl links
 	 *
 	 * @param string $description
-	 * @return string Formatted video description
 	 */
 	protected function formatDescription(string $description) {
 
