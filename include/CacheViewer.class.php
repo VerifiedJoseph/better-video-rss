@@ -245,7 +245,7 @@ HTML;
 			$tdData .= <<<HTML
 Feed URL: <a target="_blank" href="{$feedurl}">{$feedurl}<a/>
 <textarea cols="140" rows="50">{$format->get()}</textarea>
-HTML;	
+HTML;
 		} else {
 
 			$tdData .= <<<HTML
