@@ -120,6 +120,10 @@ class BetterYouTubeRss {
 
 		$format->build();
 
+		Output::feed(
+			$format->get(),
+			$format->getContentType()
+		);
 	}
 
 	public function generateIndex() {
