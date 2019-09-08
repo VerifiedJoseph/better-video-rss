@@ -42,6 +42,16 @@ abstract class Format {
 		return $this->feed;
 	}
 
+	
+	/**
+	 * Returns feed header
+	 *
+	 * @return string
+	 */
+	public function getContentType() {
+		return $this->contentType;
+	}
+
 	/**
 	 * Build feed itmes
 	 *
