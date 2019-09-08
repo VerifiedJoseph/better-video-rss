@@ -38,9 +38,9 @@ class FeedUrlGenerator {
 	private $feedFormat = 'rss';
 
 	/**
-	 * @var array $supportedFormats Supported feed formats
+	 * @var array $supportedFormats Feed formats
 	 */
-	private $supportedFormats = array('rss', 'html', 'json');
+	private $supportedFormats = array();
 
 	/**
 	 * @var boolean $error Error status
@@ -55,7 +55,10 @@ class FeedUrlGenerator {
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
+	public function __construct(array $supportedFormats) {
+
+		$this->supportedFormats = $supportedFormats;
+
 		$this->checkInputs();
 
 		if (!empty($this->query)) {
