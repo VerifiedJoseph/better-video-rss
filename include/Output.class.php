@@ -10,6 +10,21 @@ class Output {
 	}
 
 	/**
+	 * Output feed
+	 */	
+	
+	/**
+	 * Output feed
+	 *
+	 * @param string $data Feed data
+	 * @param string $contentType Content-type header value
+	 */
+	public static function feed(string $data, string $contentType) {
+		header('content-type: ' . $contentType);
+		echo $data;
+	}
+	
+	/**
 	 * Output XML
 	 */
 	public static function xml(string $feed) {

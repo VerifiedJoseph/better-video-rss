@@ -8,6 +8,10 @@
  * https://json-feed-validator.herokuapp.com/validate
  */
 class JsonFormat extends Format {
+
+	/** @var string $contentType HTTP content-type header value */
+	protected $contentType = 'application/json';
+
 	/**
 	 * Build feed
 	 */

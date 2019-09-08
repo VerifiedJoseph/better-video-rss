@@ -11,12 +11,10 @@ class BetterYouTubeRss {
 	/** @var boolean $embedVideos Embed videos status */
 	private $embedVideos = false;
 
-	/** @var string $feedFormat Feed format */
+	/** @var string $feedFormat Default feed format */
 	private $feedFormat = 'rss';
 
-	/**
-	 * @var array $supportedFormats Supported feed formats
-	 */
+	/** @var array $supportedFormats Supported feed formats */
 	private $supportedFeedFormats = array('rss', 'html', 'json');
 
 	/** @var array $parts Cache and fetch parts */
@@ -32,12 +30,18 @@ class BetterYouTubeRss {
 	/**
 	 * Check user inputs
 	 *
+	 * @throws Exception if a invalid format parameter given.
 	 * @throws Exception if a empty channel ID parameter is given.
 	 * @throws Exception if a empty playlist ID parameter is given.
 	 */
 	private function checkInputs() {
 
-		if (isset($_GET['format']) && in_array($_GET['format'], $this->supportedFeedFormats)) {
+		if (isset($_GET['format'])) {
+
+			if (!in_array($_GET['format'], $this->getFeedFormats())) {
+				throw new Exception('Invalid format parameter given.');
+			}
+
 			$this->feedFormat = $_GET['format'];
 		}
 
@@ -103,44 +107,30 @@ class BetterYouTubeRss {
 
 		$cache->save();
 
-		switch ($this->feedFormat) {
-			case 'rss':
-
-				$format = new XmlFormat(
-					$cache->getData(),
-					$this->getEmbedStatus()
-				);
-
-				$format->build();
-				Output::xml($format->get());
-
-				break;
-			case 'html':
-
-				$format = new HtmlFormat(
-					$cache->getData(),
-					$this->getEmbedStatus()
-				);
-
-				$format->build();
-				Output::html($format->get());
-
-				break;
-			case 'json':
-
-				$format = new JsonFormat(
-					$cache->getData(),
-					$this->getEmbedStatus()
-				);
-
-				$format->build();
-				Output::json($format->get());
+		if (!in_array($this->feedFormat, $this->getFeedFormats())) {
+			throw new Exception('Invalid format parameter given.');
 		}
+
+		$formatClass = ucfirst($this->feedFormat) . 'Format';
+
+		$format = new $formatClass(
+			$cache->getData(),
+			$this->getEmbedStatus()
+		);
+
+		$format->build();
+
+		Output::feed(
+			$format->get(),
+			$format->getContentType()
+		);
 	}
 
 	public function generateIndex() {
 
-		$generator = new FeedUrlGenerator();
+		$generator = new FeedUrlGenerator(
+			$this->getFeedFormats()
+		);
 		$generator->display();
 
 	}
@@ -161,6 +151,15 @@ class BetterYouTubeRss {
 	 */
 	public function getFeedId() {
 		return $this->feedId;
+	}
+	
+	/**
+	 * Return supported feed formats
+	 *
+	 * @return string
+	 */
+	private function getFeedFormats() {
+		return $this->supportedFeedFormats;
 	}
 
 	/**
