@@ -32,12 +32,18 @@ class BetterYouTubeRss {
 	/**
 	 * Check user inputs
 	 *
+	 * @throws Exception if a invalid format parameter given.
 	 * @throws Exception if a empty channel ID parameter is given.
 	 * @throws Exception if a empty playlist ID parameter is given.
 	 */
 	private function checkInputs() {
 
-		if (isset($_GET['format']) && in_array($_GET['format'], $this->supportedFeedFormats)) {
+		if (isset($_GET['format'])) {
+
+			if (!in_array($_GET['format'], $this->getFeedFormats())) {
+				throw new Exception('Invalid format parameter given.');
+			}
+
 			$this->feedFormat = $_GET['format'];
 		}
 
