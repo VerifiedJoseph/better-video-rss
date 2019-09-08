@@ -1,6 +1,10 @@
 <?php
 
 class HtmlFormat extends Format {
+
+	/** @var string $contentType HTTP content-type header value */
+	protected $contentType = 'text/html; charset=UTF-8';
+
 	/**
 	 * Build feed
 	 */

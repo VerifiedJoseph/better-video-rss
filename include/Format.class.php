@@ -7,6 +7,9 @@ abstract class Format {
 
 	/** @var string $feed Formatted feed data */
 	protected $feed = '';
+	
+	/** @var string $contentType HTTP content-type header value */
+	protected $contentType = 'text/plain';
 
 	/** @var string $urlRegex URL regex */
 	protected $urlRegex = '/https?:\/\/(?:www\.)?(?:[a-zA-Z0-9-.]{2,256}\.[a-z]{2,20})(\:[0-9]{2,4})?(?:\/[a-zA-Z0-9@:%_\+.,~#"!?&\/\/=\-*]+|\/)?/';
