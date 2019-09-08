@@ -109,39 +109,19 @@ class BetterYouTubeRss {
 
 		$cache->save();
 
-		switch ($this->feedFormat) {
-			case 'rss':
-
-				$format = new XmlFormat(
-					$cache->getData(),
-					$this->getEmbedStatus()
-				);
-
-				$format->build();
-				Output::xml($format->get());
-
-				break;
-			case 'html':
-
-				$format = new HtmlFormat(
-					$cache->getData(),
-					$this->getEmbedStatus()
-				);
-
-				$format->build();
-				Output::html($format->get());
-
-				break;
-			case 'json':
-
-				$format = new JsonFormat(
-					$cache->getData(),
-					$this->getEmbedStatus()
-				);
-
-				$format->build();
-				Output::json($format->get());
+		if (!in_array($this->feedFormat, $this->getFeedFormats())) {
+			throw new Exception('Invalid format parameter given.');
 		}
+
+		$formatClass = ucfirst($this->feedFormat) . 'Format';
+
+		$format = new $formatClass(
+			$cache->getData(),
+			$this->getEmbedStatus()
+		);
+
+		$format->build();
+
 	}
 
 	public function generateIndex() {
