@@ -1,6 +1,6 @@
 <?php
 
-class XmlFormat extends Format {
+class RssFormat extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
 	protected $contentType = 'text/xml; charset=UTF-8';
