@@ -11,12 +11,10 @@ class BetterYouTubeRss {
 	/** @var boolean $embedVideos Embed videos status */
 	private $embedVideos = false;
 
-	/** @var string $feedFormat Feed format */
+	/** @var string $feedFormat Default feed format */
 	private $feedFormat = 'rss';
 
-	/**
-	 * @var array $supportedFormats Supported feed formats
-	 */
+	/** @var array $supportedFormats Supported feed formats */
 	private $supportedFeedFormats = array('rss', 'html', 'json');
 
 	/** @var array $parts Cache and fetch parts */
