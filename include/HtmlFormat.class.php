@@ -36,7 +36,8 @@ class HtmlFormat extends Format {
 	<div id="main">
 		<div id="items">
 			<div class="item">
-				Feed format: <a href="{$rssLink}&format=rss"><button>RSS</button></a> <a href="{$rssLink}&format=html"><button>HTML</button></a>
+				Feed format: <a href="{$rssLink}&format=rss"><button>RSS</button></a> <a href="{$rssLink}&format=html"><button>HTML</button></a> 
+				<a href="{$rssLink}&format=json"><button>JSON</button></a>
 			</div>
 			{$items}
 		</div>
