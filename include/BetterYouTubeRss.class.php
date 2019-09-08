@@ -162,6 +162,15 @@ class BetterYouTubeRss {
 	public function getFeedId() {
 		return $this->feedId;
 	}
+	
+	/**
+	 * Return supported feed formats
+	 *
+	 * @return string
+	 */
+	private function getFeedFormats() {
+		return $this->supportedFeedFormats;
+	}
 
 	/**
 	 * Return embed video status
