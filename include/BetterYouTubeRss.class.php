@@ -88,7 +88,7 @@ class BetterYouTubeRss {
 	/**
 	 * Check user inputs
 	 *
-	 * @throws Exception if a invalid format parameter given.
+	 * @throws Exception if a invalid format parameter is given.
 	 * @throws Exception if a empty channel ID parameter is given.
 	 * @throws Exception if a empty playlist ID parameter is given.
 	 */
@@ -128,6 +128,9 @@ class BetterYouTubeRss {
 		}
 	}
 
+	/**
+	 * Generate feed
+	 */
 	private function generateFeed() {
 
 		$cache = new Cache(
@@ -184,6 +187,9 @@ class BetterYouTubeRss {
 		);
 	}
 
+	/**
+	 * Generate index page with FeedUrlGenerator
+	 */
 	private function generateIndex() {
 
 		$generator = new FeedUrlGenerator(
