@@ -209,6 +209,7 @@ class Fetch {
 				$video['title'] = $item->snippet->title;
 				$video['description'] = $item->snippet->description;
 				$video['published'] = strtotime($item->snippet->publishedAt);
+				$video['author'] = $item->snippet->channelTitle;
 				$video['tags'] = array();
 
 				if (isset($item->snippet->tags)) {
@@ -267,7 +268,7 @@ class Fetch {
 			$ids = $parameter;
 
 			$parameters = 'videos?part=id,snippet,contentDetails&id='
-				. $ids . '&fields=etag,items(id,snippet(title,description,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
+				. $ids . '&fields=etag,items(id,snippet(title,description,channelTitle,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
 		}
 
 		return $this->apiEndpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
