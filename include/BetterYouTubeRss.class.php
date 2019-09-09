@@ -41,6 +41,51 @@ class BetterYouTubeRss {
 	}
 
 	/**
+	 * Return Feed type
+	 *
+	 * @return string
+	 */
+	private function getFeedType() {
+		return $this->feedType;
+	}
+
+	/**
+	 * Return feed ID
+	 *
+	 * @return string
+	 */
+	private function getFeedId() {
+		return $this->feedId;
+	}
+	
+	/**
+	 * Return supported feed formats
+	 *
+	 * @return string
+	 */
+	private function getFeedFormats() {
+		return $this->supportedFeedFormats;
+	}
+
+	/**
+	 * Return embed video status
+	 *
+	 * @return boolean
+	 */
+	private function getEmbedStatus() {
+		return $this->embedVideos;
+	}
+
+	/**
+	 * Return cache and fetch parts
+	 *
+	 * @return array
+	 */
+	private function getParts() {
+		return $this->parts;
+	}
+	
+	/**
 	 * Check user inputs
 	 *
 	 * @throws Exception if a invalid format parameter given.
@@ -146,50 +191,5 @@ class BetterYouTubeRss {
 		);
 		$generator->display();
 
-	}
-
-	/**
-	 * Return Feed type
-	 *
-	 * @return string
-	 */
-	private function getFeedType() {
-		return $this->feedType;
-	}
-
-	/**
-	 * Return feed ID
-	 *
-	 * @return string
-	 */
-	private function getFeedId() {
-		return $this->feedId;
-	}
-	
-	/**
-	 * Return supported feed formats
-	 *
-	 * @return string
-	 */
-	private function getFeedFormats() {
-		return $this->supportedFeedFormats;
-	}
-
-	/**
-	 * Return embed video status
-	 *
-	 * @return boolean
-	 */
-	private function getEmbedStatus() {
-		return $this->embedVideos;
-	}
-
-	/**
-	 * Return cache and fetch parts
-	 *
-	 * @return array
-	 */
-	private function getParts() {
-		return $this->parts;
 	}
 }
