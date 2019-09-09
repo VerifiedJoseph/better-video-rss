@@ -41,9 +41,54 @@ class BetterYouTubeRss {
 	}
 
 	/**
+	 * Return Feed type
+	 *
+	 * @return string
+	 */
+	private function getFeedType() {
+		return $this->feedType;
+	}
+
+	/**
+	 * Return feed ID
+	 *
+	 * @return string
+	 */
+	private function getFeedId() {
+		return $this->feedId;
+	}
+	
+	/**
+	 * Return supported feed formats
+	 *
+	 * @return string
+	 */
+	private function getFeedFormats() {
+		return $this->supportedFeedFormats;
+	}
+
+	/**
+	 * Return embed video status
+	 *
+	 * @return boolean
+	 */
+	private function getEmbedStatus() {
+		return $this->embedVideos;
+	}
+
+	/**
+	 * Return cache and fetch parts
+	 *
+	 * @return array
+	 */
+	private function getParts() {
+		return $this->parts;
+	}
+	
+	/**
 	 * Check user inputs
 	 *
-	 * @throws Exception if a invalid format parameter given.
+	 * @throws Exception if a invalid format parameter is given.
 	 * @throws Exception if a empty channel ID parameter is given.
 	 * @throws Exception if a empty playlist ID parameter is given.
 	 */
@@ -83,7 +128,10 @@ class BetterYouTubeRss {
 		}
 	}
 
-	public function generateFeed() {
+	/**
+	 * Generate feed
+	 */
+	private function generateFeed() {
 
 		$cache = new Cache(
 			$this->getFeedId(),
@@ -139,57 +187,15 @@ class BetterYouTubeRss {
 		);
 	}
 
-	public function generateIndex() {
+	/**
+	 * Generate index page with FeedUrlGenerator
+	 */
+	private function generateIndex() {
 
 		$generator = new FeedUrlGenerator(
 			$this->getFeedFormats()
 		);
 		$generator->display();
 
-	}
-
-	/**
-	 * Return Feed type
-	 *
-	 * @return string
-	 */
-	public function getFeedType() {
-		return $this->feedType;
-	}
-
-	/**
-	 * Return feed ID
-	 *
-	 * @return string
-	 */
-	public function getFeedId() {
-		return $this->feedId;
-	}
-	
-	/**
-	 * Return supported feed formats
-	 *
-	 * @return string
-	 */
-	private function getFeedFormats() {
-		return $this->supportedFeedFormats;
-	}
-
-	/**
-	 * Return embed video status
-	 *
-	 * @return boolean
-	 */
-	public function getEmbedStatus() {
-		return $this->embedVideos;
-	}
-
-	/**
-	 * Return cache and fetch parts
-	 *
-	 * @return array
-	 */
-	public function getParts() {
-		return $this->parts;
 	}
 }
