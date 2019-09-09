@@ -28,6 +28,19 @@ class BetterYouTubeRss {
 	}
 
 	/**
+	 * Generate feed or index page.
+	 */
+	public function generate() {
+
+		if (!empty($this->getFeedId())) {
+			$this->generateFeed();
+
+		} else {
+			$this->generateIndex();
+		}
+	}
+
+	/**
 	 * Check user inputs
 	 *
 	 * @throws Exception if a invalid format parameter given.
