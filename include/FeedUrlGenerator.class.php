@@ -255,6 +255,12 @@ HTML;
 	 */
 	private function isPlaylistId(string $query) {
 
+		// Channel uploads playlist
+		if (substr($query, 0, 2) === 'UU' && mb_strlen($query, 'utf8') >= 24) {
+			return true;
+		}
+
+		// Standard playlist
 		if (substr($query, 0, 2) === 'PL' && mb_strlen($query, 'utf8') >= 34) {
 			return true;
 		}
