@@ -4,7 +4,7 @@ class Cache {
 
 	/** @var string $name Cache filename */
 	private $name = '';
-	
+
 	/** @var array $data Cache data */
 	private $data = array(
 		'details' => array(),
@@ -14,7 +14,6 @@ class Cache {
 		)
 	);
 
-	// TODO: Move to config file?
 	private $expiresIn = array(
 		'details' => '+10 days',
 		'playlist' => '+10 minutes',
@@ -41,7 +40,7 @@ class Cache {
 	}
 
 	/**
-	 * Return cache data
+	 * Returns cache data
 	 *
 	 * @return array $data
 	 */
@@ -67,7 +66,7 @@ class Cache {
 	}
 
 	/**
-	 * Returns list of expired videos
+	 * Returns expired video IDs as comma separated string
 	 *
 	 * @return string
 	 */
@@ -75,6 +74,7 @@ class Cache {
 
 		$ExpiredVideos = array();
 
+		// Return all video IDs if videos array is empty or cache is disabled
 		if (empty($this->data['videos']['items']) || Config::get('DISABLE_CACHE') === true) {
 			return implode(',', $this->data['playlist']['videos']);
 		}
@@ -90,9 +90,9 @@ class Cache {
 	}
 
 	/**
-	 * Check if cache part has expired
+	 * Returns cache status of a cache part
 	 *
-	 * @param string $part Name of cache part
+	 * @param string $part Cache part
 	 * @return boolean
 	 */
 	public function expired(string $part) {
@@ -113,10 +113,10 @@ class Cache {
 	}
 
 	/**
-	 * Update cache data array
+	 * Update part of the cache data array
 	 *
-	 * @param string $part Name of cache part
-	 * @param array $data Data to update
+	 * @param string $part Cache part
+	 * @param array $data Data
 	 */
 	public function update(string $part, array $data = array()) {
 
@@ -155,12 +155,12 @@ class Cache {
 	}
 
 	/**
-	 * Set cache name from Channel ID
+	 * Set cache name from feed ID
 	 *
-	 * @param string $channelId YouTube channel ID
+	 * @param string $feedId channel or playlist ID
 	 */
-	private function setName(string $channelId) {
-		$this->name = hash('sha256', $channelId);
+	private function setName(string $feedId) {
+		$this->name = hash('sha256', $feedId);
 	}
 
 	/**
@@ -172,7 +172,7 @@ class Cache {
 	}
 
 	/**
-	 * Set cache expire date for each video
+	 * Set cache expiry date for each video
 	 *
 	 * @param array $data
 	 * @return array $videos
