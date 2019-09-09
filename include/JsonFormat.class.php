@@ -54,6 +54,9 @@ class JsonFormat extends Format {
 			$item = array();
 			$item['id'] = $video['url'];
 			$item['url'] = $video['url'];
+			$item['author'] = array(
+				'name' => $video['author']
+			);
 			$item['title'] = $video['title'] . ' (' . $video['duration'] . ')';
 			$item['date_published'] = Helper::convertUnixTime($video['published'], 'Y-m-d\TH:i:s\Z');
 			$item['content_html'] = $this->buildContent($video);
