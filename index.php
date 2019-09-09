@@ -15,13 +15,7 @@ try {
 	Config::checkConfig();
 
 	$betterRss = new BetterYouTubeRss();
-
-	if (!empty($betterRss->getFeedId())) {
-		$betterRss->generateFeed();
-
-	} else {
-		$betterRss->generateIndex();
-	}
+	$betterRss->generate();
 
 } catch (Exception $e) {
 	Output::Error($e->getMessage());
