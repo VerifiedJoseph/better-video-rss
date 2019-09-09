@@ -51,6 +51,7 @@ EOD;
 		foreach ($this->data['videos']['items'] as $video) {
 
 			$itemTitle = $this->xmlEncode($video['title']);
+			$itemAuthor = $this->xmlEncode($video['author']);
 			$itemUrl = $this->xmlEncode($video['url']);
 			$itemTimestamp = $this->xmlEncode(
 				Helper::convertUnixTime($video['published'], 'r')
@@ -65,6 +66,9 @@ EOD;
 	<pubDate>{$itemTimestamp}</pubDate>
 	<link>{$itemUrl}</link>
 	<guid isPermaLink="true">{$itemUrl}</guid>
+	<author>
+		<name>{$itemAuthor}</name>
+	</author>
 	<content:encoded>{$itemContent}</content:encoded>
 	<enclosure url="{$itemEnclosure}" type="image/jpeg" />
 	{$itemCategories}
