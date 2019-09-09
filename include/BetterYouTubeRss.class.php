@@ -83,7 +83,7 @@ class BetterYouTubeRss {
 		}
 	}
 
-	public function generateFeed() {
+	private function generateFeed() {
 
 		$cache = new Cache(
 			$this->getFeedId(),
@@ -139,7 +139,7 @@ class BetterYouTubeRss {
 		);
 	}
 
-	public function generateIndex() {
+	private function generateIndex() {
 
 		$generator = new FeedUrlGenerator(
 			$this->getFeedFormats()
@@ -153,7 +153,7 @@ class BetterYouTubeRss {
 	 *
 	 * @return string
 	 */
-	public function getFeedType() {
+	private function getFeedType() {
 		return $this->feedType;
 	}
 
@@ -162,7 +162,7 @@ class BetterYouTubeRss {
 	 *
 	 * @return string
 	 */
-	public function getFeedId() {
+	private function getFeedId() {
 		return $this->feedId;
 	}
 	
@@ -180,7 +180,7 @@ class BetterYouTubeRss {
 	 *
 	 * @return boolean
 	 */
-	public function getEmbedStatus() {
+	private function getEmbedStatus() {
 		return $this->embedVideos;
 	}
 
@@ -189,7 +189,7 @@ class BetterYouTubeRss {
 	 *
 	 * @return array
 	 */
-	public function getParts() {
+	private function getParts() {
 		return $this->parts;
 	}
 }
