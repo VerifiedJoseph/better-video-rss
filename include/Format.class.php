@@ -100,14 +100,4 @@ EOD;
 {$media}<hr/>Published: {$published} - Duration: {$video['duration']}<hr/><p>{$description}</p>
 EOD;
 	}
-
-	/**
-	 * Convert special characters to HTML entities
-	 *
-	 * @param string $text
-	 * @return string String with encoded characters
-	 */
-	protected function xmlEncode($text) {
-		return htmlspecialchars($text, ENT_XML1);
-	}
 }

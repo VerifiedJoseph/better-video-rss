@@ -99,4 +99,14 @@ EOD;
 
 		return $itemCategories;
 	}
+
+	/**
+	 * Convert special characters to HTML entities
+	 *
+	 * @param string $text
+	 * @return string String with encoded characters
+	 */
+	private function xmlEncode($text) {
+		return htmlspecialchars($text, ENT_XML1);
+	}
 }
