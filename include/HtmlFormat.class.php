@@ -94,8 +94,6 @@ EOD;
 		$itemCategories = '<strong>Categories:</strong> <ul>';
 
 		foreach($categories as $category) {
-			$category = $this->xmlEncode($category);
-
 			$itemCategories .= <<<EOD
 <li>{$category}</li>
 EOD;
