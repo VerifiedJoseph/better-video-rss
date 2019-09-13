@@ -16,8 +16,6 @@ class Fetch {
 	/** @var array $data */
 	private $data = array();
 
-	/** @var string $fetchType Data fetch type */
-	private $fetchType = '';
 
 	/**
 	 * Constructor
