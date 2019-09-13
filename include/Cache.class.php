@@ -192,22 +192,4 @@ class Cache {
 		return $videos;
 	}
 
-	/**
-	 * Order video items by the playlist order
-	 *
-	 * Video items that do not have a video ID in the playlist array are removed.
-	 *
-	 * @param array $data
-	 * @return array $videos
-	 */
-	private function orderVideos() {
-
-		$videos = array();
-
-		foreach ($this->data['playlist']['videos'] as $videoId) {
-			$videos[$videoId] = $this->data['videos']['items'][$videoId];
-		}
-
-		$this->data['videos']['items'] = $videos;
-	}
 }
