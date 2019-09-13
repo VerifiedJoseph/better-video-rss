@@ -48,27 +48,6 @@ class Fetch {
 	 *
 	 * @param string $part Name part
 	 */
-	public function part(string $part, string $parameter = '') {
-
-		$this->fetchType = $part;
-		$etag = '';
-
-		if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
-			$this->fetchType = 'feed';
-			$response = $this->fetchFeed($parameter);
-
-		} else {
-
-			if (isset($this->data[$this->fetchType]['etag'])) {
-				$etag = $this->data[$this->fetchType]['etag'];
-			}
-
-			$response = $this->fetch($etag, $parameter);
-		}
-
-		if (!empty($response)) {
-			$this->handleResponse($response);
-		}
 	}
 
 	/**
