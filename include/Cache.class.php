@@ -6,13 +6,7 @@ class Cache {
 	private $name = '';
 
 	/** @var array $data Cache data */
-	private $data = array(
-		'details' => array(),
-		'playlist' => array(),
-		'videos' => array(
-			'items' => array()
-		)
-	);
+	private $data = array();
 
 	private $expiresIn = array(
 		'details' => '+10 days',
