@@ -88,10 +88,10 @@ class Cache {
 	/**
 	 * Save cache data to disk
 	 */
-	public function save() {
+	public function save(array $data = array(), bool $updated = false) {
 
-		if ($this->cacheUpdated === true) {
-			$data = json_encode($this->data);
+		if ($updated === true) {
+			$data = json_encode($data);
 			$file = fopen($this->path, 'w');
 
 			fwrite($file, $data);
