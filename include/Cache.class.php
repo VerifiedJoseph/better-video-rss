@@ -170,26 +170,4 @@ class Cache {
 		$this->path = Config::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . 
 			Config::get('CACHE_DIR') . DIRECTORY_SEPARATOR . $this->name . '.' . Config::get('CACHE_FILENAME_EXT');
 	}
-
-	/**
-	 * Set cache expiry date for each video
-	 *
-	 * @param array $data
-	 * @return array $videos
-	 */
-	private function setVideoExpireDate(array $data) {
-
-		$videos = array(
-			'items' => array()
-		);
-
-		foreach ($data['items'] as $video) {
-			$video['fetched'] = strtotime('now');
-			$video['expires'] = strtotime($this->expiresIn['videoItems']);
-			$videos['items'][$video['id']] = $video;
-		}
-
-		return $videos;
-	}
-
 }
