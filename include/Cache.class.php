@@ -58,34 +58,6 @@ class Cache {
 	}
 
 	/**
-	 * Update part of the cache data array
-	 *
-	 * @param string $part Cache part
-	 * @param array $data Data
-	 */
-	public function update(string $part, array $data = array()) {
-
-		$this->cacheUpdated = true;
-
-		if ($part === 'videos') {
-			$data = $this->setVideoExpireDate($data);
-
-			$this->data['videos']['items'] = array_merge(
-				$this->data['videos']['items'],
-				$data['items']
-			);
-
-			$this->orderVideos();
-
-		} else {
-			$this->data[$part] = $data;
-		}
-
-		$this->data[$part]['fetched'] = strtotime('now');
-		$this->data[$part]['expires'] = strtotime($this->expiresIn[$part]);
-	}
-
-	/**
 	 * Save cache data to disk
 	 */
 	public function save(array $data = array(), bool $updated = false) {
