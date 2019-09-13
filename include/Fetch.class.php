@@ -59,18 +59,20 @@ class Fetch {
 	 * Fetch YouTube RSS feed
 	 *
 	 * @param string $id YouTube channel or playlist ID
-	 * @return object
 	 * @throws Exception If a curl error has occurred.
 	 */
-	private function fetchFeed(string $id) {
+	public function feed() {
 
-		$url = $this->feedEndpoint . '?' . $this->data['details']['type'] . '_id=' . $id;
+		$this->fetchType = 'feed';
+
+		$url = $this->feedEndpoint . '?' . $this->feedType . '_id=' . $this->feedId;
 
 		$curl = new Curl();
 		$curl->get($url);
 
 		$statusCode = $curl->getHttpStatusCode();
 		$errorCode = $curl->getCurlErrorCode();
+		$this->response = $curl->response;
 
 		if ($errorCode !== 0) {
 			throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
@@ -79,8 +81,6 @@ class Fetch {
 		if ($statusCode !== 200) {
 			throw new Exception('Failed to fetch: ' . $url);
 		}
-
-		return $curl->response;
 	}
 
 	/**
