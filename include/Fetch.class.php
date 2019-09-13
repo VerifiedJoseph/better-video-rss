@@ -86,12 +86,15 @@ class Fetch {
 	/**
 	 * Fetch data from API
 	 *
-	 * @param string $etag HTTP etag
-	 * @return array|object
+	 * @param string $part Name part
+	 * @param string $parameter Request parameter
+	 * @param string $etag Request etag
 	 * @throws Exception If a curl error has occurred.
 	 */
-	private function fetch(string $etag = '', string $parameter = '') {
+	public function api(string $part, string $parameter, string $etag) {
 
+		$this->fetchType = $part;
+		
 		$curl = new Curl();
 
 		// Set if-Match header
@@ -105,20 +108,21 @@ class Fetch {
 
 		$statusCode = $curl->getHttpStatusCode();
 		$errorCode = $curl->getCurlErrorCode();
+		$this->response = $curl->response;
 
 		if ($errorCode !== 0) {
 			throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
 		}
 
 		if ($statusCode === 304) {
-			return array();
+			$this->response = array();
 		}
 
 		if ($statusCode !== 200) {
-			$this->handleApiError($curl->response);
+			$this->handleApiError(
+				$this->response
+			);
 		}
-
-		return $curl->response;
 	}
 
 	/**
