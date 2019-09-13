@@ -30,7 +30,7 @@ class Fetch {
 		$this->feedId = $feedId;
 		$this->feedType = $feedType;
 	}
-
+	
 	/**
 	 * Return data
 	 *
@@ -234,16 +234,18 @@ class Fetch {
 	 */
 	private function buildApiUrl(string $parameter = '') {
 
+		$parameters = '';
+		
 		if ($this->fetchType === 'details') {
 
-			if ($this->data['details']['type'] === 'channel') {
+			if ($this->feedType === 'channel') {
 				$parameters = 'channels?part=snippet,contentDetails&id='
-					. $this->data['details']['id'] . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
+					. $this->feedId . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
 			}
 
-			if ($this->data['details']['type'] === 'playlist') {
+			if ($this->feedType === 'playlist') {
 				$parameters = 'playlists?part=snippet,contentDetails&id='
-					. $this->data['details']['id'] . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';
+					. $this->feedId . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';
 			}
 		}
 
