@@ -44,10 +44,12 @@ class Fetch {
 	}
 
 	/**
-	 * Fetch and headle response for a part
+	 * Returns response from cURL
 	 *
-	 * @param string $part Name part
+	 * @return array|object
 	 */
+	public function getResponse() {
+		return $this->response;
 	}
 
 	/**
