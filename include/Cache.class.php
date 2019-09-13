@@ -90,29 +90,6 @@ class Cache {
 	}
 
 	/**
-	 * Returns cache status of a cache part
-	 *
-	 * @param string $part Cache part
-	 * @return boolean
-	 */
-	public function expired(string $part) {
-
-		if (Config::get('DISABLE_CACHE') === true) {
-			return true;
-		}
-
-		if (!isset($this->data[$part]['expires'])) {
-			return true;
-		}
-
-		if (time() >= $this->data[$part]['expires']) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Update part of the cache data array
 	 *
 	 * @param string $part Cache part
