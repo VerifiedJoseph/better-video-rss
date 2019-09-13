@@ -16,14 +16,19 @@ class Fetch {
 	/** @var array $data */
 	private $data = array();
 
+	/** @var string $feedId YouTube channel or playlist ID */
+	private $feedId = '';
 
+	/** @var string $feedType Feed type (channel or playlist) */
+	private $feedType = 'channel';
 	/**
 	 * Constructor
 	 *
 	 * @param array $data Cache data
 	 */
-	public function __construct(array $data) {
-		$this->data = $data;
+	public function __construct(string $feedId, $feedType) {
+		$this->feedId = $feedId;
+		$this->feedType = $feedType;
 	}
 
 	/**
