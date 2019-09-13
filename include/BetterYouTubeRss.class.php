@@ -134,39 +134,60 @@ class BetterYouTubeRss {
 	private function generateFeed() {
 
 		$cache = new Cache(
+			$this->getFeedId()
+		);
+		$cache->load();
+		
+		$data = new Data(
 			$this->getFeedId(),
 			$this->getFeedType()
 		);
 
-		$cache->load();
-
-		$fetch = new Fetch(
+		$data->setData(
 			$cache->getData()
 		);
 
-		foreach($this->getParts() as $part) {
+		$fetch = new Fetch(
+			$this->getFeedId(),
+			$this->getFeedType()
+		);
+
+		foreach ($data->getExpiredParts() as $part) {
+			$data->setWorkingPart($part);
+
 			$parameter = '';
 
-			if ($cache->expired($part)) {
+			if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
+				$fetch->feed();
 
-				if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
-					$parameter = $this->getFeedId();
-				}
-
+				$data->handleRssResponse(
+					$fetch->getResponse()
+				);
+			} else {
+				
 				if ($part === 'videos') {
-					$parameter = $cache->getExpiredVideos();
+					$parameter = $data->getExpiredVideos();
 
 					if (empty($parameter)) {
 						continue;
 					}
 				}
 
-				$fetch->part($part, $parameter);
-				$cache->update($part, $fetch->getData($part));
+				$fetch->api(
+					$part,
+					$parameter,
+					$data->getPartEtag()
+				);
+				$data->handleApiResponse(
+					$fetch->getResponse()
+				);
 			}
 		}
 
-		$cache->save();
+		$cache->save(
+			$data->getData(),
+			$data->getUpdateStatus()
+		);
 
 		if (!in_array($this->feedFormat, $this->getFeedFormats())) {
 			throw new Exception('Invalid format parameter given.');
@@ -175,7 +196,7 @@ class BetterYouTubeRss {
 		$formatClass = ucfirst($this->feedFormat) . 'Format';
 
 		$format = new $formatClass(
-			$cache->getData(),
+			$data->getData(),
 			$this->getEmbedStatus()
 		);
 
