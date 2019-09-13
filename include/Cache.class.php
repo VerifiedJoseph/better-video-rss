@@ -66,30 +66,6 @@ class Cache {
 	}
 
 	/**
-	 * Returns expired video IDs as comma separated string
-	 *
-	 * @return string
-	 */
-	public function getExpiredVideos() {
-
-		$ExpiredVideos = array();
-
-		// Return all video IDs if videos array is empty or cache is disabled
-		if (empty($this->data['videos']['items']) || Config::get('DISABLE_CACHE') === true) {
-			return implode(',', $this->data['playlist']['videos']);
-		}
-
-		foreach ($this->data['playlist']['videos'] as $id) {
-
-			if (!isset($this->data['videos']['items'][$id]) || time() >= $this->data['videos']['items'][$id]['expires']) {
-				$ExpiredVideos[] = $id;
-			}
-		}
-
-		return implode(',', $ExpiredVideos);
-	}
-
-	/**
 	 * Update part of the cache data array
 	 *
 	 * @param string $part Cache part
