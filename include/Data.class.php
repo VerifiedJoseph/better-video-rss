@@ -196,9 +196,10 @@ class Data {
 			$playlist['expires'] = strtotime($this->expiresIn['playlist']);
 
 			$this->data['playlist'] = $playlist;
+			$this->orderVideos();
 		}
 
-		if ($this->workingPart === 'videos') {
+		if ($this->workingPart === 'videos' && !empty($response)) {
 			$videos = array();
 			$videos['etag'] = $response->etag;
 			$videos['items'] = array();
@@ -234,9 +235,8 @@ class Data {
 				$video['expires'] = strtotime($this->expiresIn['videoItems']);
 
 				$this->data['videos']['items'][$video['id']] = $video;
+				$this->orderVideos();
 			}
-
-			$this->orderVideos();
 		}
 	}
 
@@ -259,6 +259,7 @@ class Data {
 		$playlist['expires'] = strtotime($this->expiresIn['playlist']);
 
 		$this->data['playlist'] = $playlist;
+		$this->orderVideos();
 	}
 
 	/**
@@ -273,7 +274,10 @@ class Data {
 		$videos = array();
 
 		foreach ($this->data['playlist']['videos'] as $videoId) {
-			$videos[$videoId] = $this->data['videos']['items'][$videoId];
+			
+			if (isset($this->data['videos']['items'][$videoId])) {
+				$videos[$videoId] = $this->data['videos']['items'][$videoId];	
+			}
 		}
 
 		$this->data['videos']['items'] = $videos;
