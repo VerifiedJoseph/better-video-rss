@@ -180,7 +180,7 @@ class Data {
 			$details['fetched'] = strtotime('now');
 			$details['expires'] = strtotime($this->expiresIn['details']);
 
-			$this->data['details'] = $details;
+			$this->data['details'] = array_merge($this->data['details'], $details);
 		}
 
 		if ($this->workingPart === 'playlist') {
