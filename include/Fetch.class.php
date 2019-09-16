@@ -4,9 +4,6 @@ use \Curl\Curl;
 
 class Fetch {
 
-	/** @var string $endpoint YouTube.com Endpoint */
-	private $endpoint = 'https://www.youtube.com';
-
 	/** @var string $apiEndpoint YouTube API Endpoint */
 	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
 

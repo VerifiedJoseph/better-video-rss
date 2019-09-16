@@ -2,6 +2,9 @@
 
 class Data {
 
+	/** @var string $endpoint YouTube.com Endpoint */
+	private $endpoint = 'https://www.youtube.com';
+
 	/** @var array $parts Data part names */
 	private $parts = array('details', 'playlist', 'videos');
 
