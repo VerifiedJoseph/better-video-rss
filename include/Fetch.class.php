@@ -116,9 +116,7 @@ class Fetch {
 
 		if ($statusCode === 304) {
 			$this->response = array();
-		}
-
-		if ($statusCode !== 200) {
+		} else if ($statusCode !== 200) {
 			$this->handleApiError(
 				$this->response
 			);
