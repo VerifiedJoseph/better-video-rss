@@ -11,7 +11,9 @@ class Data {
 	/** @var array $data Data */
 	private $data = array(
 		'details' => array(),
-		'playlist' => array(),
+		'playlist' => array(
+			'videos' => array(),
+		),
 		'videos' => array(
 			'items' => array()
 		)
