@@ -178,7 +178,7 @@ class Data {
 			$details['fetched'] = strtotime('now');
 			$details['expires'] = strtotime($this->expiresIn['details']);
 
-			$this->data['details'] = array_merge($this->data['details'], $details);
+			$this->data['details'] = $details;
 		}
 
 		if ($this->workingPart === 'playlist') {
@@ -193,7 +193,7 @@ class Data {
 			$playlist['fetched'] = strtotime('now');
 			$playlist['expires'] = strtotime($this->expiresIn['playlist']);
 
-			$this->data['playlist'] = array_merge($this->data['playlist'], $playlist);
+			$this->data['playlist'] = $playlist;
 		}
 
 		if ($this->workingPart === 'videos') {
@@ -230,14 +230,8 @@ class Data {
 
 				$video['fetched'] = strtotime('now');
 				$video['expires'] = strtotime($this->expiresIn['videoItems']);
-				
-				$videos['items'][$video['id']] = $video;
-			}
 
-			if (!empty($videos['items'])) {
-				$this->data['videos'] = array_merge($this->data['videos'], $videos);
-			} else {
-				$this->data['videos'] = $videos;
+				$this->data['videos']['items'][$video['id']] = $video;
 			}
 
 			$this->orderVideos();
@@ -262,7 +256,7 @@ class Data {
 		$playlist['fetched'] = strtotime('now');
 		$playlist['expires'] = strtotime($this->expiresIn['playlist']);
 
-		$this->data['playlist'] = array_merge($this->data['playlist'], $playlist);
+		$this->data['playlist'] = $playlist;
 	}
 
 	/**
@@ -274,7 +268,6 @@ class Data {
 	 * @return array $videos
 	 */
 	private function orderVideos() {
-
 		$videos = array();
 
 		foreach ($this->data['playlist']['videos'] as $videoId) {
