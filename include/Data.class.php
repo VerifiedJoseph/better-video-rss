@@ -61,7 +61,7 @@ class Data {
 	public function setData(array $data) {
 
 		if (!empty($data)) {
-			$this->data = $data;	
+			$this->data = $data;
 		}
 	}
 
@@ -104,21 +104,21 @@ class Data {
 	 */
 	public function getExpiredParts() {
 		$expiredParts = array();
-		
+
 		if (Config::get('DISABLE_CACHE') === true) {
 			return $this->parts;
 		}
-		
+
 		foreach ($this->data as $partName => $partData) {
-			
+
 			if (!isset($partData['expires'])) {
 				$expiredParts[] = $partName;
-			
-			} else if (time() >= $partData['expires']) {
+
+			} elseif (time() >= $partData['expires']) {
 				$expiredParts[] = $partName;
 			}
 		}
-		
+
 		return $expiredParts;
 	}
 
@@ -283,9 +283,9 @@ class Data {
 		$videos = array();
 
 		foreach ($this->data['playlist']['videos'] as $videoId) {
-			
+
 			if (isset($this->data['videos']['items'][$videoId])) {
-				$videos[$videoId] = $this->data['videos']['items'][$videoId];	
+				$videos[$videoId] = $this->data['videos']['items'][$videoId];
 			}
 		}
 

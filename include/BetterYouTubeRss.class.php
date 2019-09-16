@@ -57,7 +57,7 @@ class BetterYouTubeRss {
 	private function getFeedId() {
 		return $this->feedId;
 	}
-	
+
 	/**
 	 * Return supported feed formats
 	 *
@@ -84,7 +84,7 @@ class BetterYouTubeRss {
 	private function getParts() {
 		return $this->parts;
 	}
-	
+
 	/**
 	 * Check user inputs
 	 *
@@ -137,7 +137,7 @@ class BetterYouTubeRss {
 			$this->getFeedId()
 		);
 		$cache->load();
-		
+
 		$data = new Data(
 			$this->getFeedId(),
 			$this->getFeedType()
@@ -164,7 +164,7 @@ class BetterYouTubeRss {
 					$fetch->getResponse()
 				);
 			} else {
-				
+
 				if ($part === 'videos') {
 					$parameter = $data->getExpiredVideos();
 
@@ -172,7 +172,7 @@ class BetterYouTubeRss {
 						continue;
 					}
 				}
-				
+
 				if ($part === 'playlist') {
 					$parameter = $data->getPlaylistId();
 				}

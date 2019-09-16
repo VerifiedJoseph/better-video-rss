@@ -15,6 +15,7 @@ class Fetch {
 
 	/** @var string $feedType Feed type (channel or playlist) */
 	private $feedType = 'channel';
+
 	/**
 	 * Constructor
 	 *
@@ -41,7 +42,6 @@ class Fetch {
 	 * @throws Exception If a curl error has occurred.
 	 */
 	public function feed() {
-
 		$this->fetchType = 'feed';
 
 		$url = $this->feedEndpoint . '?' . $this->feedType . '_id=' . $this->feedId;
@@ -71,9 +71,8 @@ class Fetch {
 	 * @throws Exception If a curl error has occurred.
 	 */
 	public function api(string $part, string $parameter, string $etag) {
-
 		$this->fetchType = $part;
-		
+
 		$curl = new Curl();
 
 		// Set if-Match header
@@ -95,7 +94,8 @@ class Fetch {
 
 		if ($statusCode === 304) {
 			$this->response = array();
-		} else if ($statusCode !== 200) {
+
+		} elseif ($statusCode !== 200) {
 			$this->handleApiError(
 				$this->response
 			);
@@ -108,9 +108,8 @@ class Fetch {
 	 * @return string Returns API URL
 	 */
 	private function buildApiUrl(string $parameter = '') {
-
 		$parameters = '';
-		
+
 		if ($this->fetchType === 'details') {
 
 			if ($this->feedType === 'channel') {
