@@ -10,9 +10,6 @@ class Fetch {
 	/** @var string $feedEndpoint YouTube RSS Feed Endpoint */
 	private $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml';
 
-	/** @var array $data */
-	private $data = array();
-
 	/** @var string $feedId YouTube channel or playlist ID */
 	private $feedId = '';
 
@@ -26,21 +23,6 @@ class Fetch {
 	public function __construct(string $feedId, $feedType) {
 		$this->feedId = $feedId;
 		$this->feedType = $feedType;
-	}
-	
-	/**
-	 * Return data
-	 *
-	 * @param string $part Name part
-	 * @return array Returns fetch data
-	 */
-	public function getData(string $part) {
-
-		if (isset($part)) {
-			return $this->data[$part];
-		}
-
-		return $this->data;
 	}
 
 	/**
