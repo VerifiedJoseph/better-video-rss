@@ -144,7 +144,7 @@ class Fetch {
 
 		if ($this->fetchType === 'playlist') {
 			$parameters = 'playlistItems?part=contentDetails&maxResults=' . Config::get('RESULTS_LIMIT') . '&playlistId='
-				. $this->data['details']['playlist'] . '&fields=etag,items(contentDetails(videoId))';
+				. $parameter . '&fields=etag,items(contentDetails(videoId))';
 		}
 
 		if ($this->fetchType === 'videos') {

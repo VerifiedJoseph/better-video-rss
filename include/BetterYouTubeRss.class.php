@@ -172,6 +172,10 @@ class BetterYouTubeRss {
 						continue;
 					}
 				}
+				
+				if ($part === 'playlist') {
+					$parameter = $data->getPlaylistId();
+				}
 
 				$fetch->api(
 					$part,
