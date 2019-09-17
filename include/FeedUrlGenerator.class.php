@@ -195,7 +195,7 @@ HTML;
 				{$playlistLink}{$playlistError}
 			</div>
 			<div class="item">
-				<a href="tools">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterYouTubeRss">Source Code</a>
+				<a href="tools.php">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterYouTubeRss">Source Code</a>
 			</div>
 		</div>
 	</div>
