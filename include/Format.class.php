@@ -7,7 +7,7 @@ abstract class Format {
 
 	/** @var string $feed Formatted feed data */
 	protected $feed = '';
-	
+
 	/** @var string $contentType HTTP content-type header value */
 	protected $contentType = 'text/plain';
 
@@ -45,7 +45,6 @@ abstract class Format {
 		return $this->feed;
 	}
 
-	
 	/**
 	 * Returns feed header
 	 *
