@@ -165,7 +165,7 @@ HTML;
 			<div class="item">
 				<h2>Channel</h2>
 				<form action="" method="post">
-					Channel: <input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title"><br>
+					Channel: <input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required><br>
 					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
 					Feed format: 
 					<select name="format">
@@ -181,7 +181,7 @@ HTML;
 			<div class="item">
 				<h2>Playlist</h2>
 				<form action="" method="post">
-					Playlist: <input style="width:280px;" name="query" type="input" placeholder="Playlist ID or title"><br>
+					Playlist: <input style="width:280px;" name="query" type="input" placeholder="Playlist ID or title" required><br>
 					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
 					Feed format: 
 					<select name="format">
