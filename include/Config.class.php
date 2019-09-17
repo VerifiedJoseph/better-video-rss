@@ -50,6 +50,8 @@ class Config {
 			throw new Exception('Config Error: Configuration file not found. Use config.php-dist to create config.php and edit it.');
 		}
 
+		self::requireConfigFile();
+
 		$cacheDir = constant('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . constant('CACHE_DIR');
 
 		if (empty(constant('SELF_URL_PATH'))) {
