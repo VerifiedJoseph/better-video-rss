@@ -1,10 +1,7 @@
 <?php
 
 // Class Auto loader
-require '../include/autoload.php';
-
-// Config file
-require '../config.php';
+require 'include/autoload.php';
 
 try {
 
