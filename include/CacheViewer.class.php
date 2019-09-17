@@ -173,7 +173,7 @@ HTML;
 <html lang="en">
 <head>
 	<title>CacheViewer</title>
-	<link rel="stylesheet" type="text/css" href="../static/style.css" />
+	<link rel="stylesheet" type="text/css" href="static/style.css" />
 </head>
 <body>
 	<div id="header"><a href="index.php">Tools</a> &#187; Cache Viewer</div>
