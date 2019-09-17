@@ -41,9 +41,14 @@ class Config {
 	/**
 	 * Check config constants
 	 *
+	 * @throws Exception if config.php is not found
 	 * @throws Exception if constant is invalid
 	 */
 	public static function checkConfig() {
+
+		if (!file_exists('config.php')) {
+			throw new Exception('Config Error: Configuration file not found. Use config.php-dist to create config.php and edit it.');
+		}
 
 		$cacheDir = constant('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . constant('CACHE_DIR');
 
