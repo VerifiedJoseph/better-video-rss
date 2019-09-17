@@ -128,4 +128,11 @@ class Config {
 
 		return constant($key);
 	}
+
+	/**
+	 * Include (require) config file
+	 */
+	private function requireConfigFile() {
+		require 'config.php';
+	}
 }
