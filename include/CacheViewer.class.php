@@ -140,26 +140,27 @@ class CacheViewer {
 	<td>{$modified}</td>
 	<td>{$size}</td>
 	<td style="width:170px;">
-	<div style="float:left;">
-		<form action="#{$data['id']}" method="post">
-			<input name="id" type="hidden" value="{$data['id']}">
-			<button type="submit">View Data</button>
-		</form>
-	</div>
-	<div style="float: right;">
-		<form action="#{$data['id']}" method="post">
-			<input name="id" type="hidden" value="{$data['id']}">
-			<input name="raw" type="hidden">
-			<button type="submit">View Raw</button>
-		</form>
-	</div>
-	<div style="float:left;">
-		<form action="#{$data['id']}" method="post">
-			<input name="id" type="hidden" value="{$data['id']}">
-			<input name="xml" type="hidden">
-			<button style="width:80px;" type="submit">View XML</button>
-		</form>
-	</div>
+		<div style="float:left;">
+			<form action="#{$data['id']}" method="post">
+				<input name="id" type="hidden" value="{$data['id']}">
+				<button type="submit">View Data</button>
+			</form>
+		</div>
+		<div style="float: right;">
+			<form action="#{$data['id']}" method="post">
+				<input name="id" type="hidden" value="{$data['id']}">
+				<input name="raw" type="hidden">
+				<button type="submit">View Raw</button>
+			</form>
+		</div>
+		<div style="float:left;">
+			<form action="#{$data['id']}" method="post">
+				<input name="id" type="hidden" value="{$data['id']}">
+				<input name="xml" type="hidden">
+				<button style="width:80px;" type="submit">View XML</button>
+			</form>
+		</div>
+	</td>
 </tr>
 HTML;
 
