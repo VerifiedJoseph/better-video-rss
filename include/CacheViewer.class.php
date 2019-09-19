@@ -123,6 +123,16 @@ class CacheViewer {
 		$cacheSize = FileHelper::readableFileSize($this->cacheSize);
 		$tbody = '';
 
+		if(empty($this->data)) {
+			$tbody = <<<HTML
+<tr class="center">
+	<td colspan="6">
+		No cache files found. 
+	</td>
+</tr>
+HTML;	
+		}
+
 		foreach ($this->data as $index => $data) {
 
 			$modified = Helper::convertUnixTime($data['modified']);
