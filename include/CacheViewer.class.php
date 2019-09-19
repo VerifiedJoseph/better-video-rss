@@ -107,7 +107,7 @@ class CacheViewer {
 				'size' => $file->getSize(),
 				'contents' => $data
 			);
-			
+
 			$this->cacheSize += $file->getSize();
 		}
 	}
@@ -130,7 +130,7 @@ class CacheViewer {
 		No cache files found. 
 	</td>
 </tr>
-HTML;	
+HTML;
 		}
 
 		foreach ($this->data as $index => $data) {
