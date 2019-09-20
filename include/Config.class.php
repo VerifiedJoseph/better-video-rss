@@ -17,7 +17,8 @@ class Config {
 	/**
 	 * Check PHP version and loaded extensions
 	 *
-	 * @throws Exception if PHP version is not supported or extension is not loaded
+	 * @throws Exception if PHP version is not supported
+	 * @throws Exception if a PHP extension is not loaded
 	 */
 	public static function checkInstall() {
 
@@ -42,7 +43,9 @@ class Config {
 	 * Check config constants
 	 *
 	 * @throws Exception if config.php is not found
-	 * @throws Exception if constant is invalid
+	 * @throws Exception if a constant is invalid
+	 * @throws Exception if cache directory could not be created
+	 * @throws Exception if cache directory is not writable
 	 */
 	public static function checkConfig() {
 
@@ -116,9 +119,9 @@ class Config {
 	}
 
 	/**
-	 * Return config option value
+	 * Returns config value
 	 *
-	 * @param string $key Config option key
+	 * @param string $key Config key
 	 * @return constant
 	 * @throws Exception if config key is invalid
 	 */
