@@ -336,7 +336,7 @@ HTML;
 <tr>
 	<td>
 		<strong>Video IDs:</strong><br>
-		<textarea cols="140" rows="2" readonly>{$videoIDs}</textarea>
+		<textarea cols="140" rows="2" readonly>{$videoIDs}</textarea><br>
 		<strong>Fetched:</strong> $fetched<br>
 		<strong>Expires:</strong> $expires<br>
 	</td>
@@ -388,7 +388,7 @@ HTML;
 </tr>
 <tr>
 	<td colspan="3">
-		<strong>Tags ({$tagCount}) :</strong>
+		<strong>Tags ({$tagCount}) :</strong><br/>
 		<textarea cols="140" rows="2" readonly="">{$tags}</textarea>
 	</td>
 </tr>
