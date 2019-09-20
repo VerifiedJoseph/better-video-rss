@@ -55,8 +55,6 @@ class Config {
 
 		self::requireConfigFile();
 
-		$cacheDir = constant('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . constant('CACHE_DIR');
-
 		if (empty(constant('SELF_URL_PATH'))) {
 			throw new Exception('Config Error: Self URL path must be set. [SELF_URL_PATH]');
 		}
@@ -92,6 +90,8 @@ class Config {
 		if (empty(constant('CACHE_DIR'))) {
 			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
 		}
+
+		$cacheDir = constant('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . constant('CACHE_DIR');
 
 		if (!is_dir($cacheDir) && !mkdir($cacheDir, self::$mkdirMode)) {
 			throw new Exception('Config Error: Could not create cache directory. [CACHE_DIR]');
