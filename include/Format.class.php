@@ -11,9 +11,6 @@ abstract class Format {
 	/** @var string $contentType HTTP content-type header value */
 	protected $contentType = 'text/plain';
 
-	/** @var string $urlRegex URL regex */
-	protected $urlRegex = '/https?:\/\/(?:www\.)?(?:[a-zA-Z0-9-.]{2,256}\.[a-z]{2,20})(\:[0-9]{2,4})?(?:\/[a-zA-Z0-9@:%_\+.,~#"!?&\/\/=\-*]+|\/)?/';
-
 	/** @var string $embedUrl YouTube URL */
 	protected $embedUrl = 'https://www.youtube.com';
 
