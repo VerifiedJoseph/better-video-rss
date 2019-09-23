@@ -2,6 +2,9 @@
 
 class Data {
 
+	/** @var object $cache Cache class object */
+	private $cache;
+
 	/** @var string $endpoint YouTube.com Endpoint */
 	private $endpoint = 'https://www.youtube.com';
 
@@ -42,6 +45,28 @@ class Data {
 	public function __construct(string $feedId, string $feedType) {
 		$this->data['details']['id'] = $feedId;
 		$this->data['details']['type'] = $feedType;
+
+		$this->cache = new Cache($feedId);
+
+		// Load cache 
+		$this->cache->load();
+
+		// Use data from cache, if found
+		$this->setData(
+			$this->cache->getData()
+		);
+	}
+
+	/**
+	 * Destructor
+	 */
+	public function __destruct() {
+
+		// Save data to cache file, if updated
+		$this->cache->save(
+			$this->getData(),
+			$this->getUpdateStatus()
+		);
 	}
 
 	/**
