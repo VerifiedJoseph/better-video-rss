@@ -45,6 +45,17 @@ class Data {
 	public function __construct(string $feedId, string $feedType) {
 		$this->data['details']['id'] = $feedId;
 		$this->data['details']['type'] = $feedType;
+
+		$this->cache = new Cache($feedId);
+
+		// Load cache 
+		$this->cache->load();
+
+		// Use data from cache, if found
+		$this->setData(
+			$this->cache->getData()
+		);
+	}
 	}
 
 	/**
