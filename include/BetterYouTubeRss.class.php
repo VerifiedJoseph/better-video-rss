@@ -133,18 +133,9 @@ class BetterYouTubeRss {
 	 */
 	private function generateFeed() {
 
-		$cache = new Cache(
-			$this->getFeedId()
-		);
-		$cache->load();
-
 		$data = new Data(
 			$this->getFeedId(),
 			$this->getFeedType()
-		);
-
-		$data->setData(
-			$cache->getData()
 		);
 
 		$fetch = new Fetch(
@@ -187,11 +178,6 @@ class BetterYouTubeRss {
 				);
 			}
 		}
-
-		$cache->save(
-			$data->getData(),
-			$data->getUpdateStatus()
-		);
 
 		if (!in_array($this->feedFormat, $this->getFeedFormats())) {
 			throw new Exception('Invalid format parameter given.');
