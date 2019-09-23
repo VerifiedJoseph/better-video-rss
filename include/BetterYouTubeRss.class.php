@@ -179,10 +179,6 @@ class BetterYouTubeRss {
 			}
 		}
 
-		if (!in_array($this->feedFormat, $this->getFeedFormats())) {
-			throw new Exception('Invalid format parameter given.');
-		}
-
 		$formatClass = ucfirst($this->feedFormat) . 'Format';
 
 		$format = new $formatClass(
