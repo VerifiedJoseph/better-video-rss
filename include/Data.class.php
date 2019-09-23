@@ -2,6 +2,9 @@
 
 class Data {
 
+	/** @var object $cache Cache class object */
+	private $cache;
+
 	/** @var string $endpoint YouTube.com Endpoint */
 	private $endpoint = 'https://www.youtube.com';
 
