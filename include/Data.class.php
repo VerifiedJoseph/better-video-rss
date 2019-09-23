@@ -56,6 +56,17 @@ class Data {
 			$this->cache->getData()
 		);
 	}
+
+	/**
+	 * Destructor
+	 */
+	public function __destruct() {
+
+		// Save data to cache file, if updated
+		$this->cache->save(
+			$this->getData(),
+			$this->getUpdateStatus()
+		);
 	}
 
 	/**
