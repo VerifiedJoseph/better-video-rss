@@ -182,7 +182,7 @@ class Data {
 	/**
 	 * Handle response from YouTube Data API
 	 *
-	 * @param object $data
+	 * @param object|array $response
 	 */
 	public function handleApiResponse($response) {
 		$this->dataUpdated = true;
@@ -277,7 +277,7 @@ class Data {
 	/**
 	 * Handle response from YouTube RSS feed
 	 *
-	 * @param object $data
+	 * @param object $response
 	 */
 	public function handleRssResponse($response) {
 		$this->dataUpdated = true;
@@ -300,9 +300,6 @@ class Data {
 	 * Order video items by the playlist order
 	 *
 	 * Video items that do not have a video ID in the playlist array are removed.
-	 *
-	 * @param array $data
-	 * @return array $videos
 	 */
 	private function orderVideos() {
 		$videos = array();
