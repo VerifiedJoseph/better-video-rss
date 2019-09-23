@@ -8,13 +8,6 @@ class Cache {
 	/** @var array $data Cache data */
 	private $data = array();
 
-	private $expiresIn = array(
-		'details' => '+10 days',
-		'playlist' => '+10 minutes',
-		'videos' => '+10 minutes',
-		'videoItems' => '+6 hours'
-	);
-
 	/** @var string $path Cache file path */
 	private $path = '';
 
