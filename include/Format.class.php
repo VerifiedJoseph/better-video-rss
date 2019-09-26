@@ -34,7 +34,7 @@ abstract class Format {
 	abstract public function build();
 
 	/**
-	 * Returns feed
+	 * Returns formatted feed data
 	 *
 	 * @return string
 	 */
@@ -43,7 +43,7 @@ abstract class Format {
 	}
 
 	/**
-	 * Returns feed header
+	 * Returns HTTP content-type header value
 	 *
 	 * @return string
 	 */
