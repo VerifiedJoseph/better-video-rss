@@ -45,7 +45,11 @@ class Cache {
 				$contents = fread($handle, filesize($this->path));
 				fclose($handle);
 
-				$this->data = json_decode($contents, true);
+				$decoded = json_decode($contents, true);
+
+				if (!is_null($decoded)) {
+					$this->data = $decoded;
+				}
 			}
 		}
 	}
