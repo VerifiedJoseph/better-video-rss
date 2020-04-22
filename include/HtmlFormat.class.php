@@ -31,6 +31,7 @@ class HtmlFormat extends Format {
 <head>
 	<title>{$feedTitle}</title>
 	<meta name="robots" content="noindex, follow">
+	<meta name="description" content="{$feedDescription}">
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
 </head>
 <body>
