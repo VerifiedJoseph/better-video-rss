@@ -71,98 +71,20 @@ class Fetch {
 	 * @throws Exception If a curl error has occurred.
 	 */
 	public function api(string $part, string $parameter, string $etag) {
-		$this->fetchType = $part;
-
-		$curl = new Curl();
-
-		// Set if-Match header
-		if (!empty($etag)) {
-			$curl->setHeader('If-None-Match', $etag);
-		}
-
-		$curl->get(
-			$this->buildApiUrl($parameter)
-		);
-
-		$statusCode = $curl->getHttpStatusCode();
-		$errorCode = $curl->getCurlErrorCode();
-		$this->response = $curl->response;
-
-		if ($errorCode !== 0) {
-			throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
-		}
-
-		if ($statusCode === 304) {
-			$this->response = array();
-
-		} elseif ($statusCode !== 200) {
-			$this->handleApiError(
-				$this->response
-			);
-		}
-	}
-
-	/**
-	 * Build API URL for a fetch type
-	 *
-	 * @return string Returns API URL
-	 */
-	private function buildApiUrl(string $parameter = '') {
-		$parameters = '';
-
-		if ($this->fetchType === 'details') {
-
+		$api = new Api();
+		
+		if ($part === 'details') {
 			if ($this->feedType === 'channel') {
-				$parameters = 'channels?part=snippet,contentDetails&id='
-					. $this->feedId . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
+				$this->response = $api->getChannel($this->feedId, $etag);
 			}
-
+			
 			if ($this->feedType === 'playlist') {
-				$parameters = 'playlists?part=snippet,contentDetails&id='
-					. $this->feedId . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';
+				$this->response = $api->getPlaylist($parameter, $etag);
 			}
 		}
 
-		if ($this->fetchType === 'playlist') {
-			$parameters = 'playlistItems?part=contentDetails&maxResults=' . Config::get('RESULTS_LIMIT') . '&playlistId='
-				. $parameter . '&fields=etag,items(contentDetails(videoId))';
+		if ($part === 'videos') {
+			$this->response = $api->getVideos($parameter, $etag);
 		}
-
-		if ($this->fetchType === 'videos') {
-			$ids = $parameter;
-
-			$parameters = 'videos?part=id,snippet,contentDetails&id='
-				. $ids . '&fields=etag,items(id,snippet(title,description,channelTitle,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
-		}
-
-		return $this->apiEndpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
-	}
-
-	/**
-	 * Handle API errors
-	 *
-	 * @param object $response API response
-	 * @throws Exception
-	 */
-	private function handleApiError($response) {
-		$error = $response->error->errors[0];
-
-		if (config::get('RAW_API_ERRORS') === true) {
-			$raw = json_encode($response->error, JSON_PRETTY_PRINT);
-
-			throw new Exception(
-				"API Error \n"
-				. 'Fetch: ' . $this->fetchType
-				. "\n" . $raw
-			);
-		}
-
-		throw new Exception(
-			'API Error'
-			. "\n Fetch:   " . $this->fetchType
-			. "\n Message: " . $error->message
-			. "\n Domain:  " . $error->domain
-			. "\n Reason:  " . $error->reason
-		);
 	}
 }
