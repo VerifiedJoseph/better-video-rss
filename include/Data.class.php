@@ -177,6 +177,7 @@ class Data {
 		return implode(',', $ExpiredVideos);
 	}
 
+	/**
 	 * Update channel or playlist details with response from YouTube Data API
 	 *
 	 * @param object|array $response
@@ -212,6 +213,55 @@ class Data {
 		$this->data['details'] = array_merge($this->data['details'], $details);
 	}
 	
+	/**
+	 * Update video details with response from YouTube Data API
+	 *
+	 * @param object|array $response
+	 */
+	public function updateVideos($response) {
+		$this->dataUpdated = true;
+
+		if (empty($response) === false) {
+			$videos = array();
+			$videos['etag'] = $response->etag;
+			$videos['items'] = array();
+
+			foreach ($response->items as $item) {
+				$video = array();
+
+				$video['id'] = $item->id;
+				$video['url'] = $this->endpoint . '/watch?v=' . $item->id;
+				$video['title'] = $item->snippet->title;
+				$video['description'] = $item->snippet->description;
+				$video['published'] = strtotime($item->snippet->publishedAt);
+				$video['author'] = $item->snippet->channelTitle;
+				$video['tags'] = array();
+
+				if (isset($item->snippet->tags)) {
+					$video['tags'] = $item->snippet->tags;
+				}
+
+				$video['duration'] = Helper::parseVideoDuration($item->contentDetails->duration);
+
+				if (isset($item->snippet->thumbnails->maxres)) {
+					$video['thumbnail'] = $item->snippet->thumbnails->maxres->url;
+
+				} elseif (isset($item->snippet->thumbnails->standard)) {
+					$video['thumbnail'] = $item->snippet->thumbnails->standard->url;
+
+				} else {
+					$video['thumbnail']  = 'https://i.ytimg.com/vi/' . $item->id . '/hqdefault.jpg';
+				}
+
+				$video['fetched'] = strtotime('now');
+				$video['expires'] = strtotime($this->expiresIn['videoItems']);
+
+				$this->data['videos']['items'][$video['id']] = $video;
+				$this->orderVideos();
+			}
+		}
+	}
+
 	/**
 	 * Handle response from YouTube Data API
 	 *
