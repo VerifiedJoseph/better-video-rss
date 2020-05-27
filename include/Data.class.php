@@ -362,7 +362,7 @@ class Data {
 	 *
 	 * @param object $response
 	 */
-	public function handleRssResponse($response) {
+	public function updateFeed($response) {
 		$this->dataUpdated = true;
 
 		$feed = array();
