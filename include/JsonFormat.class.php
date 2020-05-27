@@ -16,7 +16,6 @@ class JsonFormat extends Format {
 	 * Build feed
 	 */
 	public function build() {
-
 		$feedDescription = $this->data['details']['description'];
 		$feedTitle = $this->data['details']['title'];
 		$feedAuthor = $this->data['details']['title'];
@@ -46,11 +45,9 @@ class JsonFormat extends Format {
 	 * @return string Items as XML
 	 */
 	protected function buildItmes() {
-
 		$items = array();
 
 		foreach ($this->data['videos']['items'] as $video) {
-
 			$item = array();
 			$item['id'] = $video['url'];
 			$item['url'] = $video['url'];

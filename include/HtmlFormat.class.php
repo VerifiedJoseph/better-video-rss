@@ -9,7 +9,6 @@ class HtmlFormat extends Format {
 	 * Build feed
 	 */
 	public function build() {
-
 		$feedDescription = $this->data['details']['description'];
 		$feedTitle = $this->data['details']['title'];
 		$feedAuthor = $this->data['details']['title'];
@@ -59,11 +58,9 @@ EOD;
 	 * @return string Items as XML
 	 */
 	protected function buildItmes() {
-
 		$items = '';
 
 		foreach ($this->data['videos']['items'] as $video) {
-
 			$itemTitle = $video['title'];
 			$itemUrl = $video['url'];
 			$itemEnclosure = $video['thumbnail'];
@@ -91,7 +88,6 @@ EOD;
 	 * @return string Categories as XML
 	 */
 	protected function buildCategories(array $categories) {
-
 		$itemCategories = '<strong>Categories:</strong> <ul>';
 
 		foreach($categories as $category) {

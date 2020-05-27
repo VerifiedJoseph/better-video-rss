@@ -9,7 +9,6 @@ class RssFormat extends Format {
 	 * Build feed
 	 */
 	public function build() {
-
 		$feedDescription = $this->xmlEncode($this->data['details']['description']);
 		$feedTitle = $this->xmlEncode($this->data['details']['title']);
 		$feedAuthor = $this->xmlEncode($this->data['details']['title']);
@@ -45,11 +44,9 @@ EOD;
 	 * @return string Items as XML
 	 */
 	protected function buildItmes() {
-
 		$items = '';
 
 		foreach ($this->data['videos']['items'] as $video) {
-
 			$itemTitle = $this->xmlEncode($video['title']);
 			$itemAuthor = $this->xmlEncode($video['author']);
 			$itemUrl = $this->xmlEncode($video['url']);
@@ -86,7 +83,6 @@ EOD;
 	 * @return string Categories as XML
 	 */
 	protected function buildCategories(array $categories) {
-
 		$itemCategories = '';
 
 		foreach($categories as $category) {
