@@ -79,7 +79,7 @@ class Fetch {
 			}
 			
 			if ($this->feedType === 'playlist') {
-				$this->response = $api->getPlaylist($parameter, $etag);
+				$this->response = $api->getPlaylist($this->feedId, $etag);
 			}
 		}
 
