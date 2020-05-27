@@ -261,7 +261,7 @@ HTML;
 
 			$tdData .= <<<HTML
 {$this->displayChannel($data['contents']['details'])}<br/>
-{$this->displayplaylist($data['contents']['playlist'])}<br>
+{$this->displayFeed($data['contents']['feed'])}<br>
 {$this->displayVideos($data['contents']['videos'])}<br/>
 HTML;
 		}
@@ -318,20 +318,20 @@ HTML;
 	}
 
 	/**
-	 * Display playlist details
+	 * Display feed details
 	 *
-	 * @param  array $playlist
+	 * @param 	array $feed
 	 * @return string $html
 	 */
-	private function displayPlaylist(array $playlist) {
+	private function displayFeed(array $feed) {
 
-		$videoIDs = implode(' ', $playlist['videos']);
+		$videoIDs = implode(' ', $feed['videos']);
 
-		$fetched = Helper::convertUnixTime($playlist['fetched']);
-		$expires = Helper::convertUnixTime($playlist['expires']);
+		$fetched = Helper::convertUnixTime($feed['fetched']);
+		$expires = Helper::convertUnixTime($feed['expires']);
 
 		$html = <<<HTML
-<strong>Playlist:</strong>
+<strong>Feed:</strong>
 <table style="width: 1153px;">
 <tr>
 	<td>
