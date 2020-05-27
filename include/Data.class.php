@@ -177,6 +177,41 @@ class Data {
 		return implode(',', $ExpiredVideos);
 	}
 
+	 * Update channel or playlist details with response from YouTube Data API
+	 *
+	 * @param object|array $response
+	 */
+	public function updateDetails($response) {
+		$this->dataUpdated = true;
+
+		if (empty($response->items)) {
+			throw new Exception($this->data['details']['type'] . ' not found.');
+		}
+
+		$details = array();
+		$details['etag'] = $response->etag;
+
+		$details['title'] = $response->items['0']->snippet->title;
+		$details['description'] = $response->items['0']->snippet->description;
+		$details['published'] = strtotime($response->items['0']->snippet->publishedAt);
+
+		if ($this->data['details']['type'] === 'channel') {
+			$details['url'] = $this->endpoint . '/channel/' . $this->data['details']['id'];
+			$details['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
+		}
+
+		if ($this->data['details']['type'] === 'playlist') {
+			$details['url'] = $this->endpoint . '/playlist?list=' . $this->data['details']['id'];
+			$details['playlist'] = $response->items['0']->id;
+		}
+
+		$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
+		$details['fetched'] = strtotime('now');
+		$details['expires'] = strtotime($this->expiresIn['details']);
+
+		$this->data['details'] = array_merge($this->data['details'], $details);
+	}
+	
 	/**
 	 * Handle response from YouTube Data API
 	 *
