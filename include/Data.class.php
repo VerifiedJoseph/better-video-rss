@@ -9,23 +9,22 @@ class Data {
 	private $endpoint = 'https://www.youtube.com';
 
 	/** @var array $parts Data part names */
-	private $parts = array('details', 'playlist', 'videos');
+	private $parts = array('details', 'feed', 'videos');
 
 	/** @var array $data Data */
 	private $data = array(
 		'details' => array(),
-		'playlist' => array(
+		'feed' => array(
 			'videos' => array(),
 		),
 		'videos' => array(
-			'items' => array()
 		)
 	);
 
 	/** @var array $expiresIn Number of days, hours or minutes that each part expires */
 	private $expiresIn = array(
 		'details' => '+10 days',
-		'playlist' => '+10 minutes',
+		'feed' => '+10 minutes',
 		'videos' => '+10 minutes',
 		'videoItems' => '+6 hours'
 	);
@@ -166,11 +165,10 @@ class Data {
 
 		// Return all video IDs if videos array is empty or cache is disabled
 		if (empty($this->data['videos']['items']) || Config::get('DISABLE_CACHE') === true) {
-			return implode(',', $this->data['playlist']['videos']);
+			return implode(',', $this->data['feed']['videos']);
 		}
 
-		foreach ($this->data['playlist']['videos'] as $id) {
-
+		foreach ($this->data['feed']['videos'] as $id) {			
 			if (!isset($this->data['videos']['items'][$id]) || time() >= $this->data['videos']['items'][$id]['expires']) {
 				$ExpiredVideos[] = $id;
 			}
@@ -282,17 +280,17 @@ class Data {
 	public function handleRssResponse($response) {
 		$this->dataUpdated = true;
 
-		$playlist = array();
-		$playlist['videos'] = array();
+		$feed = array();
+		$feed['videos'] = array();
 
 		foreach ($response->entry as $entry) {
-			$playlist['videos'][] = str_replace('yt:video:', '', $entry->id);
+			$feed['videos'][] = str_replace('yt:video:', '', $entry->id);
 		}
 
-		$playlist['fetched'] = strtotime('now');
-		$playlist['expires'] = strtotime($this->expiresIn['playlist']);
+		$feed['fetched'] = strtotime('now');
+		$feed['expires'] = strtotime($this->expiresIn['feed']);
 
-		$this->data['playlist'] = $playlist;
+		$this->data['feed'] = $feed;
 		$this->orderVideos();
 	}
 
@@ -304,7 +302,7 @@ class Data {
 	private function orderVideos() {
 		$videos = array();
 
-		foreach ($this->data['playlist']['videos'] as $videoId) {
+		foreach ($this->data['feed']['videos'] as $videoId) {
 
 			if (isset($this->data['videos']['items'][$videoId])) {
 				$videos[$videoId] = $this->data['videos']['items'][$videoId];
