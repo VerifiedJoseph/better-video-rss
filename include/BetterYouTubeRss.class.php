@@ -148,7 +148,7 @@ class BetterYouTubeRss {
 
 			$parameter = '';
 
-			if (Config::get('ENABLE_HYBRID_MODE') === true && $part === 'playlist') {
+			if ($part === 'feed') {
 				$fetch->feed();
 
 				$data->handleRssResponse(

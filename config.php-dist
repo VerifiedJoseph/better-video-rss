@@ -45,8 +45,3 @@ define('DISABLE_CACHE', false);
 
 // Enable cache viewer
 define('ENABLE_CACHE_VIEWER', false);
-
-// Enable hybrid mode
-// Use YouTube RSS feeds and the YouTube Data API to generate feeds.
-// Enabling hybrid mode reduces API requests.  
-define('ENABLE_HYBRID_MODE', false);
