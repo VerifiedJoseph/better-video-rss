@@ -60,7 +60,7 @@ EOD;
 	protected function buildItmes() {
 		$items = '';
 
-		foreach ($this->data['videos']['items'] as $video) {
+		foreach ($this->data['videos'] as $video) {
 			$itemTitle = $video['title'];
 			$itemUrl = $video['url'];
 			$itemEnclosure = $video['thumbnail'];

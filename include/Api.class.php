@@ -72,7 +72,7 @@ class Api {
 				break;
 			case 'videos':
 				$parameters = 'videos?part=id,snippet,contentDetails&id='
-					. $parameter . '&fields=etag,items(id,snippet(title,description,channelTitle,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
+					. $parameter . '&fields=etag,items(id,snippet(description,tags,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
 				break;
 			case 'searchChannels':
 				$parameters = 'search?part=snippet&fields=items(snippet(channelId))&q='

@@ -355,10 +355,10 @@ HTML;
 	 */
 	private function displayVideos(array $videos) {
 
-		$videoCount = count($videos['items']);
+		$videoCount = count($videos);
 		$videoHtml = '';
 
-		foreach ($videos['items'] as $video) {
+		foreach ($videos as $video) {
 
 			$tags = implode(', ', $video['tags']);
 			$tagCount = count($video['tags']);

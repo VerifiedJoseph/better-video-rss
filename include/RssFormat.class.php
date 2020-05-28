@@ -46,7 +46,7 @@ EOD;
 	protected function buildItmes() {
 		$items = '';
 
-		foreach ($this->data['videos']['items'] as $video) {
+		foreach ($this->data['videos'] as $video) {
 			$itemTitle = $this->xmlEncode($video['title']);
 			$itemAuthor = $this->xmlEncode($video['author']);
 			$itemUrl = $this->xmlEncode($video['url']);

@@ -25,8 +25,7 @@ class Data {
 	private $expiresIn = array(
 		'details' => '+10 days',
 		'feed' => '+10 minutes',
-		'videos' => '+10 minutes',
-		'videoItems' => '+6 hours'
+		'videos' => '+6 hours',
 	);
 
 	/** @var string $workingPart Current part being worked on */
@@ -164,12 +163,14 @@ class Data {
 		$ExpiredVideos = array();
 
 		// Return all video IDs if videos array is empty or cache is disabled
-		if (empty($this->data['videos']['items']) || Config::get('DISABLE_CACHE') === true) {
+		if (empty($this->data['videos']) || Config::get('DISABLE_CACHE') === true) {
 			return implode(',', $this->data['feed']['videos']);
 		}
 
 		foreach ($this->data['feed']['videos'] as $id) {
-			if (!isset($this->data['videos']['items'][$id]) || time() >= $this->data['videos']['items'][$id]['expires']) {
+			$key = array_search($id, array_column($this->data['videos'], 'id'));
+
+			if (!isset($this->data['videos'][$key]['expires']) || time() >= $this->data['videos'][$key]['expires']) {
 				$ExpiredVideos[] = $id;
 			}
 		}
@@ -222,26 +223,19 @@ class Data {
 		$this->dataUpdated = true;
 
 		if (empty($response) === false) {
-			$videos = array();
-			$videos['etag'] = $response->etag;
-			$videos['items'] = array();
+			$videos = $this->data['videos'];
 
 			foreach ($response->items as $item) {
-				$video = array();
+				$key = array_search($item->id, array_column($this->data['videos'], 'id'));
+				$video = $this->data['videos'][$key];
 
-				$video['id'] = $item->id;
-				$video['url'] = $this->endpoint . '/watch?v=' . $item->id;
-				$video['title'] = $item->snippet->title;
 				$video['description'] = $item->snippet->description;
-				$video['published'] = strtotime($item->snippet->publishedAt);
-				$video['author'] = $item->snippet->channelTitle;
+				$video['duration'] = Helper::parseVideoDuration($item->contentDetails->duration);
 				$video['tags'] = array();
 
 				if (isset($item->snippet->tags)) {
 					$video['tags'] = $item->snippet->tags;
 				}
-
-				$video['duration'] = Helper::parseVideoDuration($item->contentDetails->duration);
 
 				if (isset($item->snippet->thumbnails->maxres)) {
 					$video['thumbnail'] = $item->snippet->thumbnails->maxres->url;
@@ -254,11 +248,12 @@ class Data {
 				}
 
 				$video['fetched'] = strtotime('now');
-				$video['expires'] = strtotime($this->expiresIn['videoItems']);
+				$video['expires'] = strtotime($this->expiresIn['videos']);
 
-				$this->data['videos']['items'][$video['id']] = $video;
-				$this->orderVideos();
+				$videos[$key] = $video;
 			}
+
+			$this->data['videos'] = $videos;
 		}
 	}
 
@@ -270,35 +265,54 @@ class Data {
 	public function updateFeed($response) {
 		$this->dataUpdated = true;
 
-		$feed = array();
-		$feed['videos'] = array();
+		$feed = array(
+			'videos' => array()
+		);
 
-		foreach ($response->entry as $entry) {
-			$feed['videos'][] = str_replace('yt:video:', '', $entry->id);
+		$videos = $this->data['videos'];
+
+		foreach ($response->entry as $entry) {		
+			$id = str_replace('yt:video:', '', $entry->id);
+			$key = array_search($id, array_column($videos, 'id'));
+
+			$feed['videos'][] = $id;
+
+			$video = array();
+			$video['id'] = $id;
+			$video['url'] = $this->endpoint . '/watch?v=' . $id;
+			$video['title'] = (string)$entry->title;
+			$video['author'] = (string)$entry->author->name;
+			$video['published'] = strtotime((string)$entry->published);
+
+			if ($key !== false) {
+				$videos[$key] = array_merge($video, $videos[$key]);
+			} else {
+				$videos[] = $video;
+			}
 		}
 
 		$feed['fetched'] = strtotime('now');
 		$feed['expires'] = strtotime($this->expiresIn['feed']);
 
+		$this->data['videos'] = $videos;
 		$this->data['feed'] = $feed;
-		$this->orderVideos();
+		$this->removeOldVideos();
 	}
 
 	/**
-	 * Order video items by the playlist order
-	 *
-	 * Video items that do not have a video ID in the playlist array are removed.
+	 * Removes videos that are no longer in the RSS feed from YouTube
 	 */
-	private function orderVideos() {
+	private function removeOldVideos() {
 		$videos = array();
 
 		foreach ($this->data['feed']['videos'] as $videoId) {
+			$key = array_search($videoId, array_column($this->data['videos'], 'id'));
 
-			if (isset($this->data['videos']['items'][$videoId])) {
-				$videos[$videoId] = $this->data['videos']['items'][$videoId];
+			if ($key !== false) {
+				$videos[] = $this->data['videos'][$key];
 			}
 		}
 
-		$this->data['videos']['items'] = $videos;
+		$this->data['videos'] = $videos;
 	}
 }

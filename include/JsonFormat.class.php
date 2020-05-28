@@ -47,7 +47,7 @@ class JsonFormat extends Format {
 	protected function buildItmes() {
 		$items = array();
 
-		foreach ($this->data['videos']['items'] as $video) {
+		foreach ($this->data['videos'] as $video) {
 			$item = array();
 			$item['id'] = $video['url'];
 			$item['url'] = $video['url'];
