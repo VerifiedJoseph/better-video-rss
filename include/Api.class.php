@@ -84,7 +84,7 @@ class Api {
 				break;
 		}
 
-		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
+		return $this->endpoint . $parameters . '&prettyPrint=false&key=as' . Config::get('YOUTUBE_API_KEY');
 	}
 	
 	private function fetch(string $url, string $etag = '') {
@@ -125,17 +125,12 @@ class Api {
 
 			throw new Exception(
 				"API Error \n"
-				. 'Fetch: ' . $this->fetchType
 				. "\n" . $raw
 			);
 		}
 
 		throw new Exception(
-			'API Error'
-			. "\n Fetch:   " . $this->fetchType
-			. "\n Message: " . $error->message
-			. "\n Domain:  " . $error->domain
-			. "\n Reason:  " . $error->reason
+			'API Error :' . $error->message . ' (' . $error->reason .')'
 		);
 	}
 }
