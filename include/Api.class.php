@@ -84,7 +84,7 @@ class Api {
 				break;
 		}
 
-		return $this->endpoint . $parameters . '&prettyPrint=false&key=as' . Config::get('YOUTUBE_API_KEY');
+		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 	}
 	
 	private function fetch(string $url, string $etag = '') {
