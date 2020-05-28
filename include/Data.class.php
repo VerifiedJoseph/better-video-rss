@@ -47,7 +47,7 @@ class Data {
 
 		$this->cache = new Cache($feedId);
 
-		// Load cache 
+		// Load cache
 		$this->cache->load();
 
 		// Use data from cache, if found
@@ -168,7 +168,7 @@ class Data {
 			return implode(',', $this->data['feed']['videos']);
 		}
 
-		foreach ($this->data['feed']['videos'] as $id) {			
+		foreach ($this->data['feed']['videos'] as $id) {
 			if (!isset($this->data['videos']['items'][$id]) || time() >= $this->data['videos']['items'][$id]['expires']) {
 				$ExpiredVideos[] = $id;
 			}
@@ -212,7 +212,7 @@ class Data {
 
 		$this->data['details'] = array_merge($this->data['details'], $details);
 	}
-	
+
 	/**
 	 * Update video details with response from YouTube Data API
 	 *

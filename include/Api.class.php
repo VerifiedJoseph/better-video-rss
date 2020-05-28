@@ -86,7 +86,7 @@ class Api {
 
 		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 	}
-	
+
 	private function fetch(string $url, string $etag = '') {
 		$curl = new Curl();
 
@@ -130,7 +130,7 @@ class Api {
 		}
 
 		throw new Exception(
-			'API Error :' . $error->message . ' (' . $error->reason .')'
+			'API Error :' . $error->message . ' (' . $error->reason . ')'
 		);
 	}
 }

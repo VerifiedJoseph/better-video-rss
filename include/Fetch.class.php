@@ -72,12 +72,12 @@ class Fetch {
 	 */
 	public function api(string $part, string $parameter, string $etag) {
 		$api = new Api();
-		
+
 		if ($part === 'details') {
 			if ($this->feedType === 'channel') {
 				$this->response = $api->getChannel($this->feedId, $etag);
 			}
-			
+
 			if ($this->feedType === 'playlist') {
 				$this->response = $api->getPlaylist($this->feedId, $etag);
 			}

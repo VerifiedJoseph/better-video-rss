@@ -135,7 +135,7 @@ HTML;
 <p>{$this->errorMessage}</p>
 HTML;
 		}
-		
+
 		if ($this->feedType === 'channel') {
 			$channelLink = $link;
 		}
