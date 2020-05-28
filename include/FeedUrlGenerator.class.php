@@ -114,13 +114,10 @@ class FeedUrlGenerator {
 	 * @echo string $html
 	 */
 	public function display() {
-
 		$link = '';
 		$error = '';
 		$channelLink = '';
-		$channelError = '';
 		$playlistLink = '';
-		$playlistError = '';
 
 		if (!empty($this->feedId) && $this->error === false) {
 			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '_id=' . $this->feedId . '&format=' . $this->feedFormat;
@@ -132,20 +129,19 @@ class FeedUrlGenerator {
 			$link = <<<HTML
 <p>Feed URL: <a href="{$url}">{$url}</a></p>
 HTML;
+		} else {
 
 			$error = <<<HTML
 <p>{$this->errorMessage}</p>
 HTML;
 		}
-
+		
 		if ($this->feedType === 'channel') {
 			$channelLink = $link;
-			$channelError = $error;
 		}
 
 		if ($this->feedType === 'playlist') {
 			$playlistLink = $link;
-			$playlistError = $error;
 		}
 
 			$html = <<<HTML
@@ -163,6 +159,7 @@ HTML;
 	<div id="main">
 		<div id="items">
 			<div class="item">
+				{$error}
 				<h2>Channel</h2>
 				<form action="" method="post">
 					Channel: <input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required><br>
@@ -176,7 +173,7 @@ HTML;
 					<input type="hidden" name="type" value="channel">
 					<button style="width:80px;" type="submit">Generate</button>
 				</form><br>
-				{$channelLink}{$channelError}
+				{$channelLink}
 			</div>
 			<div class="item">
 				<h2>Playlist</h2>
@@ -192,7 +189,7 @@ HTML;
 					<input type="hidden" name="type" value="playlist">
 					<button style="width:80px;" type="submit">Generate</button>
 				</form><br>
-				{$playlistLink}{$playlistError}
+				{$playlistLink}
 			</div>
 			<div class="item">
 				<a href="tools.php">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterYouTubeRss">Source Code</a>
