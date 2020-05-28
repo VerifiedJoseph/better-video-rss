@@ -150,22 +150,24 @@ class BetterYouTubeRss {
 
 			if ($part === 'feed') {
 				$fetch->feed();
+				$data->updateFeed($fetch->getResponse());
+			}
 
-				$data->handleRssResponse(
-					$fetch->getResponse()
+			if ($part === 'details') {
+				$fetch->api(
+					$part,
+					$parameter,
+					$data->getPartEtag()
 				);
-			} else {
 
-				if ($part === 'videos') {
-					$parameter = $data->getExpiredVideos();
+				$data->updateDetails($fetch->getResponse());
+			}
 
-					if (empty($parameter)) {
-						continue;
-					}
-				}
+			if ($part === 'videos') {
+				$parameter = $data->getExpiredVideos();
 
-				if ($part === 'playlist') {
-					$parameter = $data->getPlaylistId();
+				if (empty($parameter)) {
+					continue;
 				}
 
 				$fetch->api(
@@ -173,9 +175,8 @@ class BetterYouTubeRss {
 					$parameter,
 					$data->getPartEtag()
 				);
-				$data->handleApiResponse(
-					$fetch->getResponse()
-				);
+
+				$data->updateVideos($fetch->getResponse());
 			}
 		}
 
