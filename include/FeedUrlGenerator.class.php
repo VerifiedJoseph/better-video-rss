@@ -279,32 +279,14 @@ HTML;
 	private function searchApi(string $query) {
 
 		try {
+			$api = new api();
 
 			if ($this->feedType === 'channel') {
-				$url = $this->apiEndpoint . 'search?part=snippet&fields=items(snippet(channelId))&q='
-					. urlencode($query) . '&type=channel';
+				$response = $api->searchChannels($query);
 			}
 
 			if ($this->feedType === 'playlist') {
-				$url = $this->apiEndpoint . 'search?part=snippet&fields=items(id(playlistId))&q='
-					. urlencode($query) . '&type=playlist';
-			}
-
-			$url .= '&maxResults=1&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
-
-			$curl = new Curl();
-			$curl->get($url);
-
-			$statusCode = $curl->getHttpStatusCode();
-			$errorCode = $curl->getCurlErrorCode();
-			$response =	$curl->response;
-
-			if ($errorCode !== 0) {
-				throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
-			}
-
-			if ($statusCode !== 200) {
-				throw new Exception('An API error occurred.');
+				$response = $api->searchPlaylists($query);
 			}
 
 			if (empty($response->items)) {
