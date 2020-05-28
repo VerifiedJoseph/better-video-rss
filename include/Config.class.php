@@ -79,14 +79,6 @@ class Config {
 			throw new Exception('Config Error: DateTime format must be set. [DATE_FORMAT]');
 		}
 
-		if (!is_int(constant('RESULTS_LIMIT'))) {
-			throw new Exception('Config Error: Results limit option must be a integer. [RESULTS_LIMIT]');
-		}
-
-		if ((constant('RESULTS_LIMIT') < self::$minResults) || (constant('RESULTS_LIMIT') > self::$maxResults)) {
-			throw new Exception('Config Error: Results limit option must be a integer between 1 and 50, inclusive. [RESULTS_LIMIT]');
-		}
-
 		if (empty(constant('CACHE_DIR'))) {
 			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
 		}
