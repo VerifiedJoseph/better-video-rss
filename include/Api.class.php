@@ -44,11 +44,13 @@ class Api {
 	}
 
 	public function searchChannels(string $parameter) {
-		
+		$url = $this->buildUrl('searchChannels', $parameter);
+		return $this->fetch($url);
 	}
 
 	public function searchPlaylists(string $parameter) {
-		
+		$url = $this->buildUrl('searchPlaylists', $parameter);
+		return $this->fetch($url);
 	}
 
 	/**
@@ -71,6 +73,14 @@ class Api {
 			case 'videos':
 				$parameters = 'videos?part=id,snippet,contentDetails&id='
 					. $parameter . '&fields=etag,items(id,snippet(title,description,channelTitle,tags,publishedAt,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
+				break;
+			case 'searchChannels':
+				$parameters = 'search?part=snippet&fields=items(snippet(channelId))&q='
+					. urlencode($parameter) . '&type=channel&maxResults=1';
+				break;
+			case 'searchPlaylists':
+				$parameters = 'search?part=snippet&fields=items(id(playlistId))&q='
+					. urlencode($parameter) . '&type=playlist&maxResults=1';
 				break;
 		}
 
