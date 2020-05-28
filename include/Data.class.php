@@ -178,60 +178,50 @@ class Data {
 	}
 
 	/**
-	 * Handle response from YouTube Data API
+	 * Update channel or playlist details with response from YouTube Data API
 	 *
 	 * @param object|array $response
 	 */
-	public function handleApiResponse($response) {
+	public function updateDetails($response) {
 		$this->dataUpdated = true;
 
-		if ($this->workingPart === 'details') {
-
-			if (empty($response->items)) {
-				throw new Exception($this->data['details']['type'] . ' not found.');
-			}
-
-			$details = array();
-			$details['etag'] = $response->etag;
-
-			$details['title'] = $response->items['0']->snippet->title;
-			$details['description'] = $response->items['0']->snippet->description;
-			$details['published'] = strtotime($response->items['0']->snippet->publishedAt);
-
-			if ($this->data['details']['type'] === 'channel') {
-				$details['url'] = $this->endpoint . '/channel/' . $this->data['details']['id'];
-				$details['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
-			}
-
-			if ($this->data['details']['type'] === 'playlist') {
-				$details['url'] = $this->endpoint . '/playlist?list=' . $this->data['details']['id'];
-				$details['playlist'] = $response->items['0']->id;
-			}
-
-			$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
-			$details['fetched'] = strtotime('now');
-			$details['expires'] = strtotime($this->expiresIn['details']);
-
-			$this->data['details'] = array_merge($this->data['details'], $details);
+		if (empty($response->items)) {
+			throw new Exception($this->data['details']['type'] . ' not found.');
 		}
 
-		if ($this->workingPart === 'playlist') {
-			$playlist = array();
-			$playlist['etag'] = $response->etag;
-			$playlist['videos'] = array();
+		$details = array();
+		$details['etag'] = $response->etag;
 
-			foreach ($response->items as $item) {
-				$playlist['videos'][] = $item->contentDetails->videoId;
-			}
+		$details['title'] = $response->items['0']->snippet->title;
+		$details['description'] = $response->items['0']->snippet->description;
+		$details['published'] = strtotime($response->items['0']->snippet->publishedAt);
 
-			$playlist['fetched'] = strtotime('now');
-			$playlist['expires'] = strtotime($this->expiresIn['playlist']);
-
-			$this->data['playlist'] = $playlist;
-			$this->orderVideos();
+		if ($this->data['details']['type'] === 'channel') {
+			$details['url'] = $this->endpoint . '/channel/' . $this->data['details']['id'];
+			$details['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
 		}
 
-		if ($this->workingPart === 'videos' && !empty($response)) {
+		if ($this->data['details']['type'] === 'playlist') {
+			$details['url'] = $this->endpoint . '/playlist?list=' . $this->data['details']['id'];
+			$details['playlist'] = $response->items['0']->id;
+		}
+
+		$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
+		$details['fetched'] = strtotime('now');
+		$details['expires'] = strtotime($this->expiresIn['details']);
+
+		$this->data['details'] = array_merge($this->data['details'], $details);
+	}
+	
+	/**
+	 * Update video details with response from YouTube Data API
+	 *
+	 * @param object|array $response
+	 */
+	public function updateVideos($response) {
+		$this->dataUpdated = true;
+
+		if (empty($response) === false) {
 			$videos = array();
 			$videos['etag'] = $response->etag;
 			$videos['items'] = array();
@@ -277,7 +267,7 @@ class Data {
 	 *
 	 * @param object $response
 	 */
-	public function handleRssResponse($response) {
+	public function updateFeed($response) {
 		$this->dataUpdated = true;
 
 		$feed = array();
