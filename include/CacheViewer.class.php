@@ -141,9 +141,9 @@ HTML;
 			$tbody .= <<<HTML
 <tr class="center">
 	<td id="{$data['id']}">$index</td>
-	<td>{$data['id']}<br>
+	<td>{$data['contents']['details']['title']}<br>
 		<span style="font-size:13px;">
-			(ID: {$data['contents']['details']['id']} Title: {$data['contents']['details']['title']})
+			(Cache ID: {$data['id']}
 		</span>
 	</td>
 	<td>{$data['contents']['details']['type']}</td>	
@@ -207,7 +207,7 @@ HTML;
 			<thead>
 				<tr class="center">
 					<th>#</th>
-					<th>Cache ID</th>
+					<th>Name</th>
 					<th>Type</th>
 					<th>Last Modified</th>
 					<th>Size</th>
