@@ -56,7 +56,6 @@ class FeedUrlGenerator {
 	 * Constructor
 	 */
 	public function __construct(array $supportedFormats) {
-
 		$this->supportedFormats = $supportedFormats;
 
 		$this->checkInputs();

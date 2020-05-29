@@ -4,7 +4,6 @@
 require 'include/autoload.php';
 
 try {
-
 	Config::checkInstall();
 	Config::checkConfig();
 

@@ -79,7 +79,6 @@ class CacheViewer {
 	 * @throws Exception If a cache file can not be opened.
 	 */
 	private function loadFiles() {
-
 		$regex = '/.' . preg_quote(Config::get('CACHE_FILENAME_EXT')) . '$/';
 
 		$directoryPath = Config::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . Config::get('CACHE_DIR');
@@ -87,7 +86,6 @@ class CacheViewer {
 		$cacheFiles = new RegexIterator($cacheDirectory, $regex);
 
 		foreach ($cacheFiles as $file) {
-
 			$handle = fopen($file, 'r');
 
 			if (!$handle) {
@@ -118,7 +116,6 @@ class CacheViewer {
 	 * @return string $html
 	 */
 	private function display() {
-
 		$fileCount = count($this->data);
 		$cacheSize = FileHelper::readableFileSize($this->cacheSize);
 		$tbody = '';
@@ -134,7 +131,6 @@ HTML;
 		}
 
 		foreach ($this->data as $index => $data) {
-
 			$modified = Helper::convertUnixTime($data['modified']);
 			$size = FileHelper::readableFileSize($data['size']);
 
@@ -233,10 +229,9 @@ HTML;
 	 * @return string $html
 	 */
 	private function displayFileDetails(array $data) {
-
 		$tr = '';
 
-			$tdData = <<<HTML
+		$tdData = <<<HTML
 <a style="float: right;" href="cache-viewer.php">[Close]</a>
 HTML;
 
@@ -284,7 +279,6 @@ HTML;
 	 * @return string $html
 	 */
 	private function displayChannel(array $channel) {
-
 		$fetched = Helper::convertUnixTime($channel['fetched']);
 		$expires = Helper::convertUnixTime($channel['expires']);
 		$published = Helper::convertUnixTime($channel['published']);
@@ -324,7 +318,6 @@ HTML;
 	 * @return string $html
 	 */
 	private function displayFeed(array $feed) {
-
 		$videoIDs = implode(' ', $feed['videos']);
 
 		$fetched = Helper::convertUnixTime($feed['fetched']);
@@ -354,7 +347,6 @@ HTML;
 	 * @return string $html
 	 */
 	private function displayVideos(array $videos) {
-
 		$videoCount = count($videos);
 		$videoHtml = '';
 
@@ -407,7 +399,6 @@ HTML;
 	 * Order cache files by date modified
 	 */
 	private function orderByModified() {
-
 		$sort = array();
 		foreach ($this->data as $key => $item) {
 			$sort[$key] = $item['modified'];

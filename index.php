@@ -7,7 +7,6 @@ require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/include/autoload.php';
 
 try {
-
 	Config::checkInstall();
 	Config::checkConfig();
 

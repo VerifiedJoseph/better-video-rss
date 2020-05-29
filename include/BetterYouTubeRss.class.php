@@ -187,11 +187,9 @@ class BetterYouTubeRss {
 	 * Generate index page with FeedUrlGenerator
 	 */
 	private function generateIndex() {
-
 		$generator = new FeedUrlGenerator(
 			$this->getFeedFormats()
 		);
 		$generator->display();
-
 	}
 }
