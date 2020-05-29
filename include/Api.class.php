@@ -43,11 +43,23 @@ class Api {
 		return $this->fetch($url, $etag);
 	}
 
+	/**
+	 * Search for a channel
+	 *
+	 * @param string $parameter Request parameter
+	 * @return object|array
+	 */
 	public function searchChannels(string $parameter) {
 		$url = $this->buildUrl('searchChannels', $parameter);
 		return $this->fetch($url);
 	}
 
+	/**
+	 * Search for a playlist
+	 *
+	 * @param string $parameter Request parameter
+	 * @return object|array
+	 */
 	public function searchPlaylists(string $parameter) {
 		$url = $this->buildUrl('searchPlaylists', $parameter);
 		return $this->fetch($url);
@@ -87,6 +99,13 @@ class Api {
 		return $this->endpoint . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 	}
 
+	/**
+	 * Fetch API request
+	 *
+	 * @param string $url
+	 * @param string $etag Request etag
+	 * @return object|array
+	 */
 	private function fetch(string $url, string $etag = '') {
 		$curl = new Curl();
 
