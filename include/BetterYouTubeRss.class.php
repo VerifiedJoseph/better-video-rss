@@ -17,9 +17,6 @@ class BetterYouTubeRss {
 	/** @var array $supportedFormats Supported feed formats */
 	private $supportedFeedFormats = array('rss', 'html', 'json');
 
-	/** @var array $parts Cache and fetch parts */
-	private $parts = array('details', 'playlist', 'videos');
-
 	/**
 	 * Constructor
 	 */
@@ -74,15 +71,6 @@ class BetterYouTubeRss {
 	 */
 	private function getEmbedStatus() {
 		return $this->embedVideos;
-	}
-
-	/**
-	 * Return cache and fetch parts
-	 *
-	 * @return array
-	 */
-	private function getParts() {
-		return $this->parts;
 	}
 
 	/**
