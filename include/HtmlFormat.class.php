@@ -32,6 +32,7 @@ class HtmlFormat extends Format {
 	<meta name="robots" content="noindex, follow">
 	<meta name="description" content="{$feedDescription}">
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
+	<link rel="alternate" type="application/rss+xml" title="{$feedTitle}" href="{$rssLink}">
 </head>
 <body>
 	<div id="header" class="center">
