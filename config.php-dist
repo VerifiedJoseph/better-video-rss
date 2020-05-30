@@ -17,7 +17,7 @@ define('YOUTUBE_EMBED_PRIVACY', true);
 
 // Raw API Errors
 // Display raw API errors
-define('RAW_API_ERRORS', true);
+define('RAW_API_ERRORS', false);
 
 // Timezone
 // https://www.php.net/manual/en/timezones.php
