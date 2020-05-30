@@ -1,0 +1,8 @@
+<?php
+/*
+	Class auto load
+*/
+spl_autoload_register(function ($name) {
+	$name = str_replace('\\', '/', $name);
+	require __DIR__ . '/' . $name . '.class.php';
+});
