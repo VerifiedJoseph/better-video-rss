@@ -166,8 +166,8 @@ HTML;
 					Feed format: 
 					<select name="format">
 						<option value="rss">RSS</option>
-						<option value="html">html</option>
-						<option value="json">json</option>
+						<option value="html">HTML</option>
+						<option value="json">JSON</option>
 					</select><br/>
 					<input type="hidden" name="type" value="channel">
 					<button style="width:80px;" type="submit">Generate</button>
@@ -182,8 +182,8 @@ HTML;
 					Feed format: 
 					<select name="format">
 						<option value="rss">RSS</option>
-						<option value="html">html</option>
-						<option value="json">json</option>
+						<option value="html">HTML</option>
+						<option value="json">JSON</option>
 					</select><br/>
 					<input type="hidden" name="type" value="playlist">
 					<button style="width:80px;" type="submit">Generate</button>
