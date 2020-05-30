@@ -247,7 +247,7 @@ HTML;
 HTML;
 		} elseif ($this->showXml === true) {
 
-			$format = new RssFormat($data['contents'], false);
+			$format = new Format\Rss($data['contents'], false);
 			$format->build();
 
 			$feedurl = Config::get('SELF_URL_PATH') . '?' . $data['contents']['details']['type'] . '_id='. $data['contents']['details']['id'];
