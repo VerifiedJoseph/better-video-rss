@@ -1,5 +1,7 @@
 <?php
 
+use Helper\Convert;
+
 class RssFormat extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
@@ -14,7 +16,7 @@ class RssFormat extends Format {
 		$feedAuthor = $this->xmlEncode($this->data['details']['title']);
 		$feedUrl = $this->xmlEncode($this->data['details']['url']);
 		$feedUpdated = $this->xmlEncode(
-			Helper::convertUnixTime(strtotime('now'), 'r')
+			Convert::unixTime(strtotime('now'), 'r')
 		);
 		$feedImage = $this->xmlEncode($this->data['details']['thumbnail']);
 
@@ -51,7 +53,7 @@ EOD;
 			$itemAuthor = $this->xmlEncode($video['author']);
 			$itemUrl = $this->xmlEncode($video['url']);
 			$itemTimestamp = $this->xmlEncode(
-				Helper::convertUnixTime($video['published'], 'r')
+				Convert::unixTime($video['published'], 'r')
 			);
 			$itemEnclosure = $this->xmlEncode($video['thumbnail']);
 			$itemCategories = $this->buildCategories($video['tags']);

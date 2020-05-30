@@ -1,5 +1,7 @@
 <?php
 
+use Helper\Convert;
+
 abstract class Format {
 
 	/** @var array $data Feed data */
@@ -72,8 +74,8 @@ abstract class Format {
 	 */
 	protected function buildContent(array $video) {
 		$description = nl2br($video['description']);
-		$description = Helper::convertUrls($description);
-		$published = Helper::convertUnixTime($video['published'], config::get('DATE_FORMAT'));
+		$description = Convert::urls($description);
+		$published = Convert::unixTime($video['published'], config::get('DATE_FORMAT'));
 
 		$media = <<<EOD
 <a target="_blank" title="Watch" href="https://youtube.com/watch?v={$video['id']}"><img src="{$video['thumbnail']}"/></a>

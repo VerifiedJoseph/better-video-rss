@@ -1,5 +1,7 @@
 <?php
 
+use Helper\Convert;
+
 class HtmlFormat extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
@@ -13,7 +15,7 @@ class HtmlFormat extends Format {
 		$feedTitle = $this->data['details']['title'];
 		$feedAuthor = $this->data['details']['title'];
 		$feedUrl = $this->data['details']['url'];
-		$feedUpdated = Helper::convertUnixTime(strtotime('now'), 'r');
+		$feedUpdated = Convert::unixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
 		$rssLink = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'];

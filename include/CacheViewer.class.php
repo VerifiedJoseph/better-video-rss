@@ -1,5 +1,7 @@
 <?php
 
+use Helper\Convert;
+
 class CacheViewer {
 	/**
 	 * @var string $cacheId Current cache file ID
@@ -131,7 +133,7 @@ HTML;
 		}
 
 		foreach ($this->data as $index => $data) {
-			$modified = Helper::convertUnixTime($data['modified']);
+			$modified = Convert::unixTime($data['modified']);
 			$size = FileHelper::readableFileSize($data['size']);
 
 			$tbody .= <<<HTML
@@ -279,9 +281,9 @@ HTML;
 	 * @return string $html
 	 */
 	private function displayChannel(array $channel) {
-		$fetched = Helper::convertUnixTime($channel['fetched']);
-		$expires = Helper::convertUnixTime($channel['expires']);
-		$published = Helper::convertUnixTime($channel['published']);
+		$fetched = Convert::unixTime($channel['fetched']);
+		$expires = Convert::unixTime($channel['expires']);
+		$published = Convert::unixTime($channel['published']);
 
 		$html = <<<HTML
 <strong>Details:</strong>
@@ -320,8 +322,8 @@ HTML;
 	private function displayFeed(array $feed) {
 		$videoIDs = implode(' ', $feed['videos']);
 
-		$fetched = Helper::convertUnixTime($feed['fetched']);
-		$expires = Helper::convertUnixTime($feed['expires']);
+		$fetched = Convert::unixTime($feed['fetched']);
+		$expires = Convert::unixTime($feed['expires']);
 
 		$html = <<<HTML
 <strong>Feed:</strong>
@@ -355,9 +357,9 @@ HTML;
 			$tags = implode(', ', $video['tags']);
 			$tagCount = count($video['tags']);
 
-			$fetched = Helper::convertUnixTime($video['fetched']);
-			$expires = Helper::convertUnixTime($video['expires']);
-			$published = Helper::convertUnixTime($video['published']);
+			$fetched = Convert::unixTime($video['fetched']);
+			$expires = Convert::unixTime($video['expires']);
+			$published = Convert::unixTime($video['published']);
 
 			$videoHtml .= <<<HTML
 <tr>

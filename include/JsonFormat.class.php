@@ -7,6 +7,9 @@
  * https://validator.jsonfeed.org/
  * https://json-feed-validator.herokuapp.com/validate
  */
+
+use Helper\Convert;
+
 class JsonFormat extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
@@ -21,7 +24,7 @@ class JsonFormat extends Format {
 		$feedAuthor = $this->data['details']['title'];
 		$feedHomePageUrl = $this->data['details']['url'];
 		$feedUrl = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'];
-		$feedUpdated = Helper::convertUnixTime(strtotime('now'), 'r');
+		$feedUpdated = Convert::unixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
 		$items = $this->buildItmes();
@@ -55,7 +58,7 @@ class JsonFormat extends Format {
 				'name' => $video['author']
 			);
 			$item['title'] = $video['title'] . ' (' . $video['duration'] . ')';
-			$item['date_published'] = Helper::convertUnixTime($video['published'], 'Y-m-d\TH:i:s\Z');
+			$item['date_published'] = Convert::unixTime($video['published'], 'Y-m-d\TH:i:s\Z');
 			$item['content_html'] = $this->buildContent($video);
 			$item['tags'] = $this->buildCategories($video['tags']);
 			$item['attachments'][] = array(
