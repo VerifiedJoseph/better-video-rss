@@ -1,5 +1,6 @@
 <?php
 
+use Helper\File;
 use Helper\Convert;
 
 class CacheViewer {
@@ -119,7 +120,7 @@ class CacheViewer {
 	 */
 	private function display() {
 		$fileCount = count($this->data);
-		$cacheSize = FileHelper::readableFileSize($this->cacheSize);
+		$cacheSize = File::readableSize($this->cacheSize);
 		$tbody = '';
 
 		if(empty($this->data)) {
@@ -134,7 +135,7 @@ HTML;
 
 		foreach ($this->data as $index => $data) {
 			$modified = Convert::unixTime($data['modified']);
-			$size = FileHelper::readableFileSize($data['size']);
+			$size = File::readableSize($data['size']);
 
 			$tbody .= <<<HTML
 <tr class="center">
