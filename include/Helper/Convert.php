@@ -2,7 +2,6 @@
 
 namespace Helper;
 
-use Config;
 use DateTime;
 use DateTimeZone;
 

@@ -1,7 +1,6 @@
 <?php
 
 use \Curl\Curl;
-
 class FeedUrlGenerator {
 
 	/** @var string $apiEndpoint YouTube API Endpoint */

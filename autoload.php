@@ -4,5 +4,5 @@
 */
 spl_autoload_register(function ($name) {
 	$name = str_replace('\\', '/', $name);
-	require __DIR__ . '/include/' . $name . '.class.php';
+	require __DIR__ . '/include/' . $name . '.php';
 });

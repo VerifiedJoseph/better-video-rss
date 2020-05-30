@@ -10,7 +10,6 @@
 
 namespace Format;
 
-use Config;
 use Helper\Convert;
 
 class Json extends Format {
