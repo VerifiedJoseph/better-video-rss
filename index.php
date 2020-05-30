@@ -4,7 +4,7 @@
 require __DIR__ . '/vendor/autoload.php';
 
 // Class Auto loader
-require __DIR__ . '/include/autoload.php';
+require __DIR__ . '/autoload.php';
 
 try {
 	Config::checkInstall();

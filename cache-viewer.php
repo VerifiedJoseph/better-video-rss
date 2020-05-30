@@ -1,7 +1,7 @@
 <?php
 
 // Class Auto loader
-require 'include/autoload.php';
+require 'autoload.php';
 
 try {
 	Config::checkInstall();
