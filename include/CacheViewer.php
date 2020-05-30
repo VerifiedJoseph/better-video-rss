@@ -1,5 +1,6 @@
 <?php
 
+use Configuration as Config;
 use Helper\File;
 use Helper\Convert;
 

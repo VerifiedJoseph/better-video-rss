@@ -3,6 +3,8 @@
 // Class Auto loader
 require 'autoload.php';
 
+use Configuration as Config;
+
 try {
 	Config::checkInstall();
 	Config::checkConfig();

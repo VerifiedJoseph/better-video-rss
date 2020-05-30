@@ -1,6 +1,6 @@
 <?php
 
-class Config {
+class Configuration {
 
 	/** @var string $minPhpVersion Minimum PHP version */
 	private static $minPhpVersion = '7.1.0';

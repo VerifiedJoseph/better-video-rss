@@ -2,7 +2,7 @@
 
 namespace Format;
 
-use Config;
+use Configuration as Config;
 use Helper\Convert;
 
 abstract class Format {

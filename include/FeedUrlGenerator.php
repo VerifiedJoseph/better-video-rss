@@ -1,6 +1,8 @@
 <?php
 
 use \Curl\Curl;
+use Configuration as Config;
+
 class FeedUrlGenerator {
 
 	/** @var string $apiEndpoint YouTube API Endpoint */

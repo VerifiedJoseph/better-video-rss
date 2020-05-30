@@ -1,5 +1,7 @@
 <?php
 
+use Configuration as Config;
+
 class Cache {
 
 	/** @var string $name Cache filename */

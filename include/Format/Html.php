@@ -1,6 +1,8 @@
 <?php
 
 namespace Format;
+
+use Configuration as Config;
 use Helper\Convert;
 
 class Html extends Format {

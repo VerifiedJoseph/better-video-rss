@@ -1,5 +1,7 @@
 <?php
 
+use Configuration as Config;
+
 class Data {
 
 	/** @var object $cache Cache class object */

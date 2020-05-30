@@ -1,6 +1,7 @@
 <?php
 
 use \Curl\Curl;
+use Configuration as Config;
 
 class Api {
 
