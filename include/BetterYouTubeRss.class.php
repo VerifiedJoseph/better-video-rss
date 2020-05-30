@@ -168,7 +168,7 @@ class BetterYouTubeRss {
 			}
 		}
 
-		$formatClass = ucfirst($this->feedFormat) . 'Format';
+		$formatClass = 'Format\\' . ucfirst($this->feedFormat);
 
 		$format = new $formatClass(
 			$data->getData(),
