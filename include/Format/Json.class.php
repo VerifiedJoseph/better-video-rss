@@ -8,9 +8,12 @@
  * https://json-feed-validator.herokuapp.com/validate
  */
 
+namespace Format;
+
+use Config;
 use Helper\Convert;
 
-class JsonFormat extends Format {
+class Json extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
 	protected $contentType = 'application/json';

@@ -1,8 +1,11 @@
 <?php
 
+namespace Format;
+
+use Config;
 use Helper\Convert;
 
-class HtmlFormat extends Format {
+class Html extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
 	protected $contentType = 'text/html; charset=UTF-8';

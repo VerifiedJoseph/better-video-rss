@@ -1,8 +1,10 @@
 <?php
 
+namespace Format;
+
 use Helper\Convert;
 
-class RssFormat extends Format {
+class Rss extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
 	protected $contentType = 'text/xml; charset=UTF-8';

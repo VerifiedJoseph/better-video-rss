@@ -1,5 +1,8 @@
 <?php
 
+namespace Format;
+
+use Config;
 use Helper\Convert;
 
 abstract class Format {
