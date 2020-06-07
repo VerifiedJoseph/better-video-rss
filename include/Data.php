@@ -1,6 +1,7 @@
 <?php
 
 use Configuration as Config;
+use Helper\Convert;
 
 class Data {
 
@@ -232,7 +233,7 @@ class Data {
 				$video = $this->data['videos'][$key];
 
 				$video['description'] = $item->snippet->description;
-				$video['duration'] = Helper::parseVideoDuration($item->contentDetails->duration);
+				$video['duration'] = Convert::videoDuration($item->contentDetails->duration);
 				$video['tags'] = array();
 
 				if (isset($item->snippet->tags)) {
