@@ -276,7 +276,7 @@ HTML;
 	private function searchApi(string $query) {
 
 		try {
-			$api = new api();
+			$api = new Api();
 
 			if ($this->feedType === 'channel') {
 				$response = $api->searchChannels($query);
