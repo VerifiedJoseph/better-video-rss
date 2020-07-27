@@ -192,7 +192,7 @@ HTML;
 				{$playlistLink}
 			</div>
 			<div class="item">
-				<a href="tools.php">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterYouTubeRss">Source Code</a>
+				<a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterYouTubeRss">Source Code</a>
 			</div>
 		</div>
 	</div>
