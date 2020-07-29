@@ -8,27 +8,27 @@ class CacheViewer {
 	/**
 	 * @var string $cacheId Current cache file ID
 	 */
-	private $cacheId = '';
+	private string $cacheId = '';
 
 	/**
 	 * @var boolean $showRaw Show raw cache file data
 	 */
-	private $showRaw = false;
+	private bool $showRaw = false;
 	
 	/**
 	 * @var boolean $showXml Show feed XML
 	 */
-	private $showXml = false;
+	private bool $showXml = false;
 
 	/**
 	 * @var array $data Data from cache files
 	 */
-	private $data = array();
+	private array $data = array();
 
 	/**
 	 * @var int $cacheSize Total size of the cache files
 	 */
-	private $cacheSize = 0;
+	private int $cacheSize = 0;
 
 	/**
 	 * Constructor

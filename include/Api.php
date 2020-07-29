@@ -6,7 +6,7 @@ use Configuration as Config;
 class Api {
 
 	/** @var string $endpoint YouTube API Endpoint */
-	private $endpoint = 'https://www.googleapis.com/youtube/v3/';
+	private string $endpoint = 'https://www.googleapis.com/youtube/v3/';
 
 	/**
 	 * Get channel details

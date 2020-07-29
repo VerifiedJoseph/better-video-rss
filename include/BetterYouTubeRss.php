@@ -3,19 +3,19 @@
 class BetterYouTubeRss {
 
 	/** @var string $feedId YouTube channel or playlist ID */
-	private $feedId = '';
+	private string $feedId = '';
 
 	/** @var string $feedType Feed type (channel or playlist) */
-	private $feedType = 'channel';
+	private string $feedType = 'channel';
 
 	/** @var boolean $embedVideos Embed videos status */
-	private $embedVideos = false;
+	private bool $embedVideos = false;
 
 	/** @var string $feedFormat Default feed format */
-	private $feedFormat = 'rss';
+	private string $feedFormat = 'rss';
 
 	/** @var array $supportedFormats Supported feed formats */
-	private $supportedFeedFormats = array('rss', 'html', 'json');
+	private array $supportedFeedFormats = array('rss', 'html', 'json');
 
 	/**
 	 * Constructor

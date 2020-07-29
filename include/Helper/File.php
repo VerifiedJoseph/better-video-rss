@@ -5,19 +5,19 @@ namespace Helper;
 class File {
 
 	/** @var int $byteCountGB Number of bytes in a GB */
-	private static $byteCountGB = 1073741824;
+	private static int $byteCountGB = 1073741824;
 
 	/** @var int $byteCountMB Number of bytes in a MB */
-	private static $byteCountMB = 1048576;
+	private static int $byteCountMB = 1048576;
 
 	/** @var int $byteCountKB Number of bytes in a KB */
-	private static $byteCountKB = 1024;
+	private static int $byteCountKB = 1024;
 
 	/** @var int $numDecimalPlaces Number of decimal places to round to. */
-	private static $numDecimalPlaces = 2;
+	private static int $numDecimalPlaces = 2;
 
 	/** @var int $minByteCount Minimum byte count */
-	private static $minByteCount = 1;
+	private static int $minByteCount = 1;
 
 	/**
 	 * Convert file size into a readable format from bytes (GB, MB, KB)

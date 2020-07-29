@@ -7,7 +7,7 @@ use Helper\Convert;
 class Rss extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
-	protected $contentType = 'text/xml; charset=UTF-8';
+	protected string $contentType = 'text/xml; charset=UTF-8';
 
 	/**
 	 * Build feed

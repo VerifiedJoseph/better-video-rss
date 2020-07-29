@@ -3,16 +3,16 @@
 class Configuration {
 
 	/** @var string $minPhpVersion Minimum PHP version */
-	private static $minPhpVersion = '7.1.0';
+	private static string $minPhpVersion = '7.1.0';
 
 	/** @var int $mkdirMode mkdir() access mode */
-	private static $mkdirMode = 0775;
+	private static int $mkdirMode = 0775;
 
 	/** @var int $minResults Minimum number of results allowed */
-	private static $minResults = 1;
+	private static int $minResults = 1;
 
 	/** @var int $maxResults Maximum number of results allowed */
-	private static $maxResults = 50;
+	private static int $maxResults = 50;
 
 	/**
 	 * Check PHP version and loaded extensions

@@ -5,16 +5,16 @@ use Configuration as Config;
 class Cache {
 
 	/** @var string $name Cache filename */
-	private $name = '';
+	private string $name = '';
 
 	/** @var array $data Cache data */
-	private $data = array();
+	private array $data = array();
 
 	/** @var string $path Cache file path */
-	private $path = '';
+	private string $path = '';
 
 	/** @var boolean $cacheUpdated Cache update status */
-	private $cacheUpdated = false;
+	private bool $cacheUpdated = false;
 
 	/**
 	 * Constructor

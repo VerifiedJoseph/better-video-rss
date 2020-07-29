@@ -6,16 +6,16 @@ use Helper\Convert;
 class Data {
 
 	/** @var object $cache Cache class object */
-	private $cache;
+	private Cache $cache;
 
 	/** @var string $endpoint YouTube.com Endpoint */
-	private $endpoint = 'https://www.youtube.com';
+	private string $endpoint = 'https://www.youtube.com';
 
 	/** @var array $parts Data part names */
-	private $parts = array('details', 'feed', 'videos');
+	private array $parts = array('details', 'feed', 'videos');
 
 	/** @var array $data Data */
-	private $data = array(
+	private array $data = array(
 		'details' => array(),
 		'feed' => array(
 			'videos' => array(),
@@ -32,10 +32,10 @@ class Data {
 	);
 
 	/** @var string $workingPart Current part being worked on */
-	private $workingPart = '';
+	private string $workingPart = '';
 
-	/** @var string $dataUpdated Data update status */
-	private $dataUpdated = false;
+	/** @var bool $dataUpdated Data update status */
+	private bool $dataUpdated = false;
 
 	/**
 	 * Constructor

@@ -8,19 +8,19 @@ use Helper\Convert;
 abstract class Format {
 
 	/** @var array $data Feed data */
-	protected $data = array();
+	protected array $data = array();
 
 	/** @var string $feed Formatted feed data */
-	protected $feed = '';
+	protected string $feed = '';
 
 	/** @var string $contentType HTTP content-type header value */
-	protected $contentType = 'text/plain';
+	protected string $contentType = 'text/plain';
 
 	/** @var string $embedUrl YouTube URL */
-	protected $embedUrl = 'https://www.youtube.com';
+	protected string $embedUrl = 'https://www.youtube.com';
 
 	/** @var string $embedUrlNoCookie YouTube no cookie URL */
-	protected $embedUrlNoCookie = 'https://www.youtube-nocookie.com';
+	protected string $embedUrlNoCookie = 'https://www.youtube-nocookie.com';
 
 	/**
 	 * Constructor

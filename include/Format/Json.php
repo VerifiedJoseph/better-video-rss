@@ -16,7 +16,7 @@ use Helper\Convert;
 class Json extends Format {
 
 	/** @var string $contentType HTTP content-type header value */
-	protected $contentType = 'application/json';
+	protected string $contentType = 'application/json';
 
 	/**
 	 * Build feed

@@ -6,52 +6,52 @@ use Configuration as Config;
 class FeedUrlGenerator {
 
 	/** @var string $apiEndpoint YouTube API Endpoint */
-	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
+	private string $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
 
 	/**
 	 * @var string $query Search query
 	 */
-	private $query = '';
+	private string $query = '';
 
 	/**
 	 * @var boolean $embedVideos Embed videos status
 	 */
-	private $embedVideos = false;
+	private bool $embedVideos = false;
 
 	/**
 	 * @var string $feedId YouTube channel or playlist ID
 	 */
-	private $feedId = '';
+	private string $feedId = '';
 
 	/**
 	 * @var string $feedType Feed type (channel or playlist)
 	 */
-	private $feedType = 'channel';
+	private string $feedType = 'channel';
 
 	/**
 	 * @var array $supportedTypes Supported feed types
 	 */
-	private $supportedTypes = array('channel', 'playlist');
+	private array $supportedTypes = array('channel', 'playlist');
 
 	/**
 	 * @var string $feedFormat Feed Format
 	 */
-	private $feedFormat = 'rss';
+	private string $feedFormat = 'rss';
 
 	/**
 	 * @var array $supportedFormats Feed formats
 	 */
-	private $supportedFormats = array();
+	private array $supportedFormats = array();
 
 	/**
 	 * @var boolean $error Error status
 	 */
-	private $error = false;
+	private bool $error = false;
 
 	/**
 	 * @var string $errorMessage Error Message
 	 */
-	private $errorMessage = '';
+	private string $errorMessage = '';
 
 	/**
 	 * Constructor

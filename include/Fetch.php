@@ -5,16 +5,16 @@ use \Curl\Curl;
 class Fetch {
 
 	/** @var string $apiEndpoint YouTube API Endpoint */
-	private $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
+	private string $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
 
 	/** @var string $feedEndpoint YouTube RSS Feed Endpoint */
-	private $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml';
+	private string $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml';
 
 	/** @var string $feedId YouTube channel or playlist ID */
-	private $feedId = '';
+	private string $feedId = '';
 
 	/** @var string $feedType Feed type (channel or playlist) */
-	private $feedType = 'channel';
+	private string $feedType = 'channel';
 
 	/**
 	 * Constructor
