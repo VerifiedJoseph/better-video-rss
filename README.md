@@ -11,7 +11,7 @@ To reduce requests, responses from YouTube's Data API and RSS feeds are cached. 
 
 ## Requirements
 
-* PHP >= 7.1
+* PHP >= 7.4
 * Composer
 * PHP Extensions:
 	* JSON [https://secure.php.net/manual/en/refs.xml.php](https://www.php.net/manual/en/book.json.php)
