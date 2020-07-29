@@ -31,9 +31,6 @@ class Data {
 		'videos' => '+6 hours',
 	);
 
-	/** @var string $workingPart Current part being worked on */
-	private string $workingPart = '';
-
 	/** @var bool $dataUpdated Data update status */
 	private bool $dataUpdated = false;
 
@@ -92,15 +89,6 @@ class Data {
 	}
 
 	/**
-	 * Sets working part
-	 *
-	 * @param string $part
-	 */
-	public function setWorkingPart(string $part) {
-		$this->workingPart = $part;
-	}
-
-	/**
 	 * Returns data update status
 	 *
 	 * @return boolean
@@ -112,12 +100,13 @@ class Data {
 	/**
 	 * Returns HTTP ETag for a part
 	 *
+	 * @param string $part
 	 * @return string
 	 */
-	public function getPartEtag() {
+	public function getPartEtag(string $part) {
 
-		if (isset($this->data[$this->workingPart]['etag'])) {
-			return $this->data[$this->workingPart]['etag'];
+		if (isset($this->data[$part]['etag'])) {
+			return $this->data[$part]['etag'];
 		}
 
 		return '';

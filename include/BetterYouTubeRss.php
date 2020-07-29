@@ -132,8 +132,6 @@ class BetterYouTubeRss {
 		);
 
 		foreach ($data->getExpiredParts() as $part) {
-			$data->setWorkingPart($part);
-
 			$parameter = '';
 
 			if ($part === 'feed') {
@@ -145,7 +143,7 @@ class BetterYouTubeRss {
 				$fetch->api(
 					$part,
 					$parameter,
-					$data->getPartEtag()
+					$data->getPartEtag($part)
 				);
 
 				$data->updateDetails($fetch->getResponse());
@@ -161,7 +159,7 @@ class BetterYouTubeRss {
 				$fetch->api(
 					$part,
 					$parameter,
-					$data->getPartEtag()
+					$data->getPartEtag($part)
 				);
 
 				$data->updateVideos($fetch->getResponse());
