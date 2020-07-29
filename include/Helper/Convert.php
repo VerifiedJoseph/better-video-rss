@@ -8,13 +8,13 @@ use DateTimeZone;
 
 class Convert {
 
-	/** @var int $urlRegex URL regex */
+	/** @var string $urlRegex URL regex */
 	private static $urlRegex = '/(https?:\/\/(?:www\.)?(?:[a-zA-Z0-9-.]{2,256}\.[a-z]{2,20})(\:[0-9]{2,4})?(?:\/[a-zA-Z0-9@:%_\+.,~#"!?&\/\/=\-*]+|\/)?)/ims';
 
-	/** @var int $urlRegex ISO 8601 regex */
+	/** @var string $iso8601Regex ISO 8601 regex */
 	private static $iso8601Regex = '/^(-|)?P([0-9]+Y|)?([0-9]+M|)?([0-9]+D|)?T?([0-9]+H|)?([0-9]+M|)?([0-9]+S|)?$/';
 
-	/** @var int $urlRegex ISO 8601 part regex */
+	/** @var string $iso8601PartRegex ISO 8601 part regex */
 	private static $iso8601PartRegex = '/((?!([0-9]|-)).)*/';
 
 	/**
