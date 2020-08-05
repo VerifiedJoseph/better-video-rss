@@ -263,8 +263,13 @@ class Data {
 
 		$videos = $this->data['videos'];
 
+		// Get namespaces from XML
+		$namespaces = $response->getNamespaces(true);
+
 		foreach ($response->entry as $entry) {
-			$id = str_replace('yt:video:', '', $entry->id);
+			$ytNodes = $entry->children($namespaces['yt']);
+	
+			$id = (string)$ytNodes->videoId;
 			$key = array_search($id, array_column($videos, 'id'));
 
 			$feed['videos'][] = $id;
