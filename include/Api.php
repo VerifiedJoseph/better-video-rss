@@ -77,7 +77,7 @@ class Api {
 		switch ($type) {
 			case 'channel':
 				$parameters = 'channels?part=snippet,contentDetails&id='
-					. $parameter . '&fields=etag,items(snippet(title,description,publishedAt,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
+					. $parameter . '&fields=etag,items(snippet(title,description,thumbnails(default(url))),contentDetails(relatedPlaylists(uploads)))';
 				break;
 			case 'playlist':
 				$parameters = 'playlists?part=snippet,contentDetails&id='
