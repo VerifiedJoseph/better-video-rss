@@ -221,7 +221,6 @@ class Data {
 				$key = array_search($item->id, array_column($this->data['videos'], 'id'));
 				$video = $this->data['videos'][$key];
 
-				$video['description'] = $item->snippet->description;
 				$video['duration'] = Convert::videoDuration($item->contentDetails->duration);
 				$video['tags'] = array();
 
@@ -267,6 +266,7 @@ class Data {
 		$namespaces = $response->getNamespaces(true);
 
 		foreach ($response->entry as $entry) {
+			$mediaNodes = $entry->children($namespaces['media']);
 			$ytNodes = $entry->children($namespaces['yt']);
 	
 			$id = (string)$ytNodes->videoId;
@@ -278,6 +278,7 @@ class Data {
 			$video['id'] = $id;
 			$video['url'] = $this->endpoint . '/watch?v=' . $id;
 			$video['title'] = (string)$entry->title;
+			$video['description'] = (string)$mediaNodes->group->description;
 			$video['author'] = (string)$entry->author->name;
 			$video['published'] = strtotime((string)$entry->published);
 
