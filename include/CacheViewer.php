@@ -167,7 +167,7 @@ HTML;
 			<form action="#{$data['id']}" method="post">
 				<input name="id" type="hidden" value="{$data['id']}">
 				<input name="xml" type="hidden">
-				<button style="width:80px;" type="submit">View XML</button>
+				<button type="submit">View XML</button>
 			</form>
 		</div>
 	</td>
@@ -300,7 +300,7 @@ HTML;
 	</td>
 	<td>
 		<strong>Description:</strong><br>
-		<textarea cols="70" rows="4" readonly>{$channel['description']}</textarea>
+		<textarea class="description" readonly>{$channel['description']}</textarea>
 	</td>
 	<td>
 		<strong>Thumbnail:</strong><br>
@@ -331,7 +331,7 @@ HTML;
 <tr>
 	<td>
 		<strong>Video IDs:</strong><br>
-		<textarea cols="140" rows="2" readonly>{$videoIDs}</textarea><br>
+		<textarea class="videos" readonly>{$videoIDs}</textarea><br>
 		<strong>Fetched:</strong> $fetched<br>
 		<strong>Expires:</strong> $expires<br>
 	</td>
@@ -373,7 +373,7 @@ HTML;
 	</td>
 	<td>
 		<strong>Description</strong>:<br>
-		<textarea cols="70" rows="5" readonly>{$video['description']}</textarea>
+		<textarea class="description" readonly>{$video['description']}</textarea>
 	</td>
 	<td>
 		<strong>Thumbnail:</strong><br>
@@ -383,7 +383,7 @@ HTML;
 <tr>
 	<td colspan="3">
 		<strong>Tags ({$tagCount}) :</strong><br/>
-		<textarea cols="140" rows="2" readonly="">{$tags}</textarea>
+		<textarea class="tags" readonly>{$tags}</textarea>
 	</td>
 </tr>
 HTML;
