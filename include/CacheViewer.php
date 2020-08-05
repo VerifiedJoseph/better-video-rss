@@ -285,7 +285,6 @@ HTML;
 	private function displayChannel(array $channel) {
 		$fetched = Convert::unixTime($channel['fetched']);
 		$expires = Convert::unixTime($channel['expires']);
-		$published = Convert::unixTime($channel['published']);
 
 		$html = <<<HTML
 <strong>Details:</strong>
@@ -295,7 +294,6 @@ HTML;
 		<strong>ID:</strong> {$channel['id']}<br>
 		<strong>Title:</strong> {$channel['title']}<br>
 		<strong>URL:</strong> <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
-		<strong>Published:</strong> {$published}<br>
 		<strong>Playlist ID:</strong> {$channel['playlist']}<br>
 		<strong>Fetched:</strong> $fetched<br>
 		<strong>Expires:</strong> $expires<br>

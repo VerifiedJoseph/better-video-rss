@@ -187,7 +187,6 @@ class Data {
 
 		$details['title'] = $response->items['0']->snippet->title;
 		$details['description'] = $response->items['0']->snippet->description;
-		$details['published'] = strtotime($response->items['0']->snippet->publishedAt);
 
 		if ($this->data['details']['type'] === 'channel') {
 			$details['url'] = $this->endpoint . '/channel/' . $this->data['details']['id'];
