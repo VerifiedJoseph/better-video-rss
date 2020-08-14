@@ -61,10 +61,11 @@ class Data {
 	public function __destruct() {
 
 		// Save data to cache file, if updated
-		$this->cache->save(
-			$this->getData(),
-			$this->getUpdateStatus()
-		);
+		if ($this->getUpdateStatus() === true) {
+			$this->cache->save(
+				$this->getData(),
+			);	
+		}
 	}
 
 	/**
