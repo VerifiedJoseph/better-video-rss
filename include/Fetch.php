@@ -1,14 +1,9 @@
 <?php
 
 use \Curl\Curl;
+use Configuration as Config;
 
 class Fetch {
-
-	/** @var string $apiEndpoint YouTube API Endpoint */
-	private string $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
-
-	/** @var string $feedEndpoint YouTube RSS Feed Endpoint */
-	private string $feedEndpoint = 'https://www.youtube.com/feeds/videos.xml';
 
 	/** @var string $feedId YouTube channel or playlist ID */
 	private string $feedId = '';
@@ -44,7 +39,7 @@ class Fetch {
 	public function feed() {
 		$this->fetchType = 'feed';
 
-		$url = $this->feedEndpoint . '?' . $this->feedType . '_id=' . $this->feedId;
+		$url = Config::getEndpoint('feed') . '?' . $this->feedType . '_id=' . $this->feedId;
 
 		$curl = new Curl();
 		$curl->get($url);
