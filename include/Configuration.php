@@ -8,12 +8,6 @@ class Configuration {
 	/** @var int $mkdirMode mkdir() access mode */
 	private static int $mkdirMode = 0775;
 
-	/** @var int $minResults Minimum number of results allowed */
-	private static int $minResults = 1;
-
-	/** @var int $maxResults Maximum number of results allowed */
-	private static int $maxResults = 50;
-
 	/**
 	 * Check PHP version and loaded extensions
 	 *
