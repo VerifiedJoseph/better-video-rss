@@ -5,9 +5,6 @@ use Configuration as Config;
 
 class FeedUrlGenerator {
 
-	/** @var string $apiEndpoint YouTube API Endpoint */
-	private string $apiEndpoint = 'https://www.googleapis.com/youtube/v3/';
-
 	/**
 	 * @var string $query Search query
 	 */
