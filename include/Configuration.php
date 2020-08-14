@@ -10,6 +10,7 @@ class Configuration {
 
 	/** @var array $endpoints YouTube endpoints */
 	private static array $endpoints = array(
+		'images' => 'https://i.ytimg.com/vi/',
 		'nocookie' => 'https://www.youtube-nocookie.com/',
 		'website' => 'https://www.youtube.com/',
 		'feed' => 'https://www.youtube.com/feeds/videos.xml',	
