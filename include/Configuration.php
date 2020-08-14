@@ -13,10 +13,10 @@ class Configuration {
 		'images' => 'https://i.ytimg.com/vi/',
 		'nocookie' => 'https://www.youtube-nocookie.com/',
 		'website' => 'https://www.youtube.com/',
-		'feed' => 'https://www.youtube.com/feeds/videos.xml',	
+		'feed' => 'https://www.youtube.com/feeds/videos.xml',
 		'api' => 'https://www.googleapis.com/youtube/v3/'
 	);
-	
+
 	/**
 	 * Check PHP version and loaded extensions
 	 *

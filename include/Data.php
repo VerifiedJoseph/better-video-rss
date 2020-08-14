@@ -17,8 +17,7 @@ class Data {
 		'feed' => array(
 			'videos' => array(),
 		),
-		'videos' => array(
-		)
+		'videos' => array()
 	);
 
 	/** @var array $expiresIn Number of days, hours or minutes that each part expires */
@@ -61,7 +60,7 @@ class Data {
 		if ($this->getUpdateStatus() === true) {
 			$this->cache->save(
 				$this->getData()
-			);	
+			);
 		}
 	}
 
@@ -192,7 +191,7 @@ class Data {
 		}
 
 		if ($this->data['details']['type'] === 'playlist') {
-			$details['url'] =  Config::getEndpoint('website') . 'playlist?list=' . $this->data['details']['id'];
+			$details['url'] = Config::getEndpoint('website') . 'playlist?list=' . $this->data['details']['id'];
 			$details['playlist'] = $response->items['0']->id;
 		}
 
@@ -265,7 +264,7 @@ class Data {
 		foreach ($response->entry as $entry) {
 			$mediaNodes = $entry->children($namespaces['media']);
 			$ytNodes = $entry->children($namespaces['yt']);
-	
+
 			$id = (string)$ytNodes->videoId;
 			$key = array_search($id, array_column($videos, 'id'));
 
@@ -273,7 +272,7 @@ class Data {
 
 			$video = array();
 			$video['id'] = $id;
-			$video['url'] =  Config::getEndpoint('website') . 'watch?v=' . $id;
+			$video['url'] = Config::getEndpoint('website') . 'watch?v=' . $id;
 			$video['title'] = (string)$entry->title;
 			$video['description'] = (string)$mediaNodes->group->description;
 			$video['author'] = (string)$entry->author->name;
