@@ -8,9 +8,6 @@ class Data {
 	/** @var object $cache Cache class object */
 	private Cache $cache;
 
-	/** @var string $endpoint YouTube.com Endpoint */
-	private string $endpoint = 'https://www.youtube.com';
-
 	/** @var array $parts Data part names */
 	private array $parts = array('details', 'feed', 'videos');
 
@@ -190,12 +187,12 @@ class Data {
 		$details['description'] = $response->items['0']->snippet->description;
 
 		if ($this->data['details']['type'] === 'channel') {
-			$details['url'] = $this->endpoint . '/channel/' . $this->data['details']['id'];
+			$details['url'] = Config::getEndpoint('website') . 'channel/' . $this->data['details']['id'];
 			$details['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
 		}
 
 		if ($this->data['details']['type'] === 'playlist') {
-			$details['url'] = $this->endpoint . '/playlist?list=' . $this->data['details']['id'];
+			$details['url'] =  Config::getEndpoint('website') . 'playlist?list=' . $this->data['details']['id'];
 			$details['playlist'] = $response->items['0']->id;
 		}
 
@@ -276,7 +273,7 @@ class Data {
 
 			$video = array();
 			$video['id'] = $id;
-			$video['url'] = $this->endpoint . '/watch?v=' . $id;
+			$video['url'] =  Config::getEndpoint('website') . 'watch?v=' . $id;
 			$video['title'] = (string)$entry->title;
 			$video['description'] = (string)$mediaNodes->group->description;
 			$video['author'] = (string)$entry->author->name;
