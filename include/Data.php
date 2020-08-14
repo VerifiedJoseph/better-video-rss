@@ -232,7 +232,7 @@ class Data {
 					$video['thumbnail'] = $item->snippet->thumbnails->standard->url;
 
 				} else {
-					$video['thumbnail']  = 'https://i.ytimg.com/vi/' . $item->id . '/hqdefault.jpg';
+					$video['thumbnail']  = Config::getEndpoint('images') . $item->id . '/hqdefault.jpg';
 				}
 
 				$video['fetched'] = strtotime('now');
