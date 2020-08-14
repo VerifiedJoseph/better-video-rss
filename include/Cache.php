@@ -58,16 +58,15 @@ class Cache {
 
 	/**
 	 * Save cache data to disk
+	 *
+	 * @param array $data Feed date
 	 */
-	public function save(array $data = array(), bool $updated = false) {
+	public function save(array $data = array()) {
+		$data = json_encode($data);
+		$file = fopen($this->path, 'w');
 
-		if ($updated === true) {
-			$data = json_encode($data);
-			$file = fopen($this->path, 'w');
-
-			fwrite($file, $data);
-			fclose($file);
-		}
+		fwrite($file, $data);
+		fclose($file);
 	}
 
 	/**
