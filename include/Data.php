@@ -63,7 +63,7 @@ class Data {
 		// Save data to cache file, if updated
 		if ($this->getUpdateStatus() === true) {
 			$this->cache->save(
-				$this->getData(),
+				$this->getData()
 			);	
 		}
 	}
