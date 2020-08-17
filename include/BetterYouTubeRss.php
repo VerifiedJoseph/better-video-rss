@@ -1,5 +1,7 @@
 <?php
 
+use Configuration as Config;
+
 class BetterYouTubeRss {
 
 	/** @var string $feedId YouTube channel or playlist ID */
@@ -11,16 +13,11 @@ class BetterYouTubeRss {
 	/** @var boolean $embedVideos Embed videos status */
 	private bool $embedVideos = false;
 
-	/** @var string $feedFormat Default feed format */
-	private string $feedFormat = 'rss';
-
-	/** @var array $supportedFormats Supported feed formats */
-	private array $supportedFeedFormats = array('rss', 'html', 'json');
-
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
+		$this->feedFormat = Config::getDefaultFeedFormat();
 		$this->checkInputs();
 	}
 
@@ -56,15 +53,6 @@ class BetterYouTubeRss {
 	}
 
 	/**
-	 * Return supported feed formats
-	 *
-	 * @return string
-	 */
-	private function getFeedFormats() {
-		return $this->supportedFeedFormats;
-	}
-
-	/**
 	 * Return embed video status
 	 *
 	 * @return boolean
@@ -84,7 +72,7 @@ class BetterYouTubeRss {
 
 		if (isset($_GET['format'])) {
 
-			if (!in_array($_GET['format'], $this->getFeedFormats())) {
+			if (!in_array($_GET['format'], Config::getFeedFormats())) {
 				throw new Exception('Invalid format parameter given.');
 			}
 
@@ -185,9 +173,7 @@ class BetterYouTubeRss {
 	 * Generate index page with FeedUrlGenerator
 	 */
 	private function generateIndex() {
-		$generator = new FeedUrlGenerator(
-			$this->getFeedFormats()
-		);
+		$generator = new FeedUrlGenerator();
 		$generator->display();
 	}
 }

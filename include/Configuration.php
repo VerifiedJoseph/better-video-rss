@@ -17,6 +17,12 @@ class Configuration {
 		'api' => 'https://www.googleapis.com/youtube/v3/'
 	);
 
+	/** @var array $feedFormats Supported feed formats */
+	private static array $feedFormats = array('rss', 'html', 'json');
+
+	/** @var array $defaultFeedFormats Default feed format */
+	private static string $defaultFeedFormat = 'rss';
+
 	/**
 	 * Check PHP version and loaded extensions
 	 *
@@ -133,6 +139,24 @@ class Configuration {
 	 */
 	public static function getEndpoint(string $name) {
 		return self::$endpoints[$name];
+	}
+
+	/**
+	 * Returns default feed format
+	 *
+	 * @return array
+	 */
+	public static function getDefaultFeedFormat() {
+		return self::$defaultFeedFormat;
+	}
+
+	/**
+	 * Returns feed formats
+	 *
+	 * @return array
+	 */
+	public static function getFeedFormats() {
+		return self::$feedFormats;
 	}
 
 	/**

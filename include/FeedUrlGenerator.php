@@ -33,12 +33,7 @@ class FeedUrlGenerator {
 	/**
 	 * @var string $feedFormat Feed Format
 	 */
-	private string $feedFormat = 'rss';
-
-	/**
-	 * @var array $supportedFormats Feed formats
-	 */
-	private array $supportedFormats = array();
+	private string $feedFormat = '';
 
 	/**
 	 * @var boolean $error Error status
@@ -53,9 +48,8 @@ class FeedUrlGenerator {
 	/**
 	 * Constructor
 	 */
-	public function __construct(array $supportedFormats) {
-		$this->supportedFormats = $supportedFormats;
-
+	public function __construct() {
+		$this->feedFormat = Config::getDefaultFeedFormat();
 		$this->checkInputs();
 
 		if (!empty($this->query)) {
@@ -92,7 +86,7 @@ class FeedUrlGenerator {
 				$this->feedType = $_POST['type'];
 			}
 
-			if (isset($_POST['format']) && in_array($_POST['format'], $this->supportedFormats)) {
+			if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
 				$this->feedFormat = $_POST['format'];
 			}
 
