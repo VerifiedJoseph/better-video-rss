@@ -71,7 +71,7 @@ class CacheViewer {
 		if (isset($_POST['raw'])) {
 			$this->showRaw = true;
 		}
-		
+
 		if (isset($_POST['xml'])) {
 			$this->showXml = true;
 		}
