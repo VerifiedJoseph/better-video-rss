@@ -37,8 +37,6 @@ class Fetch {
 	 * @throws Exception If a curl error has occurred.
 	 */
 	public function feed() {
-		$this->fetchType = 'feed';
-
 		$url = Config::getEndpoint('feed') . '?' . $this->feedType . '_id=' . $this->feedId;
 
 		$curl = new Curl();
