@@ -8,7 +8,7 @@ class Api {
 	 * Get channel details
 	 *
 	 * @param string $parameter Request parameter
-	 * @param string $etag Request etag
+	 * @param string $etag Request ETag
 	 * @return object
 	 */
 	public function getChannel(string $parameter, string $etag) {
@@ -20,7 +20,7 @@ class Api {
 	 * Get playlist details
 	 *
 	 * @param string $parameter Request parameter
-	 * @param string $etag Request etag
+	 * @param string $etag Request ETag
 	 * @return object
 	 */
 	public function getPlaylist(string $parameter, string $etag) {
@@ -32,7 +32,7 @@ class Api {
 	 * Get videos details
 	 *
 	 * @param string $parameter Request parameter
-	 * @param string $etag Request etag
+	 * @param string $etag Request ETag
 	 * @return object
 	 */
 	public function getVideos(string $parameter, string $etag) {
@@ -65,8 +65,8 @@ class Api {
 	/**
 	 * Build URL
 	 *
-	 * @param string $type Type
-	 * @param string $parameter parameter
+	 * @param string $type API request type
+	 * @param string $parameter Request Parameter
 	 * @return string Returns API URL
 	 */
 	private function buildUrl(string $type, string $parameter = '') {
@@ -99,8 +99,8 @@ class Api {
 	/**
 	 * Fetch API request
 	 *
-	 * @param string $url
-	 * @param string $etag Request etag
+	 * @param string $url Request URL
+	 * @param string $etag Request ETag
 	 * @return object|array
 	 */
 	private function fetch(string $url, string $etag = '') {
