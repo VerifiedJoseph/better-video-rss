@@ -73,7 +73,7 @@ class Convert {
 	 * Convert Unix timestamp into a readable format
 	 *
 	 * @param string $timestamp Unix timestamp
-	 * @param string $format DaeTime format
+	 * @param string $format DateTime format
 	 * @return string
 	 */
 	public static function unixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s') {
