@@ -114,7 +114,7 @@ class Api {
 		$curl->get($url);
 
 		if ($curl->getCurlErrorCode() !== 0) {
-			throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
+			throw new Exception('Error: ' . $curl->getCurlErrorCode() . ': ' . $curl->getErrorMessage());
 		}
 
 		if ($curl->getHttpStatusCode() === 304) {
