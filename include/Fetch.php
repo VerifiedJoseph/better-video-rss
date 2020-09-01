@@ -41,16 +41,13 @@ class Fetch {
 
 		$curl = new Curl();
 		$curl->get($url);
-
-		$statusCode = $curl->getHttpStatusCode();
-		$errorCode = $curl->getCurlErrorCode();
 		$this->response = $curl->response;
 
-		if ($errorCode !== 0) {
-			throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
+		if ($curl->getCurlErrorCode() !== 0) {
+			throw new Exception('Error: ' . $curl->getCurlErrorCode() . ': ' . $curl->errorMessage);
 		}
 
-		if ($statusCode !== 200) {
+		if ($curl->getHttpStatusCode() !== 200) {
 			throw new Exception('Failed to fetch: ' . $url);
 		}
 	}
