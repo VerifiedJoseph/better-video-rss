@@ -80,8 +80,8 @@ class Api {
 					. $parameter . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';
 				break;
 			case 'videos':
-				$parameters = 'videos?part=id,snippet,contentDetails&id='
-					. $parameter . '&fields=etag,items(id,snippet(tags,thumbnails(standard(url),maxres(url))),contentDetails(duration))';
+				$parameters = 'videos?part=id,snippet,contentDetails,liveStreamingDetails&id='
+					. $parameter . '&fields=etag,items(id,snippet(tags,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))';
 				break;
 			case 'searchChannels':
 				$parameters = 'search?part=snippet&fields=items(snippet(channelId))&q='
