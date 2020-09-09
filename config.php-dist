@@ -27,6 +27,10 @@ define('TIMEZONE', 'Europe/London');
 // https://www.php.net/manual/en/function.date.php
 define('DATE_FORMAT', 'F j, Y');
 
+// Time Format
+// https://www.php.net/manual/en/function.date.php
+define('TIME_FORMAT', 'H:i');
+
 // Cache directory
 // Name of the directory that cache files are saved to.
 define('CACHE_DIR', 'cache');

@@ -87,6 +87,10 @@ class Configuration {
 		if (empty(constant('DATE_FORMAT'))) {
 			throw new Exception('Config Error: DateTime format must be set. [DATE_FORMAT]');
 		}
+		
+		if (empty(constant('TIME_FORMAT'))) {
+			throw new Exception('Config Error: Time format must be set. [TIME_FORMAT]');
+		}
 
 		if (empty(constant('CACHE_DIR'))) {
 			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
