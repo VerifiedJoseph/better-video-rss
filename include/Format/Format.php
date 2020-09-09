@@ -95,4 +95,26 @@ EOD;
 {$media}<hr/>Published: {$published} - Duration: {$video['duration']}<hr/><p>{$description}</p>
 EOD;
 	}
+
+	/**
+	 * Build item title
+	 *
+	 * @param array $video Video data
+	 * @return string
+	 */
+	protected function buildItemTitle(array $video) {
+
+		if (isset($video['liveStream'])) {
+			$scheduled = Convert::unixTime(
+				$video['liveStreamScheduled'],
+				config::get('DATE_FORMAT') . ' ' . config::get('TIME_FORMAT')
+			);
+
+			if ($video['liveStreamScheduled'] > strtotime('now')) {
+				return '[Live Stream ' . $scheduled .  '] ' . $video['title'];
+			}
+		}
+
+		return $video['title'] . ' (' . $video['duration'] . ')';
+	}
 }
