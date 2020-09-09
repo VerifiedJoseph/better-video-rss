@@ -51,7 +51,9 @@ EOD;
 		$items = '';
 
 		foreach ($this->data['videos'] as $video) {
-			$itemTitle = $this->xmlEncode($video['title']);
+			$itemTitle = $this->xmlEncode(
+				$this->buildTitle($video)
+			);
 			$itemAuthor = $this->xmlEncode($video['author']);
 			$itemUrl = $this->xmlEncode($video['url']);
 			$itemTimestamp = $this->xmlEncode(
@@ -63,7 +65,7 @@ EOD;
 
 			$items .= <<<EOD
 <item>
-	<title>{$itemTitle} ({$video['duration']})</title>
+	<title>{$itemTitle}</title>
 	<pubDate>{$itemTimestamp}</pubDate>
 	<link>{$itemUrl}</link>
 	<guid isPermaLink="true">{$itemUrl}</guid>

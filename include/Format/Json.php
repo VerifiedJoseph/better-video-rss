@@ -60,7 +60,8 @@ class Json extends Format {
 			$item['author'] = array(
 				'name' => $video['author']
 			);
-			$item['title'] = $video['title'] . ' (' . $video['duration'] . ')';
+			$item['title'] = $this->buildTitle($video);
+
 			$item['date_published'] = Convert::unixTime($video['published'], 'Y-m-d\TH:i:s\Z');
 			$item['content_html'] = $this->buildContent($video);
 			$item['tags'] = $this->buildCategories($video['tags']);

@@ -67,7 +67,7 @@ EOD;
 		$items = '';
 
 		foreach ($this->data['videos'] as $video) {
-			$itemTitle = $video['title'];
+			$itemTitle = $this->buildTitle($video);
 			$itemUrl = $video['url'];
 			$itemEnclosure = $video['thumbnail'];
 			$itemCategories = $this->buildCategories($video['tags']);
@@ -76,7 +76,7 @@ EOD;
 			$items .= <<<EOD
 <div class="item">
 	<div class="title">
-		<h2><a href="{$itemUrl}">{$itemTitle} ({$video['duration']})</a></h2>
+		<h2><a href="{$itemUrl}">{$itemTitle}</a></h2>
 	</div>
 {$itemContent}
 {$itemCategories}
