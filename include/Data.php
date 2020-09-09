@@ -220,6 +220,11 @@ class Data {
 				$video['duration'] = Convert::videoDuration($item->contentDetails->duration);
 				$video['tags'] = array();
 
+				if (isset($item->liveStreamingDetails)) {
+					$video['liveStream'] = true;
+					$video['liveStreamScheduled'] = strtotime($item->liveStreamingDetails->scheduledStartTime);
+				}
+
 				if (isset($item->snippet->tags)) {
 					$video['tags'] = $item->snippet->tags;
 				}
