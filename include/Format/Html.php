@@ -67,7 +67,7 @@ EOD;
 		$items = '';
 
 		foreach ($this->data['videos'] as $video) {
-			$itemTitle = $this->buildItemTitle($video);
+			$itemTitle = $this->buildTitle($video);
 			$itemUrl = $video['url'];
 			$itemEnclosure = $video['thumbnail'];
 			$itemCategories = $this->buildCategories($video['tags']);

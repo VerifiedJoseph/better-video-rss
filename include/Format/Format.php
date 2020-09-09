@@ -102,7 +102,7 @@ EOD;
 	 * @param array $video Video data
 	 * @return string
 	 */
-	protected function buildItemTitle(array $video) {
+	protected function buildTitle(array $video) {
 
 		if (isset($video['liveStream'])) {
 			$scheduled = Convert::unixTime(

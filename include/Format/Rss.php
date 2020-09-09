@@ -52,7 +52,7 @@ EOD;
 
 		foreach ($this->data['videos'] as $video) {
 			$itemTitle = $this->xmlEncode(
-				$this->buildItemTitle($video)
+				$this->buildTitle($video)
 			);
 			$itemAuthor = $this->xmlEncode($video['author']);
 			$itemUrl = $this->xmlEncode($video['url']);
