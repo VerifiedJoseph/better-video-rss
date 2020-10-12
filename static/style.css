@@ -51,7 +51,6 @@ p {
 }
 
 #main {
-	padding: 15px;
 	margin-left: 10px;
 	margin-right: 10px;
 }
@@ -95,8 +94,8 @@ li {
 	margin-top:0;
 }
 
-.item {
-	margin-bottom: 15px;
+.item, .viewer, .tools {
+	margin-top: 15px;
 }
 
 .item > .title {
@@ -121,4 +120,13 @@ textarea.tags, textarea.videos {
 
 button {
 	width: 80px;
+}
+
+#error {
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+	text-align: center;
+	padding: 5px;
+	margin-bottom: 15px;
 }

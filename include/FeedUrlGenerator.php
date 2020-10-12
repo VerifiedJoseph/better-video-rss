@@ -120,10 +120,11 @@ class FeedUrlGenerator {
 			$link = <<<HTML
 <p>Feed URL: <a href="{$url}">{$url}</a></p>
 HTML;
-		} else {
+		}
 
+		if (empty($this->errorMessage) === false) {
 			$error = <<<HTML
-<p>{$this->errorMessage}</p>
+<div id="error"><strong>{$this->errorMessage}</strong></div>
 HTML;
 		}
 
@@ -149,8 +150,8 @@ HTML;
 	</div>
 	<div id="main">
 		<div id="items">
+			{$error}
 			<div class="item">
-				{$error}
 				<h2>Channel</h2>
 				<form action="" method="post">
 					Channel: <input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required><br>
@@ -278,7 +279,7 @@ HTML;
 			}
 
 			if (empty($response->items)) {
-				throw new Exception($this->feedType . ' not found');
+				throw new Exception(ucfirst($this->feedType) . ' not found');
 			}
 
 			if ($this->feedType === 'channel') {
