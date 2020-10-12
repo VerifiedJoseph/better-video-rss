@@ -110,8 +110,14 @@ EOD;
 				config::get('DATE_FORMAT') . ' ' . config::get('TIME_FORMAT')
 			);
 
+			// Scheduled
 			if ($video['liveStreamScheduled'] > strtotime('now')) {
 				return '[Live Stream ' . $scheduled .  '] ' . $video['title'];
+			}
+
+			// Broadcasting
+			if ($video['duration'] === '00:00') {
+				return '[Live] ' . $video['title'];
 			}
 		}
 
