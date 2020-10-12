@@ -188,8 +188,8 @@ HTML;
 </head>
 <body>
 	<div id="header"><a href="index.php">BetterYouTube</a>  &#187; <a href="tools.html">Tools</a> &#187; Cache Viewer</div>
-	<div id="main">
-		<table style="width:200px; margin-bottom: 10px;">
+	<div id="main" class="viewer">
+		<table class="stats">
 			<thead>
 				<tr>
 					<th>Files</th>
@@ -203,7 +203,7 @@ HTML;
 				</tr>
 			</tbody>
 		</table>
-		<table style="width:1150px;">
+		<table>
 			<thead>
 				<tr class="center">
 					<th>#</th>
