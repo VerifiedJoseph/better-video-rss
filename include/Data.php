@@ -24,7 +24,7 @@ class Data {
 	private $expiresIn = array(
 		'details' => '+10 days',
 		'feed' => '+10 minutes',
-		'videos' => '+6 hours',
+		'videos' => '+1 hour',
 	);
 
 	/** @var bool $dataUpdated Data update status */
