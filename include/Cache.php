@@ -13,9 +13,6 @@ class Cache {
 	/** @var string $path Cache file path */
 	private string $path = '';
 
-	/** @var boolean $cacheUpdated Cache update status */
-	private bool $cacheUpdated = false;
-
 	/**
 	 * Constructor
 	 *
