@@ -26,7 +26,7 @@ class BetterYouTubeRss {
 	 */
 	public function generate() {
 
-		if (!empty($this->getFeedId())) {
+		if (empty($this->getFeedId()) === false) {
 			$this->generateFeed();
 
 		} else {
@@ -72,7 +72,7 @@ class BetterYouTubeRss {
 
 		if (isset($_GET['format'])) {
 
-			if (!in_array($_GET['format'], Config::getFeedFormats())) {
+			if (in_array($_GET['format'], Config::getFeedFormats()) === false) {
 				throw new Exception('Invalid format parameter given.');
 			}
 

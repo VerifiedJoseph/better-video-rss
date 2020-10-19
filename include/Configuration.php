@@ -35,15 +35,15 @@ class Configuration {
 			throw new Exception('BetterYouTubeRss requires at least PHP version ' . self::$minPhpVersion . '!');
 		}
 
-		if(!extension_loaded('curl')) {
+		if(extension_loaded('curl') === false) {
 			throw new Exception('Extension Error: cURL extension not loaded.');
 		}
 
-		if(!extension_loaded('json')) {
+		if(extension_loaded('json') === false) {
 			throw new Exception('Extension Error: JSON extension not loaded.');
 		}
 
-		if(!extension_loaded('mbstring')) {
+		if(extension_loaded('mbstring') === false) {
 			throw new Exception('Extension Error: Mbstring extension not loaded.');
 		}
 	}
@@ -58,7 +58,7 @@ class Configuration {
 	 */
 	public static function checkConfig() {
 
-		if (!file_exists('config.php')) {
+		if (file_exists('config.php') === false) {
 			throw new Exception('Config Error: Configuration file not found. Use config.php-dist to create config.php and edit it.');
 		}
 
@@ -72,11 +72,11 @@ class Configuration {
 			throw new Exception('Config Error: YouTube API key must be set. [YOUTUBE_API_KEY]');
 		}
 
-		if (!is_bool(constant('YOUTUBE_EMBED_PRIVACY'))) {
+		if (is_bool(constant('YOUTUBE_EMBED_PRIVACY')) === false) {
 			throw new Exception('Config Error: YouTube Embed Privacy option must be a boolean. [YOUTUBE_EMBED_PRIVACY]');
 		}
 
-		if (!is_bool(constant('RAW_API_ERRORS'))) {
+		if (is_bool(constant('RAW_API_ERRORS')) === false) {
 			throw new Exception('Config Error: Raw API Errors option must be a boolean. [RAW_API_ERRORS]');
 		}
 
@@ -98,11 +98,11 @@ class Configuration {
 
 		$cacheDir = constant('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . constant('CACHE_DIR');
 
-		if (!is_dir($cacheDir) && !mkdir($cacheDir, self::$mkdirMode)) {
+		if (is_dir($cacheDir) === false && mkdir($cacheDir, self::$mkdirMode) === false) {
 			throw new Exception('Config Error: Could not create cache directory. [CACHE_DIR]');
 		}
 
-		if (is_dir($cacheDir) && !is_writable($cacheDir)) {
+		if (is_dir($cacheDir) && is_writable($cacheDir) === false) {
 			throw new Exception('Config Error: Cache directory is not writable. [CACHE_DIR]');
 		}
 
@@ -110,11 +110,11 @@ class Configuration {
 			throw new Exception('Config Error: Cache filename extension must be set. [CACHE_FILENAME_EXT]');
 		}
 
-		if (!is_bool(constant('DISABLE_CACHE'))) {
+		if (is_bool(constant('DISABLE_CACHE')) === false) {
 			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
 		}
 
-		if (!is_bool(constant('ENABLE_CACHE_VIEWER'))) {
+		if (is_bool(constant('ENABLE_CACHE_VIEWER')) === false) {
 			throw new Exception('Config Error: Enable cache viewer option must be a boolean. [ENABLE_CACHE_VIEWER]');
 		}
 	}
@@ -128,7 +128,7 @@ class Configuration {
 	 */
 	public static function get(string $key) {
 
-		if (!defined($key)) {
+		if (defined($key) === false) {
 			throw new Exception('Invalid config key given:' . $key);
 		}
 

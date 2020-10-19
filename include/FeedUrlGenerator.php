@@ -52,7 +52,7 @@ class FeedUrlGenerator {
 		$this->feedFormat = Config::getDefaultFeedFormat();
 		$this->checkInputs();
 
-		if (!empty($this->query)) {
+		if (empty($this->query) === false) {
 
 			if ($this->feedType === 'channel') {
 				$this->findChannel();
@@ -110,7 +110,7 @@ class FeedUrlGenerator {
 		$channelLink = '';
 		$playlistLink = '';
 
-		if (!empty($this->feedId) && $this->error === false) {
+		if (empty($this->feedId) === false && $this->error === false) {
 			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '_id=' . $this->feedId . '&format=' . $this->feedFormat;
 
 			if ($this->embedVideos === true) {

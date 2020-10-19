@@ -46,7 +46,7 @@ class Cache {
 
 				$decoded = json_decode($contents, true);
 
-				if (!is_null($decoded)) {
+				if (is_null($decoded) === false) {
 					$this->data = $decoded;
 				}
 			}

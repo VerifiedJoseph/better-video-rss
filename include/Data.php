@@ -80,7 +80,7 @@ class Data {
 	 */
 	public function setData(array $data) {
 
-		if (!empty($data)) {
+		if (empty($data) === false) {
 			$this->data = $data;
 		}
 	}
@@ -123,7 +123,7 @@ class Data {
 
 		foreach ($this->data as $partName => $partData) {
 
-			if (!isset($partData['expires'])) {
+			if (isset($partData['expires']) === false) {
 				$expiredParts[] = $partName;
 
 			} elseif (time() >= $partData['expires']) {
@@ -159,7 +159,7 @@ class Data {
 		foreach ($this->data['feed']['videos'] as $id) {
 			$key = array_search($id, array_column($this->data['videos'], 'id'));
 
-			if (!isset($this->data['videos'][$key]['expires']) || time() >= $this->data['videos'][$key]['expires']) {
+			if (isset($this->data['videos'][$key]['expires']) === false || time() >= $this->data['videos'][$key]['expires']) {
 				$ExpiredVideos[] = $id;
 			}
 		}

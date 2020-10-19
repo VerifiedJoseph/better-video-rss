@@ -38,7 +38,7 @@ class CacheViewer {
 	 */
 	public function __construct() {
 
-		if (!Config::get('ENABLE_CACHE_VIEWER')) {
+		if (Config::get('ENABLE_CACHE_VIEWER') === false) {
 			throw new Exception('Cache viewer is disabled.');
 		}
 
@@ -92,7 +92,7 @@ class CacheViewer {
 		foreach ($cacheFiles as $file) {
 			$handle = fopen($file, 'r');
 
-			if (!$handle) {
+			if ($handle === false) {
 				throw new Exception('Failed to open file: ' . $file->getPathname());
 			}
 
