@@ -253,7 +253,7 @@ HTML;
 			$feedurl = Config::get('SELF_URL_PATH') . '?' . $data['contents']['details']['type'] . '_id='. $data['contents']['details']['id'];
 
 			$tdData .= <<<HTML
-Feed URL: <a target="_blank" href="{$feedurl}">{$feedurl}<a/>
+Feed URL: <a target="_blank" href="{$feedurl}">{$feedurl}</a><br/>
 <textarea cols="140" rows="50">{$format->get()}</textarea>
 HTML;
 		} else {
