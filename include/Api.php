@@ -102,6 +102,8 @@ class Api {
 	 * @param string $url Request URL
 	 * @param string $etag Request ETag
 	 * @return object|array
+	 *
+	 * @throws Exception If a curl error has occurred.
 	 */
 	private function fetch(string $url, string $etag = '') {
 		$curl = new Curl();
