@@ -72,10 +72,6 @@ class Configuration {
 			throw new Exception('Config Error: YouTube API key must be set. [YOUTUBE_API_KEY]');
 		}
 
-		if (is_bool(constant('YOUTUBE_EMBED_PRIVACY')) === false) {
-			throw new Exception('Config Error: YouTube Embed Privacy option must be a boolean. [YOUTUBE_EMBED_PRIVACY]');
-		}
-
 		if (is_bool(constant('RAW_API_ERRORS')) === false) {
 			throw new Exception('Config Error: Raw API Errors option must be a boolean. [RAW_API_ERRORS]');
 		}
