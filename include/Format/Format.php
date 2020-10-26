@@ -68,6 +68,7 @@ abstract class Format {
 	 * Build item content (description)
 	 *
 	 * @param array $video Video data
+	 * @return string
 	 */
 	protected function buildContent(array $video) {
 		$description = nl2br($video['description']);
