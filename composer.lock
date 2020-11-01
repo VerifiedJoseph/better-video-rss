@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "8.8.0",
+            "version": "8.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "180273b577148090a62bb7333201d17e0b6efb75"
+                "reference": "a40cc77eb45bc6489240415197734ca747ce4820"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/180273b577148090a62bb7333201d17e0b6efb75",
-                "reference": "180273b577148090a62bb7333201d17e0b6efb75",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/a40cc77eb45bc6489240415197734ca747ce4820",
+                "reference": "a40cc77eb45bc6489240415197734ca747ce4820",
                 "shasum": ""
             },
             "require": {
@@ -71,7 +71,11 @@
                 "web-service",
                 "xml"
             ],
-            "time": "2020-04-20T03:39:57+00:00"
+            "support": {
+                "issues": "https://github.com/php-curl-class/php-curl-class/issues",
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/8.9.0"
+            },
+            "time": "2020-11-01T03:47:32+00:00"
         }
     ],
     "packages-dev": [],
@@ -81,5 +85,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
