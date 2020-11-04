@@ -59,7 +59,7 @@ class Fetch {
 	 * @param string $part Name part
 	 * @param string $parameter Request parameter
 	 * @param string $etag Request etag
-	 * @throws Exception If a curl error has occurred.
+	 * @throws Exception If channel or playlist was not found.
 	 */
 	public function api(string $part, string $parameter, string $etag) {
 		$api = new Api();
@@ -71,6 +71,10 @@ class Fetch {
 
 			if ($this->feedType === 'playlist') {
 				$this->response = $api->getPlaylist($this->feedId, $etag);
+			}
+
+			if (empty($this->response->items)) {
+				throw new Exception($this->feedType . ' not found.');
 			}
 		}
 

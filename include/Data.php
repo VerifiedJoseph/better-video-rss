@@ -175,10 +175,6 @@ class Data {
 	public function updateDetails($response) {
 		$this->dataUpdated = true;
 
-		if (empty($response->items)) {
-			throw new Exception($this->data['details']['type'] . ' not found.');
-		}
-
 		$details = array();
 		$details['etag'] = $response->etag;
 
