@@ -101,6 +101,7 @@ EOD;
 	 * @return string
 	 */
 	protected function buildTitle(array $video) {
+		$emptyDuration = '00:00';
 
 		if (isset($video['liveStream'])) {
 			$scheduled = Convert::unixTime(
@@ -110,11 +111,15 @@ EOD;
 
 			// Scheduled
 			if ($video['liveStreamScheduled'] > strtotime('now')) {
+				if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere 
+					return '[Premiere ' . $scheduled .  '] ' . $video['title'];
+				}
+
 				return '[Live Stream ' . $scheduled .  '] ' . $video['title'];
 			}
 
 			// Broadcasting
-			if ($video['duration'] === '00:00') {
+			if ($video['duration'] === $emptyDuration) {
 				return '[Live] ' . $video['title'];
 			}
 		}
