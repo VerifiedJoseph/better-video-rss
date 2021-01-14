@@ -81,7 +81,7 @@ class Configuration {
 		}
 
 		if (empty(constant('DATE_FORMAT'))) {
-			throw new Exception('Config Error: DateTime format must be set. [DATE_FORMAT]');
+			throw new Exception('Config Error: Date format must be set. [DATE_FORMAT]');
 		}
 		
 		if (empty(constant('TIME_FORMAT'))) {
