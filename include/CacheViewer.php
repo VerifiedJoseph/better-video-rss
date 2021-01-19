@@ -246,7 +246,6 @@ HTML;
 <textarea cols="140" rows="50">{$json}</textarea>
 HTML;
 		} elseif ($this->showXml === true) {
-
 			$format = new Format\Rss($data['contents'], false);
 			$format->build();
 
@@ -353,7 +352,6 @@ HTML;
 		$videoHtml = '';
 
 		foreach ($videos as $video) {
-
 			$tags = implode(', ', $video['tags']);
 			$tagCount = count($video['tags']);
 
