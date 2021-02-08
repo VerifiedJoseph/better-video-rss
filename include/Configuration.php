@@ -162,7 +162,7 @@ class Configuration {
 	/**
 	 * Include (require) config file
 	 */
-	private function requireConfigFile() {
+	private static function requireConfigFile() {
 		require 'config.php';
 	}
 }
