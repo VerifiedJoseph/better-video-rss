@@ -26,7 +26,7 @@ class Json extends Format {
 		$feedTitle = $this->data['details']['title'];
 		$feedAuthor = $this->data['details']['title'];
 		$feedHomePageUrl = $this->data['details']['url'];
-		$feedUrl = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'];
+		$feedUrl = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'] . '&format=json';
 		$feedUpdated = Convert::unixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
