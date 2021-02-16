@@ -73,7 +73,7 @@ class BetterYouTubeRss {
 		if (isset($_GET['format'])) {
 			$format = strtolower($_GET['format']);
 
-			if (in_array($format, Config::getFeedFormats()) === false) {
+			if (Validate::feedFormat($format) === false) {
 				throw new Exception('Invalid format parameter given.');
 			}
 
