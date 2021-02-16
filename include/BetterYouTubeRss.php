@@ -1,5 +1,6 @@
 <?php
 
+use Helper\Validate;
 use Configuration as Config;
 
 class BetterYouTubeRss {
@@ -65,8 +66,8 @@ class BetterYouTubeRss {
 	 * Check user inputs
 	 *
 	 * @throws Exception if a invalid format parameter is given.
-	 * @throws Exception if a empty channel ID parameter is given.
-	 * @throws Exception if a empty playlist ID parameter is given.
+	 * @throws Exception if an empty or invalid channel ID parameter is given.
+	 * @throws Exception if an empty or invalid playlist ID parameter is given.
 	 */
 	private function checkInputs() {
 
@@ -86,6 +87,10 @@ class BetterYouTubeRss {
 				throw new Exception('No channel ID parameter given.');
 			}
 
+			if (Validate::channelId($_GET['channel_id']) === false) {
+				throw new Exception('Invalid channel ID parameter given.');
+			}
+
 			$this->feedId = $_GET['channel_id'];
 			$this->feedType = 'channel';
 		}
@@ -94,6 +99,10 @@ class BetterYouTubeRss {
 
 			if (empty($_GET['playlist_id'])) {
 				throw new Exception('No playlist ID parameter given.');
+			}
+
+			if (Validate::playlistId($_GET['playlist_id']) === false) {
+				throw new Exception('Invalid playlist ID parameter given.');
 			}
 
 			$this->feedId = $_GET['playlist_id'];
