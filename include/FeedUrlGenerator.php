@@ -200,7 +200,6 @@ HTML;
 	 * Find channel
 	 */
 	private function findChannel() {
-
 		if ($this->isChannelId($this->query) === true) {
 			$this->feedId = $this->query;
 
@@ -213,7 +212,6 @@ HTML;
 	 * Find playlist
 	 */
 	private function findPlaylist() {
-
 		if ($this->isPlaylistId($this->query) === true) {
 			$this->feedId = $this->query;
 
@@ -251,7 +249,6 @@ HTML;
 	 * @throws Exception if the channel or playlist was not found
 	 */
 	private function searchApi(string $query) {
-
 		try {
 			$api = new Api();
 
