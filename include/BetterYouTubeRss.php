@@ -71,12 +71,13 @@ class BetterYouTubeRss {
 	private function checkInputs() {
 
 		if (isset($_GET['format'])) {
+			$format = strtolower($_GET['format']);
 
-			if (in_array($_GET['format'], Config::getFeedFormats()) === false) {
+			if (in_array($format, Config::getFeedFormats()) === false) {
 				throw new Exception('Invalid format parameter given.');
 			}
 
-			$this->feedFormat = $_GET['format'];
+			$this->feedFormat = $format;
 		}
 
 		if (isset($_GET['channel_id'])) {
