@@ -2,6 +2,7 @@
 
 use \Curl\Curl;
 use Configuration as Config;
+use Helper\Validate;
 
 class FeedUrlGenerator {
 
@@ -228,12 +229,7 @@ HTML;
 	 * @return boolean
 	 */
 	private function isChannelId(string $query) {
-
-		if (substr($query, 0, 2) === 'UC' && mb_strlen($query, 'utf8') >= 24) {
-			return true;
-		}
-
-		return false;
+		return Validate::channelId($query);
 	}
 
 	/**
