@@ -81,6 +81,7 @@ class CacheViewer {
 	 * Load cache files
 	 *
 	 * @throws Exception If a cache file can not be opened.
+	 * @throws Exception If a cache file can not be decoded.
 	 */
 	private function loadFiles() {
 		$regex = '/.' . preg_quote(Config::get('CACHE_FILENAME_EXT')) . '$/';
@@ -93,7 +94,7 @@ class CacheViewer {
 			$handle = fopen($file, 'r');
 
 			if ($handle === false) {
-				throw new Exception('Failed to open file: ' . $file->getPathname());
+				throw new Exception('Failed to open file: ' . $file->getfilename());
 			}
 
 			// Read file
@@ -103,6 +104,11 @@ class CacheViewer {
 			fclose($handle);
 
 			$data = json_decode($contents, true);
+
+			if (is_null($data) === true) {
+				throw new Exception('Failed to decode file: ' . $file->getfilename());
+			}
+
 			$this->data[] = array(
 				'id' => $file->getBasename('.' . Config::get('CACHE_FILENAME_EXT')),
 				'modified' => $file->getMTime(),
