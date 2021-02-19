@@ -142,7 +142,7 @@ HTML;
 <html lang="en">
 <head>
 	<title>BetterYouTubeRss</title>
-	<meta name="robots" content="noindex, follow">
+	<meta name="robots" content="noindex, nofollow">
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
 </head>
 <body>
