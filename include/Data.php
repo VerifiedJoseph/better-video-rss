@@ -22,7 +22,7 @@ class Data {
 
 	/** @var array $expiresIn Number of days, hours or minutes that each part expires */
 	private $expiresIn = array(
-		'details' => '+10 days',
+		'details' => '+30 days',
 		'feed' => '+10 minutes',
 		'videos' => '+1 hour',
 	);
