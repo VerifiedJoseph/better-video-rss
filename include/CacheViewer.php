@@ -148,28 +148,28 @@ HTML;
 <tr class="center">
 	<td id="{$data['id']}">$index</td>
 	<td>{$data['contents']['details']['title']}<br>
-		<span style="font-size:13px;">
+		<span class="small">
 			(Cache ID: {$data['id']}
 		</span>
 	</td>
 	<td>{$data['contents']['details']['type']}</td>	
 	<td>{$modified}</td>
 	<td>{$size}</td>
-	<td style="width:170px;">
-		<div style="float:left;">
+	<td class="buttons">
+		<div class="left">
 			<form action="#{$data['id']}" method="post">
 				<input name="id" type="hidden" value="{$data['id']}">
 				<button type="submit">View Data</button>
 			</form>
 		</div>
-		<div style="float: right;">
+		<div class="right">
 			<form action="#{$data['id']}" method="post">
 				<input name="id" type="hidden" value="{$data['id']}">
 				<input name="raw" type="hidden">
 				<button type="submit">View Raw</button>
 			</form>
 		</div>
-		<div style="float:left;">
+		<div class="left">
 			<form action="#{$data['id']}" method="post">
 				<input name="id" type="hidden" value="{$data['id']}">
 				<input name="xml" type="hidden">
@@ -242,7 +242,7 @@ HTML;
 		$tr = '';
 
 		$tdData = <<<HTML
-<a style="float: right;" href="cache-viewer.php">[Close]</a>
+<a class="right" href="cache-viewer.php">[Close]</a>
 HTML;
 
 		if ($this->showRaw === true) {
@@ -293,7 +293,7 @@ HTML;
 
 		$html = <<<HTML
 <strong>Details:</strong>
-<table style="width: 1153px;">
+<table class="part">
 <tr>
 	<td>
 		<strong>ID:</strong> {$channel['id']}<br>
@@ -332,7 +332,7 @@ HTML;
 
 		$html = <<<HTML
 <strong>Feed:</strong>
-<table style="width: 1153px;">
+<table class="part">
 <tr>
 	<td>
 		<strong>Video IDs:</strong><br>
@@ -367,7 +367,7 @@ HTML;
 
 			$videoHtml .= <<<HTML
 <tr>
-	<td style="width:440px;">
+	<td class="videoDetails">
 		<strong>Title:</strong> {$video['title']}<br>
 		<strong>URL:</strong> <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
 		<strong>Published:</strong> {$published}<br>
@@ -381,7 +381,7 @@ HTML;
 	</td>
 	<td>
 		<strong>Thumbnail:</strong><br>
-		<a target="_blank" title="{$video['thumbnail']}" href="{$video['thumbnail']}"><img style="width:100px;" src="{$video['thumbnail']}"/></a>
+		<a target="_blank" title="{$video['thumbnail']}" href="{$video['thumbnail']}"><img class="thumbnail" src="{$video['thumbnail']}"/></a>
 	</td>
 </tr>
 <tr>
@@ -395,7 +395,7 @@ HTML;
 
 		$html = <<<HTML
 		<strong>Videos ({$videoCount}):</strong>
-<table style="width: 1153px;">{$videoHtml}</table>
+<table class="part">{$videoHtml}</table>
 HTML;
 
 		return $html;

@@ -155,7 +155,7 @@ HTML;
 			<div class="item">
 				<h2>Channel</h2>
 				<form action="" method="post">
-					Channel: <input style="width:280px;" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required><br>
+					Channel: <input class="input" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required><br>
 					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
 					Feed format: 
 					<select name="format">
@@ -164,14 +164,14 @@ HTML;
 						<option value="json">JSON</option>
 					</select><br/>
 					<input type="hidden" name="type" value="channel">
-					<button style="width:80px;" type="submit">Generate</button>
+					<button type="submit">Generate</button>
 				</form><br>
 				{$channelLink}
 			</div>
 			<div class="item">
 				<h2>Playlist</h2>
 				<form action="" method="post">
-					Playlist: <input style="width:280px;" name="query" type="input" placeholder="Playlist ID or title" required><br>
+					Playlist: <input class="input" name="query" type="input" placeholder="Playlist ID or title" required><br>
 					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
 					Feed format: 
 					<select name="format">
@@ -180,7 +180,7 @@ HTML;
 						<option value="json">JSON</option>
 					</select><br/>
 					<input type="hidden" name="type" value="playlist">
-					<button style="width:80px;" type="submit">Generate</button>
+					<button type="submit">Generate</button>
 				</form><br>
 				{$playlistLink}
 			</div>

@@ -28,6 +28,10 @@ p {
 	margin-bottom: 10px;
 }
 
+.small {
+	font-size:13px;
+}
+
 .left {
 	float: left;
 }
@@ -71,6 +75,10 @@ table.files {
 	width:1150px;
 }
 
+table.part {
+	width: 1153px;
+}
+
 table th {
 	padding: 4px;
 }
@@ -84,6 +92,14 @@ table td {
 	border-right: 1px solid #808080;
 	padding: 4px 4px;
 	vertical-align: middle;
+}
+
+table td.videoDetails {
+	width:440px;
+}
+
+table td.buttons {
+	width:170px;
 }
 
 ul {
@@ -124,8 +140,16 @@ textarea.tags, textarea.videos {
 	height: 55px;
 }
 
+.thumbnail {
+	width:100px;
+}
+
 button {
 	width: 80px;
+}
+
+.input {
+	width:280px;
 }
 
 #error {
