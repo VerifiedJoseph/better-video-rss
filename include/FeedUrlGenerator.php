@@ -142,6 +142,7 @@ HTML;
 <html lang="en">
 <head>
 	<title>BetterYouTubeRss</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="robots" content="noindex, nofollow">
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
 </head>
