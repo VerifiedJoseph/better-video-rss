@@ -71,7 +71,7 @@ class BetterYouTubeRss {
 	 */
 	private function checkInputs() {
 
-		if (isset($_GET['format'])) {
+		if (isset($_GET['format']) && empty($_GET['format']) === false) {
 			$format = strtolower($_GET['format']);
 
 			if (Validate::feedFormat($format) === false) {
