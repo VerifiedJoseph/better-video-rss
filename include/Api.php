@@ -84,11 +84,11 @@ class Api {
 					. $parameter . '&fields=etag,items(id,snippet(tags,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))';
 				break;
 			case 'searchChannels':
-				$parameters = 'search?part=snippet&fields=items(snippet(channelId))&q='
+				$parameters = 'search?part=id&fields=items(id(channelId))&q='
 					. urlencode($parameter) . '&type=channel&maxResults=1';
 				break;
 			case 'searchPlaylists':
-				$parameters = 'search?part=snippet&fields=items(id(playlistId))&q='
+				$parameters = 'search?part=id&fields=items(id(playlistId))&q='
 					. urlencode($parameter) . '&type=playlist&maxResults=1';
 				break;
 		}

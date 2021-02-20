@@ -266,7 +266,7 @@ HTML;
 			}
 
 			if ($this->feedType === 'channel') {
-				$this->feedId = $response->items['0']->snippet->channelId;
+				$this->feedId = $response->items['0']->id->channelId;
 			}
 
 			if ($this->feedType === 'playlist') {
