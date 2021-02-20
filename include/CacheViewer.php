@@ -299,7 +299,6 @@ HTML;
 		<strong>ID:</strong> {$channel['id']}<br>
 		<strong>Title:</strong> {$channel['title']}<br>
 		<strong>URL:</strong> <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
-		<strong>Playlist ID:</strong> {$channel['playlist']}<br>
 		<strong>Fetched:</strong> $fetched<br>
 		<strong>Expires:</strong> $expires<br>
 	</td>
