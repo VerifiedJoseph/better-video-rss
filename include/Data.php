@@ -135,15 +135,6 @@ class Data {
 	}
 
 	/**
-	 * Returns playlist ID from details array
-	 *
-	 * @return string
-	 */
-	public function getPlaylistId() {
-		return $this->data['details']['playlist'];
-	}
-
-	/**
 	 * Returns expired video IDs as comma separated string
 	 *
 	 * @return string
