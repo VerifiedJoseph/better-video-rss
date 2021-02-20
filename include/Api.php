@@ -77,7 +77,7 @@ class Api {
 				break;
 			case 'playlist':
 				$parameters = 'playlists?part=snippet,contentDetails&id='
-					. $parameter . '&fields=etag,items(id,snippet(title,description,publishedAt,thumbnails(default(url))))';
+					. $parameter . '&fields=etag,items(snippet(title,description,thumbnails(default(url))))';
 				break;
 			case 'videos':
 				$parameters = 'videos?part=id,snippet,contentDetails,liveStreamingDetails&id='
