@@ -174,12 +174,10 @@ class Data {
 
 		if ($this->data['details']['type'] === 'channel') {
 			$details['url'] = Config::getEndpoint('website') . 'channel/' . $this->data['details']['id'];
-			$details['playlist'] = $response->items['0']->contentDetails->relatedPlaylists->uploads;
 		}
 
 		if ($this->data['details']['type'] === 'playlist') {
 			$details['url'] = Config::getEndpoint('website') . 'playlist?list=' . $this->data['details']['id'];
-			$details['playlist'] = $response->items['0']->id;
 		}
 
 		$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
