@@ -4,8 +4,8 @@
 define('ABSOLUTE_PATH', __DIR__);
 
 // Self URL Path
-// The fully qualified URL used to access BetterYouTubeRss.
-define('SELF_URL_PATH', 'https://example.com/BetterYouTubeRss/');
+// The fully qualified URL used to access BetterVideoRss.
+define('SELF_URL_PATH', 'https://example.com/BetterVideoRss/');
 
 // YouTube API Key
 // https://developers.google.com/youtube/v3/getting-started
