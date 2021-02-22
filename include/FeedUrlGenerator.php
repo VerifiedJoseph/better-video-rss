@@ -141,14 +141,14 @@ HTML;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>BetterYouTubeRss</title>
+	<title>BetterVideoRss</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="robots" content="noindex, nofollow">
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
 </head>
 <body>
 	<div id="header" class="center">
-		BetterYouTubeRss
+		BetterVideoRss
 	</div>
 	<div id="main">
 		<div id="items">
@@ -186,7 +186,7 @@ HTML;
 				{$playlistLink}
 			</div>
 			<div class="item">
-				<a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterYouTubeRss">Source Code</a>
+				<a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a>
 			</div>
 		</div>
 	</div>

@@ -3,7 +3,7 @@
 use Helper\Validate;
 use Configuration as Config;
 
-class BetterYouTubeRss {
+class BetterVideoRss {
 
 	/** @var string $feedId YouTube channel or playlist ID */
 	private string $feedId = '';

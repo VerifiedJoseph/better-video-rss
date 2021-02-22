@@ -32,7 +32,7 @@ class Configuration {
 	public static function checkInstall() {
 
 		if(version_compare(PHP_VERSION, self::$minPhpVersion) === -1) {
-			throw new Exception('BetterYouTubeRss requires at least PHP version ' . self::$minPhpVersion . '!');
+			throw new Exception('BetterVideoRss requires at least PHP version ' . self::$minPhpVersion . '!');
 		}
 
 		if(extension_loaded('curl') === false) {

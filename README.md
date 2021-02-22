@@ -1,11 +1,11 @@
-# BetterYouTubeRss 
+# BetterVideoRss 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-BetterYouTubeRss is a PHP script for generating YouTube channel and playlist RSS feeds using YouTube's [Data API](https://developers.google.com/youtube/v3/) and RSS feeds.
+BetterVideoRss is a PHP script for generating YouTube channel and playlist RSS feeds using YouTube's [Data API](https://developers.google.com/youtube/v3/) and RSS feeds.
 
 ## Public Instance
 
-A [public instance](https://tools.verifiedjoseph.com/BetterYouTubeRss/) is available and is hosted by Dreamhost in Virginia, United States. [Example feed](https://tools.verifiedjoseph.com/BetterYouTubeRss/?channel_id=UCBa659QWEk1AI4Tg--mrJ2A&format=html)
+A [public instance](https://tools.verifiedjoseph.com/BetterVideoRss/) is available and is hosted by Dreamhost in Virginia, United States. [Example feed](https://tools.verifiedjoseph.com/BetterVideoRss/?channel_id=UCBa659QWEk1AI4Tg--mrJ2A&format=html)
 
 ## API Key
 A valid [YouTube API key](https://developers.google.com/youtube/registering_an_application) is required.

@@ -12,7 +12,7 @@ try {
 	Config::checkInstall();
 	Config::checkConfig();
 
-	$betterRss = new BetterYouTubeRss();
+	$betterRss = new BetterVideoRss();
 	$betterRss->generate();
 
 } catch (Exception $e) {
