@@ -84,6 +84,7 @@ class FeedUrlGenerator {
 	 *
 	 * @throws Exception if a query parameter is not given
 	 * @throws Exception if a type parameter is not given
+	 * @throws Exception if a query parameter is not a valid YouTube URL
 	 */
 	private function checkInputs() {
 
@@ -103,6 +104,10 @@ class FeedUrlGenerator {
 
 			if ($_POST['type'] === 'url') {
 				$this->fromUrl = true;
+
+				if (Validate::YouTubeUrl($_POST['query']) === false) {
+					throw new Exception('Given URL is not a YouTube URL.');
+				}
 			}
 
 			if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
