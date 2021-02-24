@@ -11,6 +11,9 @@ class Validate {
 
 	/** @var string $playlistIdRegex playlist ID regex */
 	private static string $playlistIdRegex = '/^(?:UU|PL)[a-zA-Z0-9_-]+$/';
+	
+	/** @var string $youTubeUrlRegex YouTube URL regex */
+	private static string $youTubeUrlRegex = '/^(?:https?:\/\/)?(?:www\.)?youtube\.com/';
 
 	/**
 	 * Validate a feed format
@@ -48,6 +51,20 @@ class Validate {
 	 */
 	public static function playlistId(string $playlistId) {
 		if(preg_match(self::$playlistIdRegex, $playlistId)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Validate a YouTube URL
+	 *
+	 * @param string $url
+	 * @return boolean
+	 */
+	public static function YouTubeUrl(string $url) {
+		if(preg_match(self::$youTubeUrlRegex, $url)) {
 			return true;
 		}
 
