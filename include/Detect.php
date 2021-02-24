@@ -34,6 +34,16 @@ class Detect {
 	 *  https://www.youtube.com/user/enyay
 	 */
 	private string $usernameUrlRegex = '/youtube\.com\/(?:c|user)\/([a-zA-z0-9]+)/';
+	
+	/**
+	 * @var string $rssFeedUrlRegex YouTube RSS feed URL regex
+	 * 
+	 * Supported formats:
+	 *  https://www.youtube.com/feeds/videos.xml?user=enyay
+	 *  https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A
+	 *  https://www.youtube.com/feeds/videos.xml?playlist_id=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC
+	 */
+	private string $rssFeedUrlRegex = '/youtube\.com\/feeds\/videos\.xml\?(channel_id|user|playlist_id)=([\w-]+)/';
 
 	/**
 	 * Find and extract channel ID, channel username or playlist ID from a URL using regex
@@ -53,6 +63,18 @@ class Detect {
 		if (preg_match($this->playlistUrlRegex, $url, $match)) {
 			$this->type = 'playlist';
 			$this->value = $match[1];
+
+			return true;
+		}
+
+		if (preg_match($this->rssFeedUrlRegex, $url, $match)) {
+			$this->type = 'channel';
+
+			if ($match[1] == 'playlist_id') {
+				$this->type = 'playlist';
+			}
+
+			$this->value = $match[2];
 
 			return true;
 		}
