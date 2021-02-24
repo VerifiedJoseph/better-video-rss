@@ -56,26 +56,11 @@ class FeedUrlGenerator {
 	 */
 	public function __construct() {
 		$this->feedFormat = Config::getDefaultFeedFormat();
-		$this->checkInputs();
 
-		if (empty($this->query) === false) {
-			
-			if ($this->fromUrl === true) {
-				$detect = new Detect();
-
-				if ($detect->fromUrl($this->query)) {
-					$this->feedType = $detect->getType();
-					$this->query = $detect->getValue();
-				}
-			}
-			
-			if ($this->feedType === 'channel') {
-				$this->findChannel();
-			}
-
-			if ($this->feedType === 'playlist') {
-				$this->findPlaylist();
-			}
+		try {
+			$this->checkInputs();
+		} catch(Exception $e) {
+			$this->errorMessage = $e->getMessage();
 		}
 	}
 
@@ -87,41 +72,37 @@ class FeedUrlGenerator {
 	 * @throws Exception if a query parameter is not a valid YouTube URL
 	 */
 	private function checkInputs() {
-		try {
-			if (isset($_POST['query'])) {
+		if (isset($_POST['query'])) {
 
-				if (empty($_POST['query'])) {
-					throw new Exception('Query parameter not given.');
-				}
-
-				if (isset($_POST['type']) === false || empty($_POST['type'])) {
-					throw new Exception('Type parameter not given.');
-				}
-
-				if (in_array($_POST['type'], $this->supportedTypes)) {
-					$this->feedType = $_POST['type'];
-				}
-
-				if ($_POST['type'] === 'url') {
-					$this->fromUrl = true;
-				}
-
-				if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
-					$this->feedFormat = $_POST['format'];
-				}
-
-				if ($this->fromUrl === true && Validate::YouTubeUrl($_POST['query']) === false) {
-					throw new Exception('URL is not a valid YouTube URL.');
-				}
-
-				$this->query = $_POST['query'];
-
-				if (isset($_POST['embed_videos'])) {
-					$this->embedVideos = true;
-				}
+			if (empty($_POST['query'])) {
+				throw new Exception('Query parameter not given.');
 			}
-		} catch (Exception $e) {
-			$this->errorMessage = $e->getMessage();
+
+			if (isset($_POST['type']) === false || empty($_POST['type'])) {
+				throw new Exception('Type parameter not given.');
+			}
+
+			if (in_array($_POST['type'], $this->supportedTypes)) {
+				$this->feedType = $_POST['type'];
+			}
+
+			if ($_POST['type'] === 'url') {
+				$this->fromUrl = true;
+			}
+
+			if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
+				$this->feedFormat = $_POST['format'];
+			}
+
+			$this->query = $_POST['query'];
+
+			if($this->fromUrl === true && Validate::YouTubeUrl($_POST['query']) === false) {
+				throw new Exception('URL is not a valid YouTube URL.');
+			}
+		}
+
+		if (isset($_POST['embed_videos'])) {
+			$this->embedVideos = true;
 		}
 	}
 
