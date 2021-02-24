@@ -59,8 +59,39 @@ class FeedUrlGenerator {
 
 		try {
 			$this->checkInputs();
+			$this->generate();
+			
 		} catch(Exception $e) {
 			$this->errorMessage = $e->getMessage();
+		}
+	}
+
+	/**
+	 * Generate feed URL
+	 *
+	 * @throws Exception if a query parameter is not a supported YouTube URL
+	 */
+	private function generate() {
+		if (empty($this->query) === false) {
+
+			if ($this->fromUrl === true) {
+				$detect = new Detect();
+	
+				if ($detect->fromUrl($this->query) === false) {
+					throw new Exception('Unsupport YouTube URL.');
+				}
+
+				$this->feedType = $detect->getType();
+				$this->query = $detect->getValue();
+			}
+
+			if ($this->feedType === 'channel') {
+				$this->findChannel();
+			}
+
+			if ($this->feedType === 'playlist') {
+				$this->findPlaylist();
+			}
 		}
 	}
 
