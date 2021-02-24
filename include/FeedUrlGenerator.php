@@ -35,6 +35,11 @@ class FeedUrlGenerator {
 	 * @var string $feedFormat Feed Format
 	 */
 	private string $feedFormat = '';
+	
+	/**
+	 * @var bool $fromUrl Query string is from a URL
+	 */
+	private bool $fromUrl = false;
 
 	/**
 	 * @var boolean $error Error status
@@ -54,7 +59,16 @@ class FeedUrlGenerator {
 		$this->checkInputs();
 
 		if (empty($this->query) === false) {
+			
+			if ($this->fromUrl === true) {
+				$detect = new Detect();
 
+				if ($detect->fromUrl($this->query)) {
+					$this->feedType = $detect->getType();
+					$this->query = $detect->getValue();
+				}
+			}
+			
 			if ($this->feedType === 'channel') {
 				$this->findChannel();
 			}
@@ -79,12 +93,16 @@ class FeedUrlGenerator {
 				throw new Exception('Query parameter not given.');
 			}
 
-			if (empty($_POST['type'])) {
+			if (isset($_POST['type']) === false || empty($_POST['type'])) {
 				throw new Exception('Type parameter not given.');
 			}
 
-			if (isset($_POST['type']) && in_array($_POST['type'], $this->supportedTypes)) {
+			if (in_array($_POST['type'], $this->supportedTypes)) {
 				$this->feedType = $_POST['type'];
+			}
+
+			if ($_POST['type'] === 'url') {
+				$this->fromUrl = true;
 			}
 
 			if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
@@ -110,6 +128,7 @@ class FeedUrlGenerator {
 		$error = '';
 		$channelLink = '';
 		$playlistLink = '';
+		$fromUrlLink = '';
 
 		if (empty($this->feedId) === false && $this->error === false) {
 			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '_id=' . $this->feedId . '&format=' . $this->feedFormat;
@@ -129,13 +148,18 @@ HTML;
 HTML;
 		}
 
-		if ($this->feedType === 'channel') {
-			$channelLink = $link;
-		}
+		if ($this->fromUrl === true) {
+			$fromUrlLink = $link;
+			
+		} else {
+			if ($this->feedType === 'channel') {
+				$channelLink = $link;
+			}
 
-		if ($this->feedType === 'playlist') {
-			$playlistLink = $link;
-		}
+			if ($this->feedType === 'playlist') {
+				$playlistLink = $link;
+			}
+		} 
 
 			$html = <<<HTML
 <!DOCTYPE html>
@@ -184,6 +208,22 @@ HTML;
 					<button type="submit">Generate</button>
 				</form><br>
 				{$playlistLink}
+			</div>
+			<div class="item">
+				<h2>From URL</h2>
+				<form action="" method="post">
+					URL: <input class="input" name="query" type="input" placeholder="youtube.com URL" required><br>
+					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
+					Feed format: 
+					<select name="format">
+						<option value="rss">RSS</option>
+						<option value="html">HTML</option>
+						<option value="json">JSON</option>
+					</select><br/>
+					<input type="hidden" name="type" value="url">
+					<button type="submit">Generate</button>
+				</form><br>
+				{$fromUrlLink}
 			</div>
 			<div class="item">
 				<a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a>
