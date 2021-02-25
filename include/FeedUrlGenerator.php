@@ -309,32 +309,26 @@ HTML;
 	 * @throws Exception if the channel or playlist was not found
 	 */
 	private function searchApi(string $query) {
-		try {
-			$api = new Api();
+		$api = new Api();
 
-			if ($this->feedType === 'channel') {
-				$response = $api->searchChannels($query);
-			}
+		if ($this->feedType === 'channel') {
+			$response = $api->searchChannels($query);
+		}
 
-			if ($this->feedType === 'playlist') {
-				$response = $api->searchPlaylists($query);
-			}
+		if ($this->feedType === 'playlist') {
+			$response = $api->searchPlaylists($query);
+		}
 
-			if (empty($response->items)) {
-				throw new Exception(ucfirst($this->feedType) . ' not found');
-			}
+		if (empty($response->items)) {
+			throw new Exception(ucfirst($this->feedType) . ' not found');
+		}
 
-			if ($this->feedType === 'channel') {
-				$this->feedId = $response->items['0']->id->channelId;
-			}
+		if ($this->feedType === 'channel') {
+			$this->feedId = $response->items['0']->id->channelId;
+		}
 
-			if ($this->feedType === 'playlist') {
-				$this->feedId = $response->items['0']->id->playlistId;
-			}
-
-		} catch (Exception $e) {
-			$this->error = true;
-			$this->errorMessage = $e->getMessage();
+		if ($this->feedType === 'playlist') {
+			$this->feedId = $response->items['0']->id->playlistId;
 		}
 	}
 }
