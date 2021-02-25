@@ -304,8 +304,6 @@ HTML;
 	 * Search YouTube data API for channel or playlist
 	 *
 	 * @param string $query Query string
-	 * @throws Exception if a curl error has occurred
-	 * @throws Exception if a API error has occurred
 	 * @throws Exception if the channel or playlist was not found
 	 */
 	private function searchApi(string $query) {
