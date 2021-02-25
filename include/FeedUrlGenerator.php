@@ -79,7 +79,7 @@ class FeedUrlGenerator {
 				$detect = new Detect();
 	
 				if ($detect->fromUrl($this->query) === false) {
-					throw new Exception('Unsupport YouTube URL.');
+					throw new Exception('Unsupported YouTube URL.');
 				}
 
 				$this->feedType = $detect->getType();
