@@ -62,6 +62,7 @@ class FeedUrlGenerator {
 			$this->generate();
 			
 		} catch(Exception $e) {
+			$this->error = true;
 			$this->errorMessage = $e->getMessage();
 		}
 	}
@@ -149,7 +150,13 @@ class FeedUrlGenerator {
 		$playlistLink = '';
 		$fromUrlLink = '';
 
-		if (empty($this->feedId) === false && $this->error === false) {
+		if ($this->error === true) {
+			$error = <<<HTML
+<div id="error"><strong>{$this->errorMessage}</strong></div>
+HTML;
+		}
+
+		if ($this->error === false) {
 			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '_id=' . $this->feedId . '&format=' . $this->feedFormat;
 
 			if ($this->embedVideos === true) {
@@ -159,26 +166,17 @@ class FeedUrlGenerator {
 			$link = <<<HTML
 <p>Feed URL: <a href="{$url}">{$url}</a></p>
 HTML;
-		}
-
-		if (empty($this->errorMessage) === false) {
-			$error = <<<HTML
-<div id="error"><strong>{$this->errorMessage}</strong></div>
-HTML;
-		}
-
-		if ($this->fromUrl === true) {
-			$fromUrlLink = $link;
 			
-		} else {
-			if ($this->feedType === 'channel') {
+			if ($this->fromUrl === true) {
+				$fromUrlLink = $link;
+	
+			} else if ($this->feedType === 'channel') {
 				$channelLink = $link;
-			}
 
-			if ($this->feedType === 'playlist') {
+			} else if ($this->feedType === 'playlist') {
 				$playlistLink = $link;
 			}
-		} 
+		}
 
 			$html = <<<HTML
 <!DOCTYPE html>
@@ -229,7 +227,7 @@ HTML;
 				{$playlistLink}
 			</div>
 			<div class="item">
-				<h2>From URL</h2>
+				<h2>URL</h2>
 				<form action="" method="post">
 					URL: <input class="input" name="query" type="input" placeholder="youtube.com URL" required><br>
 					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
