@@ -148,7 +148,7 @@ class Api {
 		}
 
 		throw new Exception(
-			'API Error :' . $error->message . ' (' . $error->reason . ')'
+			'API Error: ' . $error->message . ' (' . $error->reason . ')'
 		);
 	}
 }
