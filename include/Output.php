@@ -3,8 +3,12 @@
 class Output {
 	/**
 	 * Output error message
+	 *
+	 * @param string $message Error message
+	 * @param int $code HTTP esponse code
 	 */
-	public static function error(string $message) {
+	public static function error(string $message, int $code = 400) {
+		http_response_code($code);
 		header('Content-Type: text/plain');
 		echo $message;
 	}
