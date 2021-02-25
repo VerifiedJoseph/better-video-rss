@@ -156,7 +156,7 @@ class FeedUrlGenerator {
 HTML;
 		}
 
-		if ($this->error === false) {
+		if ($this->error === false && empty($this->feedId) === false) {
 			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '_id=' . $this->feedId . '&format=' . $this->feedFormat;
 
 			if ($this->embedVideos === true) {
