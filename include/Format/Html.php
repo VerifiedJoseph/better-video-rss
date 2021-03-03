@@ -14,7 +14,7 @@ class Html extends Format {
 	 * Build feed
 	 */
 	public function build() {
-		$feedDescription = $this->data['details']['description'];
+		$feedDescription = htmlspecialchars($this->data['details']['description'], ENT_QUOTES);
 		$feedTitle = $this->data['details']['title'];
 		$feedAuthor = $this->data['details']['title'];
 		$feedUrl = $this->data['details']['url'];
