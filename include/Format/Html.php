@@ -21,7 +21,7 @@ class Html extends Format {
 		$feedUpdated = Convert::unixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
-		$rssLink = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'];
+		$selfLink = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'];
 
 		if ($this->embedVideos === true) {
 			$rssLink .= '&embed_videos=true';
@@ -38,7 +38,7 @@ class Html extends Format {
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="{$feedDescription}">
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
-	<link rel="alternate" type="application/rss+xml" title="{$feedTitle}" href="{$rssLink}">
+	<link rel="alternate" type="application/rss+xml" title="{$feedTitle}" href="{$selfLink}">
 </head>
 <body>
 	<div id="header" class="center">
@@ -47,8 +47,8 @@ class Html extends Format {
 	<div id="main">
 		<div id="items">
 			<div class="item">
-				Feed format: <a href="{$rssLink}&format=rss"><button>RSS</button></a> <a href="{$rssLink}&format=html"><button>HTML</button></a> 
-				<a href="{$rssLink}&format=json"><button>JSON</button></a>
+				Feed format: <a href="{$selfLink}&format=rss"><button>RSS</button></a> <a href="{$selfLink}&format=html"><button>HTML</button></a> 
+				<a href="{$selfLink}&format=json"><button>JSON</button></a>
 			</div>
 			{$items}
 		</div>
