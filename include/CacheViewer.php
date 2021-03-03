@@ -84,7 +84,7 @@ class CacheViewer {
 	 * @throws Exception If a cache file can not be decoded.
 	 */
 	private function loadFiles() {
-		$regex = '/.' . preg_quote(Config::get('CACHE_FILENAME_EXT')) . '$/';
+		$regex = '/.' . preg_quote(Config::getCacheFileExtension()) . '$/';
 
 		$directoryPath = Config::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . Config::get('CACHE_DIR');
 		$cacheDirectory = new RecursiveDirectoryIterator($directoryPath);
@@ -110,7 +110,7 @@ class CacheViewer {
 			}
 
 			$this->data[] = array(
-				'id' => $file->getBasename('.' . Config::get('CACHE_FILENAME_EXT')),
+				'id' => $file->getBasename('.' . Config::getCacheFileExtension()),
 				'modified' => $file->getMTime(),
 				'size' => $file->getSize(),
 				'contents' => $data

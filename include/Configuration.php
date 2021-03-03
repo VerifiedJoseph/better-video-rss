@@ -23,6 +23,9 @@ class Configuration {
 	/** @var array $defaultFeedFormats Default feed format */
 	private static string $defaultFeedFormat = 'rss';
 
+	/** @var string $cacheFileExtension Cache filename extension */
+	private static string $cacheFileExtension = 'cache';
+
 	/**
 	 * Check PHP version and loaded extensions
 	 *
@@ -102,10 +105,6 @@ class Configuration {
 			throw new Exception('Config Error: Cache directory is not writable. [CACHE_DIR]');
 		}
 
-		if (empty(constant('CACHE_FILENAME_EXT'))) {
-			throw new Exception('Config Error: Cache filename extension must be set. [CACHE_FILENAME_EXT]');
-		}
-
 		if (is_bool(constant('DISABLE_CACHE')) === false) {
 			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
 		}
@@ -157,6 +156,15 @@ class Configuration {
 	 */
 	public static function getFeedFormats() {
 		return self::$feedFormats;
+	}
+
+	/**
+	 * Returns cache filename extension
+	 *
+	 * @return array
+	 */
+	public static function getCacheFileExtension() {
+		return self::$cacheFileExtension;
 	}
 
 	/**
