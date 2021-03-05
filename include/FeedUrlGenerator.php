@@ -68,77 +68,6 @@ class FeedUrlGenerator {
 	}
 
 	/**
-	 * Generate feed URL
-	 *
-	 * @throws Exception if a query parameter is not a supported YouTube URL
-	 */
-	private function generate() {
-		if (empty($this->query) === false) {
-
-			if ($this->fromUrl === true) {
-				$detect = new Detect();
-	
-				if ($detect->fromUrl($this->query) === false) {
-					throw new Exception('Unsupported YouTube URL.');
-				}
-
-				$this->feedType = $detect->getType();
-				$this->query = $detect->getValue();
-			}
-
-			if ($this->feedType === 'channel') {
-				$this->findChannel();
-			}
-
-			if ($this->feedType === 'playlist') {
-				$this->findPlaylist();
-			}
-		}
-	}
-
-	/**
-	 * Check user inputs
-	 *
-	 * @throws Exception if a query parameter is not given
-	 * @throws Exception if a type parameter is not given
-	 * @throws Exception if a query parameter is not a valid YouTube URL
-	 */
-	private function checkInputs() {
-		if (isset($_POST['query'])) {
-
-			if (empty($_POST['query'])) {
-				throw new Exception('Query parameter not given.');
-			}
-
-			if (isset($_POST['type']) === false || empty($_POST['type'])) {
-				throw new Exception('Type parameter not given.');
-			}
-
-			if (in_array($_POST['type'], $this->supportedTypes)) {
-				$this->feedType = $_POST['type'];
-			}
-
-			if ($_POST['type'] === 'url') {
-				$this->fromUrl = true;
-			}
-
-			if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
-				$this->feedFormat = $_POST['format'];
-			}
-
-			$this->query = $_POST['query'];
-
-			if($this->fromUrl === true && Validate::YouTubeUrl($_POST['query']) === false) {
-				throw new Exception('URL is not a valid YouTube URL.');
-			}
-		}
-
-		if (isset($_POST['embed_videos'])) {
-			$this->embedVideos = true;
-		}
-	}
-
-	/**
 	 * Display HTML
 	 *
 	 * @echo string $html
@@ -252,6 +181,77 @@ HTML;
 HTML;
 
 		echo $html;
+	}
+
+	/**
+	 * Check user inputs
+	 *
+	 * @throws Exception if a query parameter is not given
+	 * @throws Exception if a type parameter is not given
+	 * @throws Exception if a query parameter is not a valid YouTube URL
+	 */
+	private function checkInputs() {
+		if (isset($_POST['query'])) {
+
+			if (empty($_POST['query'])) {
+				throw new Exception('Query parameter not given.');
+			}
+
+			if (isset($_POST['type']) === false || empty($_POST['type'])) {
+				throw new Exception('Type parameter not given.');
+			}
+
+			if (in_array($_POST['type'], $this->supportedTypes)) {
+				$this->feedType = $_POST['type'];
+			}
+
+			if ($_POST['type'] === 'url') {
+				$this->fromUrl = true;
+			}
+
+			if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
+				$this->feedFormat = $_POST['format'];
+			}
+
+			$this->query = $_POST['query'];
+
+			if($this->fromUrl === true && Validate::YouTubeUrl($_POST['query']) === false) {
+				throw new Exception('URL is not a valid YouTube URL.');
+			}
+		}
+
+		if (isset($_POST['embed_videos'])) {
+			$this->embedVideos = true;
+		}
+	}
+
+	/**
+	 * Generate feed URL
+	 *
+	 * @throws Exception if a query parameter is not a supported YouTube URL
+	 */
+	private function generate() {
+		if (empty($this->query) === false) {
+
+			if ($this->fromUrl === true) {
+				$detect = new Detect();
+	
+				if ($detect->fromUrl($this->query) === false) {
+					throw new Exception('Unsupported YouTube URL.');
+				}
+
+				$this->feedType = $detect->getType();
+				$this->query = $detect->getValue();
+			}
+
+			if ($this->feedType === 'channel') {
+				$this->findChannel();
+			}
+
+			if ($this->feedType === 'playlist') {
+				$this->findPlaylist();
+			}
+		}
 	}
 
 	/**
