@@ -70,4 +70,18 @@ class Validate {
 
 		return false;
 	}
+	
+	/**
+	 * Validate self URL
+	 *
+	 * @param string $url
+	 * @return boolean
+	 */
+	public static function selfUrl(string $url) {
+		if (substr($url, -1) === '/') {
+			return true;
+		}
+
+		return false;	
+	}
 }
