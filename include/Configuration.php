@@ -28,6 +28,17 @@ class Configuration {
 	/** @var string $cacheFileExtension Cache filename extension */
 	private static string $cacheFileExtension = 'cache';
 
+	/** @var string $defaults Default values for optional config params */
+	private static array $defaults = array(
+		'RAW_API_ERRORS' => false,
+		'TIMEZONE' => 'UTC',
+		'DATE_FORMAT' => 'F j, Y',
+		'TIME_FORMAT' => 'H:i',
+		'CACHE_DIR' => 'cache',
+		'DISABLE_CACHE' => false,
+		'ENABLE_CACHE_VIEWER' => false
+	);
+
 	/**
 	 * Check PHP version and loaded extensions
 	 *
@@ -68,6 +79,7 @@ class Configuration {
 		}
 
 		self::requireConfigFile();
+		self::setDefaults();
 
 		if (defined('SELF_URL_PATH') === false || empty(constant('SELF_URL_PATH')) === true) {
 			throw new Exception('Config Error: Self URL path must be set. [SELF_URL_PATH]');
@@ -178,5 +190,19 @@ class Configuration {
 	 */
 	private static function requireConfigFile() {
 		require 'config.php';
+	}
+
+	/**
+	 * Set defaults as constants if no override given in config.php
+	 *
+	 * @return array
+	 */	
+	private static function setDefaults() {
+		foreach (self::$defaults as $param => $value) {
+
+			if (defined($param) === false) {
+				define($param, $value);
+			}
+		}
 	}
 }
