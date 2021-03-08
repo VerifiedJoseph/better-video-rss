@@ -1,5 +1,7 @@
 <?php
 
+use Helper\Validate;
+
 class Configuration {
 
 	/** @var string $minPhpVersion Minimum PHP version */
@@ -69,6 +71,10 @@ class Configuration {
 
 		if (empty(constant('SELF_URL_PATH'))) {
 			throw new Exception('Config Error: Self URL path must be set. [SELF_URL_PATH]');
+		}
+
+		if (Validate::selfUrl(constant('SELF_URL_PATH')) === false) {
+			throw new Exception('Config Error: Self URL must end with a forward slash. e.g: ' . constant('SELF_URL_PATH') . '/ [SELF_URL_PATH]');		
 		}
 
 		if (empty(constant('YOUTUBE_API_KEY'))) {
