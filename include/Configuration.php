@@ -57,7 +57,7 @@ class Configuration {
 	 * Check config constants
 	 *
 	 * @throws Exception if config.php is not found
-	 * @throws Exception if a constant is invalid
+	 * @throws Exception if a constant is not defined
 	 * @throws Exception if cache directory could not be created
 	 * @throws Exception if cache directory is not writable
 	 */
@@ -69,7 +69,7 @@ class Configuration {
 
 		self::requireConfigFile();
 
-		if (empty(constant('SELF_URL_PATH'))) {
+		if (defined('SELF_URL_PATH') === false || empty(constant('SELF_URL_PATH')) === true) {
 			throw new Exception('Config Error: Self URL path must be set. [SELF_URL_PATH]');
 		}
 
@@ -77,7 +77,7 @@ class Configuration {
 			throw new Exception('Config Error: Self URL must end with a forward slash. e.g: ' . constant('SELF_URL_PATH') . '/ [SELF_URL_PATH]');		
 		}
 
-		if (empty(constant('YOUTUBE_API_KEY'))) {
+		if (defined('YOUTUBE_API_KEY') === false || empty(constant('YOUTUBE_API_KEY')) === true) {
 			throw new Exception('Config Error: YouTube API key must be set. [YOUTUBE_API_KEY]');
 		}
 
@@ -85,19 +85,19 @@ class Configuration {
 			throw new Exception('Config Error: Raw API Errors option must be a boolean. [RAW_API_ERRORS]');
 		}
 
-		if (empty(constant('TIMEZONE'))) {
+		if (empty(constant('TIMEZONE')) === true) {
 			throw new Exception('Config Error: Timezone must be set. [TIMEZONE]');
 		}
 
-		if (empty(constant('DATE_FORMAT'))) {
+		if (empty(constant('DATE_FORMAT')) === true) {
 			throw new Exception('Config Error: Date format must be set. [DATE_FORMAT]');
 		}
-		
-		if (empty(constant('TIME_FORMAT'))) {
+
+		if (empty(constant('TIME_FORMAT')) === true) {
 			throw new Exception('Config Error: Time format must be set. [TIME_FORMAT]');
 		}
 
-		if (empty(constant('CACHE_DIR'))) {
+		if (empty(constant('CACHE_DIR')) === true) {
 			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
 		}
 
