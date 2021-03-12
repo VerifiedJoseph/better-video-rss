@@ -12,6 +12,7 @@ namespace Format;
 
 use Configuration as Config;
 use Helper\Convert;
+use Helper\Url;
 
 class Json extends Format {
 
@@ -25,7 +26,7 @@ class Json extends Format {
 		$feedDescription = $this->data['details']['description'];
 		$feedTitle = $this->data['details']['title'];
 		$feedHomePageUrl = $this->data['details']['url'];
-		$feedUrl = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'] . '&format=json';
+		$feedUrl = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos);
 		$feedUpdated = Convert::unixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
