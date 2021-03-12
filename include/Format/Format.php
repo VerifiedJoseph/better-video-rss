@@ -112,7 +112,7 @@ EOD;
 			// Scheduled
 			if ($video['liveStreamScheduled'] > strtotime('now')) {
 				if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere 
-					return '[Premiere ' . $scheduled .  '] ' . $video['title'];
+					return '[Premiere ' . $scheduled .  '] ' . $video['title'] . ' (' . $video['duration'] . ')';
 				}
 
 				return '[Live Stream ' . $scheduled .  '] ' . $video['title'];
