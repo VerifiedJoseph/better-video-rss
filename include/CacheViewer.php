@@ -3,6 +3,7 @@
 use Configuration as Config;
 use Helper\File;
 use Helper\Convert;
+use Helper\Url;
 
 class CacheViewer {
 	/**
@@ -255,10 +256,10 @@ HTML;
 			$format = new Format\Rss($data['contents'], false);
 			$format->build();
 
-			$feedurl = Config::get('SELF_URL_PATH') . '?' . $data['contents']['details']['type'] . '_id='. $data['contents']['details']['id'];
+			$feedUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
 
 			$tdData .= <<<HTML
-Feed URL: <a target="_blank" href="{$feedurl}">{$feedurl}</a><br/>
+Feed URL: <a target="_blank" href="{$feedurl}">{$feedUrl}</a><br/>
 <textarea cols="140" rows="50">{$format->get()}</textarea>
 HTML;
 		} else {
