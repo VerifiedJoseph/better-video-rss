@@ -110,11 +110,12 @@ EOD;
 	private function buildFormatButtons() {
 		$html = '';
 
-		foreach (Config::getFeedFormats() as &$format) {
+		foreach (Config::getFeedFormats() as $format) {
+			$text = strtoupper($format);
 			$url = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], $format, $this->embedVideos);
 
 			$html .= <<<EOD
-<a href="{$url}"><button>{$format}</button></a> 
+<a href="{$url}"><button>{$text}</button></a> 
 EOD;
 		}
 
