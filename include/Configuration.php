@@ -28,7 +28,7 @@ class Configuration {
 	/** @var string $cacheFileExtension Cache filename extension */
 	private static string $cacheFileExtension = 'cache';
 
-	/** @var string $defaults Default values for optional config params */
+	/** @var string $defaults Default values for optional config parameters */
 	private static array $defaults = array(
 		'RAW_API_ERRORS' => false,
 		'TIMEZONE' => 'UTC',
@@ -193,7 +193,7 @@ class Configuration {
 	}
 
 	/**
-	 * Set defaults as constants if no override given in config.php
+	 * Set defaults as constants if no user-supplied overrides given in config.php
 	 *
 	 * @return array
 	 */	
