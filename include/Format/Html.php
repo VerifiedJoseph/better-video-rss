@@ -20,11 +20,7 @@ class Html extends Format {
 		$feedUpdated = Convert::unixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
-		$selfLink = Config::get('SELF_URL_PATH') . '?' . $this->data['details']['type'] . '_id=' . $this->data['details']['id'];
-
-		if ($this->embedVideos === true) {
-			$rssLink .= '&embed_videos=true';
-		}
+		$rssLink = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos);
 
 		$items = $this->buildItmes();
 
@@ -37,7 +33,7 @@ class Html extends Format {
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="{$feedDescription}">
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
-	<link rel="alternate" type="application/rss+xml" title="{$feedTitle}" href="{$selfLink}">
+	<link rel="alternate" type="application/rss+xml" title="{$feedTitle}" href="{$rssLink}">
 </head>
 <body>
 	<div id="header" class="center">
