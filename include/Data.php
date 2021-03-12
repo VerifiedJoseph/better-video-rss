@@ -2,6 +2,7 @@
 
 use Configuration as Config;
 use Helper\Convert;
+use Helper\Url;
 
 class Data {
 
@@ -173,11 +174,11 @@ class Data {
 		$details['description'] = $response->items['0']->snippet->description;
 
 		if ($this->data['details']['type'] === 'channel') {
-			$details['url'] = Config::getEndpoint('website') . 'channel/' . $this->data['details']['id'];
+			$details['url'] = Url::getChannel($this->data['details']['id']);
 		}
 
 		if ($this->data['details']['type'] === 'playlist') {
-			$details['url'] = Config::getEndpoint('website') . 'playlist?list=' . $this->data['details']['id'];
+			$details['url'] = Url::getPlaylist($this->data['details']['id']);
 		}
 
 		$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
@@ -216,13 +217,13 @@ class Data {
 
 				// Never use '_live.jpg' thumbnails returned by the API. Live thumbnails sometimes return 404. 
 				if (isset($item->snippet->thumbnails->maxres)) {
-					$video['thumbnail'] = Config::getEndpoint('images') . $item->id . '/maxresdefault.jpg';
+					$video['thumbnail'] = Url::getThumbnail($item->id, 'maxresdefault');
 
 				} elseif (isset($item->snippet->thumbnails->standard)) {
-					$video['thumbnail'] = Config::getEndpoint('images') . $item->id . '/sddefaul.jpg';
+					$video['thumbnail'] = Url::getThumbnail($item->id, 'sddefault');
 
 				} else {
-					$video['thumbnail']  = Config::getEndpoint('images') . $item->id . '/hqdefault.jpg';
+					$video['thumbnail'] = Url::getThumbnail($item->id, 'hqdefault');
 				}
 
 				$video['fetched'] = strtotime('now');
