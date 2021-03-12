@@ -3,6 +3,7 @@
 use \Curl\Curl;
 use Configuration as Config;
 use Helper\Validate;
+use Helper\Url;
 
 class FeedUrlGenerator {
 
@@ -86,11 +87,7 @@ HTML;
 		}
 
 		if ($this->error === false && empty($this->feedId) === false) {
-			$url = Config::get('SELF_URL_PATH') . '?' . $this->feedType . '_id=' . $this->feedId . '&format=' . $this->feedFormat;
-
-			if ($this->embedVideos === true) {
-				$url .= '&embed_videos=true';
-			}
+			$url = Url::getFeed($this->feedType, $this->feedId, $this->feedFormat, $this->embedVideos);
 
 			$link = <<<HTML
 <p>Feed URL: <a href="{$url}">{$url}</a></p>
