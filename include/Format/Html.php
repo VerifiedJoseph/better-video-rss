@@ -4,6 +4,7 @@ namespace Format;
 
 use Configuration as Config;
 use Helper\Convert;
+use Helper\Url;
 
 class Html extends Format {
 
@@ -21,6 +22,7 @@ class Html extends Format {
 		$feedImage = $this->data['details']['thumbnail'];
 
 		$rssLink = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos);
+		$feedFormatButtons = $this->buildFormatButtons();
 
 		$items = $this->buildItmes();
 
@@ -42,8 +44,7 @@ class Html extends Format {
 	<div id="main">
 		<div id="items">
 			<div class="item">
-				Feed format: <a href="{$selfLink}&format=rss"><button>RSS</button></a> <a href="{$selfLink}&format=html"><button>HTML</button></a> 
-				<a href="{$selfLink}&format=json"><button>JSON</button></a>
+				Feed format: $feedFormatButtons
 			</div>
 			{$items}
 		</div>
@@ -99,5 +100,24 @@ EOD;
 		}
 
 		return $itemCategories . '</ul>';
+	}
+
+	/**
+	 * build format buttons
+	 *
+	 * @return string button HTML 
+	 */
+	private function buildFormatButtons() {
+		$html = '';
+
+		foreach (Config::getFeedFormats() as &$format) {
+			$url = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], $format, $this->embedVideos);
+
+			$html .= <<<EOD
+<a href="{$url}"><button>{$format}</button></a> 
+EOD;
+		}
+
+		return $html;
 	}
 }
