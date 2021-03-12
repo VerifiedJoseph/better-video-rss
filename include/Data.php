@@ -20,8 +20,8 @@ class Data {
 		'videos' => array()
 	);
 
-	/** @var array $expiresIn Number of days, hours or minutes that each part expires */
-	private $expiresIn = array(
+	/** @var array $expires Number of days, hours or minutes that each part expires */
+	private $expires = array(
 		'details' => '+30 days',
 		'feed' => '+10 minutes',
 		'videos' => '+1 hour',
@@ -182,7 +182,7 @@ class Data {
 
 		$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
 		$details['fetched'] = strtotime('now');
-		$details['expires'] = strtotime($this->expiresIn['details']);
+		$details['expires'] = strtotime($this->expires['details']);
 
 		$this->data['details'] = array_merge($this->data['details'], $details);
 	}
@@ -226,7 +226,7 @@ class Data {
 				}
 
 				$video['fetched'] = strtotime('now');
-				$video['expires'] = strtotime($this->expiresIn['videos']);
+				$video['expires'] = strtotime($this->expires['videos']);
 
 				$videos[$key] = $video;
 			}
@@ -277,7 +277,7 @@ class Data {
 		}
 
 		$feed['fetched'] = strtotime('now');
-		$feed['expires'] = strtotime($this->expiresIn['feed']);
+		$feed['expires'] = strtotime($this->expires['feed']);
 
 		$this->data['videos'] = $videos;
 		$this->data['feed'] = $feed;
