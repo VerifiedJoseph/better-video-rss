@@ -214,11 +214,12 @@ class Data {
 					$video['tags'] = $item->snippet->tags;
 				}
 
+				// Never use '_live.jpg' thumbnails returned by the API. Live thumbnails sometimes return 404. 
 				if (isset($item->snippet->thumbnails->maxres)) {
-					$video['thumbnail'] = $item->snippet->thumbnails->maxres->url;
+					$video['thumbnail'] = Config::getEndpoint('images') . $item->id . '/maxresdefault.jpg';
 
 				} elseif (isset($item->snippet->thumbnails->standard)) {
-					$video['thumbnail'] = $item->snippet->thumbnails->standard->url;
+					$video['thumbnail'] = Config::getEndpoint('images') . $item->id . '/sddefaul.jpg';
 
 				} else {
 					$video['thumbnail']  = Config::getEndpoint('images') . $item->id . '/hqdefault.jpg';
