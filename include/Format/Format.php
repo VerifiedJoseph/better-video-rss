@@ -78,7 +78,7 @@ abstract class Format {
 		$url = Config::getEndpoint('website');
 
 		$media = <<<EOD
-<a target="_blank" title="Watch" href="{$url}watch?v={$video['id']}"><img src="{$video['thumbnail']}"/></a>
+<a target="_blank" title="Watch" href="{$video['url']}"><img src="{$video['thumbnail']}"/></a>
 EOD;
 
 		if ($this->embedVideos === true) {
