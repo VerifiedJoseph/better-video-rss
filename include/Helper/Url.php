@@ -51,6 +51,16 @@ class Url {
 	}
 
 	/**
+	 * Create a YouTube video URL 
+	 *
+	 * @param string $videoId YouTube video ID
+	 * @return string
+	 */
+	public static function getVideo(string $videoId) {
+		return Config::getEndpoint('website') . 'watch?v=' . $videoId;
+	}
+
+	/**
 	 * Create a YouTube thumbnail URL 
 	 *
 	 * @param string $videoID YouTube video ID
