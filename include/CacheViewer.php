@@ -259,7 +259,7 @@ HTML;
 			$feedUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
 
 			$tdData .= <<<HTML
-Feed URL: <a target="_blank" href="{$feedurl}">{$feedUrl}</a><br/>
+Feed URL: <a target="_blank" href="{$feedUrl}">{$feedUrl}</a><br/>
 <textarea cols="140" rows="50">{$format->get()}</textarea>
 HTML;
 		} else {
