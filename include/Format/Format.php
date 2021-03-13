@@ -74,18 +74,15 @@ abstract class Format {
 		$description = nl2br($video['description']);
 		$description = Convert::urls($description);
 		$published = Convert::unixTime($video['published'], config::get('DATE_FORMAT'));
-
-		$url = Config::getEndpoint('website');
-
 		$media = <<<EOD
 <a target="_blank" title="Watch" href="{$video['url']}"><img src="{$video['thumbnail']}"/></a>
 EOD;
 
 		if ($this->embedVideos === true) {
-			$url = Config::getEndpoint('nocookie');
+			$url = Url::getEmbed($video['id']);
 
 			$media = <<<EOD
-<iframe width="100%" height="410" src="{$url}embed/{$video['id']}" frameborder="0" allow="encrypted-media;" allowfullscreen></iframe>
+<iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" allowfullscreen></iframe>
 EOD;
 		}
 
