@@ -2,6 +2,7 @@
 
 use \Curl\Curl;
 use Configuration as Config;
+use Helper\Url;
 
 class Fetch {
 
@@ -38,7 +39,7 @@ class Fetch {
 	 * @throws Exception If a curl error has occurred.
 	 */
 	public function feed() {
-		$url = Config::getEndpoint('feed') . '?' . $this->feedType . '_id=' . $this->feedId;
+		$url = Url::getRssFeed($this->feedType, $this->feedId);
 
 		$curl = new Curl();
 		$curl->get($url);
