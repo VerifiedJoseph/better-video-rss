@@ -3,6 +3,7 @@
 namespace Format;
 
 use Helper\Convert;
+use Helper\Url;
 
 class Rss extends Format {
 
@@ -22,14 +23,19 @@ class Rss extends Format {
 		);
 		$feedImage = $this->xmlEncode($this->data['details']['thumbnail']);
 
+		$selfUrl = $this->xmlEncode(
+			Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos)
+		);
+
 		$items = $this->buildItmes();
 
 		$this->feed = <<<EOD
 <?xml version="1.0" encoding="utf-8"?>
-	<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+	<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>{$feedTitle}</title>
 		<link>{$feedUrl}</link>
+		<atom:link href="{$selfUrl}" rel="self"/>
 		<description>{$feedDescription}</description>
 		<pubDate>{$feedUpdated}</pubDate>
 		<image>
