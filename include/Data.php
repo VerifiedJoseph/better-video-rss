@@ -264,7 +264,7 @@ class Data {
 
 			$video = array();
 			$video['id'] = $id;
-			$video['url'] = Config::getEndpoint('website') . 'watch?v=' . $id;
+			$video['url'] = Url::getVideo($id);
 			$video['title'] = (string)$entry->title;
 			$video['description'] = (string)$mediaNodes->group->description;
 			$video['author'] = (string)$entry->author->name;
