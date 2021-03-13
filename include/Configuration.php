@@ -86,7 +86,7 @@ class Configuration {
 		}
 
 		if (Validate::selfUrl(constant('SELF_URL_PATH')) === false) {
-			throw new Exception('Config Error: Self URL must end with a forward slash. e.g: ' . constant('SELF_URL_PATH') . '/ [SELF_URL_PATH]');		
+			throw new Exception('Config Error: Self URL must end with a forward slash. e.g: ' . constant('SELF_URL_PATH') . '/ [SELF_URL_PATH]');
 		}
 
 		if (defined('YOUTUBE_API_KEY') === false || empty(constant('YOUTUBE_API_KEY')) === true) {
@@ -196,7 +196,7 @@ class Configuration {
 	 * Set defaults as constants if no user-supplied overrides given in config.php
 	 *
 	 * @return array
-	 */	
+	 */
 	private static function setDefaults() {
 		foreach (self::$defaults as $param => $value) {
 

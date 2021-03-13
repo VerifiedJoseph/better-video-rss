@@ -11,7 +11,7 @@ class Validate {
 
 	/** @var string $playlistIdRegex playlist ID regex */
 	private static string $playlistIdRegex = '/^(?:UU|PL)[a-zA-Z0-9_-]+$/';
-	
+
 	/** @var string $youTubeUrlRegex YouTube URL regex */
 	private static string $youTubeUrlRegex = '/^(?:https?:\/\/)?(?:www\.)?youtube\.com/';
 
@@ -70,7 +70,7 @@ class Validate {
 
 		return false;
 	}
-	
+
 	/**
 	 * Validate self URL
 	 *
@@ -82,6 +82,6 @@ class Validate {
 			return true;
 		}
 
-		return false;	
+		return false;
 	}
 }

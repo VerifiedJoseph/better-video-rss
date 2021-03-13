@@ -108,11 +108,11 @@ EOD;
 
 			// Scheduled
 			if ($video['liveStreamScheduled'] > strtotime('now')) {
-				if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere 
-					return '[Premiere ' . $scheduled .  '] ' . $video['title'] . ' (' . $video['duration'] . ')';
+				if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere
+					return '[Premiere ' . $scheduled . '] ' . $video['title'] . ' (' . $video['duration'] . ')';
 				}
 
-				return '[Live Stream ' . $scheduled .  '] ' . $video['title'];
+				return '[Live Stream ' . $scheduled . '] ' . $video['title'];
 			}
 
 			// Broadcasting

@@ -105,7 +105,7 @@ EOD;
 	/**
 	 * build format buttons
 	 *
-	 * @return string button HTML 
+	 * @return string button HTML
 	 */
 	private function buildFormatButtons() {
 		$html = '';

@@ -29,7 +29,7 @@ class Url {
 
 		return $url;
 	}
-	
+
 	/**
 	 * Create a YouTube RSS feed URL (https://www.youtube.com/feeds/videos.xml)
 	 *
@@ -40,9 +40,9 @@ class Url {
 	public static function getRssFeed(string $type, string $id) {
 		return Config::getEndpoint('feed') . '?' . $type . '_id=' . $id;
 	}
-	
+
 	/**
-	 * Create a YouTube channel URL 
+	 * Create a YouTube channel URL
 	 *
 	 * @param string $channelId YouTube channel ID
 	 * @return string
@@ -52,7 +52,7 @@ class Url {
 	}
 
 	/**
-	 * Create a YouTube playlist URL 
+	 * Create a YouTube playlist URL
 	 *
 	 * @param string $playlistId YouTube playlist ID
 	 * @return string
@@ -62,7 +62,7 @@ class Url {
 	}
 
 	/**
-	 * Create a YouTube video URL 
+	 * Create a YouTube video URL
 	 *
 	 * @param string $videoId YouTube video ID
 	 * @return string
@@ -72,7 +72,7 @@ class Url {
 	}
 
 	/**
-	 * Create a YouTube video embed URL 
+	 * Create a YouTube video embed URL
 	 *
 	 * @param string $videoId YouTube video ID
 	 * @return string
@@ -82,7 +82,7 @@ class Url {
 	}
 
 	/**
-	 * Create a YouTube thumbnail URL 
+	 * Create a YouTube thumbnail URL
 	 *
 	 * @param string $videoID YouTube video ID
 	 * @param string $type YouTube thumbnail type (hqdefault, sddefault or maxresdefault)

@@ -36,7 +36,7 @@ class FeedUrlGenerator {
 	 * @var string $feedFormat Feed Format
 	 */
 	private string $feedFormat = '';
-	
+
 	/**
 	 * @var bool $fromUrl Query string is from a URL
 	 */
@@ -61,7 +61,7 @@ class FeedUrlGenerator {
 		try {
 			$this->checkInputs();
 			$this->generate();
-			
+
 		} catch(Exception $e) {
 			$this->error = true;
 			$this->errorMessage = $e->getMessage();
@@ -92,14 +92,14 @@ HTML;
 			$link = <<<HTML
 <p>Feed URL: <a href="{$url}">{$url}</a></p>
 HTML;
-			
+
 			if ($this->fromUrl === true) {
 				$fromUrlLink = $link;
-	
-			} else if ($this->feedType === 'channel') {
+
+			} elseif ($this->feedType === 'channel') {
 				$channelLink = $link;
 
-			} else if ($this->feedType === 'playlist') {
+			} elseif ($this->feedType === 'playlist') {
 				$playlistLink = $link;
 			}
 		}
@@ -232,7 +232,7 @@ HTML;
 
 			if ($this->fromUrl === true) {
 				$detect = new Detect();
-	
+
 				if ($detect->fromUrl($this->query) === false) {
 					throw new Exception('Unsupported YouTube URL.');
 				}

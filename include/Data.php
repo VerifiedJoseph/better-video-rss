@@ -215,7 +215,7 @@ class Data {
 					$video['tags'] = $item->snippet->tags;
 				}
 
-				// Never use '_live.jpg' thumbnails returned by the API. Live thumbnails sometimes return 404. 
+				// Never use '_live.jpg' thumbnails returned by the API. Live thumbnails sometimes return 404.
 				if (isset($item->snippet->thumbnails->maxres)) {
 					$video['thumbnail'] = Url::getThumbnail($item->id, 'maxresdefault');
 
