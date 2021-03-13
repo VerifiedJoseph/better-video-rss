@@ -61,6 +61,16 @@ class Url {
 	}
 
 	/**
+	 * Create a YouTube video embed URL 
+	 *
+	 * @param string $videoId YouTube video ID
+	 * @return string
+	 */
+	public static function getEmbed(string $videoId) {
+		return Config::getEndpoint('nocookie') . 'embed/' . $videoId;
+	}
+
+	/**
 	 * Create a YouTube thumbnail URL 
 	 *
 	 * @param string $videoID YouTube video ID
