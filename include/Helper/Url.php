@@ -12,7 +12,7 @@ class Url {
 	);
 
 	/**
-	 * Create a feed URL 
+	 * Create a feed URL for BetterVideoRss
 	 *
 	 * @param string $type Feed type
 	 * @param string $id Feed id
@@ -28,6 +28,17 @@ class Url {
 		}
 
 		return $url;
+	}
+	
+	/**
+	 * Create a YouTube RSS feed URL (https://www.youtube.com/feeds/videos.xml)
+	 *
+	 * @param string $type Feed type
+	 * @param string $id channel or playlist id
+	 * @return string
+	 */
+	public static function getRssFeed(string $type, string $id) {
+		return Config::getEndpoint('feed') . '?' . $type . '_id=' . $id;
 	}
 	
 	/**
