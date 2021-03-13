@@ -185,7 +185,7 @@ HTML;
 	 *
 	 * @throws Exception if a query parameter is not given
 	 * @throws Exception if a type parameter is not given
-	 * @throws Exception if a query parameter is not a valid YouTube URL
+	 * @throws Exception if a query parameter is not a valid YouTube URL when type is URL
 	 */
 	private function checkInputs() {
 		if (isset($_POST['query'])) {
@@ -204,6 +204,10 @@ HTML;
 
 			if ($_POST['type'] === 'url') {
 				$this->fromUrl = true;
+
+				if (Validate::YouTubeUrl($_POST['query']) === false) {
+					throw new Exception('URL is not a valid YouTube URL.');
+				}
 			}
 
 			if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
@@ -211,10 +215,6 @@ HTML;
 			}
 
 			$this->query = $_POST['query'];
-
-			if($this->fromUrl === true && Validate::YouTubeUrl($_POST['query']) === false) {
-				throw new Exception('URL is not a valid YouTube URL.');
-			}
 		}
 
 		if (isset($_POST['embed_videos'])) {
