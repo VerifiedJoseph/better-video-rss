@@ -19,7 +19,7 @@ class Rss extends Format {
 		$feedAuthor = $this->xmlEncode($this->data['details']['title']);
 		$feedUrl = $this->xmlEncode($this->data['details']['url']);
 		$feedUpdated = $this->xmlEncode(
-			Convert::unixTime(strtotime('now'), 'r')
+			Convert::unixTime($this->data['updated'], 'r')
 		);
 		$feedImage = $this->xmlEncode($this->data['details']['thumbnail']);
 
