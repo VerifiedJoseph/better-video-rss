@@ -49,6 +49,9 @@ class Html extends Format {
 			{$items}
 		</div>
 	</div>
+	<div id="footer" class="center">
+		BetterVideoRss - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a>
+	</div>
 </body>
 </html>
 EOD;

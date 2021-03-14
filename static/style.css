@@ -44,7 +44,7 @@ p {
 	clear: both;
 }
 
-#header {
+#header, #footer {
 	padding: 10px;
 	padding-left: 25px;
 	background-color: rgb(233, 236, 239);
