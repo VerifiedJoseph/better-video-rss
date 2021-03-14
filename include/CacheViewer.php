@@ -133,6 +133,8 @@ HTML;
 		}
 
 		foreach ($this->data as $index => $data) {
+			$number = $index + 1;
+
 			$modified = Convert::unixTime($data['modified']);
 			$size = File::readableSize($data['size']);
 
@@ -140,7 +142,7 @@ HTML;
 	
 			$tbody .= <<<HTML
 <tr class="center">
-	<td id="{$data['id']}">$index</td>
+	<td id="{$data['id']}">$number</td>
 	<td>{$data['contents']['details']['title']}<br>
 		<span class="small">
 			(Cache ID: {$data['id']}
