@@ -15,11 +15,6 @@ class CacheViewer {
 	 * @var boolean $showRaw Show raw cache file data
 	 */
 	private bool $showRaw = false;
-	
-	/**
-	 * @var boolean $showXml Show feed XML
-	 */
-	private bool $showXml = false;
 
 	/**
 	 * @var array $data Data from cache files
@@ -71,10 +66,6 @@ class CacheViewer {
 
 		if (isset($_POST['raw'])) {
 			$this->showRaw = true;
-		}
-
-		if (isset($_POST['xml'])) {
-			$this->showXml = true;
 		}
 	}
 
@@ -145,6 +136,8 @@ HTML;
 			$modified = Convert::unixTime($data['modified']);
 			$size = File::readableSize($data['size']);
 
+			$xmlUrl = Url::getFeed('channel', $data['contents']['details']['id'], 'rss');
+	
 			$tbody .= <<<HTML
 <tr class="center">
 	<td id="{$data['id']}">$index</td>
@@ -171,11 +164,9 @@ HTML;
 			</form>
 		</div>
 		<div class="left">
-			<form action="#{$data['id']}" method="post">
-				<input name="id" type="hidden" value="{$data['id']}">
-				<input name="xml" type="hidden">
+			<a target="_blank" href="{$xmlUrl}">
 				<button type="submit">View XML</button>
-			</form>
+			</a>
 		</div>
 	</td>
 </tr>
@@ -250,17 +241,7 @@ HTML;
 			$json = json_encode($data['contents'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
 			$tdData .= <<<HTML
-<textarea cols="140" rows="50">{$json}</textarea>
-HTML;
-		} elseif ($this->showXml === true) {
-			$format = new Format\Rss($data['contents'], false);
-			$format->build();
-
-			$feedUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
-
-			$tdData .= <<<HTML
-Feed URL: <a target="_blank" href="{$feedUrl}">{$feedUrl}</a><br/>
-<textarea cols="140" rows="50">{$format->get()}</textarea>
+<br><textarea cols="140" rows="50">{$json}</textarea>
 HTML;
 		} else {
 
