@@ -24,7 +24,7 @@ class Rss extends Format {
 		$feedImage = $this->xmlEncode($this->data['details']['thumbnail']);
 
 		$selfUrl = $this->xmlEncode(
-			Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos)
+			Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos)
 		);
 
 		$items = $this->buildItmes();
