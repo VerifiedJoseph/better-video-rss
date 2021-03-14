@@ -186,6 +186,7 @@ class Data {
 		$details['expires'] = strtotime($this->expires['details']);
 
 		$this->data['details'] = array_merge($this->data['details'], $details);
+		$this->data['updated'] = strtotime('now');
 	}
 
 	/**
@@ -233,6 +234,7 @@ class Data {
 			}
 
 			$this->data['videos'] = $videos;
+			$this->data['updated'] = strtotime('now');
 		}
 	}
 
@@ -282,6 +284,8 @@ class Data {
 
 		$this->data['videos'] = $videos;
 		$this->data['feed'] = $feed;
+		$this->data['updated'] = strtotime('now');
+		
 		$this->removeOldVideos();
 	}
 
