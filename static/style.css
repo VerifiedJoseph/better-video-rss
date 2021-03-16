@@ -165,3 +165,22 @@ button {
 	padding: 5px;
 	margin-bottom: 15px;
 }
+
+.crumbs ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.crumbs li {
+	margin-left: 0em;
+	display: inline-block;
+}
+
+.crumbs li > a::after {
+    display: inline-block;
+    color: #000;
+    content: '>';
+    font-size: 80%;
+    font-weight: bold;
+    padding: 0 3px;
+}

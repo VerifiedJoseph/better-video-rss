@@ -188,7 +188,13 @@ HTML;
 </head>
 <body>
 	<header>
-		<a href="index.php">BetterVideoRss</a> &#187; <a href="tools.html">Tools</a> &#187; Cache Viewer
+		<nav class="crumbs">
+			<ol>
+				<li><a href="index.php">BetterVideoRss</a></li>
+				<li><a href="tools.html">Tools</a></li>
+				<li>Cache Viewer</li>
+			</ol>
+		</nav>
 	</header>
 	<div id="main" class="viewer">
 		<table class="stats">
