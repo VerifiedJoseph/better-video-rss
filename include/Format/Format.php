@@ -88,7 +88,7 @@ EOD;
 		}
 
 		return <<<EOD
-{$media}<hr/>Published: <time datetime="{$datetime}">{$published}</time> - Duration: <span cclass="duration">{$video['duration']}</span><hr/><p>{$description}</p>
+{$media}<hr/>Published: <time datetime="{$datetime}">{$published}</time> - Duration: <span class="duration">{$video['duration']}</span><hr/><p>{$description}</p>
 EOD;
 	}
 
