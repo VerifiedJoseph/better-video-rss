@@ -138,7 +138,7 @@ HTML;
 			$modified = Convert::unixTime($data['modified']);
 			$size = File::readableSize($data['size']);
 
-			$xmlUrl = Url::getFeed('channel', $data['contents']['details']['id'], 'rss');
+			$xmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
 	
 			$tbody .= <<<HTML
 <tr class="center">
