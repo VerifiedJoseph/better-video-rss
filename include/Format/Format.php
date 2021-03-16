@@ -74,8 +74,9 @@ abstract class Format {
 		$description = nl2br($video['description']);
 		$description = Convert::urls($description);
 		$published = Convert::unixTime($video['published'], config::get('DATE_FORMAT'));
+		$datetime = Convert::unixTime($video['published'], 'c');
 		$media = <<<EOD
-<a target="_blank" title="Watch" href="{$video['url']}"><img src="{$video['thumbnail']}"/></a>
+<a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$video['thumbnail']}"/></a>
 EOD;
 
 		if ($this->embedVideos === true) {
@@ -87,7 +88,7 @@ EOD;
 		}
 
 		return <<<EOD
-{$media}<hr/>Published: {$published} - Duration: {$video['duration']}<hr/><p>{$description}</p>
+{$media}<hr/>Published: <time datetime="{$datetime}">{$published}</time> - Duration: <span cclass="duration">{$video['duration']}</span><hr/><p>{$description}</p>
 EOD;
 	}
 
