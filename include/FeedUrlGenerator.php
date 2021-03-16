@@ -114,9 +114,9 @@ HTML;
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
 </head>
 <body>
-	<div id="header" class="center">
+	<header class="center">
 		BetterVideoRss
-	</div>
+	</header>
 	<div id="main">
 		<div id="items">
 			{$error}

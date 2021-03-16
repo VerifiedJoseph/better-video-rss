@@ -187,7 +187,9 @@ HTML;
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
 </head>
 <body>
-	<div id="header"><a href="index.php">BetterVideoRss</a> &#187; <a href="tools.html">Tools</a> &#187; Cache Viewer</div>
+	<header>
+		<a href="index.php">BetterVideoRss</a> &#187; <a href="tools.html">Tools</a> &#187; Cache Viewer
+	</header>
 	<div id="main" class="viewer">
 		<table class="stats">
 			<thead>
