@@ -38,20 +38,20 @@ class Html extends Format {
 	<link rel="alternate" type="application/rss+xml" title="{$feedTitle}" href="{$rssLink}">
 </head>
 <body>
-	<div id="header" class="center">
+	<header class="center">
 		<a href="{$feedUrl}">{$feedTitle}</a>
-	</div>
-	<div id="main">
-		<div id="items">
-			<div class="item">
-				Feed format: $feedFormatButtons
-			</div>
+	</header>
+	<main>
+		<section id="links">
+			Feed format: $feedFormatButtons
+		</section>
+		<section id="items">
 			{$items}
-		</div>
-	</div>
-	<div id="footer" class="center">
+		</section>
+	</main>
+	<footer class="center">
 		BetterVideoRss - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a>
-	</div>
+	</footer>
 </body>
 </html>
 EOD;
@@ -74,13 +74,11 @@ EOD;
 			$itemContent = $this->buildContent($video);
 
 			$items .= <<<EOD
-<div class="item">
-	<div class="title">
-		<h2><a href="{$itemUrl}">{$itemTitle}</a></h2>
-	</div>
-{$itemContent}
-{$itemCategories}
-			</div>
+<article>
+	<h2 class="title"><a href="{$itemUrl}">{$itemTitle}</a></h2>
+	{$itemContent}
+	{$itemCategories}
+</article>
 EOD;
 		}
 
@@ -94,7 +92,7 @@ EOD;
 	 * @return string Categories as XML
 	 */
 	protected function buildCategories(array $categories) {
-		$itemCategories = '<strong>Categories:</strong> <ul>';
+		$itemCategories = '<strong>Categories:</strong><ul>';
 
 		foreach($categories as $category) {
 			$itemCategories .= <<<EOD
