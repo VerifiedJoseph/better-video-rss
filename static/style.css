@@ -44,7 +44,7 @@ p {
 	clear: both;
 }
 
-#header, #footer {
+footer, header {
 	padding: 10px;
 	padding-left: 25px;
 	background-color: rgb(233, 236, 239);
@@ -110,23 +110,28 @@ li {
 	margin-left: 1em;
 }
 
-#items {
+#items, #feeds, #links {
 	max-width: 700px;
-	margin: 30px auto;
+	margin: 15px auto;
 	margin-top:0;
 }
 
-.item, .viewer, .tools {
+#links {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.item, .viewer, .tools, article {
 	margin-top: 15px;
 }
 
-.item > .title {
+article .title {
 	background-color: rgb(233, 236, 239);
 	text-align: center;
 	padding: 10px;
 }
 
-.item img {
+article img {
 	max-width: 100%;
 }
 
