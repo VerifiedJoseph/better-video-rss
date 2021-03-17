@@ -97,4 +97,14 @@ class Convert {
 			$string
 		);
 	}
+
+	/**
+	 * Convert newlines (\r, \r\n & \n) to HTML br tag
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function newlines(string $string) {
+		return str_replace(array("\r\n", "\r", "\n"), "<br />", $string); 
+	}
 }
