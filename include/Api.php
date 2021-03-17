@@ -12,7 +12,7 @@ class Api {
 	 * @return object
 	 */
 	public function getChannel(string $parameter, string $etag) {
-		$url = $this->buildUrl('channel', $parameter);
+		$url = Url::getApi('channel', $parameter);
 		return $this->fetch($url, $etag);
 	}
 
@@ -24,7 +24,7 @@ class Api {
 	 * @return object
 	 */
 	public function getPlaylist(string $parameter, string $etag) {
-		$url = $this->buildUrl('playlist', $parameter);
+		$url = Url::getApi('playlist', $parameter);
 		return $this->fetch($url, $etag);
 	}
 
@@ -36,7 +36,7 @@ class Api {
 	 * @return object
 	 */
 	public function getVideos(string $parameter, string $etag) {
-		$url = $this->buildUrl('videos', $parameter);
+		$url = Url::getApi('videos', $parameter);
 		return $this->fetch($url, $etag);
 	}
 
@@ -47,7 +47,7 @@ class Api {
 	 * @return object|array
 	 */
 	public function searchChannels(string $parameter) {
-		$url = $this->buildUrl('searchChannels', $parameter);
+		$url = Url::getApi('searchChannels', $parameter);
 		return $this->fetch($url);
 	}
 
@@ -58,7 +58,7 @@ class Api {
 	 * @return object|array
 	 */
 	public function searchPlaylists(string $parameter) {
-		$url = $this->buildUrl('searchPlaylists', $parameter);
+		$url = Url::getApi('searchPlaylists', $parameter);
 		return $this->fetch($url);
 	}
 
