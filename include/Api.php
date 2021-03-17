@@ -2,6 +2,7 @@
 
 use \Curl\Curl;
 use Configuration as Config;
+use Helper\Url;
 
 class Api {
 	/**
@@ -60,40 +61,6 @@ class Api {
 	public function searchPlaylists(string $parameter) {
 		$url = Url::getApi('searchPlaylists', $parameter);
 		return $this->fetch($url);
-	}
-
-	/**
-	 * Build URL
-	 *
-	 * @param string $type API request type
-	 * @param string $parameter Request Parameter
-	 * @return string Returns API URL
-	 */
-	private function buildUrl(string $type, string $parameter = '') {
-		switch ($type) {
-			case 'channel':
-				$parameters = 'channels?part=snippet,contentDetails&id='
-					. $parameter . '&fields=etag,items(snippet(title,description,thumbnails(default(url))))';
-				break;
-			case 'playlist':
-				$parameters = 'playlists?part=snippet,contentDetails&id='
-					. $parameter . '&fields=etag,items(snippet(title,description,thumbnails(default(url))))';
-				break;
-			case 'videos':
-				$parameters = 'videos?part=id,snippet,contentDetails,liveStreamingDetails&id='
-					. $parameter . '&fields=etag,items(id,snippet(tags,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))';
-				break;
-			case 'searchChannels':
-				$parameters = 'search?part=id&fields=items(id(channelId))&q='
-					. urlencode($parameter) . '&type=channel&maxResults=1';
-				break;
-			case 'searchPlaylists':
-				$parameters = 'search?part=id&fields=items(id(playlistId))&q='
-					. urlencode($parameter) . '&type=playlist&maxResults=1';
-				break;
-		}
-
-		return Config::getEndpoint('api') . $parameters . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
 	}
 
 	/**
