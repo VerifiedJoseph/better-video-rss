@@ -71,7 +71,7 @@ abstract class Format {
 	 * @return string
 	 */
 	protected function buildContent(array $video) {
-		$description = nl2br($video['description']);
+		$description = Convert::newlines($video['description']);
 		$description = Convert::urls($description);
 		$published = Convert::unixTime($video['published'], config::get('DATE_FORMAT'));
 		$datetime = Convert::unixTime($video['published'], 'c');
