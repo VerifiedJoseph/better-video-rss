@@ -95,4 +95,40 @@ class Url {
 
 		return Config::getEndpoint('images') . $videoId . '/' . $type . '.jpg';
 	}
+	
+	/**
+	 * Create a YouTube API URL
+	 *
+	 * @param string $type API request type
+	 * @param string $parameter API request Parameter
+	 * @return string Returns url
+	 */
+	public static function getApi(string $type, string $parameter) {
+		$url = Config::getEndpoint('api');
+
+		switch ($type) {
+			case 'channel':
+				$url .= 'channels?part=snippet,contentDetails&id='
+					. $parameter . '&fields=etag,items(snippet(title,description,thumbnails(default(url))))';
+				break;
+			case 'playlist':
+				$url .= 'playlists?part=snippet,contentDetails&id='
+					. $parameter . '&fields=etag,items(snippet(title,description,thumbnails(default(url))))';
+				break;
+			case 'videos':
+				$url .= 'videos?part=id,snippet,contentDetails,liveStreamingDetails&id='
+					. $parameter . '&fields=etag,items(id,snippet(tags,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))';
+				break;
+			case 'searchChannels':
+				$url .= 'search?part=id&fields=items(id(channelId))&q='
+					. urlencode($parameter) . '&type=channel&maxResults=1';
+				break;
+			case 'searchPlaylists':
+				$url .= 'search?part=id&fields=items(id(playlistId))&q='
+					. urlencode($parameter) . '&type=playlist&maxResults=1';
+				break;
+		}
+
+		return $url . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
+	}
 }
