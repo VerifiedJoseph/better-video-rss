@@ -141,7 +141,7 @@ class Data {
 	 * @return string
 	 */
 	public function getExpiredVideos() {
-		$ExpiredVideos = array();
+		$expiredVideos = array();
 
 		// Return all video IDs if videos array is empty or cache is disabled
 		if (empty($this->data['videos']) || Config::get('DISABLE_CACHE') === true) {
@@ -152,11 +152,11 @@ class Data {
 			$key = array_search($id, array_column($this->data['videos'], 'id'));
 
 			if (isset($this->data['videos'][$key]['expires']) === false || time() >= $this->data['videos'][$key]['expires']) {
-				$ExpiredVideos[] = $id;
+				$expiredVideos[] = $id;
 			}
 		}
 
-		return implode(',', $ExpiredVideos);
+		return implode(',', $expiredVideos);
 	}
 
 	/**
