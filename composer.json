@@ -1,5 +1,5 @@
 {
     "require": {
-        "php-curl-class/php-curl-class": "^8.6"
+        "php-curl-class/php-curl-class": "^9.0"
     }
 }

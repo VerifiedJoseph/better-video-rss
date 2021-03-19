@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d8590b70e9ac09ad016b24c69ccee71",
+    "content-hash": "1c809779207decf7fc8b4d3ee7f324aa",
     "packages": [
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "8.9.2",
+            "version": "9.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "45db373722c983f4c65269b92e1c351ee390c292"
+                "reference": "b1c882ec346d5db1a504aaf793d272d81e4331be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/45db373722c983f4c65269b92e1c351ee390c292",
-                "reference": "45db373722c983f4c65269b92e1c351ee390c292",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/b1c882ec346d5db1a504aaf793d272d81e4331be",
+                "reference": "b1c882ec346d5db1a504aaf793d272d81e4331be",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.3"
+                "php": ">=7.0"
             },
             "require-dev": {
                 "ext-gd": "*",
@@ -73,9 +73,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-curl-class/php-curl-class/issues",
-                "source": "https://github.com/php-curl-class/php-curl-class/tree/8.9.2"
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/9.0.0"
             },
-            "time": "2021-03-17T14:47:06+00:00"
+            "time": "2021-03-19T12:52:30+00:00"
         }
     ],
     "packages-dev": [],
