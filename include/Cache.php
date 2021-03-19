@@ -79,7 +79,6 @@ class Cache {
 	 * Set cache file path
 	 */
 	private function setPath() {
-		$this->path = Config::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . 
-			Config::get('CACHE_DIR') . DIRECTORY_SEPARATOR . $this->name . '.' . Config::getCacheFileExtension();
+		$this->path = Config::getCacheDirPath() . DIRECTORY_SEPARATOR . $this->name . '.' . Config::getCacheFileExtension();
 	}
 }
