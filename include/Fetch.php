@@ -18,7 +18,7 @@ class Fetch {
 	 * @param string $feedId Feed id (channel or playlist ID)
 	 * @param string $feedType Feed type (channel or playlist)
 	 */
-	public function __construct(string $feedId, $feedType) {
+	public function __construct(string $feedId, string $feedType) {
 		$this->feedId = $feedId;
 		$this->feedType = $feedType;
 	}
