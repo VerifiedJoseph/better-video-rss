@@ -84,4 +84,18 @@ class Validate {
 
 		return false;
 	}
+
+	/**
+	 * Validate an absolute path.
+	 *
+	 * @param string $path Cache path
+	 * @return boolean
+	 */
+	public static function absolutePath(string $path) {
+		if (substr($path, 0, 1) === '/' || strpos($path, ':\\') !== false) {
+			return true;
+		}
+
+		return false;
+	}
 }
