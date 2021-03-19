@@ -113,10 +113,10 @@ class Configuration {
 			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
 		}
 
-		$cacheDir = constant('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . constant('CACHE_DIR');
+		$cacheDir = self::getCacheDirPath();
 
 		if (is_dir($cacheDir) === false && mkdir($cacheDir, self::$mkdirMode) === false) {
-			throw new Exception('Config Error: Could not create cache directory. [CACHE_DIR]');
+			throw new Exception('Config Error: Could not create cache directory [CACHE_DIR]');
 		}
 
 		if (is_dir($cacheDir) && is_writable($cacheDir) === false) {
@@ -183,6 +183,19 @@ class Configuration {
 	 */
 	public static function getCacheFileExtension() {
 		return self::$cacheFileExtension;
+	}
+
+	/**
+	 * Returns cache directory as an absolute path
+	 *
+	 * @return array
+	 */
+	public static function getCacheDirPath() {
+		if(Validate::absolutePath(self::get('CACHE_DIR')) === false) {
+			return self::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . self::get('CACHE_DIR');
+		}
+
+		return self::get('CACHE_DIR');
 	}
 
 	/**
