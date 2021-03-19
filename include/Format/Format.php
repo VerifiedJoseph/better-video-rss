@@ -77,14 +77,14 @@ abstract class Format {
 		$published = Convert::unixTime($video['published'], config::get('DATE_FORMAT'));
 		$datetime = Convert::unixTime($video['published'], 'c');
 		$media = <<<EOD
-<a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$video['thumbnail']}"/></a>
+<a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$video['thumbnail']}" loading="lazy"/></a>
 EOD;
 
 		if ($this->embedVideos === true) {
 			$url = Url::getEmbed($video['id']);
 
 			$media = <<<EOD
-<iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" allowfullscreen></iframe>
+<iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" loading="lazy" allowfullscreen></iframe>
 EOD;
 		}
 
