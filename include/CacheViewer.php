@@ -78,8 +78,7 @@ class CacheViewer {
 	private function loadFiles() {
 		$regex = '/.' . preg_quote(Config::getCacheFileExtension()) . '$/';
 
-		$directoryPath = Config::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . Config::get('CACHE_DIR');
-		$cacheDirectory = new RecursiveDirectoryIterator($directoryPath);
+		$cacheDirectory = new RecursiveDirectoryIterator(Config::getCacheDirPath());
 		$cacheFiles = new RegexIterator($cacheDirectory, $regex);
 
 		foreach ($cacheFiles as $file) {
