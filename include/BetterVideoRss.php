@@ -10,6 +10,9 @@ class BetterVideoRss {
 
 	/** @var string $feedType Feed type (channel or playlist) */
 	private string $feedType = 'channel';
+	
+	/** @var string $feedFormat Feed format */
+	private string $feedFormat = '';
 
 	/** @var boolean $embedVideos Embed videos status */
 	private bool $embedVideos = false;
