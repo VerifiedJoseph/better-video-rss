@@ -28,8 +28,8 @@ class Data {
 		'videos' => '+1 hour',
 	);
 
-	/** @var bool $dataUpdated Data update status */
-	private bool $dataUpdated = false;
+	/** @var bool $updated Data update status */
+	private bool $updated = false;
 
 	/**
 	 * Constructor
@@ -92,7 +92,7 @@ class Data {
 	 * @return boolean
 	 */
 	public function getUpdateStatus() {
-		return $this->dataUpdated;
+		return $this->updated;
 	}
 
 	/**
@@ -165,7 +165,7 @@ class Data {
 	 * @param object|array $response
 	 */
 	public function updateDetails($response) {
-		$this->dataUpdated = true;
+		$this->updated = true;
 
 		$details = array();
 		$details['etag'] = $response->etag;
@@ -195,7 +195,7 @@ class Data {
 	 * @param object|array $response
 	 */
 	public function updateVideos($response) {
-		$this->dataUpdated = true;
+		$this->updated = true;
 
 		if (empty($response) === false) {
 			$videos = $this->data['videos'];
@@ -244,7 +244,7 @@ class Data {
 	 * @param object $response
 	 */
 	public function updateFeed($response) {
-		$this->dataUpdated = true;
+		$this->updated = true;
 
 		$feed = array(
 			'videos' => array()
