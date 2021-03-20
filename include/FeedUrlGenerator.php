@@ -125,14 +125,19 @@ HTML;
 			<div class="item">
 				<h2>Channel</h2>
 				<form action="" method="post">
-					Channel: <input class="input" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required><br>
-					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
-					Feed format: 
-					<select name="format">
-						<option value="rss">RSS</option>
-						<option value="html">HTML</option>
-						<option value="json">JSON</option>
-					</select><br/>
+					<label>Channel:
+						<input class="input" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required>
+					</label><br>
+					<label>Embed videos:
+						<input type="checkbox" name="embed_videos" value="yes">
+					</label><br>
+					<label>Feed format: 
+						<select name="format">
+							<option value="rss">RSS</option>
+							<option value="html">HTML</option>
+							<option value="json">JSON</option>
+						</select>
+					</label><br>
 					<input type="hidden" name="type" value="channel">
 					<button type="submit">Generate</button>
 				</form><br>
@@ -141,14 +146,19 @@ HTML;
 			<div class="item">
 				<h2>Playlist</h2>
 				<form action="" method="post">
-					Playlist: <input class="input" name="query" type="input" placeholder="Playlist ID or title" required><br>
-					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
-					Feed format: 
-					<select name="format">
-						<option value="rss">RSS</option>
-						<option value="html">HTML</option>
-						<option value="json">JSON</option>
-					</select><br/>
+					<label>Playlist:
+						<input class="input" name="query" type="input" placeholder="Playlist ID or title" required>
+					</label><br>
+					<label>Embed videos:
+						<input type="checkbox" name="embed_videos" value="yes">
+					</label><br>
+					<label>Feed format: 
+						<select name="format">
+							<option value="rss">RSS</option>
+							<option value="html">HTML</option>
+							<option value="json">JSON</option>
+						</select>
+					</label><br>
 					<input type="hidden" name="type" value="playlist">
 					<button type="submit">Generate</button>
 				</form><br>
@@ -157,14 +167,19 @@ HTML;
 			<div class="item">
 				<h2>URL</h2>
 				<form action="" method="post">
-					URL: <input class="input" name="query" type="input" placeholder="youtube.com URL" required><br>
-					Embed videos: <input type="checkbox" name="embed_videos" value="yes"><br>
-					Feed format: 
-					<select name="format">
-						<option value="rss">RSS</option>
-						<option value="html">HTML</option>
-						<option value="json">JSON</option>
-					</select><br/>
+					<label>URL:
+						<input class="input" name="query" type="input" placeholder="youtube.com URL" required>
+					</label><br>
+					<label>Embed videos:
+						<input type="checkbox" name="embed_videos" value="yes">
+					</label><br>
+					<label>Feed format: 
+						<select name="format">
+							<option value="rss">RSS</option>
+							<option value="html">HTML</option>
+							<option value="json">JSON</option>
+						</select>
+					</label><br>
 					<input type="hidden" name="type" value="url">
 					<button type="submit">Generate</button>
 				</form><br>
