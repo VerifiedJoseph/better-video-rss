@@ -28,6 +28,10 @@ p {
 	margin-bottom: 10px;
 }
 
+.gray {
+	color: gray;
+}
+
 .small {
 	font-size:13px;
 }
