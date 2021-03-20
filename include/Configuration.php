@@ -199,6 +199,34 @@ class Configuration {
 	}
 
 	/**
+	 * Returns current git commit and branch of BetterVideoRss.
+	 *
+	 * @return string
+	 */
+	public static function getVersion() {
+		$headPath = self::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'HEAD';
+
+		if (file_exists($headPath) === true) {
+			$headContents = file_get_contents($headPath);
+
+			$refPath = '.git/' . substr($headContents, 5, -1);
+			$parts = explode('/', $refPath);
+
+			if(isset($parts[3])) {
+				$branch = $parts[3];
+
+				if(file_exists($refPath)) {
+					$refContents = file_get_contents($refPath);
+					
+					return 'git.' . $branch . '.' . substr($refContents, 0, 7);
+				}
+			}
+		}
+
+		return 'unknown';
+	}
+	
+	/**
 	 * Include (require) config file
 	 */
 	private static function requireConfigFile() {
