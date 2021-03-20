@@ -80,6 +80,8 @@ class FeedUrlGenerator {
 		$playlistLink = '';
 		$fromUrlLink = '';
 
+		$version = Config::getVersion();
+
 		if ($this->error === true) {
 			$error = <<<HTML
 <div id="error"><strong>{$this->errorMessage}</strong></div>
@@ -169,7 +171,7 @@ HTML;
 				{$fromUrlLink}
 			</div>
 			<div class="item">
-				<a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a>
+				<p><a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a></p><span class="small gray">version: {$version}</span>
 			</div>
 		</div>
 	</div>
