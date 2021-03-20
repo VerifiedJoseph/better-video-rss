@@ -17,6 +17,9 @@ abstract class Format {
 	/** @var string $contentType HTTP content-type header value */
 	protected string $contentType = 'text/plain';
 
+	/** @var boolean $embedVideos Embed videos status */
+	private bool $embedVideos = false;
+
 	/**
 	 * Constructor
 	 *
