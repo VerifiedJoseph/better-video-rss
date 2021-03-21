@@ -87,15 +87,6 @@ class Data {
 	}
 
 	/**
-	 * Returns data update status
-	 *
-	 * @return boolean
-	 */
-	public function getUpdateStatus() {
-		return $this->updated;
-	}
-
-	/**
 	 * Returns HTTP ETag for a part
 	 *
 	 * @param string $part
@@ -287,6 +278,15 @@ class Data {
 		$this->data['updated'] = strtotime('now');
 		
 		$this->removeOldVideos();
+	}
+
+	/**
+	 * Returns data update status
+	 *
+	 * @return boolean
+	 */
+	private function getUpdateStatus() {
+		return $this->updated;
 	}
 
 	/**
