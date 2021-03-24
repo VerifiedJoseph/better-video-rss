@@ -186,7 +186,7 @@ HTML;
 				{$fromUrlLink}
 			</div>
 			<div class="item">
-				<p><a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a></p><span class="small gray">version: {$version}</span>
+				<p><a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a></p><span class="small">version: {$version}</span>
 			</div>
 		</div>
 	</div>
