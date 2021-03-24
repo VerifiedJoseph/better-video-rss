@@ -18,7 +18,7 @@ abstract class Format {
 	protected string $contentType = 'text/plain';
 
 	/** @var boolean $embedVideos Embed videos status */
-	private bool $embedVideos = false;
+	protected bool $embedVideos = false;
 
 	/**
 	 * Constructor
