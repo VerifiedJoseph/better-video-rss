@@ -161,7 +161,7 @@ class Configuration {
 	/**
 	 * Returns default feed format
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public static function getDefaultFeedFormat() {
 		return self::$defaultFeedFormat;
@@ -179,7 +179,7 @@ class Configuration {
 	/**
 	 * Returns cache filename extension
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public static function getCacheFileExtension() {
 		return self::$cacheFileExtension;
@@ -188,7 +188,7 @@ class Configuration {
 	/**
 	 * Returns cache directory as an absolute path
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public static function getCacheDirPath() {
 		if(Validate::absolutePath(self::get('CACHE_DIR')) === false) {
@@ -235,8 +235,6 @@ class Configuration {
 
 	/**
 	 * Set defaults as constants if no user-supplied overrides given in config.php
-	 *
-	 * @return array
 	 */
 	private static function setDefaults() {
 		foreach (self::$defaults as $param => $value) {
