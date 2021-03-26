@@ -55,6 +55,15 @@ abstract class Format {
 	}
 
 	/**
+	 * Returns HTTP last-modified header value
+	 *
+	 * @return string
+	 */
+	public function getLastModified() {
+		return Convert::unixTime($this->data['updated'], 'D, d M Y H:i:s T');
+	}
+
+	/**
 	 * Build feed itmes
 	 *
 	 * @return string Items as XML
