@@ -18,9 +18,11 @@ class Output {
 	 *
 	 * @param string $data Feed data
 	 * @param string $contentType Content-type header value
+	 * @param string $lastModified Last-modified header value
 	 */
-	public static function feed(string $data, string $contentType) {
+	public static function feed(string $data, string $contentType, string $lastModified) {
 		header('content-type: ' . $contentType);
+		header('last-modified:' . $lastModified);
 		echo $data;
 	}
 }
