@@ -74,12 +74,17 @@ class Convert {
 	 *
 	 * @param string $timestamp Unix timestamp
 	 * @param string $format DateTime format
+	 * @param string $timezone DateTime timezone (overrides use of config constant TIMEZONE)
 	 * @return string
 	 */
-	public static function unixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s') {
+	public static function unixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s', string $timezone = '') {
+		if (empty($timezone) === true) {
+			$timezone = config::get('TIMEZONE');
+		}
+
 		$dt = new DateTime();
 		$dt->setTimestamp($timestamp);
-		$dt->setTimezone(new DateTimeZone(config::get('TIMEZONE')));
+		$dt->setTimezone(new DateTimeZone($timezone));
 
 		return $dt->format($format);
 	}
