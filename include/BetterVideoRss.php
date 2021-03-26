@@ -178,7 +178,8 @@ class BetterVideoRss {
 
 		Output::feed(
 			$format->get(),
-			$format->getContentType()
+			$format->getContentType(),
+			$format->getLastModified()
 		);
 	}
 
