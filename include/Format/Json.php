@@ -27,7 +27,6 @@ class Json extends Format {
 		$feedTitle = $this->data['details']['title'];
 		$feedHomePageUrl = $this->data['details']['url'];
 		$feedUrl = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos);
-		$feedUpdated = Convert::unixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
 		$items = $this->buildItmes();
