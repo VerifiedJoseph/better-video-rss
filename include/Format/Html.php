@@ -18,7 +18,6 @@ class Html extends Format {
 		$feedDescription = htmlspecialchars($this->data['details']['description'], ENT_QUOTES);
 		$feedTitle = $this->data['details']['title'];
 		$feedUrl = $this->data['details']['url'];
-		$feedUpdated = Convert::unixTime(strtotime('now'), 'r');
 		$feedImage = $this->data['details']['thumbnail'];
 
 		$rssLink = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos);
