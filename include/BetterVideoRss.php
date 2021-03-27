@@ -1,7 +1,8 @@
 <?php
 
-use Helper\Validate;
 use Configuration as Config;
+use Helper\Validate;
+use Helper\Output;
 
 class BetterVideoRss {
 

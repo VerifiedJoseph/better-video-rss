@@ -4,6 +4,7 @@
 require 'autoload.php';
 
 use Configuration as Config;
+use Helper\Output;
 
 try {
 	Config::checkInstall();
