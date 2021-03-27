@@ -1,5 +1,7 @@
 <?php
 
+namespace Helper;
+
 class Output {
 	/**
 	 * Output error message
