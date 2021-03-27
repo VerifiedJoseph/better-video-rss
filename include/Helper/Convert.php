@@ -79,7 +79,7 @@ class Convert {
 	 */
 	public static function unixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s', string $timezone = '') {
 		if (empty($timezone) === true) {
-			$timezone = config::get('TIMEZONE');
+			$timezone = Config::get('TIMEZONE');
 		}
 
 		$dt = new DateTime();

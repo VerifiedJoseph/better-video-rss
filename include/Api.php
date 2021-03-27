@@ -105,7 +105,7 @@ class Api {
 	private function handleError($response) {
 		$error = $response->error->errors[0];
 
-		if (config::get('RAW_API_ERRORS') === true) {
+		if (Config::get('RAW_API_ERRORS') === true) {
 			$raw = json_encode($response->error, JSON_PRETTY_PRINT);
 
 			throw new Exception(

@@ -86,7 +86,7 @@ abstract class Format {
 	protected function buildContent(array $video) {
 		$description = Convert::newlines($video['description']);
 		$description = Convert::urls($description);
-		$published = Convert::unixTime($video['published'], config::get('DATE_FORMAT'));
+		$published = Convert::unixTime($video['published'], Config::get('DATE_FORMAT'));
 		$datetime = Convert::unixTime($video['published'], 'c');
 		$media = <<<EOD
 <a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$video['thumbnail']}" loading="lazy"/></a>
@@ -117,7 +117,7 @@ EOD;
 		if (isset($video['liveStream'])) {
 			$scheduled = Convert::unixTime(
 				$video['liveStreamScheduled'],
-				config::get('DATE_FORMAT') . ' ' . config::get('TIME_FORMAT')
+				Config::get('DATE_FORMAT') . ' ' . Config::get('TIME_FORMAT')
 			);
 
 			// Scheduled
