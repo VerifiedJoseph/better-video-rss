@@ -55,7 +55,7 @@ class Feed {
 				$fetch->api(
 					$part,
 					$parameter,
-					$this->data->getPartEtag($part)
+					$data->getPartEtag($part)
 				);
 
 				$data->updateDetails($fetch->getResponse());
