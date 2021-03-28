@@ -138,6 +138,7 @@ HTML;
 			$size = File::readableSize($data['size']);
 
 			$xmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
+			$htmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'html');
 	
 			$tbody .= <<<HTML
 <tr class="center">
@@ -167,6 +168,11 @@ HTML;
 		<div class="left">
 			<a target="_blank" href="{$xmlUrl}">
 				<button type="submit">View XML</button>
+			</a>
+		</div>
+		<div class="right">
+			<a target="_blank" href="{$htmlUrl}">
+				<button type="submit">View HTML</button>
 			</a>
 		</div>
 	</td>
