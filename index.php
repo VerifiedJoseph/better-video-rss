@@ -13,8 +13,8 @@ try {
 	Config::checkInstall();
 	Config::checkConfig();
 
-	$betterRss = new BetterVideoRss();
-	$betterRss->generate();
+	$index = new FeedUrlGenerator();
+	$index->display();
 
 } catch (Exception $e) {
 	Output::Error($e->getMessage());
