@@ -38,7 +38,7 @@ class Html extends Format {
 </head>
 <body>
 	<header class="center">
-		<a href="{$feedUrl}">{$feedTitle}</a>
+		<a target="_blank" href="{$feedUrl}">{$feedTitle}</a>
 	</header>
 	<main>
 		<section id="links">
@@ -74,7 +74,7 @@ EOD;
 
 			$items .= <<<EOD
 <article>
-	<h2 class="title"><a href="{$itemUrl}">{$itemTitle}</a></h2>
+	<h2 class="title"><a target="_blank" href="{$itemUrl}">{$itemTitle}</a></h2>
 	{$itemContent}
 	{$itemCategories}
 </article>

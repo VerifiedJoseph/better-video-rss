@@ -98,7 +98,7 @@ class Convert {
 	public static function urls(string $string) {
 		return preg_replace(
 			self::$urlRegex,
-			'<a href="$1" target="_blank">$1</a>',
+			'<a target="_blank" href="$1" target="_blank">$1</a>',
 			$string
 		);
 	}
