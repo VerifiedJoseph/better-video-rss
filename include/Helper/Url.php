@@ -21,7 +21,7 @@ class Url {
 	 * @return string
 	 */
 	public static function getFeed(string $type, string $id, string $format, bool $embed = false) {
-		$url = Config::get('SELF_URL_PATH') . '?' . $type . '_id=' . $id . '&format=' . $format;
+		$url = Config::get('SELF_URL_PATH') . 'feed.php?' . $type . '_id=' . $id . '&format=' . $format;
 
 		if ($embed === true) {
 			$url .= '&embed_videos=true';
