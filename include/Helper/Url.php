@@ -95,7 +95,7 @@ class Url {
 
 		return Config::getEndpoint('images') . $videoId . '/' . $type . '.jpg';
 	}
-	
+
 	/**
 	 * Create a YouTube API URL
 	 *

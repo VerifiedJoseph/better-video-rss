@@ -217,7 +217,7 @@ class Configuration {
 
 				if(file_exists($refPath)) {
 					$refContents = file_get_contents($refPath);
-					
+
 					return 'git.' . $branch . '.' . substr($refContents, 0, 7);
 				}
 			}
@@ -225,7 +225,7 @@ class Configuration {
 
 		return 'unknown';
 	}
-	
+
 	/**
 	 * Include (require) config file
 	 */

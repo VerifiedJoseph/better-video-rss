@@ -110,6 +110,6 @@ class Convert {
 	 * @return string
 	 */
 	public static function newlines(string $string) {
-		return str_replace(array("\r\n", "\r", "\n"), "<br />", $string); 
+		return str_replace(array("\r\n", "\r", "\n"), '<br />', $string);
 	}
 }

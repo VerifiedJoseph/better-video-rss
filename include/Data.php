@@ -276,7 +276,7 @@ class Data {
 		$this->data['videos'] = $videos;
 		$this->data['feed'] = $feed;
 		$this->data['updated'] = strtotime('now');
-		
+
 		$this->removeOldVideos();
 	}
 
