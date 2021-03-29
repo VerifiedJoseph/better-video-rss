@@ -141,7 +141,7 @@ class Feed {
 		if (isset($_GET['embed_videos'])) {
 			$this->embedVideos = filter_var($_GET['embed_videos'], FILTER_VALIDATE_BOOLEAN);
 		}
-		
+
 		if (empty($this->feedId) === true) {
 			throw new Exception('No channel or playlist ID parameter given.');
 		}
