@@ -20,8 +20,8 @@ class Html extends Format {
 		$feedUrl = $this->data['details']['url'];
 		$feedImage = $this->data['details']['thumbnail'];
 
-		$rssUrl = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos);
-		$jsonUrl = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos);
+		$rssUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos));
+		$jsonUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos));
 		$feedFormatButtons = $this->buildFormatButtons();
 
 		$items = $this->buildItmes();
