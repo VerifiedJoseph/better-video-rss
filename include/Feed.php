@@ -101,7 +101,8 @@ class Feed {
 	/**
 	 * Check user inputs
 	 *
-	 * @throws Exception if a invalid format parameter is given.
+	 * @throws Exception if an invalid format parameter is given.
+	 * @throws Exception if no channel or playlist ID parameter given.
 	 * @throws Exception if an empty or invalid channel ID parameter is given.
 	 * @throws Exception if an empty or invalid playlist ID parameter is given.
 	 */
@@ -119,11 +120,7 @@ class Feed {
 
 		if (isset($_GET['channel_id'])) {
 
-			if (empty($_GET['channel_id'])) {
-				throw new Exception('No channel ID parameter given.');
-			}
-
-			if (Validate::channelId($_GET['channel_id']) === false) {
+			if (empty($_GET['channel_id']) === true || Validate::channelId($_GET['channel_id']) === false) {
 				throw new Exception('Invalid channel ID parameter given.');
 			}
 
@@ -133,11 +130,7 @@ class Feed {
 
 		if (isset($_GET['playlist_id'])) {
 
-			if (empty($_GET['playlist_id'])) {
-				throw new Exception('No playlist ID parameter given.');
-			}
-
-			if (Validate::playlistId($_GET['playlist_id']) === false) {
+			if (empty($_GET['playlist_id']) === true || Validate::playlistId($_GET['playlist_id']) === false) {
 				throw new Exception('Invalid playlist ID parameter given.');
 			}
 
@@ -147,6 +140,10 @@ class Feed {
 
 		if (isset($_GET['embed_videos'])) {
 			$this->embedVideos = filter_var($_GET['embed_videos'], FILTER_VALIDATE_BOOLEAN);
+		}
+		
+		if (empty($this->feedId) === true) {
+			throw new Exception('No channel or playlist ID parameter given.');
 		}
 	}
 
