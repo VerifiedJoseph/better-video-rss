@@ -20,7 +20,8 @@ class Html extends Format {
 		$feedUrl = $this->data['details']['url'];
 		$feedImage = $this->data['details']['thumbnail'];
 
-		$rssLink = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos);
+		$rssUrl = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos);
+		$jsonUrl = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos);
 		$feedFormatButtons = $this->buildFormatButtons();
 
 		$items = $this->buildItmes();
@@ -34,7 +35,8 @@ class Html extends Format {
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="{$feedDescription}">
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
-	<link rel="alternate" type="application/rss+xml" title="{$feedTitle}" href="{$rssLink}">
+	<link rel="alternate" type="application/rss+xml" title="{$feedTitle} RSS feed" href="{$rssUrl}">
+	<link rel="alternate" type="application/json" title="{$feedTitle} JSON feed" href="{$jsonUrl}">
 </head>
 <body>
 	<header class="center">
