@@ -13,7 +13,7 @@ try {
 	Config::checkInstall();
 	Config::checkConfig();
 
-	$index = new FeedUrlGenerator();
+	$index = new Index();
 	$index->display();
 
 } catch (Exception $e) {

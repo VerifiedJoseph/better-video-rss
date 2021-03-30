@@ -5,7 +5,7 @@ use Configuration as Config;
 use Helper\Validate;
 use Helper\Url;
 
-class FeedUrlGenerator {
+class Index {
 
 	/**
 	 * @var string $query Search query
