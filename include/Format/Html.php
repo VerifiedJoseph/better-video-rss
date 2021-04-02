@@ -68,7 +68,7 @@ EOD;
 		$items = '';
 
 		foreach ($this->data['videos'] as $video) {
-			$itemTitle = $this->buildTitle($video);
+			$itemTitle = htmlspecialchars($this->buildTitle($video));
 			$itemUrl = $video['url'];
 			$itemEnclosure = $video['thumbnail'];
 			$itemCategories = $this->buildCategories($video['tags']);
@@ -96,6 +96,8 @@ EOD;
 		$itemCategories = '<strong>Categories:</strong><ul>';
 
 		foreach($categories as $category) {
+			$category = htmlspecialchars($category);
+
 			$itemCategories .= <<<EOD
 <li>{$category}</li>
 EOD;
