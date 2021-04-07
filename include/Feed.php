@@ -34,13 +34,9 @@ class Feed {
 	 */
 	public function generate() {
 		$api = new Api();
-		
-		$data = new Data(
-			$this->getFeedId(),
-			$this->getFeedType()
-		);
+		$fetch = new Fetch();
 
-		$fetch = new Fetch(
+		$data = new Data(
 			$this->getFeedId(),
 			$this->getFeedType()
 		);
@@ -48,8 +44,12 @@ class Feed {
 		foreach ($data->getExpiredParts() as $part) {
 
 			if ($part === 'feed') {
-				$fetch->feed();
-				$data->updateFeed($fetch->getResponse());
+				$response = $fetch->feed(
+					$this->getFeedId(),
+					$this->getFeedType()
+				);
+
+				$data->updateFeed($response);
 			}
 
 			if ($part === 'details') {
