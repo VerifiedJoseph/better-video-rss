@@ -13,15 +13,6 @@ class Fetch {
 	private string $feedType = 'channel';
 
 	/**
-	 * Returns response from cURL
-	 *
-	 * @return array|object
-	 */
-	public function getResponse() {
-		return $this->response;
-	}
-
-	/**
 	 * Fetch YouTube RSS feed
 	 *
 	 * @param string $feedId Feed id (channel or playlist ID)
