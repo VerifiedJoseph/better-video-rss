@@ -24,11 +24,15 @@ class Fetch {
 	/**
 	 * Fetch YouTube RSS feed
 	 *
-	 * @param string $id YouTube channel or playlist ID
+	 * @param string $feedId Feed id (channel or playlist ID)
+	 * @param string $feedType Feed type (channel or playlist)
+	 *	 
+	 * @return object|array Response from Curl
+	 *
 	 * @throws Exception If a curl error has occurred.
 	 */
-	public function feed() {
-		$url = Url::getRssFeed($this->feedType, $this->feedId);
+	public function feed(string $feedId, string $feedType) {
+		$url = Url::getRssFeed($feedType, $feedId);
 
 		$curl = new Curl();
 		$curl->get($url);
@@ -41,5 +45,7 @@ class Fetch {
 		if ($curl->getHttpStatusCode() !== 200) {
 			throw new Exception('Failed to fetch: ' . $url);
 		}
+
+		return $curl->getResponse();
 	}
 }
