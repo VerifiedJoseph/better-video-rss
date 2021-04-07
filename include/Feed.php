@@ -33,6 +33,8 @@ class Feed {
 	 * Generate feed
 	 */
 	public function generate() {
+		$api = new Api();
+		
 		$data = new Data(
 			$this->getFeedId(),
 			$this->getFeedType()
@@ -44,7 +46,6 @@ class Feed {
 		);
 
 		foreach ($data->getExpiredParts() as $part) {
-			$parameter = '';
 
 			if ($part === 'feed') {
 				$fetch->feed();
@@ -52,29 +53,27 @@ class Feed {
 			}
 
 			if ($part === 'details') {
-				$fetch->api(
-					$part,
-					$parameter,
+				$response = $api->getChannel(
+					$this->getFeedId(),
 					$data->getPartEtag($part)
 				);
 
-				$data->updateDetails($fetch->getResponse());
+				$data->updateDetails($response);
 			}
 
 			if ($part === 'videos') {
-				$parameter = $data->getExpiredVideos();
+				$videos = $data->getExpiredVideos();
 
-				if (empty($parameter)) {
+				if (empty($videos)) {
 					continue;
 				}
 
-				$fetch->api(
-					$part,
-					$parameter,
+				$response = $api->getVideos(
+					$videos,
 					$data->getPartEtag($part)
 				);
 
-				$data->updateVideos($fetch->getResponse());
+				$data->updateVideos($response);
 			}
 		}
 
