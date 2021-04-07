@@ -53,34 +53,4 @@ class Fetch {
 			throw new Exception('Failed to fetch: ' . $url);
 		}
 	}
-
-	/**
-	 * Fetch data from API
-	 *
-	 * @param string $part Name part
-	 * @param string $parameter Request parameter
-	 * @param string $etag Request etag
-	 * @throws Exception If channel or playlist was not found.
-	 */
-	public function api(string $part, string $parameter, string $etag) {
-		$api = new Api();
-
-		if ($part === 'details') {
-			if ($this->feedType === 'channel') {
-				$this->response = $api->getChannel($this->feedId, $etag);
-			}
-
-			if ($this->feedType === 'playlist') {
-				$this->response = $api->getPlaylist($this->feedId, $etag);
-			}
-
-			if (empty($this->response->items)) {
-				throw new Exception($this->feedType . ' not found.');
-			}
-		}
-
-		if ($part === 'videos') {
-			$this->response = $api->getVideos($parameter, $etag);
-		}
-	}
 }
