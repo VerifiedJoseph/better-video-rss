@@ -1,7 +1,6 @@
 <?php
 
 use \Curl\Curl;
-use Configuration as Config;
 use Helper\Url;
 
 class Fetch {
