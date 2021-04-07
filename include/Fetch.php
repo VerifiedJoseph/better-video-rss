@@ -5,13 +5,6 @@ use Configuration as Config;
 use Helper\Url;
 
 class Fetch {
-
-	/** @var string $feedId YouTube channel or playlist ID */
-	private string $feedId = '';
-
-	/** @var string $feedType Feed type (channel or playlist) */
-	private string $feedType = 'channel';
-
 	/**
 	 * Fetch YouTube RSS feed
 	 *
