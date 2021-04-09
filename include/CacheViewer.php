@@ -82,18 +82,7 @@ class CacheViewer {
 		$cacheFiles = new RegexIterator($cacheDirectory, $regex);
 
 		foreach ($cacheFiles as $file) {
-			$handle = fopen($file, 'r');
-
-			if ($handle === false) {
-				throw new Exception('Failed to open file: ' . $file->getfilename());
-			}
-
-			// Read file
-			$contents = fread($handle, filesize($file));
-
-			// Close file handle
-			fclose($handle);
-
+			$contents = File::read($file->getPathname());
 			$data = json_decode($contents, true);
 
 			if (is_null($data) === true) {
