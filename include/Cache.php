@@ -59,11 +59,14 @@ class Cache {
 	 * @param array $data Feed date
 	 */
 	public function save(array $data = array()) {
-		$data = json_encode($data);
-		$file = fopen($this->path, 'w');
 
-		fwrite($file, $data);
-		fclose($file);
+		if (Config::get('DISABLE_CACHE') === false) {
+			$data = json_encode($data);
+			$file = fopen($this->path, 'w');
+
+			fwrite($file, $data);
+			fclose($file);	
+		}
 	}
 
 	/**
