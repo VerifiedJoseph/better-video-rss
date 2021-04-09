@@ -5,7 +5,6 @@ namespace Helper;
 use \Exception;
 
 class File {
-
 	/**
 	 * Read a file
 	 *
@@ -61,6 +60,6 @@ class File {
 			throw new Exception('File not written: ' . $path);
 		}
 
-		fclose($handle);	
+		fclose($handle);
 	}
 }
