@@ -1,6 +1,7 @@
 <?php
 
 use Configuration as Config;
+use Helper\File;
 
 class Cache {
 
@@ -37,18 +38,12 @@ class Cache {
 	 */
 	public function load() {
 
-		if (file_exists($this->path) && Config::get('DISABLE_CACHE') === false) {
-			$handle = fopen($this->path, 'r');
+		if (Config::get('DISABLE_CACHE') === false) {
+			$contents = File::read($this->path);
+			$decoded = json_decode($contents, true);
 
-			if ($handle !== false) {
-				$contents = fread($handle, filesize($this->path));
-				fclose($handle);
-
-				$decoded = json_decode($contents, true);
-
-				if (is_null($decoded) === false) {
-					$this->data = $decoded;
-				}
+			if (is_null($decoded) === false) {
+				$this->data = $decoded;
 			}
 		}
 	}
@@ -62,10 +57,7 @@ class Cache {
 
 		if (Config::get('DISABLE_CACHE') === false) {
 			$data = json_encode($data);
-			$file = fopen($this->path, 'w');
-
-			fwrite($file, $data);
-			fclose($file);	
+			File::write($this->path, $data);
 		}
 	}
 
