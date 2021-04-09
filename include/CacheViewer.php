@@ -118,7 +118,7 @@ class CacheViewer {
 	 */
 	private function display() {
 		$fileCount = count($this->data);
-		$cacheSize = File::readableSize($this->cacheSize);
+		$cacheSize = Convert::fileSize($this->cacheSize);
 		$tbody = '';
 
 		if(empty($this->data)) {
@@ -135,7 +135,7 @@ HTML;
 			$number = $index + 1;
 
 			$modified = Convert::unixTime($data['modified']);
-			$size = File::readableSize($data['size']);
+			$size = Convert::fileSize($data['size']);
 
 			$xmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
 			$htmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'html');
