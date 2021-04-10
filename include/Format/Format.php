@@ -88,10 +88,16 @@ abstract class Format {
 		$description = Convert::urls($description);
 		$published = Convert::unixTime($video['published'], Config::get('DATE_FORMAT'));
 		$datetime = Convert::unixTime($video['published'], 'c');
-		$media = <<<EOD
-<a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$video['thumbnail']}" loading="lazy"/></a>
-EOD;
+		$thumbnailUrl = $video['thumbnail'];
 
+		if (Config::get('ENABLE_IMAGE_PROXY') === true) {
+			$thumbnailUrl = Url::getImageProy($video['id'], $this->data['details']['type'], $this->data['details']['id']);
+		}
+
+		$media = <<<EOD
+<a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$thumbnailUrl}" loading="lazy"/></a>
+EOD;
+		
 		if ($this->embedVideos === true) {
 			$url = Url::getEmbed($video['id']);
 
