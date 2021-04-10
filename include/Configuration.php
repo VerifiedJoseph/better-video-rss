@@ -36,7 +36,8 @@ class Configuration {
 		'TIME_FORMAT' => 'H:i',
 		'CACHE_DIR' => 'cache',
 		'DISABLE_CACHE' => false,
-		'ENABLE_CACHE_VIEWER' => false
+		'ENABLE_CACHE_VIEWER' => false,
+		'ENABLE_IMAGE_PROXY' => false
 	);
 
 	/**
@@ -129,6 +130,10 @@ class Configuration {
 
 		if (is_bool(constant('ENABLE_CACHE_VIEWER')) === false) {
 			throw new Exception('Config Error: Enable cache viewer option must be a boolean. [ENABLE_CACHE_VIEWER]');
+		}
+
+		if (is_bool(constant('ENABLE_IMAGE_PROXY')) === false) {
+			throw new Exception('Config Error: Enable image poxry option must be a boolean. [ENABLE_IMAGE_PROXY]');
 		}
 	}
 

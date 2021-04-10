@@ -36,3 +36,6 @@ define('DISABLE_CACHE', false);
 
 // Enable cache viewer
 define('ENABLE_CACHE_VIEWER', false);
+
+// Enable image proxy
+define('ENABLE_IMAGE_PROXY', false);

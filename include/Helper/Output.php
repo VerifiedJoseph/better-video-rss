@@ -27,4 +27,15 @@ class Output {
 		header('last-modified:' . $lastModified);
 		echo $data;
 	}
+
+	/**
+	 * Output image
+	 *
+	 * @param string $data Image data
+	 * @param string $contentType Content-type header value
+	 */
+	public static function image(string $data, string $contentType = 'image/jpeg') {
+		header('content-type: ' . $contentType);
+		echo $data;
+	}
 }
