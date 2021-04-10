@@ -10,6 +10,7 @@
 
 namespace Format;
 
+use Configuration as Config;
 use Helper\Convert;
 use Helper\Url;
 
@@ -60,11 +61,17 @@ class Json extends Format {
 			);
 			$item['title'] = $this->buildTitle($video);
 
+			$attachmentUrl = $video['thumbnail'];
+
+			if (Config::get('ENABLE_IMAGE_PROXY') === true) {
+				$attachmentUrl = Url::getImageProxy($video['id'], $this->data['details']['type'], $this->data['details']['id']);
+			}
+
 			$item['date_published'] = Convert::unixTime($video['published'], 'Y-m-d\TH:i:s\Z');
 			$item['content_html'] = $this->buildContent($video);
 			$item['tags'] = $this->buildCategories($video['tags']);
 			$item['attachments'][] = array(
-				'url' => $video['thumbnail'],
+				'url' => $attachmentUrl,
 				'mime_type' => 'image/jpeg',
 			);
 
