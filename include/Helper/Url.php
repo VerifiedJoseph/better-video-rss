@@ -38,7 +38,7 @@ class Url {
 	 * @param string $feedId Feed id
 	 * @return string
 	 */
-	public static function getImageProy(string $videoId, string $feedType, string $feedId) {
+	public static function getImageProxy(string $videoId, string $feedType, string $feedId) {
 		return Config::get('SELF_URL_PATH') . 'proxy.php?video_id=' . $videoId . '&' . $feedType . '_id=' . $feedId;
 	}
 

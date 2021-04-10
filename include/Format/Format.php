@@ -91,7 +91,7 @@ abstract class Format {
 		$thumbnailUrl = $video['thumbnail'];
 
 		if (Config::get('ENABLE_IMAGE_PROXY') === true) {
-			$thumbnailUrl = Url::getImageProy($video['id'], $this->data['details']['type'], $this->data['details']['id']);
+			$thumbnailUrl = Url::getImageProxy($video['id'], $this->data['details']['type'], $this->data['details']['id']);
 		}
 
 		$media = <<<EOD
