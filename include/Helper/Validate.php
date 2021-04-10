@@ -11,7 +11,7 @@ class Validate {
 
 	/** @var string $playlistIdRegex playlist ID regex */
 	private static string $playlistIdRegex = '/^(?:UU|PL)[a-zA-Z0-9_-]+$/';
-	
+
 	/** @var string $videoIdRegex Video ID regex */
 	private static string $videoIdRegex = '/^[a-zA-Z0-9_-]+$/';
 

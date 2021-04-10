@@ -49,7 +49,7 @@ class Proxy {
 		$videos = $data['feed']['videos'];
 
 		if (in_array($this->videoId, $videos) === false) {
-			throw new Exception('Video ID not in cache');		
+			throw new Exception('Video ID not in cache');
 		}
 
 		$key = array_search($this->videoId, $videos);
@@ -109,7 +109,7 @@ class Proxy {
 
 			$this->feedId = $_GET['playlist_id'];
 		}
-		
+
 		if (empty($this->feedId)) {
 			throw new Exception('No feed ID (channel or playlist) parameter given.');
 		}

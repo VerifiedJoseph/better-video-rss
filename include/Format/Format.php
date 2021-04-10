@@ -97,7 +97,7 @@ abstract class Format {
 		$media = <<<EOD
 <a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$thumbnailUrl}" loading="lazy"/></a>
 EOD;
-		
+
 		if ($this->embedVideos === true) {
 			$url = Url::getEmbed($video['id']);
 
