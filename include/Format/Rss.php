@@ -2,6 +2,7 @@
 
 namespace Format;
 
+use Configuration as Config;
 use Helper\Convert;
 use Helper\Url;
 
@@ -65,9 +66,15 @@ EOD;
 			$itemTimestamp = $this->xmlEncode(
 				Convert::unixTime($video['published'], 'r')
 			);
-			$itemEnclosure = $this->xmlEncode($video['thumbnail']);
 			$itemCategories = $this->buildCategories($video['tags']);
 			$itemContent = $this->xmlEncode($this->buildContent($video));
+			$itemEnclosure = $this->xmlEncode($video['thumbnail']);
+
+			if (Config::get('ENABLE_IMAGE_PROXY') === true) {
+				$itemEnclosure = $this->xmlEncode(
+					Url::getImageProxy($video['id'], $this->data['details']['type'], $this->data['details']['id'])
+				);
+			}
 
 			$items .= <<<EOD
 <item>
