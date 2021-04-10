@@ -11,6 +11,9 @@ class Validate {
 
 	/** @var string $playlistIdRegex playlist ID regex */
 	private static string $playlistIdRegex = '/^(?:UU|PL)[a-zA-Z0-9_-]+$/';
+	
+	/** @var string $videoIdRegex Video ID regex */
+	private static string $videoIdRegex = '/^[a-zA-Z0-9_-]+$/';
 
 	/** @var string $youTubeUrlRegex YouTube URL regex */
 	private static string $youTubeUrlRegex = '/^(?:https?:\/\/)?(?:www\.)?youtube\.com/';
@@ -51,6 +54,20 @@ class Validate {
 	 */
 	public static function playlistId(string $playlistId) {
 		if(preg_match(self::$playlistIdRegex, $playlistId)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Validate a video ID
+	 *
+	 * @param string $playlistId
+	 * @return boolean
+	 */
+	public static function videoId(string $videoId) {
+		if(preg_match(self::$videoIdRegex, $videoId)) {
 			return true;
 		}
 
