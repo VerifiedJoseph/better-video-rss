@@ -294,7 +294,7 @@ HTML;
 	</td>
 	<td>
 		<strong>Thumbnail:</strong><br>
-		<img src="{$channel['thumbnail']}"/></a>
+		<img loading="lazy" src="{$channel['thumbnail']}"/></a>
 	</td>
 </tr>
 </table>
@@ -366,7 +366,7 @@ HTML;
 	</td>
 	<td>
 		<strong>Thumbnail:</strong><br>
-		<a target="_blank" title="{$video['thumbnail']}" href="{$video['thumbnail']}"><img class="thumbnail" src="{$video['thumbnail']}"/></a>
+		<a target="_blank" title="{$video['thumbnail']}" href="{$video['thumbnail']}"><img loading="lazy" class="thumbnail" src="{$video['thumbnail']}"/></a>
 	</td>
 </tr>
 <tr>
