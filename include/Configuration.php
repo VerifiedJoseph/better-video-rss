@@ -11,15 +11,6 @@ class Configuration {
 	/** @var int $mkdirMode mkdir() access mode */
 	private static int $mkdirMode = 0775;
 
-	/** @var array $endpoints YouTube endpoints */
-	private static array $endpoints = array(
-		'images' => 'https://i.ytimg.com/vi/',
-		'nocookie' => 'https://www.youtube-nocookie.com/',
-		'website' => 'https://www.youtube.com/',
-		'feed' => 'https://www.youtube.com/feeds/videos.xml',
-		'api' => 'https://www.googleapis.com/youtube/v3/'
-	);
-
 	/** @var array $feedFormats Supported feed formats */
 	private static array $feedFormats = array('rss', 'html', 'json');
 
@@ -152,16 +143,6 @@ class Configuration {
 		}
 
 		return constant($key);
-	}
-
-	/**
-	 * Returns YouTube endpoint URL
-	 *
-	 * @param string $name Endpoint name
-	 * @return string
-	 */
-	public static function getEndpoint(string $name) {
-		return self::$endpoints[$name];
 	}
 
 	/**

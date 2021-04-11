@@ -6,6 +6,15 @@ use Configuration as Config;
 
 class Url {
 
+	/** @var array $endpoints YouTube endpoints */
+	private static array $endpoints = array(
+		'images' => 'https://i.ytimg.com/vi/',
+		'nocookie' => 'https://www.youtube-nocookie.com/',
+		'website' => 'https://www.youtube.com/',
+		'feed' => 'https://www.youtube.com/feeds/videos.xml',
+		'api' => 'https://www.googleapis.com/youtube/v3/'
+	);
+
 	/** @var array $thumbnailTypes Supported YouTube thumbnail types */
 	private static array $thumbnailTypes = array(
 		'hqdefault', 'sddefault', 'maxresdefault'
@@ -50,7 +59,7 @@ class Url {
 	 * @return string
 	 */
 	public static function getRssFeed(string $type, string $id) {
-		return Config::getEndpoint('feed') . '?' . $type . '_id=' . $id;
+		return self::getEndpoint('feed') . '?' . $type . '_id=' . $id;
 	}
 
 	/**
@@ -60,7 +69,7 @@ class Url {
 	 * @return string
 	 */
 	public static function getChannel(string $channelId) {
-		return Config::getEndpoint('website') . 'channel/' . $channelId;
+		return self::getEndpoint('website') . 'channel/' . $channelId;
 	}
 
 	/**
@@ -70,7 +79,7 @@ class Url {
 	 * @return string
 	 */
 	public static function getPlaylist(string $playlistId) {
-		return Config::getEndpoint('website') . 'playlist?list=' . $playlistId;
+		return self::getEndpoint('website') . 'playlist?list=' . $playlistId;
 	}
 
 	/**
@@ -80,7 +89,7 @@ class Url {
 	 * @return string
 	 */
 	public static function getVideo(string $videoId) {
-		return Config::getEndpoint('website') . 'watch?v=' . $videoId;
+		return self::getEndpoint('website') . 'watch?v=' . $videoId;
 	}
 
 	/**
@@ -90,7 +99,7 @@ class Url {
 	 * @return string
 	 */
 	public static function getEmbed(string $videoId) {
-		return Config::getEndpoint('nocookie') . 'embed/' . $videoId;
+		return self::getEndpoint('nocookie') . 'embed/' . $videoId;
 	}
 
 	/**
@@ -105,7 +114,7 @@ class Url {
 			$type = self::$thumbnailTypes[0];
 		}
 
-		return Config::getEndpoint('images') . $videoId . '/' . $type . '.jpg';
+		return self::getEndpoint('images') . $videoId . '/' . $type . '.jpg';
 	}
 
 	/**
@@ -116,7 +125,7 @@ class Url {
 	 * @return string Returns url
 	 */
 	public static function getApi(string $type, string $parameter) {
-		$url = Config::getEndpoint('api');
+		$url = self::getEndpoint('api');
 
 		switch ($type) {
 			case 'channel':
@@ -142,5 +151,15 @@ class Url {
 		}
 
 		return $url . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
+	}
+
+	/**
+	 * Returns YouTube endpoint URL
+	 *
+	 * @param string $name Endpoint name
+	 * @return string
+	 */
+	private static function getEndpoint(string $name) {
+		return self::$endpoints[$name];
 	}
 }
