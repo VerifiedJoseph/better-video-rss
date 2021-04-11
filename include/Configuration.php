@@ -1,6 +1,7 @@
 <?php
 
 use Helper\Validate;
+use Helper\File;
 
 class Configuration {
 
@@ -212,7 +213,7 @@ class Configuration {
 		$headPath = self::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'HEAD';
 
 		if (file_exists($headPath) === true) {
-			$headContents = file_get_contents($headPath);
+			$headContents = File::read($headPath);
 
 			$refPath = '.git/' . substr($headContents, 5, -1);
 			$parts = explode('/', $refPath);
@@ -221,7 +222,7 @@ class Configuration {
 				$branch = $parts[3];
 
 				if(file_exists($refPath)) {
-					$refContents = file_get_contents($refPath);
+					$refContents = File::read($refPath);
 
 					return 'git.' . $branch . '.' . substr($refContents, 0, 7);
 				}
