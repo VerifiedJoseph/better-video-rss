@@ -7,49 +7,31 @@ use Helper\Url;
 
 class Index {
 
-	/**
-	 * @var string $query Search query
-	 */
+	/** @var string $query Search query */
 	private string $query = '';
 
-	/**
-	 * @var boolean $embedVideos Embed videos status
-	 */
+	/** @var boolean $embedVideos Embed videos status */
 	private bool $embedVideos = false;
 
-	/**
-	 * @var string $feedId YouTube channel or playlist ID
-	 */
+	/** @var string $feedId YouTube channel or playlist ID */
 	private string $feedId = '';
 
-	/**
-	 * @var string $feedType Feed type (channel or playlist)
-	 */
+	/** @var string $feedType Feed type (channel or playlist) */
 	private string $feedType = 'channel';
 
-	/**
-	 * @var array $supportedTypes Supported feed types
-	 */
+	/** @var array $supportedTypes Supported feed types */
 	private array $supportedTypes = array('channel', 'playlist');
 
-	/**
-	 * @var string $feedFormat Feed Format
-	 */
+	/** @var string $feedFormat Feed Format */
 	private string $feedFormat = '';
 
-	/**
-	 * @var bool $fromUrl Query string is from a URL
-	 */
+	/** @var bool $fromUrl Query string is from a URL */
 	private bool $fromUrl = false;
 
-	/**
-	 * @var boolean $error Error status
-	 */
+	/** @var boolean $error Error status */
 	private bool $error = false;
 
-	/**
-	 * @var string $errorMessage Error Message
-	 */
+	/** @var string $errorMessage Error Message */
 	private string $errorMessage = '';
 
 	/**

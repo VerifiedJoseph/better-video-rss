@@ -6,24 +6,17 @@ use Helper\Convert;
 use Helper\Url;
 
 class CacheViewer {
-	/**
-	 * @var string $cacheId Current cache file ID
-	 */
+
+	/** @var string $cacheId Current cache file ID */
 	private string $cacheId = '';
 
-	/**
-	 * @var boolean $showRaw Show raw cache file data
-	 */
+	/** @var boolean $showRaw Show raw cache file data */
 	private bool $showRaw = false;
 
-	/**
-	 * @var array $data Data from cache files
-	 */
+	/** @var array $data Data from cache files */
 	private array $data = array();
 
-	/**
-	 * @var int $cacheSize Total size of the cache files
-	 */
+	/** @var int $cacheSize Total size of the cache files */
 	private int $cacheSize = 0;
 
 	/**
