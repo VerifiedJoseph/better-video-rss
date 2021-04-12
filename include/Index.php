@@ -254,7 +254,7 @@ HTML;
 	 * Find channel
 	 */
 	private function findChannel() {
-		if ($this->isChannelId($this->query) === true) {
+		if (Validate::channelId($this->query) === true) {
 			$this->feedId = $this->query;
 
 		} else {
@@ -266,32 +266,12 @@ HTML;
 	 * Find playlist
 	 */
 	private function findPlaylist() {
-		if ($this->isPlaylistId($this->query) === true) {
+		if (Validate::playlistId($this->query) === true) {
 			$this->feedId = $this->query;
 
 		} else {
 			$this->searchApi($this->query);
 		}
-	}
-
-	/**
-	 * Is query string a channel ID
-	 *
-	 * @param string $query Query string
-	 * @return boolean
-	 */
-	private function isChannelId(string $query) {
-		return Validate::channelId($query);
-	}
-
-	/**
-	 * Is query string a playlist ID
-	 *
-	 * @param string $query Query string
-	 * @return boolean
-	 */
-	private function isPlaylistId(string $query) {
-		return Validate::playlistId($query);
 	}
 
 	/**
