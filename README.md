@@ -11,7 +11,10 @@ A [public instance](https://tools.verifiedjoseph.com/BetterVideoRss/) is availab
 A valid [YouTube API key](https://developers.google.com/youtube/registering_an_application) is required.
 
 ## Caching
-To reduce requests, responses from YouTube's Data API and RSS feeds are cached. Caching can be disabled via the `DISABLE_CACHE` value in the config file.
+To reduce requests, responses from YouTube's Data API and RSS feeds are cached. Caching can be disabled via an [environment variable](docs/configuration.md).
+
+## Configuration
+[Environment variables](docs/configuration.md) are used to modify or set configuration parameters.
 
 ## Requirements
 
