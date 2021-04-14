@@ -15,9 +15,9 @@ The following two variables must be set or BetterVideoRss will not work.
 | Name      					| Description							| Default value |
 |--								| --									|--				|
 |`BVRSS_RAW_API_ERRORS`			| Enables displaying of raw API errors.	| `false`		|
-|`BVRSS_TIMEZONE`				| Time-zone								|`UTC`			|
-|`BVRSS_DATE_FORMAT`			| Date format							|`F j, Y`		|
-|`BVRSS_TIME_FORMAT`			| Time format							|`H:i`			|
+|`BVRSS_TIMEZONE`				| Time-zone ([php docs](https://www.php.net/manual/en/timezones.php))							|`UTC`			|
+|`BVRSS_DATE_FORMAT`			| Date format ([php docs](https://www.php.net/manual/en/function.date.php))						|`F j, Y`		|
+|`BVRSS_TIME_FORMAT`			| Time format ([php docs](https://www.php.net/manual/en/function.date.php))						|`H:i`			|
 |`BVRSS_CACHE_DIR`				| Cache directory path. 				|`cache`		|
 |`BBVRSS_DISABLE_CACHE`			| Disables caching.						|`false`		|
 |`BBVRSS_ENABLE_CACHE_VIEWER`	| Enables cache viewer.			  		|`false`		|
