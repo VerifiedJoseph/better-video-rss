@@ -12,6 +12,9 @@ The following two variables must be set or BetterVideoRss will not work.
 |`BVRSS_YOUTUBE_API_KEY`| YouTube API Key 									 |
 
 ### Optional variables
+
+Optional variables, if set, override the defaults listed in [`Configuration.php`](../include/Configuration.php#L24).
+
 | Name      					| Description							| Default value |
 |--								| --									|--				|
 |`BVRSS_RAW_API_ERRORS`			| Enables displaying of raw API errors.	| `false`		|
