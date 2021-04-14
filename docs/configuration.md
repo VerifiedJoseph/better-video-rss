@@ -1,7 +1,7 @@
 # Configuration
 The preferred method to adjust BetterVideoRss's configuration is via environment variables.
 
-Alternatively, you can use `config.php` (copied from `config.php-dist`) to override the defaults.
+Alternatively, you can use `config.php` (copied from [`config.php-dist`](../config.php-dist)) to override the defaults.
 
 ### Reqiured variables
 The following two variables must be set or BetterVideoRss will not work.
