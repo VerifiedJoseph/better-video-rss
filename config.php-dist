@@ -1,41 +1,38 @@
 <?php
 
-// Absolute File Path
-define('ABSOLUTE_PATH', __DIR__);
-
 // Self URL Path
 // The fully qualified URL used to access BetterVideoRss.
-define('SELF_URL_PATH', 'https://example.com/BetterVideoRss/');
+putenv('BVRSS_SELF_URL_PATH=https://example.com/BetterVideoRss/');
 
 // YouTube API Key
 // https://developers.google.com/youtube/v3/getting-started
-define('YOUTUBE_API_KEY', '');
+putenv('BVRSS_YOUTUBE_API_KEY=');
 
 // Raw API Errors
 // Display raw API errors
-define('RAW_API_ERRORS', false);
+putenv('BVRSS_RAW_API_ERRORS=false');
 
 // Timezone
 // https://www.php.net/manual/en/timezones.php
-define('TIMEZONE', 'Europe/London');
+putenv('BVRSS_TIMEZONE=UTC');
 
 // Date Format
 // https://www.php.net/manual/en/function.date.php
-define('DATE_FORMAT', 'F j, Y');
+putenv('BVRSS_DATE_FORMAT=F j, Y');
 
 // Time Format
 // https://www.php.net/manual/en/function.date.php
-define('TIME_FORMAT', 'H:i');
+putenv('BVRSS_TIME_FORMAT=H:i');
 
 // Cache directory
 // Name of the directory that cache files are saved to.
-define('CACHE_DIR', 'cache');
+putenv('BVRSS_CACHE_DIR=cache');
 
 // Disable Cache
-define('DISABLE_CACHE', false);
+putenv('BVRSS_DISABLE_CACHE=false');
 
 // Enable cache viewer
-define('ENABLE_CACHE_VIEWER', false);
+putenv('BVRSS_ENABLE_CACHE_VIEWER=true');
 
 // Enable image proxy
-define('ENABLE_IMAGE_PROXY', false);
+putenv('BVRSS_ENABLE_IMAGE_PROXY=true');

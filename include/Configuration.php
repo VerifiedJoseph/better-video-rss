@@ -32,6 +32,9 @@ class Configuration {
 		'ENABLE_IMAGE_PROXY' => false
 	);
 
+	/** @var array $config Loaded config parameters */
+	private static array $config = array();
+
 	/**
 	 * Check PHP version and loaded extensions
 	 *
@@ -60,72 +63,72 @@ class Configuration {
 	/**
 	 * Check config constants
 	 *
-	 * @throws Exception if config.php is not found
-	 * @throws Exception if a constant is not defined
-	 * @throws Exception if cache directory could not be created
-	 * @throws Exception if cache directory is not writable
+	 * @throws Exception if self URL path environment variable is not set.
+	 * @throws Exception if self URL path does not end with a forward slash.
+	 * @throws Exception if YouTube API key environment variable is not set.
+	 * @throws Exception if cache directory could not be created.
+	 * @throws Exception if cache directory is not writable.
 	 */
 	public static function checkConfig() {
-
-		if (file_exists('config.php') === false) {
-			throw new Exception('Config Error: Configuration file not found. Use config.php-dist to create config.php and edit it.');
-		}
-
 		self::requireConfigFile();
 		self::setDefaults();
 
-		if (defined('SELF_URL_PATH') === false || empty(constant('SELF_URL_PATH')) === true) {
-			throw new Exception('Config Error: Self URL path must be set. [SELF_URL_PATH]');
+		if (self::getEnVariable('SELF_URL_PATH') === false) {
+			throw new Exception('Config Error: Self URL path must be set. [BVRSS_SELF_URL_PATH]');
 		}
 
-		if (Validate::selfUrl(constant('SELF_URL_PATH')) === false) {
-			throw new Exception('Config Error: Self URL must end with a forward slash. e.g: ' . constant('SELF_URL_PATH') . '/ [SELF_URL_PATH]');
+		if (Validate::selfUrl(self::getEnVariable('SELF_URL_PATH')) === false) {
+			throw new Exception('Config Error: Self URL must end with a forward slash. e.g: ' . self::getEnVariable('SELF_URL_PATH') . '/ [BVRSS_SELF_URL_PATH]');
 		}
 
-		if (defined('YOUTUBE_API_KEY') === false || empty(constant('YOUTUBE_API_KEY')) === true) {
-			throw new Exception('Config Error: YouTube API key must be set. [YOUTUBE_API_KEY]');
+		self::$config['SELF_URL_PATH'] = self::getEnVariable('SELF_URL_PATH');
+
+		if (self::getEnVariable('YOUTUBE_API_KEY') === false) {
+			throw new Exception('Config Error: YouTube API key must be set. [BVRSS_YOUTUBE_API_KEY]');
 		}
 
-		if (is_bool(constant('RAW_API_ERRORS')) === false) {
-			throw new Exception('Config Error: Raw API Errors option must be a boolean. [RAW_API_ERRORS]');
+		self::$config['YOUTUBE_API_KEY'] = self::getEnVariable('YOUTUBE_API_KEY');
+
+		if (filter_var(self::getEnVariable('RAW_API_ERRORS'), FILTER_VALIDATE_BOOLEAN) === true) {
+			self::$config['RAW_API_ERRORS'] = true;
 		}
 
-		if (empty(constant('TIMEZONE')) === true) {
-			throw new Exception('Config Error: Timezone must be set. [TIMEZONE]');
+		if (self::getEnVariable('TIMEZONE') !== false) {
+			self::$config['TIMEZONE'] = self::getEnVariable('TIMEZONE');
 		}
 
-		if (empty(constant('DATE_FORMAT')) === true) {
-			throw new Exception('Config Error: Date format must be set. [DATE_FORMAT]');
+		if (self::getEnVariable('DATE_FORMAT') !== false) {
+			self::$config['DATE_FORMAT'] = self::getEnVariable('DATE_FORMAT');
 		}
 
-		if (empty(constant('TIME_FORMAT')) === true) {
-			throw new Exception('Config Error: Time format must be set. [TIME_FORMAT]');
+		if (self::getEnVariable('TIME_FORMAT') !== false) {
+			self::$config['TIME_FORMAT'] = self::getEnVariable('TIME_FORMAT');
 		}
 
-		if (empty(constant('CACHE_DIR')) === true) {
-			throw new Exception('Config Error: Cache directory must be set. [CACHE_DIR]');
+		if (self::getEnVariable('CACHE_DIR') !== false) {
+			self::$config['CACHE_DIR'] = self::getEnVariable('CACHE_DIR');
 		}
 
 		$cacheDir = self::getCacheDirPath();
 
 		if (is_dir($cacheDir) === false && mkdir($cacheDir, self::$mkdirMode) === false) {
-			throw new Exception('Config Error: Could not create cache directory [CACHE_DIR]');
+			throw new Exception('Config Error: Could not create cache directory [BVRSS_CACHE_DIR]');
 		}
 
 		if (is_dir($cacheDir) && is_writable($cacheDir) === false) {
-			throw new Exception('Config Error: Cache directory is not writable. [CACHE_DIR]');
+			throw new Exception('Config Error: Cache directory is not writable. [BVRSS_CACHE_DIR]');
 		}
 
-		if (is_bool(constant('DISABLE_CACHE')) === false) {
-			throw new Exception('Config Error: Disable cache option must be a boolean. [DISABLE_CACHE]');
+		if (filter_var(self::getEnVariable('DISABLE_CACHE'), FILTER_VALIDATE_BOOLEAN) === true) {
+			self::$config['DISABLE_CACHE'] = true;
 		}
 
-		if (is_bool(constant('ENABLE_CACHE_VIEWER')) === false) {
-			throw new Exception('Config Error: Enable cache viewer option must be a boolean. [ENABLE_CACHE_VIEWER]');
+		if (filter_var(self::getEnVariable('ENABLE_CACHE_VIEWER'), FILTER_VALIDATE_BOOLEAN) === true) {
+			self::$config['ENABLE_CACHE_VIEWER'] = true;
 		}
 
-		if (is_bool(constant('ENABLE_IMAGE_PROXY')) === false) {
-			throw new Exception('Config Error: Enable image poxry option must be a boolean. [ENABLE_IMAGE_PROXY]');
+		if (filter_var(self::getEnVariable('ENABLE_IMAGE_PROXY'), FILTER_VALIDATE_BOOLEAN) === true) {
+			self::$config['ENABLE_IMAGE_PROXY'] = true;
 		}
 	}
 
@@ -138,11 +141,11 @@ class Configuration {
 	 */
 	public static function get(string $key) {
 
-		if (defined($key) === false) {
-			throw new Exception('Invalid config key given:' . $key);
+		if (array_key_exists($key, self::$config) === false) {
+			throw new Exception('Invalid config key given: ' . $key);
 		}
 
-		return constant($key);
+		return self::$config[$key];
 	}
 
 	/**
@@ -217,18 +220,34 @@ class Configuration {
 	 * Include (require) config file
 	 */
 	private static function requireConfigFile() {
-		require 'config.php';
+		if (file_exists('config.php') === true) {
+			require 'config.php';
+		}
 	}
 
 	/**
-	 * Set defaults as constants if no user-supplied overrides given in config.php
+	 * Set defaults as config values
 	 */
 	private static function setDefaults() {
-		foreach (self::$defaults as $param => $value) {
+		self::$config = self::$defaults;
+	}
 
-			if (defined($param) === false) {
-				define($param, $value);
-			}
+	/**
+	 * Returns value of environment variable
+	 *
+	 * Boolean false is returned if the variable does not exist or is empty.
+	 *
+	 * @param string $name Name of config parameter
+	 * @return string|boolean
+	 */
+	private static function getEnVariable(string $name) {
+		$varName = 'BVRSS_' . $name;
+		$value = getenv($varName);
+
+		if ($value !== false && empty($value) === false) {
+			return getenv($varName);
 		}
+
+		return false;
 	}
 }
