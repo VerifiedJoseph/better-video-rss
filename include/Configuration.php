@@ -179,7 +179,7 @@ class Configuration {
 	 */
 	public static function getCacheDirPath() {
 		if(Validate::absolutePath(self::get('CACHE_DIR')) === false) {
-			return self::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . self::get('CACHE_DIR');
+			return dirname(__DIR__) . DIRECTORY_SEPARATOR . self::get('CACHE_DIR');
 		}
 
 		return self::get('CACHE_DIR');
@@ -191,7 +191,7 @@ class Configuration {
 	 * @return string
 	 */
 	public static function getVersion() {
-		$headPath = self::get('ABSOLUTE_PATH') . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'HEAD';
+		$headPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'HEAD';
 
 		if (file_exists($headPath) === true) {
 			$headContents = File::read($headPath);
