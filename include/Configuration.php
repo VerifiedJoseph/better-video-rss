@@ -66,6 +66,7 @@ class Configuration {
 	 * @throws Exception if self URL path environment variable is not set.
 	 * @throws Exception if self URL path does not end with a forward slash.
 	 * @throws Exception if YouTube API key environment variable is not set.
+	 * @throws Exception if an invalid timezone was given in environment variable.
 	 * @throws Exception if cache directory could not be created.
 	 * @throws Exception if cache directory is not writable.
 	 */
@@ -94,6 +95,10 @@ class Configuration {
 		}
 
 		if (self::getEnVariable('TIMEZONE') !== false) {
+			if (in_array(self::getEnVariable('TIMEZONE'), DateTimeZone::listIdentifiers(DateTimeZone::ALL)) === false) {
+				throw new Exception('Config Error: Invalid timezone given ('. self::getEnVariable('TIMEZONE') .'). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]');
+			}
+
 			self::$config['TIMEZONE'] = self::getEnVariable('TIMEZONE');
 		}
 
