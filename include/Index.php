@@ -88,7 +88,8 @@ HTML;
 			}
 		}
 
-			$html = <<<HTML
+		$selectHtml = $this->createFormatSelect();
+		$html = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,11 +115,7 @@ HTML;
 						<input type="checkbox" name="embed_videos" value="yes">
 					</label><br>
 					<label>Feed format: 
-						<select name="format">
-							<option value="rss">RSS</option>
-							<option value="html">HTML</option>
-							<option value="json">JSON</option>
-						</select>
+						{$selectHtml}
 					</label><br>
 					<input type="hidden" name="type" value="channel">
 					<button type="submit">Generate</button>
@@ -135,11 +132,7 @@ HTML;
 						<input type="checkbox" name="embed_videos" value="yes">
 					</label><br>
 					<label>Feed format: 
-						<select name="format">
-							<option value="rss">RSS</option>
-							<option value="html">HTML</option>
-							<option value="json">JSON</option>
-						</select>
+						{$selectHtml}
 					</label><br>
 					<input type="hidden" name="type" value="playlist">
 					<button type="submit">Generate</button>
@@ -156,11 +149,7 @@ HTML;
 						<input type="checkbox" name="embed_videos" value="yes">
 					</label><br>
 					<label>Feed format: 
-						<select name="format">
-							<option value="rss">RSS</option>
-							<option value="html">HTML</option>
-							<option value="json">JSON</option>
-						</select>
+						{$selectHtml}
 					</label><br>
 					<input type="hidden" name="type" value="url">
 					<button type="submit">Generate</button>
@@ -302,5 +291,24 @@ HTML;
 		if ($this->feedType === 'playlist') {
 			$this->feedId = $response->items['0']->id->playlistId;
 		}
+	}
+
+	/**
+	 * Create feed format drop-down
+	 *
+	 * @return string $html
+	 */
+	private function createFormatSelect() {
+		$html = '<select name="format">';
+
+		foreach (Config::getFeedFormats() as $key => $format) {
+			$name = strtoupper($format);
+
+			$html .= <<<HTML
+<option value="{$format}">$name</option>
+HTML;
+		}
+
+		return $html .= '</select>';
 	}
 }
