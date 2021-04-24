@@ -2,6 +2,7 @@
 
 namespace Helper;
 
+use DateTimeZone;
 use Configuration as Config;
 
 class Validate {
@@ -17,6 +18,22 @@ class Validate {
 
 	/** @var string $youTubeUrlRegex YouTube URL regex */
 	private static string $youTubeUrlRegex = '/^(?:https?:\/\/)?(?:www\.)?youtube\.com/';
+
+	/**
+	 * Validate a timezone
+	 *
+	 * Checks given timezone against list of timezones supported by PHP. 
+	 *
+	 * @param string $timezone Timezone string
+	 * @return boolean
+	 */
+	public static function timezone(string $timezone) {
+		if (in_array($timezone, DateTimeZone::listIdentifiers(DateTimeZone::ALL))) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Validate a feed format
