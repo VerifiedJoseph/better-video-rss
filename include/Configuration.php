@@ -95,7 +95,7 @@ class Configuration {
 		}
 
 		if (self::getEnVariable('TIMEZONE') !== false) {
-			if (in_array(self::getEnVariable('TIMEZONE'), DateTimeZone::listIdentifiers(DateTimeZone::ALL)) === false) {
+			if (Validate::timezone(self::getEnVariable('TIMEZONE')) === false) {
 				throw new Exception('Config Error: Invalid timezone given ('. self::getEnVariable('TIMEZONE') .'). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]');
 			}
 
