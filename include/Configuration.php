@@ -65,12 +65,12 @@ class Configuration {
 	/**
 	 * Check config constants
 	 *
-	 * @throws Exception if self URL path environment variable is not set.
-	 * @throws Exception if self URL path does not end with a forward slash.
-	 * @throws Exception if YouTube API key environment variable is not set.
-	 * @throws Exception if an invalid timezone was given in environment variable.
-	 * @throws Exception if cache directory could not be created.
-	 * @throws Exception if cache directory is not writable.
+	 * @throws ConfigException if self URL path environment variable is not set.
+	 * @throws ConfigException if self URL path does not end with a forward slash.
+	 * @throws ConfigException if YouTube API key environment variable is not set.
+	 * @throws ConfigException if an invalid timezone was given in environment variable.
+	 * @throws ConfigException if cache directory could not be created.
+	 * @throws ConfigException if cache directory is not writable.
 	 */
 	public static function checkConfig() {
 		self::requireConfigFile();
