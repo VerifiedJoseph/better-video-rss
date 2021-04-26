@@ -1,5 +1,7 @@
 <?php
 
+use Exception\ConfigurationException as ConfigException;
+
 use Helper\Validate;
 use Helper\File;
 
@@ -75,17 +77,17 @@ class Configuration {
 		self::setDefaults();
 
 		if (self::getEnVariable('SELF_URL_PATH') === false) {
-			throw new Exception('Config Error: Self URL path must be set. [BVRSS_SELF_URL_PATH]');
+			throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
 		}
 
 		if (Validate::selfUrl(self::getEnVariable('SELF_URL_PATH')) === false) {
-			throw new Exception('Config Error: Self URL must end with a forward slash. e.g: ' . self::getEnVariable('SELF_URL_PATH') . '/ [BVRSS_SELF_URL_PATH]');
+			throw new ConfigException('Self URL must end with a forward slash. e.g: ' . self::getEnVariable('SELF_URL_PATH') . '/ [BVRSS_SELF_URL_PATH]');
 		}
 
 		self::$config['SELF_URL_PATH'] = self::getEnVariable('SELF_URL_PATH');
 
 		if (self::getEnVariable('YOUTUBE_API_KEY') === false) {
-			throw new Exception('Config Error: YouTube API key must be set. [BVRSS_YOUTUBE_API_KEY]');
+			throw new ConfigException('YouTube API key must be set. [BVRSS_YOUTUBE_API_KEY]');
 		}
 
 		self::$config['YOUTUBE_API_KEY'] = self::getEnVariable('YOUTUBE_API_KEY');
@@ -96,7 +98,7 @@ class Configuration {
 
 		if (self::getEnVariable('TIMEZONE') !== false) {
 			if (Validate::timezone(self::getEnVariable('TIMEZONE')) === false) {
-				throw new Exception('Config Error: Invalid timezone given ('. self::getEnVariable('TIMEZONE') .'). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]');
+				throw new ConfigException('Invalid timezone given ('. self::getEnVariable('TIMEZONE') .'). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]');
 			}
 
 			self::$config['TIMEZONE'] = self::getEnVariable('TIMEZONE');
@@ -117,11 +119,11 @@ class Configuration {
 		$cacheDir = self::getCacheDirPath();
 
 		if (is_dir($cacheDir) === false && mkdir($cacheDir, self::$mkdirMode) === false) {
-			throw new Exception('Config Error: Could not create cache directory [BVRSS_CACHE_DIR]');
+			throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
 		}
 
 		if (is_dir($cacheDir) && is_writable($cacheDir) === false) {
-			throw new Exception('Config Error: Cache directory is not writable. [BVRSS_CACHE_DIR]');
+			throw new ConfigException('Cache directory is not writable. [BVRSS_CACHE_DIR]');
 		}
 
 		if (filter_var(self::getEnVariable('DISABLE_CACHE'), FILTER_VALIDATE_BOOLEAN) === true) {
