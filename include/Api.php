@@ -6,6 +6,27 @@ use Helper\Url;
 
 class Api {
 	/**
+	 * Get channel or playlist details
+	 *
+	 * @param string $type Feed type
+	 * @param string $parameter Request parameter (channel or playlist id)
+	 * @param string $etag Request ETag
+	 * @return object|array
+	 *
+	 * @throws Exception if channel or playlist is not found.
+	 */
+	public function getDetails(string $type, string $parameter, string $etag) {
+		$url = Url::getApi($type, $parameter);
+		$response = $this->fetch($url, $etag);
+
+		if (empty($response->items)) {
+			throw new Exception(ucfirst($type) . ' not found');
+		}
+
+		return $response;
+	}
+
+	/**
 	 * Get channel details
 	 *
 	 * @param string $parameter Request parameter
