@@ -27,30 +27,6 @@ class Api {
 	}
 
 	/**
-	 * Get channel details
-	 *
-	 * @param string $parameter Request parameter
-	 * @param string $etag Request ETag
-	 * @return object
-	 */
-	public function getChannel(string $parameter, string $etag) {
-		$url = Url::getApi('channel', $parameter);
-		return $this->fetch($url, $etag);
-	}
-
-	/**
-	 * Get playlist details
-	 *
-	 * @param string $parameter Request parameter
-	 * @param string $etag Request ETag
-	 * @return object
-	 */
-	public function getPlaylist(string $parameter, string $etag) {
-		$url = Url::getApi('playlist', $parameter);
-		return $this->fetch($url, $etag);
-	}
-
-	/**
 	 * Get videos details
 	 *
 	 * @param string $parameter Request parameter
