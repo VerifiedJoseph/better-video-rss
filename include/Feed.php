@@ -53,7 +53,8 @@ class Feed {
 			}
 
 			if ($part === 'details') {
-				$response = $api->getChannel(
+				$response = $api->getDetails(
+					$this->getFeedType(),
 					$this->getFeedId(),
 					$data->getPartEtag($part)
 				);
