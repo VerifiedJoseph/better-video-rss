@@ -158,25 +158,29 @@ class Data {
 	public function updateDetails($response) {
 		$this->updated = true;
 
-		$details = array();
-		$details['etag'] = $response->etag;
+		$details = $this->data['details'];
 
-		$details['title'] = $response->items['0']->snippet->title;
-		$details['description'] = $response->items['0']->snippet->description;
+		if (empty($response) === false) {
+			$details['etag'] = $response->etag;
 
-		if ($this->data['details']['type'] === 'channel') {
-			$details['url'] = Url::getChannel($this->data['details']['id']);
+			$details['title'] = $response->items['0']->snippet->title;
+			$details['description'] = $response->items['0']->snippet->description;
+
+			if ($this->data['details']['type'] === 'channel') {
+				$details['url'] = Url::getChannel($this->data['details']['id']);
+			}
+
+			if ($this->data['details']['type'] === 'playlist') {
+				$details['url'] = Url::getPlaylist($this->data['details']['id']);
+			}
+
+			$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
+			$details['fetched'] = strtotime('now');
 		}
 
-		if ($this->data['details']['type'] === 'playlist') {
-			$details['url'] = Url::getPlaylist($this->data['details']['id']);
-		}
-
-		$details['thumbnail'] = $response->items['0']->snippet->thumbnails->default->url;
-		$details['fetched'] = strtotime('now');
 		$details['expires'] = strtotime($this->expires['details']);
 
-		$this->data['details'] = array_merge($this->data['details'], $details);
+		$this->data['details'] = $details;
 		$this->data['updated'] = strtotime('now');
 	}
 
