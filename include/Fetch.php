@@ -1,6 +1,7 @@
 <?php
 
 use \Curl\Curl;
+use Configuration as Config;
 use Helper\Url;
 
 class Fetch {
@@ -18,6 +19,7 @@ class Fetch {
 		$url = Url::getRssFeed($feedType, $feedId);
 
 		$curl = new Curl();
+		$curl->setUserAgent(Config::getUserAgent());
 		$curl->get($url);
 		$this->response = $curl->response;
 

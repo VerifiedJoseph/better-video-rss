@@ -77,6 +77,7 @@ class Api {
 			$curl->setHeader('If-None-Match', $etag);
 		}
 
+		$curl->setUserAgent(Config::getUserAgent());
 		$curl->get($url);
 
 		if ($curl->getCurlErrorCode() !== 0) {
