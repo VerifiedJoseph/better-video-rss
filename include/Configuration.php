@@ -13,6 +13,9 @@ class Configuration {
 	/** @var int $mkdirMode mkdir() access mode */
 	private static int $mkdirMode = 0775;
 
+	/** @var array $userAgent User agent used for Curl requests */
+	private static string $userAgent ='Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0 (BetterVideoRss https://github.com/VerifiedJoseph/BetterVideoRss)';
+	
 	/** @var array $feedFormats Supported feed formats */
 	private static array $feedFormats = array('rss', 'html', 'json');
 
@@ -153,6 +156,15 @@ class Configuration {
 		}
 
 		return self::$config[$key];
+	}
+
+	/**
+	 * Returns user agent string
+	 *
+	 * @return string
+	 */
+	public static function getUserAgent() {
+		return self::$userAgent;
 	}
 
 	/**
