@@ -44,7 +44,7 @@ class File {
 	 * @param string $path File path
 	 * @param string $data Data to write
 	 *
-	 * @throws Exception if file was not found.
+	 * @throws Exception if file was not opened.
 	 * @throws Exception if data was not written to file.
 	 */
 	public static function write(string $path, string $data) {
