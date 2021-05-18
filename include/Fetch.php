@@ -21,7 +21,6 @@ class Fetch {
 		$curl = new Curl();
 		$curl->setUserAgent(Config::getUserAgent());
 		$curl->get($url);
-		$this->response = $curl->response;
 
 		if ($curl->getCurlErrorCode() !== 0) {
 			throw new Exception('Error: ' . $curl->getCurlErrorCode() . ': ' . $curl->errorMessage);
@@ -47,7 +46,6 @@ class Fetch {
 	public function thumbnail(string $url) {
 		$curl = new Curl();
 		$curl->get($url);
-		$this->response = $curl->response;
 
 		if ($curl->getCurlErrorCode() !== 0) {
 			throw new Exception('Error: ' . $curl->getCurlErrorCode() . ': ' . $curl->errorMessage);
