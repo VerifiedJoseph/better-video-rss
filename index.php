@@ -17,5 +17,5 @@ try {
 	$index->display();
 
 } catch (Exception $e) {
-	Output::Error($e->getMessage());
+	Output::error($e->getMessage());
 }

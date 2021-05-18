@@ -18,5 +18,5 @@ try {
 	$proxy->output();
 
 } catch (Exception $e) {
-	Output::Error($e->getMessage());
+	Output::error($e->getMessage());
 }
