@@ -2,6 +2,8 @@
 
 namespace Helper;
 
+use Helper\Log;
+
 class Output {
 	/**
 	 * Output error message
@@ -10,6 +12,8 @@ class Output {
 	 * @param int $code HTTP esponse code
 	 */
 	public static function error(string $message, int $code = 400) {
+		Log::error($message);
+
 		http_response_code($code);
 		header('Content-Type: text/plain');
 		echo $message;
