@@ -2,7 +2,7 @@
 
 namespace Helper;
 
-class log {
+class Log {
 	/**
 	 * Write error message to system log file
 	 *
