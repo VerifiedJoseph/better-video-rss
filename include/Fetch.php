@@ -11,7 +11,7 @@ class Fetch {
 	 * @param string $feedId Feed id (channel or playlist ID)
 	 * @param string $feedType Feed type (channel or playlist)
 	 *
-	 * @return object|array Response from Curl
+	 * @return object Response from Curl
 	 *
 	 * @throws Exception If a curl error has occurred.
 	 */
@@ -38,7 +38,7 @@ class Fetch {
 	 *
 	 * @param string $url YouTube thumbnail URL
 	 *
-	 * @return object|array Response from Curl
+	 * @return string Response from Curl
 	 *
 	 * @throws Exception If a curl error has occurred.
 	 * @throws Exception If failed to fetch image.
