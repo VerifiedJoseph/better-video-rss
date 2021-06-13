@@ -5,13 +5,17 @@ use Configuration as Config;
 use Helper\Url;
 
 class Api {
+
+	/** @var array $expectedStatusCodes Non-error HTTP status codes returned by the API */
+	private array $expectedStatusCodes = array(200, 304);
+
 	/**
 	 * Get channel or playlist details
 	 *
 	 * @param string $type Feed type
 	 * @param string $parameter Request parameter (channel or playlist id)
 	 * @param string $etag Request ETag
-	 * @return object|array
+	 * @return object
 	 *
 	 * @throws Exception if channel or playlist is not found.
 	 */
@@ -19,11 +23,11 @@ class Api {
 		$url = Url::getApi($type, $parameter);
 		$response = $this->fetch($url, $etag);
 
-		if (empty($response->items)) {
+		if ($response['statusCode'] === 200 && empty($response['data']->items)) {
 			throw new Exception(ucfirst($type) . ' not found');
 		}
 
-		return $response;
+		return $response['data'];
 	}
 
 	/**
@@ -35,29 +39,35 @@ class Api {
 	 */
 	public function getVideos(string $parameter, string $etag) {
 		$url = Url::getApi('videos', $parameter);
-		return $this->fetch($url, $etag);
+		$response = $this->fetch($url);
+
+		return $response['data'];
 	}
 
 	/**
 	 * Search for a channel
 	 *
 	 * @param string $parameter Request parameter
-	 * @return object|array
+	 * @return object
 	 */
 	public function searchChannels(string $parameter) {
 		$url = Url::getApi('searchChannels', $parameter);
-		return $this->fetch($url);
+		$response = $this->fetch($url);
+
+		return $response['data'];
 	}
 
 	/**
 	 * Search for a playlist
 	 *
 	 * @param string $parameter Request parameter
-	 * @return object|array
+	 * @return object
 	 */
 	public function searchPlaylists(string $parameter) {
 		$url = Url::getApi('searchPlaylists', $parameter);
-		return $this->fetch($url);
+		$response = $this->fetch($url);
+
+		return $response['data'];
 	}
 
 	/**
@@ -65,7 +75,7 @@ class Api {
 	 *
 	 * @param string $url Request URL
 	 * @param string $etag Request ETag
-	 * @return object|array
+	 * @return array
 	 *
 	 * @throws Exception If a curl error has occurred.
 	 */
@@ -84,14 +94,15 @@ class Api {
 			throw new Exception('Error: ' . $curl->getCurlErrorCode() . ': ' . $curl->getErrorMessage());
 		}
 
-		if ($curl->getHttpStatusCode() === 304) {
-			return array();
+		$response = array();
+		$response['data'] = $curl->getResponse();
+		$response['statusCode'] = $curl->getHttpStatusCode();
 
-		} elseif ($curl->getHttpStatusCode() !== 200) {
+		if (in_array($curl->getHttpStatusCode(), $this->expectedStatusCodes) === false) {
 			$this->handleError($curl->getResponse());
 		}
 
-		return $curl->getResponse();
+		return $response;
 	}
 
 	/**
