@@ -14,8 +14,8 @@ class Configuration {
 	private static int $mkdirMode = 0775;
 
 	/** @var array $userAgent User agent used for Curl requests */
-	private static string $userAgent ='Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0 (BetterVideoRss https://github.com/VerifiedJoseph/BetterVideoRss)';
-	
+	private static string $userAgent = 'Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0 (BetterVideoRss https://github.com/VerifiedJoseph/BetterVideoRss)';
+
 	/** @var array $feedFormats Supported feed formats */
 	private static array $feedFormats = array('rss', 'html', 'json');
 
@@ -101,7 +101,7 @@ class Configuration {
 
 		if (self::getEnVariable('TIMEZONE') !== false) {
 			if (Validate::timezone(self::getEnVariable('TIMEZONE')) === false) {
-				throw new ConfigException('Invalid timezone given ('. self::getEnVariable('TIMEZONE') .'). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]');
+				throw new ConfigException('Invalid timezone given (' . self::getEnVariable('TIMEZONE') . '). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]');
 			}
 
 			self::$config['TIMEZONE'] = self::getEnVariable('TIMEZONE');

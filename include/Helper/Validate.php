@@ -22,7 +22,7 @@ class Validate {
 	/**
 	 * Validate a timezone
 	 *
-	 * Checks given timezone against list of timezones supported by PHP. 
+	 * Checks given timezone against list of timezones supported by PHP.
 	 *
 	 * @param string $timezone Timezone string
 	 * @return boolean
