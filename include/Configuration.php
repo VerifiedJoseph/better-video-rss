@@ -146,7 +146,7 @@ class Configuration {
 	 * Returns config value
 	 *
 	 * @param string $key Config key
-	 * @return constant
+	 * @return string|boolean
 	 * @throws Exception if config key is invalid
 	 */
 	public static function get(string $key) {
