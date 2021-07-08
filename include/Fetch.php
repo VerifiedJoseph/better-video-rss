@@ -13,7 +13,8 @@ class Fetch {
 	 *
 	 * @return object Response from Curl
 	 *
-	 * @throws Exception If a curl error has occurred.
+	 * @throws Exception if a cURL error occurred.
+	 * @throws Exception if RSS feed fetch failed.
 	 */
 	public function feed(string $feedId, string $feedType) {
 		$url = Url::getRssFeed($feedType, $feedId);
@@ -40,8 +41,8 @@ class Fetch {
 	 *
 	 * @return string Response from Curl
 	 *
-	 * @throws Exception If a curl error has occurred.
-	 * @throws Exception If failed to fetch image.
+	 * @throws Exception if a cURL error occurred.
+	 * @throws Exception if image fetch failed.
 	 */
 	public function thumbnail(string $url) {
 		$curl = new Curl();
