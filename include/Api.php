@@ -71,13 +71,13 @@ class Api {
 	}
 
 	/**
-	 * Fetch API request
+	 * Make API request
 	 *
 	 * @param string $url Request URL
 	 * @param string $etag Request ETag
 	 * @return array
 	 *
-	 * @throws Exception If a curl error has occurred.
+	 * @throws Exception If a cURL error occurred.
 	 */
 	private function fetch(string $url, string $etag = '') {
 		$curl = new Curl();
