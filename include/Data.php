@@ -153,7 +153,7 @@ class Data {
 	/**
 	 * Update channel or playlist details with response from YouTube Data API
 	 *
-	 * @param object|array $response
+	 * @param object|string $response
 	 */
 	public function updateDetails($response) {
 		$this->updated = true;
@@ -187,7 +187,7 @@ class Data {
 	/**
 	 * Update video details with response from YouTube Data API
 	 *
-	 * @param object|array $response
+	 * @param object|string $response
 	 */
 	public function updateVideos($response) {
 		$this->updated = true;
