@@ -38,6 +38,8 @@ class Validate {
 	/**
 	 * Validate a feed format
 	 *
+	 * Checks given feed format against list of formats returned by Config::getFeedFormats().
+	 * 
 	 * @param string $format Feed format
 	 * @return boolean
 	 */
