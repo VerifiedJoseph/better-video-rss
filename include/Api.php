@@ -15,7 +15,7 @@ class Api {
 	 * @param string $type Feed type
 	 * @param string $parameter Request parameter (channel or playlist id)
 	 * @param string $etag Request ETag
-	 * @return object
+	 * @return object|string
 	 *
 	 * @throws Exception if channel or playlist is not found.
 	 */
@@ -35,7 +35,7 @@ class Api {
 	 *
 	 * @param string $parameter Request parameter
 	 * @param string $etag Request ETag
-	 * @return object
+	 * @return object|string
 	 */
 	public function getVideos(string $parameter, string $etag) {
 		$url = Url::getApi('videos', $parameter);
