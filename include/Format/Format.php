@@ -90,7 +90,7 @@ abstract class Format {
 		$datetime = Convert::unixTime($video['published'], 'c');
 		$thumbnailUrl = $video['thumbnail'];
 
-		if (Config::get('ENABLE_IMAGE_PROXY') === true) {
+		if (Config::get('ENABLE_IMAGE_PROXY') === true && Config::get('DISABLE_CACHE') === false) {
 			$thumbnailUrl = Url::getImageProxy($video['id'], $this->data['details']['type'], $this->data['details']['id']);
 		}
 
