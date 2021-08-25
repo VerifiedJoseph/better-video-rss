@@ -138,7 +138,7 @@ class Url {
 				break;
 			case 'videos':
 				$url .= 'videos?part=id,snippet,contentDetails,liveStreamingDetails&id='
-					. $parameter . '&fields=etag,items(id,snippet(tags,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))';
+					. $parameter . '&fields=etag,items(id,snippet(tags,liveBroadcastContent,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))';
 				break;
 			case 'searchChannels':
 				$url .= 'search?part=id&fields=items(id(channelId))&q='
