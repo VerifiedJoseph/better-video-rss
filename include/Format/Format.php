@@ -120,7 +120,7 @@ EOD;
 	protected function buildTitle(array $video) {
 		$emptyDuration = '00:00';
 
-		if (isset($video['liveStream'])) {
+		if ($video['liveStream'] === true) {
 
 			if ($video['liveStreamStatus'] === 'upcoming') {
 				$scheduled = Convert::unixTime(

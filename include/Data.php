@@ -201,6 +201,7 @@ class Data {
 
 				$video['duration'] = Convert::videoDuration($item->contentDetails->duration);
 				$video['tags'] = array();
+				$video['liveStream'] = false;
 
 				if ($item->snippet->liveBroadcastContent !== 'none') {
 					$video['liveStream'] = true;
