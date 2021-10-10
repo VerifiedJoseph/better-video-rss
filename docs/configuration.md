@@ -13,7 +13,7 @@ The following two variables must be set for BetterVideoRss to work.
 
 ### Optional variables
 
-Optional variables, if set, override the defaults listed in [`Configuration.php`](../include/Configuration.php#L24).
+Optional variables, if set, override the defaults listed in [`Configuration.php`](../include/Configuration.php#L29).
 
 | Name                        | Description                                                               | Default value |
 | --------------------------- | ------------------------------------------------------------------------- | ------------- |
