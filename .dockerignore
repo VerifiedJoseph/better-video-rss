@@ -1,0 +1,11 @@
+# docs
+/docs
+*.md
+LICENSE
+
+phpcs.xml
+config.php-dist
+
+Dockerfile
+.dockerignore
+LICENSE
