@@ -8,7 +8,7 @@ use Helper\File;
 class Configuration {
 
 	/** @var string $minPhpVersion Minimum PHP version */
-	private static string $minPhpVersion = '7.4.0';
+	private static string $minPhpVersion = '8.0.0';
 
 	/** @var int $mkdirMode mkdir() access mode */
 	private static int $mkdirMode = 0775;

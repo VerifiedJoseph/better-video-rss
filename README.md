@@ -16,7 +16,7 @@ A [public instance](https://tools.verifiedjoseph.com/BetterVideoRss/) is availab
 
 ## Requirements
 
-* PHP >= 7.4
+* PHP >= 8.0
 * Composer
 * PHP Extensions:
 	* [`JSON`](https://www.php.net/manual/en/book.json.php)
