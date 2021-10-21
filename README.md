@@ -3,11 +3,9 @@
 
 BetterVideoRss is a PHP script for generating YouTube channel and playlist RSS feeds using YouTube's [Data API](https://developers.google.com/youtube/v3/) and RSS feeds.
 
-### Caching
-To reduce requests, responses from YouTube's Data API and RSS feeds are cached. Caching can be disabled via an [environment variable](docs/configuration.md).
-
 ## Documentation
 * [Configuration](docs/configuration.md)
+* [Caching](docs/caching.md)
 * [Docker](docs/docker.md)
 
 ## Public Instance
