@@ -30,23 +30,22 @@ class Rss extends Format {
 
 		$items = $this->buildItmes();
 
-		$this->feed = <<<EOD
-<?xml version="1.0" encoding="utf-8"?>
-	<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>{$feedTitle}</title>
-		<link>{$feedUrl}</link>
-		<atom:link href="{$selfUrl}" rel="self"/>
-		<description>{$feedDescription}</description>
-		<pubDate>{$feedUpdated}</pubDate>
-		<image>
-			<url>{$feedImage}</url>
-		</image>
-		{$items}
-	</channel>
-	</rss>
-EOD;
-
+		$this->feed = <<<XML
+			<?xml version="1.0" encoding="utf-8"?>
+				<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+				<channel>
+					<title>{$feedTitle}</title>
+					<link>{$feedUrl}</link>
+					<atom:link href="{$selfUrl}" rel="self"/>
+					<description>{$feedDescription}</description>
+					<pubDate>{$feedUpdated}</pubDate>
+					<image>
+						<url>{$feedImage}</url>
+					</image>
+					{$items}
+				</channel>
+			</rss>
+		XML;
 	}
 
 	/**
@@ -76,20 +75,20 @@ EOD;
 				);
 			}
 
-			$items .= <<<EOD
-<item>
-	<title>{$itemTitle}</title>
-	<pubDate>{$itemTimestamp}</pubDate>
-	<link>{$itemUrl}</link>
-	<guid isPermaLink="true">{$itemUrl}</guid>
-	<author>
-		<name>{$itemAuthor}</name>
-	</author>
-	<content:encoded>{$itemContent}</content:encoded>
-	<enclosure url="{$itemEnclosure}" type="image/jpeg" />
-	{$itemCategories}
-</item>
-EOD;
+			$items .= <<<XML
+				<item>
+					<title>{$itemTitle}</title>
+					<pubDate>{$itemTimestamp}</pubDate>
+					<link>{$itemUrl}</link>
+					<guid isPermaLink="true">{$itemUrl}</guid>
+					<author>
+						<name>{$itemAuthor}</name>
+					</author>
+					<content:encoded>{$itemContent}</content:encoded>
+					<enclosure url="{$itemEnclosure}" type="image/jpeg" />
+						{$itemCategories}
+				</item>
+			XML;
 		}
 
 		return $items;
@@ -107,9 +106,9 @@ EOD;
 		foreach($categories as $category) {
 			$category = $this->xmlEncode($category);
 
-			$itemCategories .= <<<EOD
-<category>{$category}</category>
-EOD;
+			$itemCategories .= <<<XML
+				<category>{$category}</category>
+			XML;
 		}
 
 		return $itemCategories;

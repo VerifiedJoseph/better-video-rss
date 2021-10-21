@@ -94,21 +94,21 @@ abstract class Format {
 			$thumbnailUrl = Url::getImageProxy($video['id'], $this->data['details']['type'], $this->data['details']['id']);
 		}
 
-		$media = <<<EOD
-<a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$thumbnailUrl}" loading="lazy"/></a>
-EOD;
+		$media = <<<HTML
+			<a target="_blank" title="Watch on YouTube" href="{$video['url']}"><img title="video thumbnail" src="{$thumbnailUrl}" loading="lazy"/></a>
+		HTML;
 
 		if ($this->embedVideos === true) {
 			$url = Url::getEmbed($video['id']);
 
-			$media = <<<EOD
-<iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" loading="lazy" allowfullscreen></iframe>
-EOD;
+			$media = <<<HTML
+				<iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" loading="lazy" allowfullscreen></iframe>
+			HTML;
 		}
 
-		return <<<EOD
-{$media}<hr/>Published: <time datetime="{$datetime}">{$published}</time> - Duration: <span class="duration">{$video['duration']}</span><hr/><p>{$description}</p>
-EOD;
+		return <<<HTML
+			{$media}<hr/>Published: <time datetime="{$datetime}">{$published}</time> - Duration: <span class="duration">{$video['duration']}</span><hr/><p>{$description}</p>
+		HTML;
 	}
 
 	/**

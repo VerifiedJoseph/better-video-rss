@@ -66,16 +66,16 @@ class Index {
 
 		if ($this->error === true) {
 			$error = <<<HTML
-<div id="error"><strong>{$this->errorMessage}</strong></div>
-HTML;
+				<div id="error"><strong>{$this->errorMessage}</strong></div>
+			HTML;
 		}
 
 		if ($this->error === false && empty($this->feedId) === false) {
 			$url = Url::getFeed($this->feedType, $this->feedId, $this->feedFormat, $this->embedVideos);
 
 			$link = <<<HTML
-<p>Feed URL: <a href="{$url}">{$url}</a></p>
-HTML;
+				Feed URL: <a href="{$url}">{$url}</a>
+			HTML;
 
 			if ($this->fromUrl === true) {
 				$fromUrlLink = $link;
@@ -329,8 +329,8 @@ HTML;
 			$name = strtoupper($format);
 
 			$html .= <<<HTML
-<option value="{$format}">$name</option>
-HTML;
+				<option value="{$format}">$name</option>
+			HTML;
 		}
 
 		return $html .= '</select>';

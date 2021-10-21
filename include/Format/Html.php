@@ -26,7 +26,7 @@ class Html extends Format {
 
 		$items = $this->buildItmes();
 
-		$this->feed = <<<EOD
+		$this->feed = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +55,7 @@ class Html extends Format {
 	</footer>
 </body>
 </html>
-EOD;
+HTML;
 
 	}
 
@@ -74,13 +74,13 @@ EOD;
 			$itemCategories = $this->buildCategories($video['tags']);
 			$itemContent = $this->buildContent($video);
 
-			$items .= <<<EOD
-<article>
-	<h2 class="title"><a target="_blank" href="{$itemUrl}">{$itemTitle}</a></h2>
-	{$itemContent}
-	{$itemCategories}
-</article>
-EOD;
+			$items .= <<<HTML
+				<article>
+					<h2 class="title"><a target="_blank" href="{$itemUrl}">{$itemTitle}</a></h2>
+					{$itemContent}
+					{$itemCategories}
+				</article>
+			HTML;
 		}
 
 		return $items;
@@ -98,9 +98,9 @@ EOD;
 		foreach($categories as $category) {
 			$category = htmlspecialchars($category);
 
-			$itemCategories .= <<<EOD
-<li>{$category}</li>
-EOD;
+			$itemCategories .= <<<HTML
+				<li>{$category}</li>
+			HTML;
 		}
 
 		return $itemCategories . '</ul>';
@@ -118,9 +118,9 @@ EOD;
 			$text = strtoupper($format);
 			$url = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], $format, $this->embedVideos);
 
-			$html .= <<<EOD
-<a href="{$url}"><button>{$text}</button></a> 
-EOD;
+			$html .= <<<HTML
+				<a href="{$url}"><button>{$text}</button></a> 
+			HTML;
 		}
 
 		return $html;
