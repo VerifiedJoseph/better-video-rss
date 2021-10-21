@@ -87,6 +87,10 @@ class Configuration {
 			throw new ConfigException('Self URL must end with a forward slash. e.g: ' . self::getEnVariable('SELF_URL_PATH') . '/ [BVRSS_SELF_URL_PATH]');
 		}
 
+		if (Validate::selfUrlHttp(self::getEnVariable('SELF_URL_PATH')) === false) {
+			throw new ConfigException('Self URL must start with http:// or https:// [BVRSS_SELF_URL_PATH]');
+		}
+
 		self::$config['SELF_URL_PATH'] = self::getEnVariable('SELF_URL_PATH');
 
 		if (self::getEnVariable('YOUTUBE_API_KEY') === false) {

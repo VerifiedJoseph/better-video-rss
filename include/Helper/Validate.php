@@ -19,6 +19,9 @@ class Validate {
 	/** @var string $youTubeUrlRegex YouTube URL regex */
 	private static string $youTubeUrlRegex = '/^(?:https?:\/\/)?(?:www\.)?youtube\.com/';
 
+	/** @var string $httpRegex Regex for checking if a URL starts with http:// or https:// */
+	private static string $httpRegex = '/^https?:\/\//';
+
 	/**
 	 * Validate a timezone
 	 *
@@ -118,6 +121,20 @@ class Validate {
 			return true;
 		}
 
+		return false;
+	}
+
+	/**
+	 * Validate the self URL start with http:// or https://
+	 *
+	 * @param string $url
+	 * @return boolean
+	 */
+	public static function selfUrlHttp(string $url) {
+		if(preg_match(self::$httpRegex, $url)) {
+			return true;
+		}
+	
 		return false;
 	}
 
