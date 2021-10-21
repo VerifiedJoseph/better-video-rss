@@ -1,8 +1,8 @@
 <?php
 
-use \Curl\Curl;
 use Configuration as Config;
 use Helper\Validate;
+use Helper\Format;
 use Helper\Url;
 
 class Index {
@@ -189,7 +189,7 @@ class Index {
 </html>
 HTML;
 
-		echo $html;
+		echo Format::minify($html);
 	}
 
 	/**

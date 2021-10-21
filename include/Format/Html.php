@@ -3,7 +3,6 @@
 namespace Format;
 
 use Configuration as Config;
-use Helper\Convert;
 use Helper\Url;
 
 class Html extends Format {
@@ -57,6 +56,7 @@ class Html extends Format {
 </html>
 HTML;
 
+		$this->feed = \Helper\Format::minify($this->feed);
 	}
 
 	/**

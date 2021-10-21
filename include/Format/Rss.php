@@ -46,6 +46,8 @@ class Rss extends Format {
 				</channel>
 			</rss>
 		XML;
+
+		$this->feed = \Helper\Format::minify($this->feed);
 	}
 
 	/**

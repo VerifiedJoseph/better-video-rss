@@ -2,6 +2,7 @@
 
 use Configuration as Config;
 use Helper\File;
+use Helper\Format;
 use Helper\Convert;
 use Helper\Url;
 
@@ -218,7 +219,7 @@ class CacheViewer {
 </html>
 HTML;
 
-		echo $html;
+		echo Format::minify($html);
 	}
 
 	/**
