@@ -12,6 +12,9 @@ COPY --chown=www-data:www-data ./ /var/www/html/
 # Set working directory
 WORKDIR /var/www/html/
 
+# Create cache folder & set owner
+RUN mkdir -p cache && chown www-data cache
+
 # Install dependencies via composer
 RUN composer install --prefer-dist --no-dev
 
