@@ -28,6 +28,15 @@ p {
 	margin-bottom: 10px;
 }
 
+p.margin {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+p.feedUrl {
+	margin-top: 10px;
+}
+
 .gray {
 	color: gray;
 }
