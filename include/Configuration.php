@@ -70,8 +70,9 @@ class Configuration {
 	 *
 	 * @throws ConfigException if self URL path environment variable is not set.
 	 * @throws ConfigException if self URL path does not end with a forward slash.
+	 * @throws ConfigException if self URL path does not start with http:// or https://.
 	 * @throws ConfigException if YouTube API key environment variable is not set.
-	 * @throws ConfigException if an invalid timezone was given in environment variable.
+	 * @throws ConfigException if timezone environment variable is invalid.
 	 * @throws ConfigException if cache directory could not be created.
 	 * @throws ConfigException if cache directory is not writable.
 	 */
