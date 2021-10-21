@@ -108,12 +108,12 @@ class Validate {
 	}
 
 	/**
-	 * Validate self URL
+	 * Validate that self URL ends with a forward slash
 	 *
 	 * @param string $url
 	 * @return boolean
 	 */
-	public static function selfUrl(string $url) {
+	public static function selfUrlSlash(string $url) {
 		if (substr($url, -1) === '/') {
 			return true;
 		}

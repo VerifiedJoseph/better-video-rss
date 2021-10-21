@@ -83,7 +83,7 @@ class Configuration {
 			throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
 		}
 
-		if (Validate::selfUrl(self::getEnVariable('SELF_URL_PATH')) === false) {
+		if (Validate::selfUrlSlash(self::getEnVariable('SELF_URL_PATH')) === false) {
 			throw new ConfigException('Self URL must end with a forward slash. e.g: ' . self::getEnVariable('SELF_URL_PATH') . '/ [BVRSS_SELF_URL_PATH]');
 		}
 
