@@ -1,5 +1,8 @@
 {
     "require": {
         "php-curl-class/php-curl-class": "^9.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.0"
     }
 }
