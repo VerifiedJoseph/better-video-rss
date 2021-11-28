@@ -110,12 +110,12 @@ class Index {
 				<form action="" method="post">
 					<input type="hidden" name="type" value="channel">
 					<p class="margin">
-						<label>Channel:
+						<label>Channel: 
 							<input class="input" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required>
 						</label>
 					</p>
 					<p class="margin">
-						<label>Embed videos:
+						<label>Embed videos: 
 							<input type="checkbox" name="embed_videos" value="yes">
 						</label>
 					</p>
@@ -135,12 +135,12 @@ class Index {
 				<form action="" method="post">
 					<input type="hidden" name="type" value="playlist">
 					<p class="margin">
-						<label>Playlist:
+						<label>Playlist: 
 						<input class="input" name="query" type="input" placeholder="Playlist ID or title" required>
 						</label>
 					</p>
 					<p class="margin">
-						<label>Embed videos:
+						<label>Embed videos: 
 							<input type="checkbox" name="embed_videos" value="yes">
 						</label>
 					</p>
@@ -160,12 +160,12 @@ class Index {
 				<form action="" method="post">
 					<input type="hidden" name="type" value="url">
 					<p class="margin">
-						<label>URL:
+						<label>URL: 
 						<input class="input" name="query" type="input" placeholder="youtube.com URL" required>
 						</label>
 					</p>
 					<p class="margin">
-						<label>Embed videos:
+						<label>Embed videos: 
 							<input type="checkbox" name="embed_videos" value="yes">
 						</label>
 					</p>
