@@ -10,10 +10,6 @@ BetterVideoRss is a PHP script for generating YouTube channel and playlist RSS f
 - [Caching](docs/caching.md)
 - [Docker](docs/docker.md)
 
-## Public Instance
-
-A [public instance](https://tools.verifiedjoseph.com/BetterVideoRss/) is available and is hosted by Dreamhost in Virginia, United States. [Example feed](https://tools.verifiedjoseph.com/BetterVideoRss/feed.php?channel_id=UCBa659QWEk1AI4Tg--mrJ2A&format=html)
-
 ## Requirements
 
 - PHP >= 8.0
