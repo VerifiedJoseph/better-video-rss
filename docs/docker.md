@@ -1,6 +1,6 @@
 # Docker
 
-BetterVideoRss can be quickly deployed using the included [Dockerfile](../Dockerfile) or [docker-compose.yml](docker-compose.yml).
+BetterVideoRss can be quickly deployed using the included [Dockerfile](../Dockerfile) or [docker-compose.yml](../docker-compose.yml).
 
 ## Dockerfile 
 
