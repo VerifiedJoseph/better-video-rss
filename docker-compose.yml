@@ -8,4 +8,4 @@ services:
       BVRSS_SELF_URL_PATH: 'http://exmaple.com/'
       BVRSS_YOUTUBE_API_KEY: ''
     ports:
-      - '8080:8080'
+      - '8080:80'
