@@ -6,6 +6,9 @@ USER root
 # Install php8.0-simplexml
 RUN apk add --no-cache php8-simplexml
 
+# Configure nginx
+COPY --chown=nobody config/nginx.conf /etc/nginx/nginx.conf
+
 # Install composer from the official image
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
