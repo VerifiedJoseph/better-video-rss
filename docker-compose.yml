@@ -1,15 +1,11 @@
 version: '3'
 
 services:
-  web:
+  app:
+    container_name: BetterVideoRss
     build: .
     environment:
       BVRSS_SELF_URL_PATH: 'http://exmaple.com/'
       BVRSS_YOUTUBE_API_KEY: ''
-    volumes:
-      - cache:/var/www/html/cache/
     ports:
-      - '8080:80'
-
-volumes:
-  cache:
+      - '8080:8080'
