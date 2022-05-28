@@ -3,8 +3,11 @@
 *.md
 LICENSE
 
+/vendor
+
 phpcs.xml
 config.php-dist
+config.php
 
 Dockerfile
 .dockerignore
