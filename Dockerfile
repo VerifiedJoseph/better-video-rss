@@ -1,22 +1,28 @@
-FROM php:8.0-apache
+FROM trafex/php-nginx:2.5.0
 
-# Install zip and unzip (used by Composer)
-RUN apt-get update && apt-get install zip unzip -y
+# Run commands as root
+USER root
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Install php8.0-simplexml
+RUN apk add --no-cache php8-simplexml
 
-# Copy code
-COPY --chown=www-data:www-data ./ /var/www/html/
+# Configure nginx
+COPY --chown=nobody config/nginx.conf /etc/nginx/nginx.conf
 
-# Set working directory
-WORKDIR /var/www/html/
+# Install composer from the official image
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Create cache folder & set owner
-RUN mkdir -p cache && chown www-data cache
+RUN mkdir -p /var/www/cache/ && chown nobody:nobody /var/www/cache/
 
-# Install dependencies via composer
-RUN composer install --prefer-dist --no-dev
+# Switch to nobody
+USER nobody
 
-# Start apache2
-CMD apache2-foreground
+# Copy code
+COPY --chown=nobody ./ /var/www/html/
+
+# Run composer install to install the dependencies
+RUN composer install --optimize-autoloader --no-dev --no-interaction --no-progress
+
+# Set env for cache dir
+ENV BVRSS_CACHE_DIR=/var/www/cache/
