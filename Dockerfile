@@ -9,8 +9,8 @@ RUN apk add --no-cache php8-simplexml
 # Configure nginx
 COPY --chown=nobody config/nginx.conf /etc/nginx/nginx.conf
 
-# Install composer from the official image
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Create cache folder & set owner
 RUN mkdir -p /var/www/cache/ && chown nobody:nobody /var/www/cache/
