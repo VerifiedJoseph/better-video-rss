@@ -1,10 +1,10 @@
-FROM trafex/php-nginx:2.5.0
+FROM trafex/php-nginx:2.6.0
 
 # Run commands as root
 USER root
 
-# Install php8.0-simplexml
-RUN apk add --no-cache php8-simplexml
+# Install php81-simplexml
+RUN apk add --no-cache php81-simplexml
 
 # Configure nginx
 COPY --chown=nobody config/nginx.conf /etc/nginx/nginx.conf
