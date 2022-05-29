@@ -26,3 +26,6 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction --no-progre
 
 # Set env for cache dir
 ENV BVRSS_CACHE_DIR=/var/www/cache/
+
+# Configure healthcheck (overrides base image healthcheck)
+HEALTHCHECK --interval=60s --timeout=10s CMD curl --silent --fail http://127.0.0.1/fpm-ping
