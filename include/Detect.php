@@ -32,8 +32,9 @@ class Detect {
 	 * Supported formats:
 	 *  https://www.youtube.com/c/TomScottGo
 	 *  https://www.youtube.com/user/enyay
+	 *  https://www.youtube.com/@TomScottGo
 	 */
-	private string $usernameUrlRegex = '/youtube\.com\/(?:c|user)\/([a-zA-z0-9]+)/';
+	private string $usernameUrlRegex = '/youtube\.com\/(?:(?:c|user)\/|@)([a-zA-z0-9]+)/';
 
 	/**
 	 * @var string $rssFeedUrlRegex YouTube RSS feed URL regex
