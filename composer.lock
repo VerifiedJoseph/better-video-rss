@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "9.12.5",
+            "version": "9.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "ac45a3d212e56c52cdeb81ceece47d0fd69f9abf"
+                "reference": "1fa71f639275987092c60ac117ff5c8a3771898d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/ac45a3d212e56c52cdeb81ceece47d0fd69f9abf",
-                "reference": "ac45a3d212e56c52cdeb81ceece47d0fd69f9abf",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/1fa71f639275987092c60ac117ff5c8a3771898d",
+                "reference": "1fa71f639275987092c60ac117ff5c8a3771898d",
                 "shasum": ""
             },
             "require": {
@@ -77,9 +77,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-curl-class/php-curl-class/issues",
-                "source": "https://github.com/php-curl-class/php-curl-class/tree/9.12.5"
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/9.13.1"
             },
-            "time": "2022-12-20T01:29:22+00:00"
+            "time": "2023-01-16T01:29:25+00:00"
         }
     ],
     "packages-dev": [
