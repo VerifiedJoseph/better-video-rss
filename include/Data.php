@@ -206,6 +206,7 @@ class Data {
 				if ($item->snippet->liveBroadcastContent !== 'none') {
 					$video['liveStream'] = true;
 					$video['liveStreamStatus'] = $item->snippet->liveBroadcastContent;
+					$video['liveStreamScheduled'] = 0;
 
 					if (isset($item->liveStreamingDetails->scheduledStartTime)) {
 						$video['liveStreamScheduled'] = strtotime($item->liveStreamingDetails->scheduledStartTime);
