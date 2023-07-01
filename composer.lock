@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "9.16.0",
+            "version": "9.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "100a7f406daea7e1a0a020a2445d9b4715ad3ab0"
+                "reference": "60055da5b5ae91f9d8f4688d363483954ec640dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/100a7f406daea7e1a0a020a2445d9b4715ad3ab0",
-                "reference": "100a7f406daea7e1a0a020a2445d9b4715ad3ab0",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/60055da5b5ae91f9d8f4688d363483954ec640dd",
+                "reference": "60055da5b5ae91f9d8f4688d363483954ec640dd",
                 "shasum": ""
             },
             "require": {
@@ -27,6 +27,7 @@
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "*",
                 "ext-gd": "*",
+                "friendsofphp/php-cs-fixer": "*",
                 "phpcompatibility/php-compatibility": "dev-develop",
                 "phpcsstandards/phpcsutils": "@alpha",
                 "phpunit/phpunit": "*",
@@ -77,9 +78,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-curl-class/php-curl-class/issues",
-                "source": "https://github.com/php-curl-class/php-curl-class/tree/9.16.0"
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/9.17.2"
             },
-            "time": "2023-05-25T18:02:49+00:00"
+            "time": "2023-06-27T01:06:30+00:00"
         }
     ],
     "packages-dev": [
