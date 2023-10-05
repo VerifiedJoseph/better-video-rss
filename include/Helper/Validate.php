@@ -107,7 +107,7 @@ class Validate
      * @param string $url
      * @return boolean
      */
-    public static function YouTubeUrl(string $url)
+    public static function youTubeUrl(string $url)
     {
         if (preg_match(self::$youTubeUrlRegex, $url)) {
             return true;

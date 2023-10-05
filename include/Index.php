@@ -215,7 +215,7 @@ HTML;
             if ($_POST['type'] === 'url') {
                 $this->fromUrl = true;
 
-                if (Validate::YouTubeUrl($_POST['query']) === false) {
+                if (Validate::youTubeUrl($_POST['query']) === false) {
                     throw new Exception('URL is not a valid YouTube URL.');
                 }
             }
