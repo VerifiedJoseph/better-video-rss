@@ -9,7 +9,7 @@ class Log
      *
      * @param string $message Error message
      */
-    public static function error(string $message)
+    public static function error(string $message): void
     {
         error_log('[BetterVideoRss] ' . $message, 0);
     }
