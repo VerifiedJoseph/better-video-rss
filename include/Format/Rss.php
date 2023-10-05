@@ -32,21 +32,21 @@ class Rss extends Format
         $items = $this->buildItems();
 
         $this->feed = <<<XML
-			<?xml version="1.0" encoding="utf-8"?>
-				<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
-				<channel>
-					<title>{$feedTitle}</title>
-					<link>{$feedUrl}</link>
-					<atom:link href="{$selfUrl}" rel="self"/>
-					<description>{$feedDescription}</description>
-					<pubDate>{$feedUpdated}</pubDate>
-					<image>
-						<url>{$feedImage}</url>
-					</image>
-					{$items}
-				</channel>
-			</rss>
-        XML;
+<?xml version="1.0" encoding="utf-8"?>
+    <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+        <channel>
+            <title>{$feedTitle}</title>
+            <link>{$feedUrl}</link>
+            <atom:link href="{$selfUrl}" rel="self"/>
+            <description>{$feedDescription}</description>
+            <pubDate>{$feedUpdated}</pubDate>
+            <image>
+                <url>{$feedImage}</url>
+            </image>
+            {$items}
+        </channel>
+    </rss>
+XML;
 
         $this->feed = \App\Helper\Format::minify($this->feed);
     }
@@ -80,19 +80,19 @@ class Rss extends Format
             }
 
             $items .= <<<XML
-				<item>
-					<title>{$itemTitle}</title>
-					<pubDate>{$itemTimestamp}</pubDate>
-					<link>{$itemUrl}</link>
-					<guid isPermaLink="true">{$itemUrl}</guid>
-					<author>
-						<name>{$itemAuthor}</name>
-					</author>
-					<content:encoded>{$itemContent}</content:encoded>
-					<enclosure url="{$itemEnclosure}" type="image/jpeg" />
-						{$itemCategories}
-				</item>
-            XML;
+<item>
+	<title>{$itemTitle}</title>
+	<pubDate>{$itemTimestamp}</pubDate>
+	<link>{$itemUrl}</link>
+	<guid isPermaLink="true">{$itemUrl}</guid>
+	<author>
+	<name>{$itemAuthor}</name>
+	</author>
+	<content:encoded>{$itemContent}</content:encoded>
+	<enclosure url="{$itemEnclosure}" type="image/jpeg" />
+	{$itemCategories}
+	</item>
+XML;
         }
 
         return $items;
@@ -112,7 +112,7 @@ class Rss extends Format
             $category = $this->xmlEncode($category);
 
             $itemCategories .= <<<XML
-				<category>{$category}</category>
+                <category>{$category}</category>
             XML;
         }
 
