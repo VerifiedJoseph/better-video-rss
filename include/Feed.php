@@ -86,6 +86,7 @@ class Feed
     {
         $formatClass = 'App\Format\\' . ucfirst($this->getFeedFormat());
 
+        /** @var Format\Rss|Format\Json|Format\Html */
         $format = new $formatClass(
             $this->getFeedData(),
             $this->getEmbedStatus()
