@@ -1,18 +1,14 @@
-# docs
-/docs
-*.md
-LICENSE
+# Ignore everything
+*
 
-/vendor
-
-phpcs.xml
-config.php-dist
-config.php
-
-Dockerfile
-.dockerignore
-docker-compose.yml
-
-.git
-!.git/HEAD
-!.git/refs/heads/*
+# Allow files and directories
+!/include
+!/static
+!/index.php
+!/feed.php
+!/tools.html
+!/proxy.php
+!/cache-viewer.php
+!/composer.json
+!/composer.lock
+!/docker/config/*
