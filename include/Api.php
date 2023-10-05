@@ -5,6 +5,7 @@ namespace App;
 use Curl\Curl;
 use App\Configuration as Config;
 use App\Helper\Url;
+use stdClass;
 use Exception;
 
 class Api
@@ -81,7 +82,7 @@ class Api
      *
      * @param string $url Request URL
      * @param string $eTag Request ETag
-     * @return array
+     * @return array<mixed>
      *
      * @throws Exception If a cURL error occurred.
      */
@@ -115,10 +116,10 @@ class Api
     /**
      * Handle API errors
      *
-     * @param object $response API response
+     * @param stdClass $response API response
      * @throws Exception
      */
-    private function handleError($response): void
+    private function handleError(stdClass $response): void
     {
         $error = $response->error->errors[0];
 
