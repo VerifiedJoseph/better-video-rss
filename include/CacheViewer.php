@@ -263,7 +263,7 @@ HTML;
     /**
      * Display channel details
      *
-     * @param array<string, string|int> $channel
+     * @param array<string, mixed> $channel
      * @return string $html
      */
     private function displayChannel(array $channel): string
