@@ -15,7 +15,7 @@ class Data
     /** @var array<int, string> $parts Data part names */
     private array $parts = ['details', 'feed', 'videos'];
 
-    /** @var array<string, array<mixed>> $data Data */
+    /** @var array<string, mixed> $data Data */
     private array $data = array(
         'details' => array(),
         'feed' => array(
@@ -163,7 +163,7 @@ class Data
      *
      * @param object|string $response
      */
-    public function updateDetails($response)
+    public function updateDetails($response): void
     {
         $this->updated = true;
 
@@ -198,7 +198,7 @@ class Data
      *
      * @param object|string $response
      */
-    public function updateVideos($response)
+    public function updateVideos($response): void
     {
         $this->updated = true;
 
@@ -252,7 +252,7 @@ class Data
      *
      * @param object $response
      */
-    public function updateFeed($response)
+    public function updateFeed($response): void
     {
         $this->updated = true;
 
@@ -312,9 +312,9 @@ class Data
     /**
      * Removes videos that are no longer in the RSS feed from YouTube
      */
-    private function removeOldVideos()
+    private function removeOldVideos(): void
     {
-        $videos = array();
+        $videos = [];
 
         foreach ($this->data['feed']['videos'] as $videoId) {
             $key = array_search($videoId, array_column($this->data['videos'], 'id'));
