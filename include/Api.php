@@ -19,7 +19,7 @@ class Api
      * @param string $type Feed type
      * @param string $parameter Request parameter (channel or playlist id)
      * @param string $eTag Request ETag
-     * @return object|string
+     * @return mixed
      *
      * @throws Exception if channel or playlist is not found.
      */
@@ -82,7 +82,7 @@ class Api
      *
      * @param string $url Request URL
      * @param string $eTag Request ETag
-     * @return array<mixed>
+     * @return array<string, mixed>
      *
      * @throws Exception If a cURL error occurred.
      */
