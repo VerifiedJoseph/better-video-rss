@@ -20,8 +20,12 @@ class Html extends Format
         $feedUrl = $this->data['details']['url'];
         $feedImage = $this->data['details']['thumbnail'];
 
-        $rssUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos));
-        $jsonUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos));
+        $rssUrl = htmlspecialchars(
+            Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos)
+        );
+        $jsonUrl = htmlspecialchars(
+            Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos)
+        );
         $feedFormatButtons = $this->buildFormatButtons();
 
         $items = $this->buildItems();
@@ -117,7 +121,12 @@ HTML;
 
         foreach (Config::getFeedFormats() as $format) {
             $text = strtoupper($format);
-            $url = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], $format, $this->embedVideos);
+            $url = Url::getFeed(
+                $this->data['details']['type'],
+                $this->data['details']['id'],
+                $format,
+                $this->embedVideos
+            );
 
             $html .= sprintf('<a href="%s"><button>%s</button></a>', $url, $text);
         }
