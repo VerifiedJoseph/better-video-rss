@@ -30,7 +30,6 @@ class CacheViewer
      */
     public function __construct()
     {
-
         if (Config::get('ENABLE_CACHE_VIEWER') === false) {
             throw new Exception('Cache viewer is disabled.');
         }
@@ -52,7 +51,6 @@ class CacheViewer
      */
     private function checkInputs()
     {
-
         if (isset($_POST['id'])) {
             if (empty($_POST['id'])) {
                 throw new Exception('No cache ID parameter given.');
@@ -100,8 +98,6 @@ class CacheViewer
 
     /**
      * Display cache file details
-     *
-     * @return string $html
      */
     private function display()
     {
