@@ -1,42 +1,46 @@
-ARG COMPOSER_VERSION=2.4
-ARG PHP_NGINX_VERSION=2.7.0
+FROM composer:2.6.4 AS composer
 
-FROM composer:${COMPOSER_VERSION} AS composer
-
-# Copy code
 COPY ./ /app
-
 WORKDIR /app
 
-# Run composer install to install the dependencies
+# Run composer to install dependencies
 RUN composer install \
   --optimize-autoloader \
   --no-interaction \
   --no-progress \
   --no-dev
 
-FROM trafex/php-nginx:${PHP_NGINX_VERSION}
+FROM php:8.2.11-fpm-alpine3.18
 
-# Run commands as root
-USER root
+# Install packages
+ RUN apk add --no-cache \
+  nginx=~1.24.0-r6 \
+  supervisor=~4.2.5-r2
 
-# Install php81-simplexml
-RUN apk add --no-cache php81-simplexml
+# Copy nginx config
+COPY --chown=nobody /docker/config/nginx.conf /etc/nginx/nginx.conf
 
-# Configure nginx
-COPY --chown=nobody config/nginx.conf /etc/nginx/nginx.conf
+# Copy php-fpm config
+COPY --chown=nobody /docker/config/fpm-pool.conf /usr/local/etc/php-fpm.d/www.conf
 
-# Create cache folder & set owner
-RUN mkdir -p /var/www/cache/ && chown nobody:nobody /var/www/cache/
+# Remove zz-docker.conf
+RUN rm /usr/local/etc/php-fpm.d/zz-docker.conf
 
-# Switch to nobody
-USER nobody
+# Copy supervisord config
+COPY --chown=nobody /docker/config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy code
-COPY --chown=nobody --from=composer /app /var/www/html/
+COPY --chown=nobody --from=composer /app/ /app
 
-# Set env for cache dir
-ENV BVRSS_CACHE_DIR=/var/www/cache/
+# Create cache folder
+RUN mkdir -p /app/cache
 
-# Configure healthcheck (overrides base image healthcheck)
-HEALTHCHECK --interval=60s --timeout=10s CMD curl --silent --fail http://127.0.0.1/fpm-ping
+# Make files accessable to nobody user
+RUN chown -R nobody.nobody /run /app /var/lib/nginx /var/log/nginx
+
+# Remove setup files
+RUN rm -r /app/docker
+RUN rm /app/composer.*
+
+USER nobody
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
