@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Detect {
 
 	/** @var array $type Feed type detected from URL */

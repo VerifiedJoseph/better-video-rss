@@ -8,11 +8,11 @@
  * https://json-feed-validator.herokuapp.com/validate
  */
 
-namespace Format;
+namespace App\Format;
 
-use Configuration as Config;
-use Helper\Convert;
-use Helper\Url;
+use App\Configuration as Config;
+use App\Helper\Convert;
+use App\Helper\Url;
 
 class Json extends Format {
 
@@ -29,7 +29,7 @@ class Json extends Format {
 		$feedUrl = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos);
 		$feedImage = $this->data['details']['thumbnail'];
 
-		$items = $this->buildItmes();
+		$items = $this->buildItems();
 
 		$feed = array(
 			'version' => 'https://jsonfeed.org/version/1',
@@ -45,11 +45,11 @@ class Json extends Format {
 	}
 
 	/**
-	 * Build feed itmes
+	 * Build feed items
 	 *
 	 * @return string Items as XML
 	 */
-	protected function buildItmes() {
+	protected function buildItems() {
 		$items = array();
 
 		foreach ($this->data['videos'] as $video) {

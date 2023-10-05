@@ -1,8 +1,11 @@
 <?php
 
-use Configuration as Config;
-use Helper\Validate;
-use Helper\Output;
+namespace App;
+
+use App\Configuration as Config;
+use App\Helper\Validate;
+use App\Helper\Output;
+use Exception;
 
 class Feed {
 
@@ -82,7 +85,7 @@ class Feed {
 	}
 
 	public function output() {
-		$formatClass = 'Format\\' . ucfirst($this->getFeedFormat());
+		$formatClass = 'App\Format\\' . ucfirst($this->getFeedFormat());
 
 		$format = new $formatClass(
 			$this->getFeedData(),

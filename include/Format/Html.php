@@ -1,9 +1,9 @@
 <?php
 
-namespace Format;
+namespace App\Format;
 
-use Configuration as Config;
-use Helper\Url;
+use App\Configuration as Config;
+use App\Helper\Url;
 
 class Html extends Format {
 
@@ -23,7 +23,7 @@ class Html extends Format {
 		$jsonUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos));
 		$feedFormatButtons = $this->buildFormatButtons();
 
-		$items = $this->buildItmes();
+		$items = $this->buildItems();
 
 		$this->feed = <<<HTML
 <!DOCTYPE html>
@@ -56,15 +56,15 @@ class Html extends Format {
 </html>
 HTML;
 
-		$this->feed = \Helper\Format::minify($this->feed);
+		$this->feed = \App\Helper\Format::minify($this->feed);
 	}
 
 	/**
-	 * Build feed itmes
+	 * Build feed items
 	 *
 	 * @return string Items as XML
 	 */
-	protected function buildItmes() {
+	protected function buildItems() {
 		$items = '';
 
 		foreach ($this->data['videos'] as $video) {

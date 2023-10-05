@@ -1,10 +1,10 @@
 <?php
 
-namespace Format;
+namespace App\Format;
 
-use Configuration as Config;
-use Helper\Convert;
-use Helper\Url;
+use App\Configuration as Config;
+use App\Helper\Convert;
+use App\Helper\Url;
 
 class Rss extends Format {
 
@@ -28,7 +28,7 @@ class Rss extends Format {
 			Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos)
 		);
 
-		$items = $this->buildItmes();
+		$items = $this->buildItems();
 
 		$this->feed = <<<XML
 			<?xml version="1.0" encoding="utf-8"?>
@@ -47,15 +47,15 @@ class Rss extends Format {
 			</rss>
 		XML;
 
-		$this->feed = \Helper\Format::minify($this->feed);
+		$this->feed = \App\Helper\Format::minify($this->feed);
 	}
 
 	/**
-	 * Build feed itmes
+	 * Build feed items
 	 *
 	 * @return string Items as XML
 	 */
-	protected function buildItmes() {
+	protected function buildItems() {
 		$items = '';
 
 		foreach ($this->data['videos'] as $video) {

@@ -1,7 +1,9 @@
 <?php
 
-use Configuration as Config;
-use Helper\File;
+namespace App;
+
+use App\Configuration as Config;
+use App\Helper\File;
 
 class Cache {
 

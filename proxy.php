@@ -6,8 +6,9 @@ require __DIR__ . '/vendor/autoload.php';
 // Class Auto loader
 require __DIR__ . '/autoload.php';
 
-use Configuration as Config;
-use Helper\Output;
+use App\Configuration as Config;
+use App\Helper\Output;
+use App\Proxy;
 
 try {
 	Config::checkInstall();

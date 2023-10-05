@@ -1,9 +1,11 @@
 <?php
 
-use Exception\ConfigurationException as ConfigException;
+namespace App;
 
-use Helper\Validate;
-use Helper\File;
+use App\Helper\Validate;
+use App\Helper\File;
+use App\Exception\ConfigurationException as ConfigException;
+use Exception;
 
 class Configuration {
 

@@ -1,8 +1,11 @@
 <?php
 
-use Configuration as Config;
-use Helper\Convert;
-use Helper\Url;
+namespace App;
+
+use App\Configuration as Config;
+use App\Cache;
+use App\Helper\Convert;
+use App\Helper\Url;
 
 class Data {
 

@@ -1,8 +1,11 @@
 <?php
 
+namespace App;
+
 use \Curl\Curl;
-use Configuration as Config;
-use Helper\Url;
+use App\Configuration as Config;
+use App\Helper\Url;
+use Exception;
 
 class Api {
 

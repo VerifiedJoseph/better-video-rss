@@ -1,9 +1,12 @@
 <?php
 
-use Configuration as Config;
-use Helper\Validate;
-use Helper\Format;
-use Helper\Url;
+namespace App;
+
+use App\Configuration as Config;
+use App\Helper\Validate;
+use App\Helper\Format;
+use App\Helper\Url;
+use Exception;
 
 class Index {
 

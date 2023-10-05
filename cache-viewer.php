@@ -1,10 +1,10 @@
 <?php
 
-// Class Auto loader
-require 'autoload.php';
+require 'vendor/autoload.php';
 
-use Configuration as Config;
-use Helper\Output;
+use App\Configuration as Config;
+use App\Helper\Output;
+use App\CacheViewer;
 
 try {
 	Config::checkInstall();
