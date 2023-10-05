@@ -8,7 +8,7 @@ use App\Helper\Url;
 
 abstract class Format
 {
-    /** @var array $data Feed data */
+    /** @var array<string, mixed> $data Feed data */
     protected array $data = [];
 
     /** @var string $feed Formatted feed data */
@@ -23,7 +23,7 @@ abstract class Format
     /**
      * Constructor
      *
-     * @param array $data Cache/fetch data
+     * @param array<string, mixed> $data Cache/fetch data
      * @param boolean $embedVideos Embed YouTube videos in feed
      */
     public function __construct(array $data, bool $embedVideos = false)
