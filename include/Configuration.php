@@ -15,20 +15,20 @@ class Configuration
     /** @var int $mkdirMode mkdir() access mode */
     private static int $mkdirMode = 0775;
 
-    /** @var array $userAgent User agent used for Curl requests */
+    /** @var string $userAgent User agent used for Curl requests */
     private static string $userAgent = 'BetterVideoRss (+https://github.com/VerifiedJoseph/BetterVideoRss)';
 
-    /** @var array $feedFormats Supported feed formats */
-    private static array $feedFormats = array('rss', 'html', 'json');
+    /** @var array<int, string> $feedFormats Supported feed formats */
+    private static array $feedFormats = ['rss', 'html', 'json'];
 
-    /** @var array $defaultFeedFormats Default feed format */
+    /** @var string $defaultFeedFormats Default feed format */
     private static string $defaultFeedFormat = 'rss';
 
     /** @var string $cacheFileExtension Cache filename extension */
     private static string $cacheFileExtension = 'cache';
 
-    /** @var string $defaults Default values for optional config parameters */
-    private static array $defaults = array(
+    /** @var array<string, mixed> $defaults Default values for optional config parameters */
+    private static array $defaults = [
         'RAW_API_ERRORS' => false,
         'TIMEZONE' => 'UTC',
         'DATE_FORMAT' => 'F j, Y',
@@ -37,10 +37,10 @@ class Configuration
         'DISABLE_CACHE' => false,
         'ENABLE_CACHE_VIEWER' => false,
         'ENABLE_IMAGE_PROXY' => false
-    );
+    ];
 
-    /** @var array $config Loaded config parameters */
-    private static array $config = array();
+    /** @var array<string, mixed> $config Loaded config parameters */
+    private static array $config = [];
 
     /**
      * Check PHP version and loaded extensions
@@ -48,9 +48,8 @@ class Configuration
      * @throws Exception if PHP version is not supported
      * @throws Exception if a PHP extension is not loaded
      */
-    public static function checkInstall()
+    public static function checkInstall(): void
     {
-
         if (version_compare(PHP_VERSION, self::$minPhpVersion) === -1) {
             throw new Exception('BetterVideoRss requires at least PHP version ' . self::$minPhpVersion . '!');
         }
@@ -79,7 +78,7 @@ class Configuration
      * @throws ConfigException if cache directory could not be created.
      * @throws ConfigException if cache directory is not writable.
      */
-    public static function checkConfig()
+    public static function checkConfig(): void
     {
         self::requireConfigFile();
         self::setDefaults();
@@ -88,14 +87,14 @@ class Configuration
             throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
         }
 
-        if (Validate::selfUrlSlash(self::getEnVariable('SELF_URL_PATH')) === false) {
+        if (Validate::selfUrlSlash((string) self::getEnVariable('SELF_URL_PATH')) === false) {
             throw new ConfigException(sprintf(
                 'Self URL must end with a forward slash. e.g: %s [BVRSS_SELF_URL_PATH]',
                 self::getEnVariable('SELF_URL_PATH')
             ));
         }
 
-        if (Validate::selfUrlHttp(self::getEnVariable('SELF_URL_PATH')) === false) {
+        if (Validate::selfUrlHttp((string) self::getEnVariable('SELF_URL_PATH')) === false) {
             throw new ConfigException('Self URL must start with http:// or https:// [BVRSS_SELF_URL_PATH]');
         }
 
@@ -112,7 +111,7 @@ class Configuration
         }
 
         if (self::getEnVariable('TIMEZONE') !== false) {
-            if (Validate::timezone(self::getEnVariable('TIMEZONE')) === false) {
+            if (Validate::timezone((string) self::getEnVariable('TIMEZONE')) === false) {
                 throw new ConfigException(sprintf(
                     'Invalid timezone given (%s). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]',
                     self::getEnVariable('TIMEZONE')
@@ -166,7 +165,6 @@ class Configuration
      */
     public static function get(string $key)
     {
-
         if (array_key_exists($key, self::$config) === false) {
             throw new Exception('Invalid config key given: ' . $key);
         }
@@ -179,7 +177,7 @@ class Configuration
      *
      * @return string
      */
-    public static function getUserAgent()
+    public static function getUserAgent(): string
     {
         return self::$userAgent;
     }
@@ -189,7 +187,7 @@ class Configuration
      *
      * @return string
      */
-    public static function getDefaultFeedFormat()
+    public static function getDefaultFeedFormat(): string
     {
         return self::$defaultFeedFormat;
     }
@@ -197,9 +195,9 @@ class Configuration
     /**
      * Returns feed formats
      *
-     * @return array
+     * @return array<int, string>
      */
-    public static function getFeedFormats()
+    public static function getFeedFormats(): array
     {
         return self::$feedFormats;
     }
@@ -209,7 +207,7 @@ class Configuration
      *
      * @return string
      */
-    public static function getCacheFileExtension()
+    public static function getCacheFileExtension(): string
     {
         return self::$cacheFileExtension;
     }
@@ -219,13 +217,13 @@ class Configuration
      *
      * @return string
      */
-    public static function getCacheDirPath()
+    public static function getCacheDirPath(): string
     {
-        if (Validate::absolutePath(self::get('CACHE_DIR')) === false) {
+        if (Validate::absolutePath((string) self::get('CACHE_DIR')) === false) {
             return dirname(__DIR__) . DIRECTORY_SEPARATOR . self::get('CACHE_DIR');
         }
 
-        return self::get('CACHE_DIR');
+        return (string) self::get('CACHE_DIR');
     }
 
     /**
@@ -233,7 +231,7 @@ class Configuration
      *
      * @return string
      */
-    public static function getVersion()
+    public static function getVersion(): string
     {
         $headPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'HEAD';
 
@@ -260,7 +258,7 @@ class Configuration
     /**
      * Include (require) config file
      */
-    private static function requireConfigFile()
+    private static function requireConfigFile(): void
     {
         if (file_exists('config.php') === true) {
             require 'config.php';
@@ -270,7 +268,7 @@ class Configuration
     /**
      * Set defaults as config values
      */
-    private static function setDefaults()
+    private static function setDefaults(): void
     {
         self::$config = self::$defaults;
     }
