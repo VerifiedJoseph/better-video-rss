@@ -28,7 +28,12 @@ class Json extends Format
         $feedDescription = $this->data['details']['description'];
         $feedTitle = $this->data['details']['title'];
         $feedHomePageUrl = $this->data['details']['url'];
-        $feedUrl = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos);
+        $feedUrl = Url::getFeed(
+            $this->data['details']['type'],
+            $this->data['details']['id'],
+            'json',
+            $this->embedVideos
+        );
         $feedImage = $this->data['details']['thumbnail'];
         $items = $this->buildItems();
         $feed = array(
@@ -61,7 +66,11 @@ class Json extends Format
             $item['title'] = $this->buildTitle($video);
             $attachmentUrl = $video['thumbnail'];
             if (Config::get('ENABLE_IMAGE_PROXY') === true) {
-                $attachmentUrl = Url::getImageProxy($video['id'], $this->data['details']['type'], $this->data['details']['id']);
+                $attachmentUrl = Url::getImageProxy(
+                    $video['id'],
+                    $this->data['details']['type'],
+                    $this->data['details']['id']
+                );
             }
 
             $item['date_published'] = Convert::unixTime($video['published'], 'Y-m-d\TH:i:s\Z');
