@@ -24,10 +24,16 @@ class Convert
     private static int $minByteCount = 1;
 
     /** @var string $urlRegex URL regex */
-    private static string $urlRegex = '/(https?:\/\/(?:www\.)?(?:[a-zA-Z0-9-.]{2,256}\.[a-z]{2,20})(\:[0-9]{2,4})?(?:\/[a-zA-Z0-9@:%_\+.,~#"!?&\/\/=\-*]+|\/)?)/ims';
+    private static string $urlRegex = <<<REGEX
+     /(https?:\/\/(?:www\.)?
+     (?:[a-zA-Z0-9-.]{2,256}\.[a-z]{2,20})
+     (\:[0-9]{2,4})?(?:\/[a-zA-Z0-9@:%_\+.,~#"!?&\/\/=\-*]+|\/)?)
+     /ix
+    REGEX;
 
     /** @var string $iso8601Regex ISO 8601 regex */
-    private static string $iso8601Regex = '/^(-|)?P([0-9]+Y|)?([0-9]+M|)?([0-9]+D|)?T?([0-9]+H|)?([0-9]+M|)?([0-9]+S|)?$/';
+    private static string $iso8601Regex =
+    '/^(-|)?P([0-9]+Y|)?([0-9]+M|)?([0-9]+D|)?T?([0-9]+H|)?([0-9]+M|)?([0-9]+S|)?$/';
 
     /** @var string $iso8601PartRegex ISO 8601 part regex */
     private static string $iso8601PartRegex = '/((?!([0-9]|-)).)*/';
