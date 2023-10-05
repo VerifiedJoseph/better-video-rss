@@ -103,19 +103,18 @@ abstract class Format
             );
         }
 
-        $media = sprintf(
-            '<a target="_blank" title="Watch on YouTube" href="%s"><img title="video thumbnail" src="%s" loading="lazy"/></a>',
-            $video['url'],
-            $thumbnailUrl
-        );
+        $media = <<<HTML
+            <a target="_blank" title="Watch on YouTube" href="{$video['url']}">
+                <img title="video thumbnail" src="{$thumbnailUrl}" loading="lazy"/>
+            </a>
+        HTML;
 
         if ($this->embedVideos === true) {
             $url = Url::getEmbed($video['id']);
 
-            $media = sprintf(
-                '<iframe width="100%" height="410" src="%s" frameborder="0" allow="encrypted-media;" loading="lazy"></iframe>',
-                $url
-            );
+            $media = <<<HTML
+<iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" loading="lazy"></iframe>
+HTML;
         }
 
         return <<<HTML
