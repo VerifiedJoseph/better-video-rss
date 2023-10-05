@@ -17,7 +17,7 @@ class CacheViewer
     private bool $showRaw = false;
 
     /** @var array $data Data from cache files */
-    private array $data = array();
+    private array $data = [];
 
     /** @var int $cacheSize Total size of the cache files */
     private int $cacheSize = 0;
@@ -49,7 +49,7 @@ class CacheViewer
      *
      * @throws Exception If a cache ID is not given.
      */
-    private function checkInputs()
+    private function checkInputs(): void
     {
         if (isset($_POST['id'])) {
             if (empty($_POST['id'])) {
@@ -70,7 +70,7 @@ class CacheViewer
      * @throws Exception If a cache file can not be opened.
      * @throws Exception If a cache file can not be decoded.
      */
-    private function loadFiles()
+    private function loadFiles(): void
     {
         $regex = '/.' . preg_quote(Config::getCacheFileExtension()) . '$/';
 
@@ -99,7 +99,7 @@ class CacheViewer
     /**
      * Display cache file details
      */
-    private function display()
+    private function display(): void
     {
         $fileCount = count($this->data);
         $cacheSize = Convert::fileSize($this->cacheSize);
