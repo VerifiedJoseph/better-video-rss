@@ -10,7 +10,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: verifiedjoseph/better-video-rss
+  IMAGE_NAME: ${{ github.repository }}
   DESCRIPTION: Generate YouTube channel and playlist RSS feeds using YouTube Data API and RSS feeds.
 
 jobs:
