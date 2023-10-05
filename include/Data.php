@@ -6,6 +6,7 @@ use App\Configuration as Config;
 use App\Cache;
 use App\Helper\Convert;
 use App\Helper\Url;
+use stdClass;
 
 class Data
 {
@@ -161,7 +162,7 @@ class Data
     /**
      * Update channel or playlist details with response from YouTube Data API
      *
-     * @param object|string $response
+     * @param mixed $response
      */
     public function updateDetails($response): void
     {
@@ -196,7 +197,7 @@ class Data
     /**
      * Update video details with response from YouTube Data API
      *
-     * @param object|string $response
+     * @param mixed $response
      */
     public function updateVideos($response): void
     {
@@ -205,6 +206,7 @@ class Data
         if (empty($response) === false) {
             $videos = $this->data['videos'];
 
+            /** @var stdClass $item  */
             foreach ($response->items as $item) {
                 $key = array_search($item->id, array_column($this->data['videos'], 'id'));
                 $video = $this->data['videos'][$key];
@@ -250,7 +252,7 @@ class Data
     /**
      * Handle response from YouTube RSS feed
      *
-     * @param object $response
+     * @param string $response
      */
     public function updateFeed($response): void
     {
@@ -262,10 +264,13 @@ class Data
 
         $videos = $this->data['videos'];
 
-        // Get namespaces from XML
-        $namespaces = $response->getNamespaces(true);
+        /** @var \SimpleXMLElement $xml */
+        $xml = simplexml_load_string($response);
 
-        foreach ($response->entry as $entry) {
+        // Get namespaces from XML
+        $namespaces = $xml->getNamespaces(true);
+
+        foreach ($xml->entry as $entry) {
             $mediaNodes = $entry->children($namespaces['media']);
             $ytNodes = $entry->children($namespaces['yt']);
 

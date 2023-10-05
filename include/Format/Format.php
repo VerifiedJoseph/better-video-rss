@@ -35,7 +35,7 @@ abstract class Format
     /**
      * Build feed
      */
-    abstract public function build(): mixed;
+    abstract public function build(): void;
 
     /**
      * Returns formatted feed data
