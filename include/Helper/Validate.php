@@ -1,9 +1,9 @@
 <?php
 
-namespace Helper;
+namespace App\Helper;
 
 use DateTimeZone;
-use Configuration as Config;
+use App\Configuration as Config;
 
 class Validate {
 

@@ -1,9 +1,12 @@
 <?php
 
-use Configuration as Config;
-use Helper\File;
-use Helper\Convert;
-use Helper\Url;
+namespace App;
+
+use App\Configuration as Config;
+use App\Helper\File;
+use App\Helper\Convert;
+use App\Helper\Url;
+use Exception;
 
 class CacheViewer {
 
@@ -71,8 +74,8 @@ class CacheViewer {
 	private function loadFiles() {
 		$regex = '/.' . preg_quote(Config::getCacheFileExtension()) . '$/';
 
-		$cacheDirectory = new RecursiveDirectoryIterator(Config::getCacheDirPath());
-		$cacheFiles = new RegexIterator($cacheDirectory, $regex);
+		$cacheDirectory = new \RecursiveDirectoryIterator(Config::getCacheDirPath());
+		$cacheFiles = new \RegexIterator($cacheDirectory, $regex);
 
 		foreach ($cacheFiles as $file) {
 			$contents = File::read($file->getPathname());

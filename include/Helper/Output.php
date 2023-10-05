@@ -1,8 +1,8 @@
 <?php
 
-namespace Helper;
+namespace App\Helper;
 
-use Helper\Log;
+use App\Helper\Log;
 
 class Output {
 	/**

@@ -1,10 +1,10 @@
 <?php
 
-namespace Format;
+namespace App\Format;
 
-use Configuration as Config;
-use Helper\Convert;
-use Helper\Url;
+use App\Configuration as Config;
+use App\Helper\Convert;
+use App\Helper\Url;
 
 abstract class Format {
 
@@ -64,11 +64,11 @@ abstract class Format {
 	}
 
 	/**
-	 * Build feed itmes
+	 * Build feed items
 	 *
 	 * @return string Items as XML
 	 */
-	abstract protected function buildItmes();
+	abstract protected function buildItems();
 
 	/**
 	 * Build item categories
