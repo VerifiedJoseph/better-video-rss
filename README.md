@@ -4,6 +4,56 @@
 
 BetterVideoRss is a PHP script for generating YouTube channel and playlist RSS feeds using YouTube's [Data API](https://developers.google.com/youtube/v3/) and RSS feeds.
 
+## Installation
+
+### docker-compose
+
+<details>
+<summary>Show/hide details</summary>
+
+```yaml
+version: '3'
+
+services:
+  app:
+    image: ghcr.io/verifiedjoseph/better-video-rss:1.0.0
+    container_name: BetterVideoRss
+    environment:
+      BVRSS_YOUTUBE_API_KEY: ''
+      BVRSS_SELF_URL_PATH: 'https://example.com/'
+      BVRSS_TIMEZONE: 'Europe/London'
+    ports:
+      - '127.0.0.1:8080:8080'
+    volumes:
+      - cache:/app/cache
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+```
+
+</details>
+
+### Manually
+
+<details>
+<summary>Show/hide install details</summary>
+
+1) Download the [latest release](https://github.com/VerifiedJoseph/BetterVideoRss/releases/latest) to your web server and extract the zip archive.
+
+2) Configure the application using `config.php` copied from [`config.php-dist`](config.example.php).
+	
+	```
+	cp config.php-dist config.php
+	```
+
+**Notes**
+
+The cache and vendor folders do not need to be reachable in the browser and access should blocked.
+
+</details>
+
+
 ## Configuration
 
 Environment variables are used to adjust the configuration. Alternatively, you can use `config.php` (copied from [`config.php-dist`](config.php-dist)).
@@ -31,7 +81,6 @@ Environment variables are used to adjust the configuration. Alternatively, you c
 ## Documentation
 
 - [Caching](docs/caching.md)
-- [Docker](docs/docker.md)
 
 ## Requirements
 
