@@ -56,7 +56,7 @@ XML;
      *
      * @return string Items as XML
      */
-    protected function buildItems()
+    protected function buildItems(): string
     {
         $items = '';
 
@@ -129,7 +129,7 @@ XML;
      * @param string $text
      * @return string String with encoded characters
      */
-    private function xmlEncode($text)
+    private function xmlEncode($text): string
     {
         return htmlspecialchars($text, ENT_XML1);
     }
