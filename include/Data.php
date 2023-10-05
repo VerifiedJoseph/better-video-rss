@@ -61,7 +61,6 @@ class Data
      */
     public function __destruct()
     {
-
         // Save data to cache file, if updated
         if ($this->getUpdateStatus() === true) {
             $this->cache->save(
@@ -87,7 +86,6 @@ class Data
      */
     public function setData(array $data)
     {
-
         if (empty($data) === false) {
             $this->data = $data;
         }
@@ -101,7 +99,6 @@ class Data
      */
     public function getPartEtag(string $part)
     {
-
         if (isset($this->data[$part]['etag'])) {
             return $this->data[$part]['etag'];
         }
