@@ -16,7 +16,7 @@ class CacheViewer
     /** @var boolean $showRaw Show raw cache file data */
     private bool $showRaw = false;
 
-    /** @var array<string, mixed> $data Data from cache files */
+    /** @var array<int, mixed> $data Data from cache files */
     private array $data = [];
 
     /** @var int $cacheSize Total size of the cache files */
