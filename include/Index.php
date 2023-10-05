@@ -22,8 +22,8 @@ class Index
     /** @var string $feedType Feed type (channel or playlist) */
     private string $feedType = 'channel';
 
-    /** @var array $supportedTypes Supported feed types */
-    private array $supportedTypes = array('channel', 'playlist');
+    /** @var array<int, string> $supportedTypes Supported feed types */
+    private array $supportedTypes = ['channel', 'playlist'];
 
     /** @var string $feedFormat Feed Format */
     private string $feedFormat = '';
@@ -55,10 +55,8 @@ class Index
 
     /**
      * Display HTML
-     *
-     * @echo string $html
      */
-    public function display()
+    public function display(): void
     {
         $link = '';
         $error = '';
@@ -75,7 +73,7 @@ class Index
         if ($this->error === false && empty($this->feedId) === false) {
             $url = Url::getFeed($this->feedType, $this->feedId, $this->feedFormat, $this->embedVideos);
 
-            $link = sprintf('Feed URL: <a href="s%">s%</a>', $url, $url);
+            $link = sprintf('Feed URL: <a href="%s">%s</a>', $url, $url);
 
             if ($this->fromUrl === true) {
                 $fromUrlLink = $link;
@@ -198,7 +196,7 @@ HTML;
      * @throws Exception if a type parameter is not given
      * @throws Exception if a query parameter is not a valid YouTube URL when type is URL
      */
-    private function checkInputs()
+    private function checkInputs(): void
     {
         if (isset($_POST['query'])) {
             if (empty($_POST['query'])) {
@@ -238,7 +236,7 @@ HTML;
      *
      * @throws Exception if a query parameter is not a supported YouTube URL
      */
-    private function generate()
+    private function generate(): void
     {
         if (empty($this->query) === false) {
             if ($this->fromUrl === true) {
@@ -265,7 +263,7 @@ HTML;
     /**
      * Find channel
      */
-    private function findChannel()
+    private function findChannel(): void
     {
         if (Validate::channelId($this->query) === true) {
             $this->feedId = $this->query;
@@ -277,7 +275,7 @@ HTML;
     /**
      * Find playlist
      */
-    private function findPlaylist()
+    private function findPlaylist(): void
     {
         if (Validate::playlistId($this->query) === true) {
             $this->feedId = $this->query;
@@ -292,7 +290,7 @@ HTML;
      * @param string $query Query string
      * @throws Exception if the channel or playlist was not found
      */
-    private function searchApi(string $query)
+    private function searchApi(string $query): void
     {
         $api = new Api();
 
@@ -322,7 +320,7 @@ HTML;
      *
      * @return string $html
      */
-    private function createFormatSelect()
+    private function createFormatSelect(): string
     {
         $html = '<select name="format">';
 
