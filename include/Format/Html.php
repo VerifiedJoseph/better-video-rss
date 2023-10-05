@@ -104,7 +104,7 @@ HTML;
 
         foreach ($categories as $category) {
             $category = htmlspecialchars($category);
-            $itemCategories .=  sprintf('<li>{%s}</li>', $category);
+            $itemCategories .=  sprintf('<li>%s</li>', $category);
         }
 
         return $itemCategories . '</ul>';
