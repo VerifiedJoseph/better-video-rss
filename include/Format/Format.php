@@ -69,8 +69,6 @@ abstract class Format
 
     /**
      * Build feed items
-     *
-     * @return string Items as XML
      */
     abstract protected function buildItems();
 
