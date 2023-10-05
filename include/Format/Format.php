@@ -82,15 +82,15 @@ abstract class Format
     /**
      * Build item content (description)
      *
-     * @param array $video Video data
+     * @param array<string, mixed> $video Video data
      * @return string
      */
     protected function buildContent(array $video): string
     {
         $description = Convert::newlines($video['description']);
         $description = Convert::urls($description);
-        $published = Convert::unixTime($video['published'], Config::get('DATE_FORMAT'));
-        $datetime = Convert::unixTime($video['published'], 'c');
+        $published = Convert::unixTime((int) $video['published'], (string) Config::get('DATE_FORMAT'));
+        $datetime = Convert::unixTime((int) $video['published'], 'c');
         $thumbnailUrl = $video['thumbnail'];
 
         if (Config::get('ENABLE_IMAGE_PROXY') === true && Config::get('DISABLE_CACHE') === false) {
@@ -126,7 +126,7 @@ HTML;
     /**
      * Build item title
      *
-     * @param array $video Video data
+     * @param array<string, mixed> $video Video data
      * @return string
      */
     protected function buildTitle(array $video): string
