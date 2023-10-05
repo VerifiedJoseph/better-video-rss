@@ -15,7 +15,7 @@ class Fetch
      * @param string $feedId Feed id (channel or playlist ID)
      * @param string $feedType Feed type (channel or playlist)
      *
-     * @return object Response from Curl
+     * @return string Response from Curl
      *
      * @throws Exception if a cURL error occurred.
      * @throws Exception if RSS feed fetch failed.
@@ -36,7 +36,7 @@ class Fetch
             throw new Exception('Failed to fetch: ' . $url . ' (' . $curl->getHttpStatusCode() . ')');
         }
 
-        return $curl->getResponse();
+        return $curl->getRawResponse();
     }
 
     /**
