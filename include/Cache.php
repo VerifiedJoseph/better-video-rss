@@ -10,8 +10,8 @@ class Cache
     /** @var string $name Cache filename */
     private string $name = '';
 
-    /** @var array $data Cache data */
-    private array $data = array();
+    /** @var array<string, mixed> $data Cache data */
+    private array $data = [];
 
     /** @var string $path Cache file path */
     private string $path = '';
@@ -32,7 +32,7 @@ class Cache
      *
      * @return array $data
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
@@ -40,9 +40,8 @@ class Cache
     /**
      * Load cache data from disk
      */
-    public function load()
+    public function load(): void
     {
-
         if (Config::get('DISABLE_CACHE') === false) {
             $contents = File::read($this->path);
             $decoded = json_decode($contents, true);
@@ -58,9 +57,8 @@ class Cache
      *
      * @param array $data Feed date
      */
-    public function save(array $data = array())
+    public function save(array $data = []): void
     {
-
         if (Config::get('DISABLE_CACHE') === false) {
             $data = json_encode($data);
             File::write($this->path, $data);
@@ -72,7 +70,7 @@ class Cache
      *
      * @param string $feedId channel or playlist ID
      */
-    private function setName(string $feedId)
+    private function setName(string $feedId): void
     {
         $this->name = hash('sha256', $feedId);
     }
@@ -80,7 +78,7 @@ class Cache
     /**
      * Set cache file path
      */
-    private function setPath()
+    private function setPath(): void
     {
         $this->path = Config::getCacheDirPath() . DIRECTORY_SEPARATOR .
         $this->name . '.' . Config::getCacheFileExtension();
