@@ -30,7 +30,7 @@ class Cache
     /**
      * Returns cache data
      *
-     * @return array $data
+     * @return array<string, mixed> $data
      */
     public function getData(): array
     {
@@ -55,12 +55,12 @@ class Cache
     /**
      * Save cache data to disk
      *
-     * @param array $data Feed date
+     * @param array<string, mixed> $data Feed date
      */
     public function save(array $data = []): void
     {
         if (Config::get('DISABLE_CACHE') === false) {
-            $data = json_encode($data);
+            $data = (string) json_encode($data);
             File::write($this->path, $data);
         }
     }
