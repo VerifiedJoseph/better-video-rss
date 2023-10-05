@@ -9,3 +9,7 @@ services:
       BVRSS_YOUTUBE_API_KEY: ''
     ports:
       - '8080:8080'
+    volumes:
+      - cache:/app/cache
+volumes:
+  cache:
