@@ -10,7 +10,7 @@ class Format
      * @param string $data
      * @return string $data Returns minified data
      */
-    public static function minify($data)
+    public static function minify($data): string
     {
         $search = array(
             '/\>[^\S ]+/s', // strip white spaces after tags, except space
