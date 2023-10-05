@@ -111,12 +111,12 @@ class CacheViewer
 
         if (empty($this->data)) {
             $tbody = <<<HTML
-				<tr class="center">
-					<td colspan="6">
-						No cache files found. 
-					</td>
-				</tr>
-            HTML;
+<tr class="center">
+	<td colspan="6">
+		No cache files found. 
+	</td>
+</tr>
+HTML;
         }
 
         foreach ($this->data as $index => $data) {
@@ -129,43 +129,43 @@ class CacheViewer
             $htmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'html');
 
             $tbody .= <<<HTML
-				<tr class="center">
-					<td id="{$data['id']}">$number</td>
-					<td>{$data['contents']['details']['title']}<br>
-						<span class="small">
-							(Cache ID: {$data['id']}
-						</span>
-					</td>
-					<td>{$data['contents']['details']['type']}</td>	
-					<td>{$modified}</td>
-					<td>{$size}</td>
-					<td class="buttons">
-						<div class="left">
-							<form action="#{$data['id']}" method="post">
-								<input name="id" type="hidden" value="{$data['id']}">
-								<button type="submit">View Data</button>
-							</form>
-						</div>
-						<div class="right">
-							<form action="#{$data['id']}" method="post">
-								<input name="id" type="hidden" value="{$data['id']}">
-								<input name="raw" type="hidden">
-								<button type="submit">View Raw</button>
-							</form>
-						</div>
-						<div class="left">
-							<a target="_blank" href="{$xmlUrl}">
-							<button type="submit">View XML</button>
-							</a>
-						</div>
-						<div class="right">
-							<a target="_blank" href="{$htmlUrl}">
-								<button type="submit">View HTML</button>
-							</a>
-						</div>
-					</td>
-				</tr>
-            HTML;
+<tr class="center">
+	<td id="{$data['id']}">$number</td>
+	<td>{$data['contents']['details']['title']}<br>
+		<span class="small">
+			(Cache ID: {$data['id']}
+		</span>
+	</td>
+	<td>{$data['contents']['details']['type']}</td>	
+	<td>{$modified}</td>
+	<td>{$size}</td>
+	<td class="buttons">
+		<div class="left">
+			<form action="#{$data['id']}" method="post">
+				<input name="id" type="hidden" value="{$data['id']}">
+				<button type="submit">View Data</button>
+			</form>
+		</div>
+		<div class="right">
+			<form action="#{$data['id']}" method="post">
+				<input name="id" type="hidden" value="{$data['id']}">
+				<input name="raw" type="hidden">
+				<button type="submit">View Raw</button>
+			</form>
+		</div>
+		<div class="left">
+			<a target="_blank" href="{$xmlUrl}">
+				<button type="submit">View XML</button>
+			</a>
+		</div>
+		<div class="right">
+			<a target="_blank" href="{$htmlUrl}">
+				<button type="submit">View HTML</button>
+			</a>
+		</div>
+	</td>
+</tr>
+HTML;
 
             if (isset($this->cacheId) && $this->cacheId === $data['id']) {
                 $tbody .= $this->displayFileDetails($data);
@@ -238,29 +238,27 @@ HTML;
         $tr = '';
 
         $tdData = <<<HTML
-			<a class="right" href="cache-viewer.php">[Close]</a>
+            <a class="right" href="cache-viewer.php">[Close]</a>
         HTML;
 
         if ($this->showRaw === true) {
             $json = json_encode($data['contents'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             $tdData .= <<<HTML
-				<br><textarea cols="140" rows="50">{$json}</textarea>
+                <br><textarea cols="140" rows="50">{$json}</textarea>
             HTML;
         } else {
             $tdData .= <<<HTML
-				{$this->displayChannel($data['contents']['details'])}<br/>
-				{$this->displayFeed($data['contents']['feed'])}<br>
-				{$this->displayVideos($data['contents']['videos'])}<br/>
+                {$this->displayChannel($data['contents']['details'])}<br/>
+                {$this->displayFeed($data['contents']['feed'])}<br>
+                {$this->displayVideos($data['contents']['videos'])}<br/>
             HTML;
         }
 
         $tr = <<<HTML
-			<tr>
-				<td colspan="6">
-					{$tdData}
-				</td>
-			</tr>
+            <tr>
+                <td colspan="6">{$tdData}</td>
+            </tr>
         HTML;
 
         return $tr;
@@ -278,26 +276,26 @@ HTML;
         $expires = Convert::unixTime($channel['expires']);
 
         $html = <<<HTML
-			<strong>Details:</strong>
-			<table class="part">
-				<tr>
-					<td>
-						<strong>ID:</strong> {$channel['id']}<br>
-						<strong>Title:</strong> {$channel['title']}<br>
-						<strong>URL:</strong> <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
-						<strong>Fetched:</strong> $fetched<br>
-						<strong>Expires:</strong> $expires<br>
-					</td>
-					<td>
-						<strong>Description:</strong><br>
-						<textarea class="description" readonly>{$channel['description']}</textarea>
-					</td>
-					<td>
-						<strong>Thumbnail:</strong><br>
-						<img loading="lazy" src="{$channel['thumbnail']}"/></a>
-					</td>
-				</tr>
-			</table>
+            <strong>Details:</strong>
+            <table class="part">
+                <tr>
+                    <td>
+                        <strong>ID:</strong> {$channel['id']}<br>
+                        <strong>Title:</strong> {$channel['title']}<br>
+                        <strong>URL:</strong> <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
+                        <strong>Fetched:</strong> $fetched<br>
+                        <strong>Expires:</strong> $expires<br>
+                    </td>
+                    <td>
+                        <strong>Description:</strong><br>
+                        <textarea class="description" readonly>{$channel['description']}</textarea>
+                    </td>
+                    <td>
+                        <strong>Thumbnail:</strong><br>
+                        <img loading="lazy" src="{$channel['thumbnail']}"/></a>
+                    </td>
+                </tr>
+            </table>
         HTML;
 
         return $html;
@@ -317,17 +315,17 @@ HTML;
         $expires = Convert::unixTime($feed['expires']);
 
         $html = <<<HTML
-			<strong>Feed:</strong>
-			<table class="part">
-				<tr>
-					<td>
-						<strong>Video IDs:</strong><br>
-						<textarea class="videos" readonly>{$videoIDs}</textarea><br>
-						<strong>Fetched:</strong> $fetched<br>
-						<strong>Expires:</strong> $expires<br>
-					</td>
-				</tr>
-			</table>
+            <strong>Feed:</strong>
+            <table class="part">
+                <tr>
+                    <td>
+                        <strong>Video IDs:</strong><br>
+                        <textarea class="videos" readonly>{$videoIDs}</textarea><br>
+                        <strong>Fetched:</strong> $fetched<br>
+                        <strong>Expires:</strong> $expires<br>
+                    </td>
+                </tr>
+            </table>
         HTML;
 
         return $html;
@@ -353,38 +351,38 @@ HTML;
             $published = Convert::unixTime($video['published']);
 
             $videoHtml .= <<<HTML
-				<tr>
-					<td class="videoDetails">
-						<strong>Title:</strong> {$video['title']}<br>
-						<strong>URL:</strong> <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
-						<strong>Published:</strong> {$published}<br>
-						<strong>Duration:</strong> {$video['duration']}<br>
-						<strong>Fetched:</strong> {$fetched}<br>
-						<strong>Expires:</strong> {$expires}<br>
-					</td>
-					<td>
-						<strong>Description</strong>:<br>
-						<textarea class="description" readonly>{$video['description']}</textarea>
-					</td>
-					<td>
-						<strong>Thumbnail:</strong><br>
-						<a target="_blank" title="{$video['thumbnail']}" href="{$video['thumbnail']}">
-							<img loading="lazy" class="thumbnail" src="{$video['thumbnail']}"/>
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<strong>Tags ({$tagCount}) :</strong><br/>
-						<textarea class="tags" readonly>{$tags}</textarea>
-					</td>
-				</tr>
+                <tr>
+                    <td class="videoDetails">
+                    <strong>Title:</strong> {$video['title']}<br>
+                        <strong>URL:</strong> <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
+                        <strong>Published:</strong> {$published}<br>
+                        <strong>Duration:</strong> {$video['duration']}<br>
+                        <strong>Fetched:</strong> {$fetched}<br>
+                        <strong>Expires:</strong> {$expires}<br>
+                    </td>
+                    <td>
+                        <strong>Description</strong>:<br>
+                        <textarea class="description" readonly>{$video['description']}</textarea>
+                    </td>
+                    <td>
+                        <strong>Thumbnail:</strong><br>
+                        <a target="_blank" title="{$video['thumbnail']}" href="{$video['thumbnail']}">
+                            <img loading="lazy" class="thumbnail" src="{$video['thumbnail']}"/>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <strong>Tags ({$tagCount}) :</strong><br/>
+                        <textarea class="tags" readonly>{$tags}</textarea>
+                    </td>
+                </tr>
             HTML;
         }
 
         $html = <<<HTML
-			<strong>Videos ({$videoCount}):</strong>
-			<table class="part">{$videoHtml}</table>
+            <strong>Videos ({$videoCount}):</strong>
+            <table class="part">{$videoHtml}</table>
         HTML;
 
         return $html;
