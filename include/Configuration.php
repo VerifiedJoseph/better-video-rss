@@ -16,7 +16,7 @@ class Configuration
     private static int $mkdirMode = 0775;
 
     /** @var array $userAgent User agent used for Curl requests */
-    private static string $userAgent = 'Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0 (BetterVideoRss https://github.com/VerifiedJoseph/BetterVideoRss)';
+    private static string $userAgent = 'BetterVideoRss (+https://github.com/VerifiedJoseph/BetterVideoRss)';
 
     /** @var array $feedFormats Supported feed formats */
     private static array $feedFormats = array('rss', 'html', 'json');
@@ -89,7 +89,10 @@ class Configuration
         }
 
         if (Validate::selfUrlSlash(self::getEnVariable('SELF_URL_PATH')) === false) {
-            throw new ConfigException('Self URL must end with a forward slash. e.g: ' . self::getEnVariable('SELF_URL_PATH') . '/ [BVRSS_SELF_URL_PATH]');
+            throw new ConfigException(sprintf(
+                'Self URL must end with a forward slash. e.g: %s [BVRSS_SELF_URL_PATH]',
+                self::getEnVariable('SELF_URL_PATH')
+            ));
         }
 
         if (Validate::selfUrlHttp(self::getEnVariable('SELF_URL_PATH')) === false) {
@@ -110,7 +113,10 @@ class Configuration
 
         if (self::getEnVariable('TIMEZONE') !== false) {
             if (Validate::timezone(self::getEnVariable('TIMEZONE')) === false) {
-                throw new ConfigException('Invalid timezone given (' . self::getEnVariable('TIMEZONE') . '). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]');
+                throw new ConfigException(sprintf(
+                    'Invalid timezone given (%s). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]',
+                    self::getEnVariable('TIMEZONE')
+                ));
             }
 
             self::$config['TIMEZONE'] = self::getEnVariable('TIMEZONE');
