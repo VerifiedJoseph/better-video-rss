@@ -16,8 +16,8 @@ class CacheViewer
     /** @var boolean $showRaw Show raw cache file data */
     private bool $showRaw = false;
 
-    /** @var array $data Data from cache files */
-    private array $data = array();
+    /** @var array<int, mixed> $data Data from cache files */
+    private array $data = [];
 
     /** @var int $cacheSize Total size of the cache files */
     private int $cacheSize = 0;
@@ -30,7 +30,6 @@ class CacheViewer
      */
     public function __construct()
     {
-
         if (Config::get('ENABLE_CACHE_VIEWER') === false) {
             throw new Exception('Cache viewer is disabled.');
         }
@@ -50,9 +49,8 @@ class CacheViewer
      *
      * @throws Exception If a cache ID is not given.
      */
-    private function checkInputs()
+    private function checkInputs(): void
     {
-
         if (isset($_POST['id'])) {
             if (empty($_POST['id'])) {
                 throw new Exception('No cache ID parameter given.');
@@ -72,7 +70,7 @@ class CacheViewer
      * @throws Exception If a cache file can not be opened.
      * @throws Exception If a cache file can not be decoded.
      */
-    private function loadFiles()
+    private function loadFiles(): void
     {
         $regex = '/.' . preg_quote(Config::getCacheFileExtension()) . '$/';
 
@@ -100,10 +98,8 @@ class CacheViewer
 
     /**
      * Display cache file details
-     *
-     * @return string $html
      */
-    private function display()
+    private function display(): void
     {
         $fileCount = count($this->data);
         $cacheSize = Convert::fileSize($this->cacheSize);
@@ -230,10 +226,10 @@ HTML;
     /**
      * Display full details for a single cache file.
      *
-     * @param  array $channel
+     * @param array $channel
      * @return string $html
      */
-    private function displayFileDetails(array $data)
+    private function displayFileDetails(array $data): string
     {
         $tr = '';
 
@@ -267,10 +263,10 @@ HTML;
     /**
      * Display channel details
      *
-     * @param  array $channel
+     * @param array $channel
      * @return string $html
      */
-    private function displayChannel(array $channel)
+    private function displayChannel(array $channel): string
     {
         $fetched = Convert::unixTime($channel['fetched']);
         $expires = Convert::unixTime($channel['expires']);
@@ -304,10 +300,10 @@ HTML;
     /**
      * Display feed details
      *
-     * @param   array $feed
+     * @param array $feed
      * @return string $html
      */
-    private function displayFeed(array $feed)
+    private function displayFeed(array $feed): string
     {
         $videoIDs = implode(' ', $feed['videos']);
 
@@ -337,7 +333,7 @@ HTML;
      * @param  array $videos
      * @return string $html
      */
-    private function displayVideos(array $videos)
+    private function displayVideos(array $videos): string
     {
         $videoCount = count($videos);
         $videoHtml = '';
@@ -391,7 +387,7 @@ HTML;
     /**
      * Order cache files by date modified
      */
-    private function orderByModified()
+    private function orderByModified(): void
     {
         $sort = array();
 

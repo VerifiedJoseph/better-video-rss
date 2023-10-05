@@ -8,8 +8,8 @@ use App\Helper\Url;
 
 abstract class Format
 {
-    /** @var array $data Feed data */
-    protected array $data = array();
+    /** @var array<string, mixed> $data Feed data */
+    protected array $data = [];
 
     /** @var string $feed Formatted feed data */
     protected string $feed = '';
@@ -23,7 +23,7 @@ abstract class Format
     /**
      * Constructor
      *
-     * @param array $data Cache/fetch data
+     * @param array<string, mixed> $data Cache/fetch data
      * @param boolean $embedVideos Embed YouTube videos in feed
      */
     public function __construct(array $data, bool $embedVideos = false)
@@ -35,14 +35,14 @@ abstract class Format
     /**
      * Build feed
      */
-    abstract public function build();
+    abstract public function build(): mixed;
 
     /**
      * Returns formatted feed data
      *
      * @return string
      */
-    public function get()
+    public function get(): string
     {
         return $this->feed;
     }
@@ -52,7 +52,7 @@ abstract class Format
      *
      * @return string
      */
-    public function getContentType()
+    public function getContentType(): string
     {
         return $this->contentType;
     }
@@ -62,37 +62,35 @@ abstract class Format
      *
      * @return string
      */
-    public function getLastModified()
+    public function getLastModified(): string
     {
         return Convert::unixTime($this->data['updated'], 'D, d M Y H:i:s T');
     }
 
     /**
      * Build feed items
-     *
-     * @return string Items as XML
      */
-    abstract protected function buildItems();
+    abstract protected function buildItems(): mixed;
 
     /**
      * Build item categories
      *
-     * @param array $categories Item categories
+     * @param array<int, string> $categories Item categories
      */
-    abstract protected function buildCategories(array $categories);
+    abstract protected function buildCategories(array $categories): mixed;
 
     /**
      * Build item content (description)
      *
-     * @param array $video Video data
+     * @param array<string, mixed> $video Video data
      * @return string
      */
-    protected function buildContent(array $video)
+    protected function buildContent(array $video): string
     {
         $description = Convert::newlines($video['description']);
         $description = Convert::urls($description);
-        $published = Convert::unixTime($video['published'], Config::get('DATE_FORMAT'));
-        $datetime = Convert::unixTime($video['published'], 'c');
+        $published = Convert::unixTime((int) $video['published'], (string) Config::get('DATE_FORMAT'));
+        $datetime = Convert::unixTime((int) $video['published'], 'c');
         $thumbnailUrl = $video['thumbnail'];
 
         if (Config::get('ENABLE_IMAGE_PROXY') === true && Config::get('DISABLE_CACHE') === false) {
@@ -128,10 +126,10 @@ HTML;
     /**
      * Build item title
      *
-     * @param array $video Video data
+     * @param array<string, mixed> $video Video data
      * @return string
      */
-    protected function buildTitle(array $video)
+    protected function buildTitle(array $video): string
     {
         $emptyDuration = '00:00';
 

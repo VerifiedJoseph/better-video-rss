@@ -9,8 +9,8 @@ use Exception;
 
 class Feed
 {
-    /** @var array $feedData Feed data from data class */
-    private array $feedData = array();
+    /** @var array<string, mixed> $feedData Feed data from data class */
+    private array $feedData = [];
 
     /** @var string $feedId YouTube channel or playlist ID */
     private string $feedId = '';
@@ -36,7 +36,7 @@ class Feed
     /**
      * Generate feed
      */
-    public function generate()
+    public function generate(): void
     {
         $api = new Api();
         $fetch = new Fetch();
@@ -73,10 +73,7 @@ class Feed
                     continue;
                 }
 
-                $response = $api->getVideos(
-                    $videos,
-                    $data->getPartEtag($part)
-                );
+                $response = $api->getVideos($videos);
 
                 $data->updateVideos($response);
             }
@@ -85,7 +82,7 @@ class Feed
         $this->feedData = $data->getData();
     }
 
-    public function output()
+    public function output(): void
     {
         $formatClass = 'App\Format\\' . ucfirst($this->getFeedFormat());
 
@@ -111,9 +108,8 @@ class Feed
      * @throws Exception if an empty or invalid channel ID parameter is given.
      * @throws Exception if an empty or invalid playlist ID parameter is given.
      */
-    private function checkInputs()
+    private function checkInputs(): void
     {
-
         if (isset($_GET['format']) && empty($_GET['format']) === false) {
             $format = strtolower($_GET['format']);
 
@@ -154,9 +150,9 @@ class Feed
     /**
      * Return feed data
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    private function getFeedData()
+    private function getFeedData(): array
     {
         return $this->feedData;
     }
@@ -166,7 +162,7 @@ class Feed
      *
      * @return string
      */
-    private function getFeedType()
+    private function getFeedType(): string
     {
         return $this->feedType;
     }
@@ -176,7 +172,7 @@ class Feed
      *
      * @return string
      */
-    private function getFeedId()
+    private function getFeedId(): string
     {
         return $this->feedId;
     }
@@ -186,7 +182,7 @@ class Feed
      *
      * @return string
      */
-    private function getFeedFormat()
+    private function getFeedFormat(): string
     {
         return $this->feedFormat;
     }
@@ -196,7 +192,7 @@ class Feed
      *
      * @return boolean
      */
-    private function getEmbedStatus()
+    private function getEmbedStatus(): bool
     {
         return $this->embedVideos;
     }

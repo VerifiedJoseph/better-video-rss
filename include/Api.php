@@ -9,23 +9,23 @@ use Exception;
 
 class Api
 {
-    /** @var array $expectedStatusCodes Non-error HTTP status codes returned by the API */
-    private array $expectedStatusCodes = array(200, 304);
+    /** @var array<int, int> $expectedStatusCodes Non-error HTTP status codes returned by the API */
+    private array $expectedStatusCodes = [200, 304];
 
     /**
      * Get channel or playlist details
      *
      * @param string $type Feed type
      * @param string $parameter Request parameter (channel or playlist id)
-     * @param string $etag Request ETag
+     * @param string $eTag Request ETag
      * @return object|string
      *
      * @throws Exception if channel or playlist is not found.
      */
-    public function getDetails(string $type, string $parameter, string $etag)
+    public function getDetails(string $type, string $parameter, string $eTag)
     {
         $url = Url::getApi($type, $parameter);
-        $response = $this->fetch($url, $etag);
+        $response = $this->fetch($url, $eTag);
 
         if ($response['statusCode'] === 200 && empty($response['data']->items)) {
             throw new Exception(ucfirst($type) . ' not found');
@@ -38,10 +38,9 @@ class Api
      * Get videos details
      *
      * @param string $parameter Request parameter
-     * @param string $etag Request ETag
      * @return object|string
      */
-    public function getVideos(string $parameter, string $etag)
+    public function getVideos(string $parameter)
     {
         $url = Url::getApi('videos', $parameter);
         $response = $this->fetch($url);
@@ -55,7 +54,7 @@ class Api
      * @param string $parameter Request parameter
      * @return object
      */
-    public function searchChannels(string $parameter)
+    public function searchChannels(string $parameter): object
     {
         $url = Url::getApi('searchChannels', $parameter);
         $response = $this->fetch($url);
@@ -69,7 +68,7 @@ class Api
      * @param string $parameter Request parameter
      * @return object
      */
-    public function searchPlaylists(string $parameter)
+    public function searchPlaylists(string $parameter): object
     {
         $url = Url::getApi('searchPlaylists', $parameter);
         $response = $this->fetch($url);
@@ -81,18 +80,18 @@ class Api
      * Make API request
      *
      * @param string $url Request URL
-     * @param string $etag Request ETag
+     * @param string $eTag Request ETag
      * @return array
      *
      * @throws Exception If a cURL error occurred.
      */
-    private function fetch(string $url, string $etag = '')
+    private function fetch(string $url, string $eTag = ''): array
     {
         $curl = new Curl();
 
         // Set if-Match header
-        if (empty($etag) === false) {
-            $curl->setHeader('If-None-Match', $etag);
+        if (empty($eTag) === false) {
+            $curl->setHeader('If-None-Match', $eTag);
         }
 
         $curl->setUserAgent(Config::getUserAgent());
@@ -119,7 +118,7 @@ class Api
      * @param object $response API response
      * @throws Exception
      */
-    private function handleError($response)
+    private function handleError($response): void
     {
         $error = $response->error->errors[0];
 

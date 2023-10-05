@@ -6,19 +6,21 @@ use App\Configuration as Config;
 
 class Url
 {
-    /** @var array $endpoints YouTube endpoints */
-    private static array $endpoints = array(
+    /** @var array<string, string> $endpoints YouTube endpoints */
+    private static array $endpoints = [
         'images' => 'https://i.ytimg.com/vi/',
         'nocookie' => 'https://www.youtube-nocookie.com/',
         'website' => 'https://www.youtube.com/',
         'feed' => 'https://www.youtube.com/feeds/videos.xml',
         'api' => 'https://www.googleapis.com/youtube/v3/'
-    );
+    ];
 
-    /** @var array $thumbnailTypes Supported YouTube thumbnail types */
-    private static array $thumbnailTypes = array(
-        'hqdefault', 'sddefault', 'maxresdefault'
-    );
+    /** @var array<int, string> $thumbnailTypes Supported YouTube thumbnail types */
+    private static array $thumbnailTypes = [
+        'hqdefault',
+        'sddefault',
+        'maxresdefault'
+    ];
 
     /**
      * Create a feed URL for BetterVideoRss
@@ -112,11 +114,11 @@ class Url
     /**
      * Create a YouTube thumbnail URL
      *
-     * @param string $videoID YouTube video ID
+     * @param string $videoId YouTube video ID
      * @param string $type YouTube thumbnail type (hqdefault, sddefault or maxresdefault)
      * @return string
      */
-    public static function getThumbnail(string $videoId, string $type)
+    public static function getThumbnail(string $videoId, string $type): string
     {
         if (in_array($type, self::$thumbnailTypes) === false) {
             $type = self::$thumbnailTypes[0];

@@ -10,9 +10,9 @@ class Output
      * Output error message
      *
      * @param string $message Error message
-     * @param int $code HTTP esponse code
+     * @param int $code HTTP response code
      */
-    public static function error(string $message, int $code = 400)
+    public static function error(string $message, int $code = 400): void
     {
         Log::error($message);
 
@@ -28,7 +28,7 @@ class Output
      * @param string $contentType Content-type header value
      * @param string $lastModified Last-modified header value
      */
-    public static function feed(string $data, string $contentType, string $lastModified)
+    public static function feed(string $data, string $contentType, string $lastModified): void
     {
         header('content-type: ' . $contentType);
         header('last-modified:' . $lastModified);
@@ -41,7 +41,7 @@ class Output
      * @param string $data Image data
      * @param string $contentType Content-type header value
      */
-    public static function image(string $data, string $contentType = 'image/jpeg')
+    public static function image(string $data, string $contentType = 'image/jpeg'): void
     {
         header('content-type: ' . $contentType);
         echo $data;

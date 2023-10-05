@@ -23,7 +23,7 @@ class Json extends Format
     /**
      * Build feed
      */
-    public function build()
+    public function build(): void
     {
         $feedDescription = $this->data['details']['description'];
         $feedTitle = $this->data['details']['title'];
@@ -45,15 +45,15 @@ class Json extends Format
             'icon' => $feedImage,
             'items' => $items
         );
-        $this->feed = json_encode($feed, JSON_PRETTY_PRINT);
+        $this->feed = (string) json_encode($feed, JSON_PRETTY_PRINT);
     }
 
     /**
      * Build feed items
      *
-     * @return string Items as XML
+     * @return array<int, array<string, string>> Items an an array
      */
-    protected function buildItems()
+    protected function buildItems(): array
     {
         $items = array();
         foreach ($this->data['videos'] as $video) {
@@ -89,10 +89,10 @@ class Json extends Format
     /**
      * Build item categories
      *
-     * @param array $categories Item categories
-     * @return array $categories
+     * @param array<int, string> $categories Item categories
+     * @return array<int, string> $categories
      */
-    protected function buildCategories(array $categories)
+    protected function buildCategories(array $categories): array
     {
         return $categories;
     }

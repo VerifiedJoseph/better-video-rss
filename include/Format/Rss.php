@@ -14,7 +14,7 @@ class Rss extends Format
     /**
      * Build feed
      */
-    public function build()
+    public function build(): void
     {
         $feedDescription = $this->xmlEncode($this->data['details']['description']);
         $feedTitle = $this->xmlEncode($this->data['details']['title']);
@@ -56,7 +56,7 @@ XML;
      *
      * @return string Items as XML
      */
-    protected function buildItems()
+    protected function buildItems(): string
     {
         $items = '';
 
@@ -105,10 +105,10 @@ XML;
     /**
      * Build item categories
      *
-     * @param array $categories Item categories
+     * @param array<int, string> $categories Item categories
      * @return string Categories as XML
      */
-    protected function buildCategories(array $categories)
+    protected function buildCategories(array $categories): string
     {
         $itemCategories = '';
 
@@ -129,7 +129,7 @@ XML;
      * @param string $text
      * @return string String with encoded characters
      */
-    private function xmlEncode($text)
+    private function xmlEncode($text): string
     {
         return htmlspecialchars($text, ENT_XML1);
     }

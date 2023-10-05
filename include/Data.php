@@ -9,13 +9,13 @@ use App\Helper\Url;
 
 class Data
 {
-    /** @var object $cache Cache class object */
+    /** @var Cache $cache Cache class object */
     private Cache $cache;
 
-    /** @var array $parts Data part names */
-    private array $parts = array('details', 'feed', 'videos');
+    /** @var array<int, string> $parts Data part names */
+    private array $parts = ['details', 'feed', 'videos'];
 
-    /** @var array $data Data */
+    /** @var array<string, mixed> $data Data */
     private array $data = array(
         'details' => array(),
         'feed' => array(
@@ -24,12 +24,12 @@ class Data
         'videos' => array()
     );
 
-    /** @var array $expires Number of days, hours or minutes that each part expires */
-    private $expires = array(
+    /** @var array<string, string> $expires Number of days, hours or minutes that each part expires */
+    private $expires = [
         'details' => '+30 days',
         'feed' => '+10 minutes',
         'videos' => '+1 hour',
-    );
+    ];
 
     /** @var bool $updated Data update status */
     private bool $updated = false;
@@ -72,9 +72,9 @@ class Data
     /**
      * Returns data
      *
-     * @return array $data
+     * @return array<string, array<mixed>> $data
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
@@ -82,9 +82,9 @@ class Data
     /**
      * Sets data
      *
-     * @param array $data
+     * @param array<mixed> $data
      */
-    public function setData(array $data)
+    public function setData(array $data): void
     {
         if (empty($data) === false) {
             $this->data = $data;
@@ -97,7 +97,7 @@ class Data
      * @param string $part
      * @return string
      */
-    public function getPartEtag(string $part)
+    public function getPartEtag(string $part): string
     {
         if (isset($this->data[$part]['etag'])) {
             return $this->data[$part]['etag'];
@@ -109,9 +109,9 @@ class Data
     /**
      * Returns array of expired data parts
      *
-     * @return array
+     * @return array<int, string>
      */
-    public function getExpiredParts()
+    public function getExpiredParts(): array
     {
         $expiredParts = array();
 
@@ -135,7 +135,7 @@ class Data
      *
      * @return string
      */
-    public function getExpiredVideos()
+    public function getExpiredVideos(): string
     {
         $expiredVideos = array();
 
@@ -163,7 +163,7 @@ class Data
      *
      * @param object|string $response
      */
-    public function updateDetails($response)
+    public function updateDetails($response): void
     {
         $this->updated = true;
 
@@ -198,7 +198,7 @@ class Data
      *
      * @param object|string $response
      */
-    public function updateVideos($response)
+    public function updateVideos($response): void
     {
         $this->updated = true;
 
@@ -252,7 +252,7 @@ class Data
      *
      * @param object $response
      */
-    public function updateFeed($response)
+    public function updateFeed($response): void
     {
         $this->updated = true;
 
@@ -304,7 +304,7 @@ class Data
      *
      * @return boolean
      */
-    private function getUpdateStatus()
+    private function getUpdateStatus(): bool
     {
         return $this->updated;
     }
@@ -312,9 +312,9 @@ class Data
     /**
      * Removes videos that are no longer in the RSS feed from YouTube
      */
-    private function removeOldVideos()
+    private function removeOldVideos(): void
     {
-        $videos = array();
+        $videos = [];
 
         foreach ($this->data['feed']['videos'] as $videoId) {
             $key = array_search($videoId, array_column($this->data['videos'], 'id'));

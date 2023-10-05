@@ -39,7 +39,7 @@ class Proxy
      * @throws Exception if feed id is not found in cache.
      * @throws Exception if video id is not found in cache.
      */
-    public function getImage()
+    public function getImage(): void
     {
         $fetch = new Fetch();
         $cache = new Cache($this->feedId);
@@ -66,7 +66,7 @@ class Proxy
     /**
      * Output image
      */
-    public function output()
+    public function output(): void
     {
         Output::image($this->image);
     }
@@ -78,9 +78,8 @@ class Proxy
      * @throws Exception if an empty or invalid channel ID parameter is given.
      * @throws Exception if an empty or invalid playlist ID parameter is given.
      */
-    private function checkInputs()
+    private function checkInputs(): void
     {
-
         if (isset($_GET['video_id']) === false || empty($_GET['video_id'])) {
             throw new Exception('No video ID parameter given.');
         }

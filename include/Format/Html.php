@@ -13,7 +13,7 @@ class Html extends Format
     /**
      * Build feed
      */
-    public function build()
+    public function build(): void
     {
         $feedDescription = htmlspecialchars($this->data['details']['description'], ENT_QUOTES);
         $feedTitle = $this->data['details']['title'];
@@ -67,9 +67,9 @@ HTML;
     /**
      * Build feed items
      *
-     * @return string Items as XML
+     * @return string Items as HTML
      */
-    protected function buildItems()
+    protected function buildItems(): string
     {
         $items = '';
 
@@ -95,10 +95,10 @@ HTML;
     /**
      * Build item categories
      *
-     * @param array $categories Item categories
+     * @param array<int, string> $categories Item categories
      * @return string Categories as XML
      */
-    protected function buildCategories(array $categories)
+    protected function buildCategories(array $categories): string
     {
         $itemCategories = '<strong>Categories:</strong><ul>';
 
@@ -115,7 +115,7 @@ HTML;
      *
      * @return string button HTML
      */
-    private function buildFormatButtons()
+    private function buildFormatButtons(): string
     {
         $html = '';
 

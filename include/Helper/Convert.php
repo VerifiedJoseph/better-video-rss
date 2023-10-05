@@ -42,7 +42,7 @@ class Convert
      * Convert ISO 8601 video duration to hours, minutes and seconds
      *
      * @param string $duration ISO 8601 duration
-     * @param string $allowNegative Allow a negative duration
+     * @param boolean $allowNegative Allow a negative duration
      * @return boolean|string
      */
     public static function videoDuration($duration, $allowNegative = true)
@@ -118,15 +118,15 @@ class Convert
     /**
      * Convert Unix timestamp into a readable format
      *
-     * @param string $timestamp Unix timestamp
+     * @param int $timestamp Unix timestamp
      * @param string $format DateTime format
      * @param string $timezone DateTime timezone (overrides use of config constant TIMEZONE)
      * @return string
      */
-    public static function unixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s', string $timezone = '')
+    public static function unixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s', string $timezone = ''): string
     {
         if (empty($timezone) === true) {
-            $timezone = Config::get('TIMEZONE');
+            $timezone = (string) Config::get('TIMEZONE');
         }
 
         $dt = new DateTime();
@@ -142,9 +142,9 @@ class Convert
      * @param string $string URL
      * @return string
      */
-    public static function urls(string $string)
+    public static function urls(string $string): string
     {
-        return preg_replace(
+        return (string) preg_replace(
             self::$urlRegex,
             '<a target="_blank" href="$1" target="_blank">$1</a>',
             $string
@@ -157,7 +157,7 @@ class Convert
      * @param string $string
      * @return string
      */
-    public static function newlines(string $string)
+    public static function newlines(string $string): string
     {
         return str_replace(array("\r\n", "\r", "\n"), '<br />', $string);
     }

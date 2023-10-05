@@ -4,10 +4,10 @@ namespace App;
 
 class Detect
 {
-    /** @var array $type Feed type detected from URL */
+    /** @var string $type Feed type detected from URL */
     private string $type = '';
 
-    /** @var array $value Vaule (channel id, username etc) extracted from URL */
+    /** @var string $value Vaule (channel id, username etc) extracted from URL */
     private string $value = '';
 
     /**
