@@ -9,11 +9,11 @@ use App\Helper\Url;
 
 class Data
 {
-    /** @var object $cache Cache class object */
+    /** @var Cache $cache Cache class object */
     private Cache $cache;
 
-    /** @var array $parts Data part names */
-    private array $parts = array('details', 'feed', 'videos');
+    /** @var array<int, string> $parts Data part names */
+    private array $parts = ['details', 'feed', 'videos'];
 
     /** @var array $data Data */
     private array $data = array(
@@ -24,12 +24,12 @@ class Data
         'videos' => array()
     );
 
-    /** @var array $expires Number of days, hours or minutes that each part expires */
-    private $expires = array(
+    /** @var array<string, string> $expires Number of days, hours or minutes that each part expires */
+    private $expires = [
         'details' => '+30 days',
         'feed' => '+10 minutes',
         'videos' => '+1 hour',
-    );
+    ];
 
     /** @var bool $updated Data update status */
     private bool $updated = false;
@@ -74,7 +74,7 @@ class Data
      *
      * @return array $data
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
@@ -84,7 +84,7 @@ class Data
      *
      * @param array $data
      */
-    public function setData(array $data)
+    public function setData(array $data): void
     {
         if (empty($data) === false) {
             $this->data = $data;
@@ -97,7 +97,7 @@ class Data
      * @param string $part
      * @return string
      */
-    public function getPartEtag(string $part)
+    public function getPartEtag(string $part): string
     {
         if (isset($this->data[$part]['etag'])) {
             return $this->data[$part]['etag'];
@@ -109,9 +109,9 @@ class Data
     /**
      * Returns array of expired data parts
      *
-     * @return array
+     * @return array<int, string>
      */
-    public function getExpiredParts()
+    public function getExpiredParts(): array
     {
         $expiredParts = array();
 
@@ -135,7 +135,7 @@ class Data
      *
      * @return string
      */
-    public function getExpiredVideos()
+    public function getExpiredVideos(): string
     {
         $expiredVideos = array();
 
@@ -304,7 +304,7 @@ class Data
      *
      * @return boolean
      */
-    private function getUpdateStatus()
+    private function getUpdateStatus(): bool
     {
         return $this->updated;
     }
