@@ -21,6 +21,6 @@ class Format
         $replace = array('>','<','\\1');
         $data = preg_replace($search, $replace, $data);
 
-        return $data;
+        return (string) $data;
     }
 }
