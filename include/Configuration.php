@@ -80,7 +80,7 @@ class Configuration
         self::requireConfigFile();
         self::setDefaults();
 
-        if (self::hasEnv('SELF_URL_PATH') === false) {
+        if (self::hasEnv('SELF_URL_PATH') === false || self::getEnv('SELF_URL_PATH') === '') {
             throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
         }
 
@@ -97,7 +97,7 @@ class Configuration
 
         self::$config['SELF_URL_PATH'] = self::getEnv('SELF_URL_PATH');
 
-        if (self::hasEnv('YOUTUBE_API_KEY') === false) {
+        if (self::hasEnv('YOUTUBE_API_KEY') === false || self::getEnv('YOUTUBE_API_KEY') === '') {
             throw new ConfigException('YouTube API key must be set. [BVRSS_YOUTUBE_API_KEY]');
         }
 
@@ -107,7 +107,7 @@ class Configuration
             self::$config['RAW_API_ERRORS'] = true;
         }
 
-        if (self::hasEnv('TIMEZONE') === true) {
+        if (self::hasEnv('TIMEZONE') === true && self::getEnv('TIMEZONE') !== '') {
             if (Validate::timezone((string) self::getEnv('TIMEZONE')) === false) {
                 throw new ConfigException(sprintf(
                     'Invalid timezone given (%s). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]',
@@ -118,15 +118,15 @@ class Configuration
             self::$config['TIMEZONE'] = self::getEnv('TIMEZONE');
         }
 
-        if (self::hasEnv('DATE_FORMAT') === true) {
+        if (self::hasEnv('DATE_FORMAT') === true && self::getEnv('DATE_FORMAT') !== '') {
             self::$config['DATE_FORMAT'] = self::getEnv('DATE_FORMAT');
         }
 
-        if (self::hasEnv('TIME_FORMAT') === true) {
+        if (self::hasEnv('TIME_FORMAT') === true && self::getEnv('TIME_FORMAT') !== '') {
             self::$config['TIME_FORMAT'] = self::getEnv('TIME_FORMAT');
         }
 
-        if (self::hasEnv('CACHE_DIR') === true) {
+        if (self::hasEnv('CACHE_DIR') === true && self::getEnv('CACHE_DIR') !== '') {
             self::$config['CACHE_DIR'] = self::getEnv('CACHE_DIR');
         }
 
