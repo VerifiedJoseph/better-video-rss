@@ -73,10 +73,7 @@ class Feed
                     continue;
                 }
 
-                $response = $api->getVideos(
-                    $videos,
-                    $data->getPartEtag($part)
-                );
+                $response = $api->getVideos($videos);
 
                 $data->updateVideos($response);
             }
