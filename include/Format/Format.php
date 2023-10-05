@@ -96,7 +96,11 @@ abstract class Format
         $thumbnailUrl = $video['thumbnail'];
 
         if (Config::get('ENABLE_IMAGE_PROXY') === true && Config::get('DISABLE_CACHE') === false) {
-            $thumbnailUrl = Url::getImageProxy($video['id'], $this->data['details']['type'], $this->data['details']['id']);
+            $thumbnailUrl = Url::getImageProxy(
+                $video['id'],
+                $this->data['details']['type'],
+                $this->data['details']['id']
+            );
         }
 
         $media = sprintf(
@@ -109,13 +113,16 @@ abstract class Format
             $url = Url::getEmbed($video['id']);
 
             $media = sprintf(
-                '<iframe width="100%" height="410" src="%s" frameborder="0" allow="encrypted-media;" loading="lazy" allowfullscreen></iframe>',
+                '<iframe width="100%" height="410" src="%s" frameborder="0" allow="encrypted-media;" loading="lazy"></iframe>',
                 $url
             );
         }
 
         return <<<HTML
-            {$media}<hr/>Published: <time datetime="{$datetime}">{$published}</time> - Duration: <span class="duration">{$video['duration']}</span><hr/><p>{$description}</p>
+            {$media}<hr/>
+            <span>Published: <time datetime="{$datetime}">{$published}</time></span>
+            <span> - Duration: <span class="duration">{$video['duration']}</span></span>
+            <hr/><p>{$description}</p>
         HTML;
     }
 
