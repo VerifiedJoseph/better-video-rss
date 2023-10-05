@@ -35,7 +35,7 @@ abstract class Format
     /**
      * Build feed
      */
-    abstract public function build();
+    abstract public function build(): mixed;
 
     /**
      * Returns formatted feed data
@@ -70,14 +70,14 @@ abstract class Format
     /**
      * Build feed items
      */
-    abstract protected function buildItems();
+    abstract protected function buildItems(): mixed;
 
     /**
      * Build item categories
      *
      * @param array<int, string> $categories Item categories
      */
-    abstract protected function buildCategories(array $categories);
+    abstract protected function buildCategories(array $categories): mixed;
 
     /**
      * Build item content (description)
