@@ -82,7 +82,7 @@ class Cache
      */
     private function setPath()
     {
-        $this->path = Config::getCacheDirPath() .DIRECTORY_SEPARATOR .
+        $this->path = Config::getCacheDirPath() . DIRECTORY_SEPARATOR .
         $this->name . '.' . Config::getCacheFileExtension();
     }
 }
