@@ -119,7 +119,7 @@ HTML;
             $text = strtoupper($format);
             $url = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], $format, $this->embedVideos);
 
-            $html .= sprintf('<a href="{%s}"><button>{%s}</button></a>', $url, $text);
+            $html .= sprintf('<a href="%s"><button>%s</button></a>', $url, $text);
         }
 
         return $html;
