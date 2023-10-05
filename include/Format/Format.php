@@ -9,7 +9,7 @@ use App\Helper\Url;
 abstract class Format
 {
     /** @var array $data Feed data */
-    protected array $data = array();
+    protected array $data = [];
 
     /** @var string $feed Formatted feed data */
     protected string $feed = '';
@@ -42,7 +42,7 @@ abstract class Format
      *
      * @return string
      */
-    public function get()
+    public function get(): string
     {
         return $this->feed;
     }
@@ -52,7 +52,7 @@ abstract class Format
      *
      * @return string
      */
-    public function getContentType()
+    public function getContentType(): string
     {
         return $this->contentType;
     }
@@ -62,7 +62,7 @@ abstract class Format
      *
      * @return string
      */
-    public function getLastModified()
+    public function getLastModified(): string
     {
         return Convert::unixTime($this->data['updated'], 'D, d M Y H:i:s T');
     }
@@ -75,7 +75,7 @@ abstract class Format
     /**
      * Build item categories
      *
-     * @param array $categories Item categories
+     * @param array<int, string> $categories Item categories
      */
     abstract protected function buildCategories(array $categories);
 
@@ -85,7 +85,7 @@ abstract class Format
      * @param array $video Video data
      * @return string
      */
-    protected function buildContent(array $video)
+    protected function buildContent(array $video): string
     {
         $description = Convert::newlines($video['description']);
         $description = Convert::urls($description);
@@ -129,7 +129,7 @@ HTML;
      * @param array $video Video data
      * @return string
      */
-    protected function buildTitle(array $video)
+    protected function buildTitle(array $video): string
     {
         $emptyDuration = '00:00';
 
