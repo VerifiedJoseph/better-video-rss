@@ -178,7 +178,7 @@ class Index
 			</div>
 			<div class="item">
 				<p><a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a></p>
-				<span class="small">version: {$version}</span>
+				<span class="small"><a href="https://github.com/VerifiedJoseph/BetterVideoRss/releases/tag/v{$version}">v{$version}</a></span>
 			</div>
 		</div>
 	</div>

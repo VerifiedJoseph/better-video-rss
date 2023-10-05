@@ -1,7 +1,7 @@
 <?php
 
-// Composer Auto loader
-require __DIR__ . '/vendor/autoload.php';
+require 'vendor/autoload.php';
+require 'include/version.php';
 
 use App\Configuration as Config;
 use App\Helper\Output;

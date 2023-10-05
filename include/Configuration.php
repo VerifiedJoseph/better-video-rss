@@ -170,6 +170,15 @@ class Configuration
     }
 
     /**
+     * Returns version string
+     * @return string
+     */
+    public static function getVersion(): string
+    {
+        return (string) constant('VERSION');
+    }
+
+    /**
      * Returns user agent string
      *
      * @return string
@@ -221,35 +230,6 @@ class Configuration
         }
 
         return (string) self::get('CACHE_DIR');
-    }
-
-    /**
-     * Returns current git commit and branch of BetterVideoRss.
-     *
-     * @return string
-     */
-    public static function getVersion(): string
-    {
-        $headPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'HEAD';
-
-        if (file_exists($headPath) === true) {
-            $headContents = File::read($headPath);
-
-            $refPath = '.git/' . substr($headContents, 5, -1);
-            $parts = explode('/', $refPath);
-
-            if (isset($parts[3])) {
-                $branch = $parts[3];
-
-                if (file_exists($refPath)) {
-                    $refContents = File::read($refPath);
-
-                    return 'git.' . $branch . '.' . substr($refContents, 0, 7);
-                }
-            }
-        }
-
-        return 'unknown';
     }
 
     /**
