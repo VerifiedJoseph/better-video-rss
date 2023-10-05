@@ -69,17 +69,13 @@ class Index
         $version = Config::getVersion();
 
         if ($this->error === true) {
-            $error = <<<HTML
-				<div id="error"><strong>{$this->errorMessage}</strong></div>
-            HTML;
+            $error = sprintf('<div id="error"><strong>%s</strong></div>', $this->errorMessage);
         }
 
         if ($this->error === false && empty($this->feedId) === false) {
             $url = Url::getFeed($this->feedType, $this->feedId, $this->feedFormat, $this->embedVideos);
 
-            $link = <<<HTML
-				Feed URL: <a href="{$url}">{$url}</a>
-            HTML;
+            $link = sprintf('Feed URL: <a href="s%">s%</a>', $url, $url);
 
             if ($this->fromUrl === true) {
                 $fromUrlLink = $link;
@@ -329,12 +325,8 @@ HTML;
     {
         $html = '<select name="format">';
 
-        foreach (Config::getFeedFormats() as $key => $format) {
-            $name = strtoupper($format);
-
-            $html .= <<<HTML
-				<option value="{$format}">$name</option>
-            HTML;
+        foreach (Config::getFeedFormats() as $format) {
+            $html .= sprintf('<option value="%s">%s</option>', $format, strtoupper($format));
         }
 
         return $html .= '</select>';
