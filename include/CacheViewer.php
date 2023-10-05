@@ -16,7 +16,7 @@ class CacheViewer
     /** @var boolean $showRaw Show raw cache file data */
     private bool $showRaw = false;
 
-    /** @var array $data Data from cache files */
+    /** @var array<string, mixed> $data Data from cache files */
     private array $data = [];
 
     /** @var int $cacheSize Total size of the cache files */
@@ -226,10 +226,10 @@ HTML;
     /**
      * Display full details for a single cache file.
      *
-     * @param  array $channel
+     * @param array $channel
      * @return string $html
      */
-    private function displayFileDetails(array $data)
+    private function displayFileDetails(array $data): string
     {
         $tr = '';
 
@@ -263,10 +263,10 @@ HTML;
     /**
      * Display channel details
      *
-     * @param  array $channel
+     * @param array $channel
      * @return string $html
      */
-    private function displayChannel(array $channel)
+    private function displayChannel(array $channel): string
     {
         $fetched = Convert::unixTime($channel['fetched']);
         $expires = Convert::unixTime($channel['expires']);
@@ -300,10 +300,10 @@ HTML;
     /**
      * Display feed details
      *
-     * @param   array $feed
+     * @param array $feed
      * @return string $html
      */
-    private function displayFeed(array $feed)
+    private function displayFeed(array $feed): string
     {
         $videoIDs = implode(' ', $feed['videos']);
 
@@ -333,7 +333,7 @@ HTML;
      * @param  array $videos
      * @return string $html
      */
-    private function displayVideos(array $videos)
+    private function displayVideos(array $videos): string
     {
         $videoCount = count($videos);
         $videoHtml = '';
@@ -387,7 +387,7 @@ HTML;
     /**
      * Order cache files by date modified
      */
-    private function orderByModified()
+    private function orderByModified(): void
     {
         $sort = array();
 
