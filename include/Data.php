@@ -147,7 +147,10 @@ class Data
         foreach ($this->data['feed']['videos'] as $id) {
             $key = array_search($id, array_column($this->data['videos'], 'id'));
 
-            if (isset($this->data['videos'][$key]['expires']) === false || time() >= $this->data['videos'][$key]['expires']) {
+            if (
+                isset($this->data['videos'][$key]['expires']) === false ||
+                time() >= $this->data['videos'][$key]['expires']
+            ) {
                 $expiredVideos[] = $id;
             }
         }
