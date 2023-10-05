@@ -15,7 +15,7 @@ class Data
     /** @var array<int, string> $parts Data part names */
     private array $parts = ['details', 'feed', 'videos'];
 
-    /** @var array $data Data */
+    /** @var array<string, array<mixed>> $data Data */
     private array $data = array(
         'details' => array(),
         'feed' => array(
@@ -72,7 +72,7 @@ class Data
     /**
      * Returns data
      *
-     * @return array $data
+     * @return array<string, array<mixed>> $data
      */
     public function getData(): array
     {
@@ -82,7 +82,7 @@ class Data
     /**
      * Sets data
      *
-     * @param array $data
+     * @param array<mixed> $data
      */
     public function setData(array $data): void
     {
