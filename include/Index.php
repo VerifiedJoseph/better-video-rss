@@ -8,91 +8,90 @@ use App\Helper\Format;
 use App\Helper\Url;
 use Exception;
 
-class Index {
+class Index
+{
+    /** @var string $query Search query */
+    private string $query = '';
 
-	/** @var string $query Search query */
-	private string $query = '';
+    /** @var boolean $embedVideos Embed videos status */
+    private bool $embedVideos = false;
 
-	/** @var boolean $embedVideos Embed videos status */
-	private bool $embedVideos = false;
+    /** @var string $feedId YouTube channel or playlist ID */
+    private string $feedId = '';
 
-	/** @var string $feedId YouTube channel or playlist ID */
-	private string $feedId = '';
+    /** @var string $feedType Feed type (channel or playlist) */
+    private string $feedType = 'channel';
 
-	/** @var string $feedType Feed type (channel or playlist) */
-	private string $feedType = 'channel';
+    /** @var array $supportedTypes Supported feed types */
+    private array $supportedTypes = array('channel', 'playlist');
 
-	/** @var array $supportedTypes Supported feed types */
-	private array $supportedTypes = array('channel', 'playlist');
+    /** @var string $feedFormat Feed Format */
+    private string $feedFormat = '';
 
-	/** @var string $feedFormat Feed Format */
-	private string $feedFormat = '';
+    /** @var bool $fromUrl Query string is from a URL */
+    private bool $fromUrl = false;
 
-	/** @var bool $fromUrl Query string is from a URL */
-	private bool $fromUrl = false;
+    /** @var boolean $error Error status */
+    private bool $error = false;
 
-	/** @var boolean $error Error status */
-	private bool $error = false;
+    /** @var string $errorMessage Error Message */
+    private string $errorMessage = '';
 
-	/** @var string $errorMessage Error Message */
-	private string $errorMessage = '';
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->feedFormat = Config::getDefaultFeedFormat();
 
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->feedFormat = Config::getDefaultFeedFormat();
+        try {
+            $this->checkInputs();
+            $this->generate();
+        } catch (Exception $e) {
+            $this->error = true;
+            $this->errorMessage = $e->getMessage();
+        }
+    }
 
-		try {
-			$this->checkInputs();
-			$this->generate();
+    /**
+     * Display HTML
+     *
+     * @echo string $html
+     */
+    public function display()
+    {
+        $link = '';
+        $error = '';
+        $channelLink = '';
+        $playlistLink = '';
+        $fromUrlLink = '';
 
-		} catch(Exception $e) {
-			$this->error = true;
-			$this->errorMessage = $e->getMessage();
-		}
-	}
+        $version = Config::getVersion();
 
-	/**
-	 * Display HTML
-	 *
-	 * @echo string $html
-	 */
-	public function display() {
-		$link = '';
-		$error = '';
-		$channelLink = '';
-		$playlistLink = '';
-		$fromUrlLink = '';
-
-		$version = Config::getVersion();
-
-		if ($this->error === true) {
-			$error = <<<HTML
+        if ($this->error === true) {
+            $error = <<<HTML
 				<div id="error"><strong>{$this->errorMessage}</strong></div>
-			HTML;
-		}
+            HTML;
+        }
 
-		if ($this->error === false && empty($this->feedId) === false) {
-			$url = Url::getFeed($this->feedType, $this->feedId, $this->feedFormat, $this->embedVideos);
+        if ($this->error === false && empty($this->feedId) === false) {
+            $url = Url::getFeed($this->feedType, $this->feedId, $this->feedFormat, $this->embedVideos);
 
-			$link = <<<HTML
+            $link = <<<HTML
 				Feed URL: <a href="{$url}">{$url}</a>
-			HTML;
+            HTML;
 
-			if ($this->fromUrl === true) {
-				$fromUrlLink = $link;
+            if ($this->fromUrl === true) {
+                $fromUrlLink = $link;
+            } elseif ($this->feedType === 'channel') {
+                $channelLink = $link;
+            } elseif ($this->feedType === 'playlist') {
+                $playlistLink = $link;
+            }
+        }
 
-			} elseif ($this->feedType === 'channel') {
-				$channelLink = $link;
-
-			} elseif ($this->feedType === 'playlist') {
-				$playlistLink = $link;
-			}
-		}
-
-		$selectHtml = $this->createFormatSelect();
-		$html = <<<HTML
+        $selectHtml = $this->createFormatSelect();
+        $html = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -192,150 +191,152 @@ class Index {
 </html>
 HTML;
 
-		echo Format::minify($html);
-	}
+        echo Format::minify($html);
+    }
 
-	/**
-	 * Check user inputs
-	 *
-	 * @throws Exception if a query parameter is not given
-	 * @throws Exception if a type parameter is not given
-	 * @throws Exception if a query parameter is not a valid YouTube URL when type is URL
-	 */
-	private function checkInputs() {
-		if (isset($_POST['query'])) {
+    /**
+     * Check user inputs
+     *
+     * @throws Exception if a query parameter is not given
+     * @throws Exception if a type parameter is not given
+     * @throws Exception if a query parameter is not a valid YouTube URL when type is URL
+     */
+    private function checkInputs()
+    {
+        if (isset($_POST['query'])) {
+            if (empty($_POST['query'])) {
+                throw new Exception('Query parameter not given.');
+            }
 
-			if (empty($_POST['query'])) {
-				throw new Exception('Query parameter not given.');
-			}
+            if (isset($_POST['type']) === false || empty($_POST['type'])) {
+                throw new Exception('Type parameter not given.');
+            }
 
-			if (isset($_POST['type']) === false || empty($_POST['type'])) {
-				throw new Exception('Type parameter not given.');
-			}
+            if (in_array($_POST['type'], $this->supportedTypes)) {
+                $this->feedType = $_POST['type'];
+            }
 
-			if (in_array($_POST['type'], $this->supportedTypes)) {
-				$this->feedType = $_POST['type'];
-			}
+            if ($_POST['type'] === 'url') {
+                $this->fromUrl = true;
 
-			if ($_POST['type'] === 'url') {
-				$this->fromUrl = true;
+                if (Validate::YouTubeUrl($_POST['query']) === false) {
+                    throw new Exception('URL is not a valid YouTube URL.');
+                }
+            }
 
-				if (Validate::YouTubeUrl($_POST['query']) === false) {
-					throw new Exception('URL is not a valid YouTube URL.');
-				}
-			}
+            if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
+                $this->feedFormat = $_POST['format'];
+            }
 
-			if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
-				$this->feedFormat = $_POST['format'];
-			}
+            $this->query = $_POST['query'];
+        }
 
-			$this->query = $_POST['query'];
-		}
+        if (isset($_POST['embed_videos'])) {
+            $this->embedVideos = true;
+        }
+    }
 
-		if (isset($_POST['embed_videos'])) {
-			$this->embedVideos = true;
-		}
-	}
+    /**
+     * Generate feed URL
+     *
+     * @throws Exception if a query parameter is not a supported YouTube URL
+     */
+    private function generate()
+    {
+        if (empty($this->query) === false) {
+            if ($this->fromUrl === true) {
+                $detect = new Detect();
 
-	/**
-	 * Generate feed URL
-	 *
-	 * @throws Exception if a query parameter is not a supported YouTube URL
-	 */
-	private function generate() {
-		if (empty($this->query) === false) {
+                if ($detect->fromUrl($this->query) === false) {
+                    throw new Exception('Unsupported YouTube URL.');
+                }
 
-			if ($this->fromUrl === true) {
-				$detect = new Detect();
+                $this->feedType = $detect->getType();
+                $this->query = $detect->getValue();
+            }
 
-				if ($detect->fromUrl($this->query) === false) {
-					throw new Exception('Unsupported YouTube URL.');
-				}
+            if ($this->feedType === 'channel') {
+                $this->findChannel();
+            }
 
-				$this->feedType = $detect->getType();
-				$this->query = $detect->getValue();
-			}
+            if ($this->feedType === 'playlist') {
+                $this->findPlaylist();
+            }
+        }
+    }
 
-			if ($this->feedType === 'channel') {
-				$this->findChannel();
-			}
+    /**
+     * Find channel
+     */
+    private function findChannel()
+    {
+        if (Validate::channelId($this->query) === true) {
+            $this->feedId = $this->query;
+        } else {
+            $this->searchApi($this->query);
+        }
+    }
 
-			if ($this->feedType === 'playlist') {
-				$this->findPlaylist();
-			}
-		}
-	}
+    /**
+     * Find playlist
+     */
+    private function findPlaylist()
+    {
+        if (Validate::playlistId($this->query) === true) {
+            $this->feedId = $this->query;
+        } else {
+            $this->searchApi($this->query);
+        }
+    }
 
-	/**
-	 * Find channel
-	 */
-	private function findChannel() {
-		if (Validate::channelId($this->query) === true) {
-			$this->feedId = $this->query;
+    /**
+     * Search YouTube data API for channel or playlist
+     *
+     * @param string $query Query string
+     * @throws Exception if the channel or playlist was not found
+     */
+    private function searchApi(string $query)
+    {
+        $api = new Api();
 
-		} else {
-			$this->searchApi($this->query);
-		}
-	}
+        if ($this->feedType === 'channel') {
+            $response = $api->searchChannels($query);
+        }
 
-	/**
-	 * Find playlist
-	 */
-	private function findPlaylist() {
-		if (Validate::playlistId($this->query) === true) {
-			$this->feedId = $this->query;
+        if ($this->feedType === 'playlist') {
+            $response = $api->searchPlaylists($query);
+        }
 
-		} else {
-			$this->searchApi($this->query);
-		}
-	}
+        if (empty($response->items)) {
+            throw new Exception(ucfirst($this->feedType) . ' not found');
+        }
 
-	/**
-	 * Search YouTube data API for channel or playlist
-	 *
-	 * @param string $query Query string
-	 * @throws Exception if the channel or playlist was not found
-	 */
-	private function searchApi(string $query) {
-		$api = new Api();
+        if ($this->feedType === 'channel') {
+            $this->feedId = $response->items['0']->id->channelId;
+        }
 
-		if ($this->feedType === 'channel') {
-			$response = $api->searchChannels($query);
-		}
+        if ($this->feedType === 'playlist') {
+            $this->feedId = $response->items['0']->id->playlistId;
+        }
+    }
 
-		if ($this->feedType === 'playlist') {
-			$response = $api->searchPlaylists($query);
-		}
+    /**
+     * Create feed format drop-down
+     *
+     * @return string $html
+     */
+    private function createFormatSelect()
+    {
+        $html = '<select name="format">';
 
-		if (empty($response->items)) {
-			throw new Exception(ucfirst($this->feedType) . ' not found');
-		}
+        foreach (Config::getFeedFormats() as $key => $format) {
+            $name = strtoupper($format);
 
-		if ($this->feedType === 'channel') {
-			$this->feedId = $response->items['0']->id->channelId;
-		}
-
-		if ($this->feedType === 'playlist') {
-			$this->feedId = $response->items['0']->id->playlistId;
-		}
-	}
-
-	/**
-	 * Create feed format drop-down
-	 *
-	 * @return string $html
-	 */
-	private function createFormatSelect() {
-		$html = '<select name="format">';
-
-		foreach (Config::getFeedFormats() as $key => $format) {
-			$name = strtoupper($format);
-
-			$html .= <<<HTML
+            $html .= <<<HTML
 				<option value="{$format}">$name</option>
-			HTML;
-		}
+            HTML;
+        }
 
-		return $html .= '</select>';
-	}
+        return $html .= '</select>';
+    }
 }

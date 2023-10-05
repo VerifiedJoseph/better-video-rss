@@ -11,13 +11,12 @@ use App\Helper\Output;
 use App\Proxy;
 
 try {
-	Config::checkInstall();
-	Config::checkConfig();
+    Config::checkInstall();
+    Config::checkConfig();
 
-	$proxy = new Proxy();
-	$proxy->getImage();
-	$proxy->output();
-
+    $proxy = new Proxy();
+    $proxy->getImage();
+    $proxy->output();
 } catch (Exception $e) {
-	Output::error($e->getMessage());
+    Output::error($e->getMessage());
 }

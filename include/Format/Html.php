@@ -5,27 +5,28 @@ namespace App\Format;
 use App\Configuration as Config;
 use App\Helper\Url;
 
-class Html extends Format {
+class Html extends Format
+{
+    /** @var string $contentType HTTP content-type header value */
+    protected string $contentType = 'text/html; charset=UTF-8';
 
-	/** @var string $contentType HTTP content-type header value */
-	protected string $contentType = 'text/html; charset=UTF-8';
+    /**
+     * Build feed
+     */
+    public function build()
+    {
+        $feedDescription = htmlspecialchars($this->data['details']['description'], ENT_QUOTES);
+        $feedTitle = $this->data['details']['title'];
+        $feedUrl = $this->data['details']['url'];
+        $feedImage = $this->data['details']['thumbnail'];
 
-	/**
-	 * Build feed
-	 */
-	public function build() {
-		$feedDescription = htmlspecialchars($this->data['details']['description'], ENT_QUOTES);
-		$feedTitle = $this->data['details']['title'];
-		$feedUrl = $this->data['details']['url'];
-		$feedImage = $this->data['details']['thumbnail'];
+        $rssUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos));
+        $jsonUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos));
+        $feedFormatButtons = $this->buildFormatButtons();
 
-		$rssUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos));
-		$jsonUrl = htmlspecialchars(Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos));
-		$feedFormatButtons = $this->buildFormatButtons();
+        $items = $this->buildItems();
 
-		$items = $this->buildItems();
-
-		$this->feed = <<<HTML
+        $this->feed = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,73 +57,76 @@ class Html extends Format {
 </html>
 HTML;
 
-		$this->feed = \App\Helper\Format::minify($this->feed);
-	}
+        $this->feed = \App\Helper\Format::minify($this->feed);
+    }
 
-	/**
-	 * Build feed items
-	 *
-	 * @return string Items as XML
-	 */
-	protected function buildItems() {
-		$items = '';
+    /**
+     * Build feed items
+     *
+     * @return string Items as XML
+     */
+    protected function buildItems()
+    {
+        $items = '';
 
-		foreach ($this->data['videos'] as $video) {
-			$itemTitle = htmlspecialchars($this->buildTitle($video));
-			$itemUrl = $video['url'];
-			$itemEnclosure = $video['thumbnail'];
-			$itemCategories = $this->buildCategories($video['tags']);
-			$itemContent = $this->buildContent($video);
+        foreach ($this->data['videos'] as $video) {
+            $itemTitle = htmlspecialchars($this->buildTitle($video));
+            $itemUrl = $video['url'];
+            $itemEnclosure = $video['thumbnail'];
+            $itemCategories = $this->buildCategories($video['tags']);
+            $itemContent = $this->buildContent($video);
 
-			$items .= <<<HTML
+            $items .= <<<HTML
 				<article>
 					<h2 class="title"><a target="_blank" href="{$itemUrl}">{$itemTitle}</a></h2>
 					{$itemContent}
 					{$itemCategories}
 				</article>
-			HTML;
-		}
+            HTML;
+        }
 
-		return $items;
-	}
+        return $items;
+    }
 
-	/**
-	 * Build item categories
-	 *
-	 * @param array $categories Item categories
-	 * @return string Categories as XML
-	 */
-	protected function buildCategories(array $categories) {
-		$itemCategories = '<strong>Categories:</strong><ul>';
+    /**
+     * Build item categories
+     *
+     * @param array $categories Item categories
+     * @return string Categories as XML
+     */
+    protected function buildCategories(array $categories)
+    {
+        $itemCategories = '<strong>Categories:</strong><ul>';
 
-		foreach($categories as $category) {
-			$category = htmlspecialchars($category);
+        foreach ($categories as $category) {
+            $category = htmlspecialchars($category);
 
-			$itemCategories .= <<<HTML
+            $itemCategories .= <<<HTML
 				<li>{$category}</li>
-			HTML;
-		}
+            HTML;
+        }
 
-		return $itemCategories . '</ul>';
-	}
+        return $itemCategories . '</ul>';
+    }
 
-	/**
-	 * build format buttons
-	 *
-	 * @return string button HTML
-	 */
-	private function buildFormatButtons() {
-		$html = '';
+    /**
+     * build format buttons
+     *
+     * @return string button HTML
+     */
+    private function buildFormatButtons()
+    {
+        $html = '';
 
-		foreach (Config::getFeedFormats() as $format) {
-			$text = strtoupper($format);
-			$url = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], $format, $this->embedVideos);
+        foreach (Config::getFeedFormats() as $format) {
+            $text = strtoupper($format);
+            $url = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], $format, $this->embedVideos);
 
-			$html .= <<<HTML
+            $html .= <<<HTML
 				<a href="{$url}"><button>{$text}</button></a> 
-			HTML;
-		}
+            HTML;
+        }
 
-		return $html;
-	}
+        return $html;
+    }
 }

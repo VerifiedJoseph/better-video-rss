@@ -7,12 +7,11 @@ use App\Helper\Output;
 use App\Index;
 
 try {
-	Config::checkInstall();
-	Config::checkConfig();
+    Config::checkInstall();
+    Config::checkConfig();
 
-	$index = new Index();
-	$index->display();
-
+    $index = new Index();
+    $index->display();
 } catch (Exception $e) {
-	Output::error($e->getMessage());
+    Output::error($e->getMessage());
 }
