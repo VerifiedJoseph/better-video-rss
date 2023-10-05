@@ -195,7 +195,7 @@ class Feed
      *
      * @return boolean
      */
-    private function getEmbedStatus(): string
+    private function getEmbedStatus(): bool
     {
         return $this->embedVideos;
     }
