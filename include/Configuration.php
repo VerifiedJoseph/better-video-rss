@@ -12,6 +12,9 @@ class Configuration
     /** @var string $minPhpVersion Minimum PHP version */
     private static string $minPhpVersion = '8.0.0';
 
+    /** @var array<int, string> $extensions Required PHP extensions */
+    private static array $extensions = ['curl', 'json', 'mbstring'];
+
     /** @var int $mkdirMode mkdir() access mode */
     private static int $mkdirMode = 0775;
 
@@ -51,19 +54,13 @@ class Configuration
     public static function checkInstall(): void
     {
         if (version_compare(PHP_VERSION, self::$minPhpVersion) === -1) {
-            throw new Exception('BetterVideoRss requires at least PHP version ' . self::$minPhpVersion . '!');
+            throw new Exception('BetterVideoRss requires at least PHP version ' . self::$minPhpVersion);
         }
 
-        if (extension_loaded('curl') === false) {
-            throw new Exception('Extension Error: cURL extension not loaded.');
-        }
-
-        if (extension_loaded('json') === false) {
-            throw new Exception('Extension Error: JSON extension not loaded.');
-        }
-
-        if (extension_loaded('mbstring') === false) {
-            throw new Exception('Extension Error: Mbstring extension not loaded.');
+        foreach (self::$extensions as $ext) {
+            if (extension_loaded($ext) === false) {
+                throw new Exception(sprintf('Extension Error: %s extension not loaded.', $ext));
+            }
         }
     }
 
@@ -83,54 +80,54 @@ class Configuration
         self::requireConfigFile();
         self::setDefaults();
 
-        if (self::getEnVariable('SELF_URL_PATH') === false) {
+        if (self::hasEnv('SELF_URL_PATH') === false) {
             throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
         }
 
-        if (Validate::selfUrlSlash((string) self::getEnVariable('SELF_URL_PATH')) === false) {
+        if (Validate::selfUrlSlash((string) self::getEnv('SELF_URL_PATH')) === false) {
             throw new ConfigException(sprintf(
                 'Self URL must end with a forward slash. e.g: %s [BVRSS_SELF_URL_PATH]',
-                self::getEnVariable('SELF_URL_PATH')
+                self::getEnv('SELF_URL_PATH')
             ));
         }
 
-        if (Validate::selfUrlHttp((string) self::getEnVariable('SELF_URL_PATH')) === false) {
+        if (Validate::selfUrlHttp((string) self::getEnv('SELF_URL_PATH')) === false) {
             throw new ConfigException('Self URL must start with http:// or https:// [BVRSS_SELF_URL_PATH]');
         }
 
-        self::$config['SELF_URL_PATH'] = self::getEnVariable('SELF_URL_PATH');
+        self::$config['SELF_URL_PATH'] = self::getEnv('SELF_URL_PATH');
 
-        if (self::getEnVariable('YOUTUBE_API_KEY') === false) {
+        if (self::hasEnv('YOUTUBE_API_KEY') === false) {
             throw new ConfigException('YouTube API key must be set. [BVRSS_YOUTUBE_API_KEY]');
         }
 
-        self::$config['YOUTUBE_API_KEY'] = self::getEnVariable('YOUTUBE_API_KEY');
+        self::$config['YOUTUBE_API_KEY'] = self::getEnv('YOUTUBE_API_KEY');
 
-        if (filter_var(self::getEnVariable('RAW_API_ERRORS'), FILTER_VALIDATE_BOOLEAN) === true) {
+        if (self::getEnv('RAW_API_ERRORS') === 'true') {
             self::$config['RAW_API_ERRORS'] = true;
         }
 
-        if (self::getEnVariable('TIMEZONE') !== false) {
-            if (Validate::timezone((string) self::getEnVariable('TIMEZONE')) === false) {
+        if (self::hasEnv('TIMEZONE') === true) {
+            if (Validate::timezone((string) self::getEnv('TIMEZONE')) === false) {
                 throw new ConfigException(sprintf(
                     'Invalid timezone given (%s). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]',
-                    self::getEnVariable('TIMEZONE')
+                    self::getEnv('TIMEZONE')
                 ));
             }
 
-            self::$config['TIMEZONE'] = self::getEnVariable('TIMEZONE');
+            self::$config['TIMEZONE'] = self::getEnv('TIMEZONE');
         }
 
-        if (self::getEnVariable('DATE_FORMAT') !== false) {
-            self::$config['DATE_FORMAT'] = self::getEnVariable('DATE_FORMAT');
+        if (self::hasEnv('DATE_FORMAT') === true) {
+            self::$config['DATE_FORMAT'] = self::getEnv('DATE_FORMAT');
         }
 
-        if (self::getEnVariable('TIME_FORMAT') !== false) {
-            self::$config['TIME_FORMAT'] = self::getEnVariable('TIME_FORMAT');
+        if (self::hasEnv('TIME_FORMAT') === true) {
+            self::$config['TIME_FORMAT'] = self::getEnv('TIME_FORMAT');
         }
 
-        if (self::getEnVariable('CACHE_DIR') !== false) {
-            self::$config['CACHE_DIR'] = self::getEnVariable('CACHE_DIR');
+        if (self::hasEnv('CACHE_DIR') === true) {
+            self::$config['CACHE_DIR'] = self::getEnv('CACHE_DIR');
         }
 
         $cacheDir = self::getCacheDirPath();
@@ -143,15 +140,15 @@ class Configuration
             throw new ConfigException('Cache directory is not writable. [BVRSS_CACHE_DIR]');
         }
 
-        if (filter_var(self::getEnVariable('DISABLE_CACHE'), FILTER_VALIDATE_BOOLEAN) === true) {
+        if (self::getEnv('DISABLE_CACHE') === 'true') {
             self::$config['DISABLE_CACHE'] = true;
         }
 
-        if (filter_var(self::getEnVariable('ENABLE_CACHE_VIEWER'), FILTER_VALIDATE_BOOLEAN) === true) {
+        if (self::getEnv('ENABLE_CACHE_VIEWER') === 'true') {
             self::$config['ENABLE_CACHE_VIEWER'] = true;
         }
 
-        if (filter_var(self::getEnVariable('ENABLE_IMAGE_PROXY'), FILTER_VALIDATE_BOOLEAN) === true) {
+        if (self::getEnv('ENABLE_IMAGE_PROXY') === 'true') {
             self::$config['ENABLE_IMAGE_PROXY'] = true;
         }
     }
@@ -274,22 +271,26 @@ class Configuration
     }
 
     /**
-     * Returns value of environment variable
+     * Check for an environment variable
      *
-     * Boolean false is returned if the variable does not exist or is empty.
-     *
-     * @param string $name Name of config parameter
-     * @return string|boolean
+     * @param string $name Variable name excluding prefix
      */
-    private static function getEnVariable(string $name)
+    private static function hasEnv(string $name): bool
     {
-        $varName = 'BVRSS_' . $name;
-        $value = getenv($varName);
-
-        if ($value !== false && empty($value) === false) {
-            return getenv($varName);
+        if (getenv('BVRSS_' . $name) === false) {
+            return false;
         }
 
-        return false;
+        return true;
+    }
+
+    /**
+     * Get an environment variable
+     *
+     * @param string $name Variable name excluding prefix
+     */
+    private static function getEnv(string $name): mixed
+    {
+        return getenv('BVRSS_' . $name);
     }
 }
