@@ -9,7 +9,7 @@ use Exception;
 
 class Feed
 {
-    /** @var array $feedData Feed data from data class */
+    /** @var array<string, mixed> $feedData Feed data from data class */
     private array $feedData = [];
 
     /** @var string $feedId YouTube channel or playlist ID */
@@ -153,7 +153,7 @@ class Feed
     /**
      * Return feed data
      *
-     * @return array
+     * @return array<string, mixed>
      */
     private function getFeedData(): array
     {
