@@ -103,7 +103,7 @@ class Configuration
 
         self::$config['YOUTUBE_API_KEY'] = self::getEnv('YOUTUBE_API_KEY');
 
-        if (filter_var(self::getEnv('RAW_API_ERRORS'), FILTER_VALIDATE_BOOLEAN) === true) {
+        if (self::getEnv('RAW_API_ERRORS') === 'true') {
             self::$config['RAW_API_ERRORS'] = true;
         }
 
