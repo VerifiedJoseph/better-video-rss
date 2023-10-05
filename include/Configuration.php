@@ -144,11 +144,11 @@ class Configuration
             self::$config['DISABLE_CACHE'] = true;
         }
 
-        if (self::getEnv('ENABLE_CACHE_VIEWER') === 'true' ) {
+        if (self::getEnv('ENABLE_CACHE_VIEWER') === 'true') {
             self::$config['ENABLE_CACHE_VIEWER'] = true;
         }
 
-        if (self::getEnv('ENABLE_IMAGE_PROXY') === 'true' ) {
+        if (self::getEnv('ENABLE_IMAGE_PROXY') === 'true') {
             self::$config['ENABLE_IMAGE_PROXY'] = true;
         }
     }
