@@ -2,13 +2,15 @@
 
 namespace App\Helper;
 
-class Log {
-	/**
-	 * Write error message to system log file
-	 *
-	 * @param string $message Error message
-	 */
-	public static function error(string $message) {
-		error_log('[BetterVideoRss] ' . $message, 0);
-	}
+class Log
+{
+    /**
+     * Write error message to system log file
+     *
+     * @param string $message Error message
+     */
+    public static function error(string $message)
+    {
+        error_log('[BetterVideoRss] ' . $message, 0);
+    }
 }

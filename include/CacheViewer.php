@@ -8,124 +8,127 @@ use App\Helper\Convert;
 use App\Helper\Url;
 use Exception;
 
-class CacheViewer {
+class CacheViewer
+{
+    /** @var string $cacheId Current cache file ID */
+    private string $cacheId = '';
 
-	/** @var string $cacheId Current cache file ID */
-	private string $cacheId = '';
+    /** @var boolean $showRaw Show raw cache file data */
+    private bool $showRaw = false;
 
-	/** @var boolean $showRaw Show raw cache file data */
-	private bool $showRaw = false;
+    /** @var array $data Data from cache files */
+    private array $data = array();
 
-	/** @var array $data Data from cache files */
-	private array $data = array();
+    /** @var int $cacheSize Total size of the cache files */
+    private int $cacheSize = 0;
 
-	/** @var int $cacheSize Total size of the cache files */
-	private int $cacheSize = 0;
+    /**
+     * Constructor
+     *
+     * @throws Exception if ENABLE_CACHE_VIEWER is false
+     * @throws Exception if DISABLE_CACHE is true
+     */
+    public function __construct()
+    {
 
-	/**
-	 * Constructor
-	 *
-	 * @throws Exception if ENABLE_CACHE_VIEWER is false
-	 * @throws Exception if DISABLE_CACHE is true
-	 */
-	public function __construct() {
+        if (Config::get('ENABLE_CACHE_VIEWER') === false) {
+            throw new Exception('Cache viewer is disabled.');
+        }
 
-		if (Config::get('ENABLE_CACHE_VIEWER') === false) {
-			throw new Exception('Cache viewer is disabled.');
-		}
+        if (Config::get('DISABLE_CACHE') === true) {
+            throw new Exception('Cache viewer not available. Cache is disabled.');
+        }
 
-		if (Config::get('DISABLE_CACHE') === true) {
-			throw new Exception('Cache viewer not available. Cache is disabled.');
-		}
+        $this->checkInputs();
+        $this->loadFiles();
+        $this->orderByModified();
+        $this->display();
+    }
 
-		$this->checkInputs();
-		$this->loadFiles();
-		$this->orderByModified();
-		$this->display();
-	}
+    /**
+     * Check user inputs
+     *
+     * @throws Exception If a cache ID is not given.
+     */
+    private function checkInputs()
+    {
 
-	/**
-	 * Check user inputs
-	 *
-	 * @throws Exception If a cache ID is not given.
-	 */
-	private function checkInputs() {
+        if (isset($_POST['id'])) {
+            if (empty($_POST['id'])) {
+                throw new Exception('No cache ID parameter given.');
+            }
 
-		if (isset($_POST['id'])) {
+            $this->cacheId = $_POST['id'];
+        }
 
-			if (empty($_POST['id'])) {
-				throw new Exception('No cache ID parameter given.');
-			}
+        if (isset($_POST['raw'])) {
+            $this->showRaw = true;
+        }
+    }
 
-			$this->cacheId = $_POST['id'];
-		}
+    /**
+     * Load cache files
+     *
+     * @throws Exception If a cache file can not be opened.
+     * @throws Exception If a cache file can not be decoded.
+     */
+    private function loadFiles()
+    {
+        $regex = '/.' . preg_quote(Config::getCacheFileExtension()) . '$/';
 
-		if (isset($_POST['raw'])) {
-			$this->showRaw = true;
-		}
-	}
+        $cacheDirectory = new \RecursiveDirectoryIterator(Config::getCacheDirPath());
+        $cacheFiles = new \RegexIterator($cacheDirectory, $regex);
 
-	/**
-	 * Load cache files
-	 *
-	 * @throws Exception If a cache file can not be opened.
-	 * @throws Exception If a cache file can not be decoded.
-	 */
-	private function loadFiles() {
-		$regex = '/.' . preg_quote(Config::getCacheFileExtension()) . '$/';
+        foreach ($cacheFiles as $file) {
+            $contents = File::read($file->getPathname());
+            $data = json_decode($contents, true);
 
-		$cacheDirectory = new \RecursiveDirectoryIterator(Config::getCacheDirPath());
-		$cacheFiles = new \RegexIterator($cacheDirectory, $regex);
+            if (is_null($data) === true) {
+                throw new Exception('Failed to decode file: ' . $file->getfilename());
+            }
 
-		foreach ($cacheFiles as $file) {
-			$contents = File::read($file->getPathname());
-			$data = json_decode($contents, true);
+            $this->data[] = array(
+                'id' => $file->getBasename('.' . Config::getCacheFileExtension()),
+                'modified' => $file->getMTime(),
+                'size' => $file->getSize(),
+                'contents' => $data
+            );
 
-			if (is_null($data) === true) {
-				throw new Exception('Failed to decode file: ' . $file->getfilename());
-			}
+            $this->cacheSize += $file->getSize();
+        }
+    }
 
-			$this->data[] = array(
-				'id' => $file->getBasename('.' . Config::getCacheFileExtension()),
-				'modified' => $file->getMTime(),
-				'size' => $file->getSize(),
-				'contents' => $data
-			);
+    /**
+     * Display cache file details
+     *
+     * @return string $html
+     */
+    private function display()
+    {
+        $fileCount = count($this->data);
+        $cacheSize = Convert::fileSize($this->cacheSize);
+        $tbody = '';
 
-			$this->cacheSize += $file->getSize();
-		}
-	}
-
-	/**
-	 * Display cache file details
-	 *
-	 * @return string $html
-	 */
-	private function display() {
-		$fileCount = count($this->data);
-		$cacheSize = Convert::fileSize($this->cacheSize);
-		$tbody = '';
-
-		if(empty($this->data)) {
-			$tbody = <<<HTML
+        if (empty($this->data)) {
+            $tbody = <<<HTML
 				<tr class="center">
 					<td colspan="6">
 						No cache files found. 
 					</td>
 				</tr>
-			HTML;
-		}
+            HTML;
+        }
 
-		foreach ($this->data as $index => $data) {
-			$number = $index + 1;
+        foreach ($this->data as $index => $data) {
+            $number = $index + 1;
 
-			$modified = Convert::unixTime($data['modified']);
-			$size = Convert::fileSize($data['size']);
+            $modified = Convert::unixTime($data['modified']);
+            $size = Convert::fileSize($data['size']);
 
-			$xmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
-			$htmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'html');
-	
-			$tbody .= <<<HTML
+            $xmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
+            $htmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'html');
+
+            $tbody .= <<<HTML
 				<tr class="center">
 					<td id="{$data['id']}">$number</td>
 					<td>{$data['contents']['details']['title']}<br>
@@ -162,14 +165,14 @@ class CacheViewer {
 						</div>
 					</td>
 				</tr>
-			HTML;
+            HTML;
 
-			if (isset($this->cacheId) && $this->cacheId === $data['id']) {
-				$tbody .= $this->displayFileDetails($data);
-			}
-		}
+            if (isset($this->cacheId) && $this->cacheId === $data['id']) {
+                $tbody .= $this->displayFileDetails($data);
+            }
+        }
 
-		$html = <<<HTML
+        $html = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -221,59 +224,60 @@ class CacheViewer {
 </html>
 HTML;
 
-		echo $html;
-	}
+        echo $html;
+    }
 
-	/**
-	 * Display full details for a single cache file.
-	 *
-	 * @param  array $channel
-	 * @return string $html
-	 */
-	private function displayFileDetails(array $data) {
-		$tr = '';
+    /**
+     * Display full details for a single cache file.
+     *
+     * @param  array $channel
+     * @return string $html
+     */
+    private function displayFileDetails(array $data)
+    {
+        $tr = '';
 
-		$tdData = <<<HTML
+        $tdData = <<<HTML
 			<a class="right" href="cache-viewer.php">[Close]</a>
-		HTML;
+        HTML;
 
-		if ($this->showRaw === true) {
-			$json = json_encode($data['contents'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        if ($this->showRaw === true) {
+            $json = json_encode($data['contents'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-			$tdData .= <<<HTML
+            $tdData .= <<<HTML
 				<br><textarea cols="140" rows="50">{$json}</textarea>
-			HTML;
-		} else {
-
-			$tdData .= <<<HTML
+            HTML;
+        } else {
+            $tdData .= <<<HTML
 				{$this->displayChannel($data['contents']['details'])}<br/>
 				{$this->displayFeed($data['contents']['feed'])}<br>
 				{$this->displayVideos($data['contents']['videos'])}<br/>
-			HTML;
-		}
+            HTML;
+        }
 
-		$tr = <<<HTML
+        $tr = <<<HTML
 			<tr>
 				<td colspan="6">
 					{$tdData}
 				</td>
 			</tr>
-		HTML;
+        HTML;
 
-		return $tr;
-	}
+        return $tr;
+    }
 
-	/**
-	 * Display channel details
-	 *
-	 * @param  array $channel
-	 * @return string $html
-	 */
-	private function displayChannel(array $channel) {
-		$fetched = Convert::unixTime($channel['fetched']);
-		$expires = Convert::unixTime($channel['expires']);
+    /**
+     * Display channel details
+     *
+     * @param  array $channel
+     * @return string $html
+     */
+    private function displayChannel(array $channel)
+    {
+        $fetched = Convert::unixTime($channel['fetched']);
+        $expires = Convert::unixTime($channel['expires']);
 
-		$html = <<<HTML
+        $html = <<<HTML
 			<strong>Details:</strong>
 			<table class="part">
 				<tr>
@@ -294,24 +298,25 @@ HTML;
 					</td>
 				</tr>
 			</table>
-		HTML;
+        HTML;
 
-		return $html;
-	}
+        return $html;
+    }
 
-	/**
-	 * Display feed details
-	 *
-	 * @param 	array $feed
-	 * @return string $html
-	 */
-	private function displayFeed(array $feed) {
-		$videoIDs = implode(' ', $feed['videos']);
+    /**
+     * Display feed details
+     *
+     * @param   array $feed
+     * @return string $html
+     */
+    private function displayFeed(array $feed)
+    {
+        $videoIDs = implode(' ', $feed['videos']);
 
-		$fetched = Convert::unixTime($feed['fetched']);
-		$expires = Convert::unixTime($feed['expires']);
+        $fetched = Convert::unixTime($feed['fetched']);
+        $expires = Convert::unixTime($feed['expires']);
 
-		$html = <<<HTML
+        $html = <<<HTML
 			<strong>Feed:</strong>
 			<table class="part">
 				<tr>
@@ -323,30 +328,31 @@ HTML;
 					</td>
 				</tr>
 			</table>
-		HTML;
+        HTML;
 
-		return $html;
-	}
+        return $html;
+    }
 
-	/**
-	 * Display video details
-	 *
-	 * @param  array $videos
-	 * @return string $html
-	 */
-	private function displayVideos(array $videos) {
-		$videoCount = count($videos);
-		$videoHtml = '';
+    /**
+     * Display video details
+     *
+     * @param  array $videos
+     * @return string $html
+     */
+    private function displayVideos(array $videos)
+    {
+        $videoCount = count($videos);
+        $videoHtml = '';
 
-		foreach ($videos as $video) {
-			$tags = implode(', ', $video['tags']);
-			$tagCount = count($video['tags']);
+        foreach ($videos as $video) {
+            $tags = implode(', ', $video['tags']);
+            $tagCount = count($video['tags']);
 
-			$fetched = Convert::unixTime($video['fetched']);
-			$expires = Convert::unixTime($video['expires']);
-			$published = Convert::unixTime($video['published']);
+            $fetched = Convert::unixTime($video['fetched']);
+            $expires = Convert::unixTime($video['expires']);
+            $published = Convert::unixTime($video['published']);
 
-			$videoHtml .= <<<HTML
+            $videoHtml .= <<<HTML
 				<tr>
 					<td class="videoDetails">
 						<strong>Title:</strong> {$video['title']}<br>
@@ -373,26 +379,27 @@ HTML;
 						<textarea class="tags" readonly>{$tags}</textarea>
 					</td>
 				</tr>
-			HTML;
-		}
+            HTML;
+        }
 
-		$html = <<<HTML
+        $html = <<<HTML
 			<strong>Videos ({$videoCount}):</strong>
 			<table class="part">{$videoHtml}</table>
-		HTML;
+        HTML;
 
-		return $html;
-	}
+        return $html;
+    }
 
-	/**
-	 * Order cache files by date modified
-	 */
-	private function orderByModified() {
-		$sort = array();
+    /**
+     * Order cache files by date modified
+     */
+    private function orderByModified()
+    {
+        $sort = array();
 
-		foreach ($this->data as $key => $item) {
-			$sort[$key] = $item['modified'];
-		}
-		array_multisort($sort, SORT_DESC, $this->data);
-	}
+        foreach ($this->data as $key => $item) {
+            $sort[$key] = $item['modified'];
+        }
+        array_multisort($sort, SORT_DESC, $this->data);
+    }
 }

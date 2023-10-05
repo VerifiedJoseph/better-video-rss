@@ -7,13 +7,12 @@ use App\Helper\Output;
 use App\Feed;
 
 try {
-	Config::checkInstall();
-	Config::checkConfig();
+    Config::checkInstall();
+    Config::checkConfig();
 
-	$feed = new Feed();
-	$feed->generate();
-	$feed->output();
-
+    $feed = new Feed();
+    $feed->generate();
+    $feed->output();
 } catch (Exception $e) {
-	Output::error($e->getMessage());
+    Output::error($e->getMessage());
 }
