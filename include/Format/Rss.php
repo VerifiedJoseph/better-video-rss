@@ -75,7 +75,11 @@ XML;
 
             if (Config::get('ENABLE_IMAGE_PROXY') === true) {
                 $itemEnclosure = $this->xmlEncode(
-                    Url::getImageProxy($video['id'], $this->data['details']['type'], $this->data['details']['id'])
+                    Url::getImageProxy(
+                        $video['id'],
+                        $this->data['details']['type'],
+                        $this->data['details']['id']
+                    )
                 );
             }
 
