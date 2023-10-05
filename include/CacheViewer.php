@@ -226,7 +226,7 @@ HTML;
     /**
      * Display full details for a single cache file.
      *
-     * @param array $channel
+     * @param arrayclear $channel
      * @return string $html
      */
     private function displayFileDetails(array $data): string
