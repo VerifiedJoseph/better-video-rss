@@ -264,7 +264,7 @@ class Data
 
         $videos = $this->data['videos'];
 
-        /** @var \SimpleXMLElement $xml */ 
+        /** @var \SimpleXMLElement $xml */
         $xml = simplexml_load_string($response);
 
         // Get namespaces from XML
