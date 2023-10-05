@@ -300,7 +300,7 @@ HTML;
     /**
      * Display feed details
      *
-     * @param array $feed
+     * @param array<string, mixed> $feed
      * @return string $html
      */
     private function displayFeed(array $feed): string
@@ -330,7 +330,7 @@ HTML;
     /**
      * Display video details
      *
-     * @param  array $videos
+     * @param array<int, array<string, mixed>> $videos
      * @return string $html
      */
     private function displayVideos(array $videos): string
