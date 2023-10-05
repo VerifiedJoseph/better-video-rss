@@ -77,12 +77,12 @@ HTML;
             $itemContent = $this->buildContent($video);
 
             $items .= <<<HTML
-				<article>
-					<h2 class="title"><a target="_blank" href="{$itemUrl}">{$itemTitle}</a></h2>
-					{$itemContent}
-					{$itemCategories}
-				</article>
-            HTML;
+<article>
+    <h2 class="title"><a target="_blank" href="{$itemUrl}">{$itemTitle}</a></h2>
+    {$itemContent}
+    {$itemCategories}
+</article>
+HTML;
         }
 
         return $items;
@@ -100,10 +100,7 @@ HTML;
 
         foreach ($categories as $category) {
             $category = htmlspecialchars($category);
-
-            $itemCategories .= <<<HTML
-				<li>{$category}</li>
-            HTML;
+            $itemCategories .=  sprintf('<li>{%s}</li>', $category);
         }
 
         return $itemCategories . '</ul>';
@@ -122,9 +119,7 @@ HTML;
             $text = strtoupper($format);
             $url = Url::getFeed($this->data['details']['type'], $this->data['details']['id'], $format, $this->embedVideos);
 
-            $html .= <<<HTML
-				<a href="{$url}"><button>{$text}</button></a> 
-            HTML;
+            $html .= sprintf('<a href="{%s}"><button>{%s}</button></a>', $url, $text);
         }
 
         return $html;
