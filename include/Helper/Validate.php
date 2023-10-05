@@ -89,10 +89,10 @@ class Validate
     /**
      * Validate a video ID
      *
-     * @param string $playlistId
+     * @param string $videoId
      * @return boolean
      */
-    public static function videoId(string $videoId)
+    public static function videoId(string $videoId): bool
     {
         if (preg_match(self::$videoIdRegex, $videoId)) {
             return true;
