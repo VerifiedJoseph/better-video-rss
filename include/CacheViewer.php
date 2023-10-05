@@ -226,7 +226,7 @@ HTML;
     /**
      * Display full details for a single cache file.
      *
-     * @param array $channel
+     * @param array<string, mixed> $data
      * @return string $html
      */
     private function displayFileDetails(array $data): string
@@ -263,7 +263,7 @@ HTML;
     /**
      * Display channel details
      *
-     * @param array $channel
+     * @param array<string, string|int> $channel
      * @return string $html
      */
     private function displayChannel(array $channel): string
