@@ -3,11 +3,19 @@
         "php-curl-class/php-curl-class": "^9.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.0"
+        "phpstan/phpstan": "^1.0",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
         "psr-4": {
             "App\\": "include/"
         }
+    },
+    "scripts": {
+        "lint": "phpstan && phpcs",
+        "lint-phpstan": "phpstan",
+        "lint-phpcs": "phpcs",
+        "lint-phpcs-gh-action": "phpcs --report=checkstyle | cs2pr",
+        "fix": "phpcbf"
     }
 }
