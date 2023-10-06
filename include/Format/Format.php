@@ -102,25 +102,27 @@ abstract class Format
         }
 
         $media = <<<HTML
-            <a target="_blank" title="Watch on YouTube" href="{$video['url']}">
-                <img title="video thumbnail" src="{$thumbnailUrl}" loading="lazy"/>
-            </a>
-        HTML;
+<a target="_blank" title="Watch on YouTube" href="{$video['url']}">
+<img title="video thumbnail" src="{$thumbnailUrl}" loading="lazy"/>
+</a>
+HTML;
 
         if ($this->embedVideos === true) {
             $url = Url::getEmbed($video['id']);
 
             $media = <<<HTML
-<iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" loading="lazy"></iframe>
-HTML;
+                <iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" loading="lazy"></iframe>
+            HTML;
         }
 
-        return <<<HTML
+        $html = <<<HTML
             {$media}<hr/>
             <span>Published: <time datetime="{$datetime}">{$published}</time></span>
             <span> - Duration: <span class="duration">{$video['duration']}</span></span>
             <hr/><p>{$description}</p>
         HTML;
+
+        return \App\Helper\Format::minify(trim($html));
     }
 
     /**
