@@ -1,0 +1,7 @@
+{
+	"channel": "channels?part=snippet,contentDetails&id={param}&fields=etag,items(snippet(title,description,thumbnails(default(url))))",
+	"playlist": "playlists?part=snippet,contentDetails&id={param}&fields=etag,items(snippet(title,description,thumbnails(default(url))))",
+	"videos": "videos?part=id,snippet,contentDetails,liveStreamingDetails&id={param}&fields=etag,items(id,snippet(tags,liveBroadcastContent,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))",
+	"searchChannels": "search?part=id&fields=items(id(channelId))&q={param}&type=channel&maxResults=1",
+	"searchPlaylists": "search?part=id&fields=items(id(playlistId))&q={param}&type=playlist&maxResults=1"
+}

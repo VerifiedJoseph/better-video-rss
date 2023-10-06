@@ -15,6 +15,9 @@ class Url
         'api' => 'https://www.googleapis.com/youtube/v3/'
     ];
 
+    /** @var array<string, string> $apiEndpoints YouTube API endpoints */
+    private static array $apiEndpoints = [];
+
     /** @var array<int, string> $thumbnailTypes Supported YouTube thumbnail types */
     private static array $thumbnailTypes = [
         'hqdefault',
@@ -140,24 +143,13 @@ class Url
 
         switch ($type) {
             case 'channel':
-                $url .= 'channels?part=snippet,contentDetails&id='
-                    . $parameter . '&fields=etag,items(snippet(title,description,thumbnails(default(url))))';
-                break;
             case 'playlist':
-                $url .= 'playlists?part=snippet,contentDetails&id='
-                    . $parameter . '&fields=etag,items(snippet(title,description,thumbnails(default(url))))';
-                break;
             case 'videos':
-                $url .= 'videos?part=id,snippet,contentDetails,liveStreamingDetails&id='
-                    . $parameter . '&fields=etag,items(id,snippet(tags,liveBroadcastContent,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))';
+                $url .= self::getApiEndpoint($type, $parameter);
                 break;
             case 'searchChannels':
-                $url .= 'search?part=id&fields=items(id(channelId))&q='
-                    . urlencode($parameter) . '&type=channel&maxResults=1';
-                break;
             case 'searchPlaylists':
-                $url .= 'search?part=id&fields=items(id(playlistId))&q='
-                    . urlencode($parameter) . '&type=playlist&maxResults=1';
+                $url .= self::getApiEndpoint($type, urlencode($parameter));
                 break;
         }
 
@@ -173,5 +165,24 @@ class Url
     private static function getEndpoint(string $name)
     {
         return self::$endpoints[$name];
+    }
+
+    /**
+     * Returns YouTube API endpoint URL with parameters
+     *
+     * @param string $name Endpoint name
+     * @param string $var Endpoint variable
+     * @return string
+     */
+    private static function getApiEndpoint(string $name, string $var)
+    {
+        if (self::$apiEndpoints === []) {
+            self::$apiEndpoints = json_decode(
+                (string) file_get_contents('include/api-endpoints.json'),
+                associative: true
+            );
+        }
+
+        return str_replace('{param}', $var, self::$apiEndpoints[$name]);
     }
 }

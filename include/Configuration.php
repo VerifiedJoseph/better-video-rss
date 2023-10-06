@@ -49,6 +49,7 @@ class Configuration
      *
      * @throws Exception if PHP version is not supported
      * @throws Exception if a PHP extension is not loaded
+     * @throws Exception if a api-endpoints.json is not found
      */
     public static function checkInstall(): void
     {
@@ -60,6 +61,10 @@ class Configuration
             if (extension_loaded($ext) === false) {
                 throw new Exception(sprintf('Extension Error: %s extension not loaded.', $ext));
             }
+        }
+
+        if (file_exists('include/api-endpoints.json') == false) {
+            throw throw new Exception('File not found: include/api-endpoints.json');
         }
     }
 
