@@ -84,109 +84,16 @@ class Index
             }
         }
 
-        $selectHtml = $this->createFormatSelect();
-        $html = <<<HTML
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>BetterVideoRss</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="robots" content="noindex, nofollow">
-	<link rel="stylesheet" type="text/css" href="static/style.css" />
-</head>
-<body>
-	<header class="center">
-		BetterVideoRss
-	</header>
-	<div id="main">
-		<div id="items">
-			{$error}
-			<div class="item">
-				<h2>Channel</h2>
-				<form action="" method="post">
-					<input type="hidden" name="type" value="channel">
-					<p class="margin">
-						<label>Channel: 
-							<input class="input" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required>
-						</label>
-					</p>
-					<p class="margin">
-						<label>Embed videos: 
-							<input type="checkbox" name="embed_videos" value="yes">
-						</label>
-					</p>
-					<p class="margin">
-						<label>Feed format: 
-							{$selectHtml}
-						</label>
-					</p>
-					<p class="margin">
-						<button type="submit">Generate</button>
-					</p>
-				</form>
-				<p class="feedUrl">{$channelLink}</p>
-			</div>
-			<div class="item">
-				<h2>Playlist</h2>
-				<form action="" method="post">
-					<input type="hidden" name="type" value="playlist">
-					<p class="margin">
-						<label>Playlist: 
-						<input class="input" name="query" type="input" placeholder="Playlist ID or title" required>
-						</label>
-					</p>
-					<p class="margin">
-						<label>Embed videos: 
-							<input type="checkbox" name="embed_videos" value="yes">
-						</label>
-					</p>
-					<p class="margin">
-						<label>Feed format: 
-							{$selectHtml}
-						</label>
-					</p>
-					<p class="margin">
-						<button type="submit">Generate</button>
-					</p>
-				</form>
-				<p class="feedUrl">{$playlistLink}</p>
-			</div>
-			<div class="item">
-				<h2>URL</h2>
-				<form action="" method="post">
-					<input type="hidden" name="type" value="url">
-					<p class="margin">
-						<label>URL: 
-						<input class="input" name="query" type="input" placeholder="youtube.com URL" required>
-						</label>
-					</p>
-					<p class="margin">
-						<label>Embed videos: 
-							<input type="checkbox" name="embed_videos" value="yes">
-						</label>
-					</p>
-					<p class="margin">
-						<label>Feed format: 
-							{$selectHtml}
-						</label>
-					</p>
-					<p class="margin">
-						<button type="submit">Generate</button>
-					</p>
-				</form>
-				<p class="feedUrl">{$fromUrlLink}</p>
-			</div>
-			<div class="item">
-				<p><a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a></p>
-				<span class="small"><a href="https://github.com/VerifiedJoseph/BetterVideoRss/releases/tag/v{$version}">v{$version}</a></span>
-			</div>
-		</div>
-	</div>
-</body>
-</html>
-HTML;
+        $html = new Template('index-page', [
+            'error' => $error,
+            'selectHtml' => $this->createFormatSelect(),
+            'channelLink' => $channelLink,
+            'playlistLink' => $playlistLink,
+            'fromUrlLink' => $fromUrlLink,
+            'version' => $version
+        ]);
 
-        echo Format::minify($html);
+        echo $html->render(minify: true);
     }
 
     /**
