@@ -4,10 +4,10 @@ namespace App;
 
 use App\Helper\File;
 use App\Helper\Format;
-use App\Exception\ConfigurationException;
+use App\Exception\ConfigurationException as ConfigException;
 
 /**
- * Class for rendering pages using HTML templates
+ * Class for rendering pages using HTML/XML templates
  */
 class Template
 {
@@ -20,7 +20,7 @@ class Template
      * @param string $name Template filename
      * @param array<string, mixed> $variables Template variables
      */
-    function __construct(string $name, array $variables = [])
+    public function __construct(string $name, array $variables = [])
     {
         $this->variables = $variables;
         $this->load($name);
@@ -28,7 +28,7 @@ class Template
 
     /**
      * Render template into page
-     * 
+     *
      * @param bool $minify Minify HTML
      * @return string HTML
      */
@@ -48,7 +48,7 @@ class Template
 
     /**
      * Load Template
-     * 
+     *
      * @param string $name Template filename
      * @throws ConfigException if template file is not found.
      */
@@ -57,7 +57,7 @@ class Template
         $path = 'include/templates/' . $name;
 
         if (file_exists($path) === false) {
-            throw new ConfigurationException('Template file not found: ' . $path);
+            throw new ConfigException('Template file not found: ' . $path);
         }
 
         $this->html = File::read($path);
