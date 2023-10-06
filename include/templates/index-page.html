@@ -11,30 +11,32 @@
 		BetterVideoRss
 	</header>
 	<div id="main">
-		<div id="items">
+		<div id="forms">
 			{error}
 			<div class="item">
 				<h2>Channel</h2>
 				<form action="" method="post">
 					<input type="hidden" name="type" value="channel">
-					<p class="margin">
-						<label>Channel: 
-							<input class="input" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required>
-						</label>
-					</p>
-					<p class="margin">
-						<label>Embed videos: 
-							<input type="checkbox" name="embed_videos" value="yes">
-						</label>
-					</p>
-					<p class="margin">
-						<label>Feed format: 
-							{selectHtml}
-						</label>
-					</p>
-					<p class="margin">
+					<div class="form-input">
+						<input class="input center-text" name="query" type="input" placeholder="Username, Channel ID or Channel Title" required>
+					</div>
+					<details>
+						<summary>Options</summary>
+						<div class="form-option">
+							<div class="input">
+								<input id="embed_videos_channel" class="checkbox" type="checkbox" name="embed_videos" value="yes">
+								<label for="embed_videos_channel" class="checkbox-text">Embed videos</label>
+							</div>
+						</div>
+						<div class="form-option">
+							<label>Format: 
+								{selectHtml}
+							</label>
+						</div>
+					</details>
+					<div class="form-button">
 						<button type="submit">Generate</button>
-					</p>
+					</div>
 				</form>
 				<p class="feedUrl">{channelLink}</p>
 			</div>
@@ -42,24 +44,26 @@
 				<h2>Playlist</h2>
 				<form action="" method="post">
 					<input type="hidden" name="type" value="playlist">
-					<p class="margin">
-						<label>Playlist: 
-						<input class="input" name="query" type="input" placeholder="Playlist ID or title" required>
-						</label>
-					</p>
-					<p class="margin">
-						<label>Embed videos: 
-							<input type="checkbox" name="embed_videos" value="yes">
-						</label>
-					</p>
-					<p class="margin">
-						<label>Feed format: 
-							{selectHtml}
-						</label>
-					</p>
-					<p class="margin">
+					<div class="form-input">
+						<input class="input center-text" name="query" type="input" placeholder="Playlist ID or title" required>
+					</div>
+					<details>
+						<summary>Options</summary>
+						<div class="form-option">
+							<div class="input">
+								<input id="embed_videos_playlist" class="checkbox" type="checkbox" name="embed_videos" value="yes">
+								<label for="embed_videos_playlist" class="checkbox-text">Embed videos</label>
+							</div>
+						</div>
+						<div class="form-option">
+							<label>Format: 
+								{selectHtml}
+							</label>
+						</div>
+					</details>
+					<div class="form-button">
 						<button type="submit">Generate</button>
-					</p>
+					</div>
 				</form>
 				<p class="feedUrl">{playlistLink}</p>
 			</div>
@@ -67,31 +71,33 @@
 				<h2>URL</h2>
 				<form action="" method="post">
 					<input type="hidden" name="type" value="url">
-					<p class="margin">
-						<label>URL: 
-						<input class="input" name="query" type="input" placeholder="youtube.com URL" required>
-						</label>
-					</p>
-					<p class="margin">
-						<label>Embed videos: 
-							<input type="checkbox" name="embed_videos" value="yes">
-						</label>
-					</p>
-					<p class="margin">
-						<label>Feed format: 
-							{selectHtml}
-						</label>
-					</p>
-					<p class="margin">
+					<div class="form-input">
+						<input class="input center-text" name="query" type="input" placeholder="youtube.com URL" required>
+					</div>
+					<details>
+						<summary>Options</summary>
+						<div class="form-option">
+							<div class="input">
+								<input id="embed_videos_url" class="checkbox" type="checkbox" name="embed_videos" value="yes">
+								<label for="embed_videos_url" class="checkbox-text">Embed videos</label>
+							</div>
+						</div>
+						<div class="form-option">
+							<label>Format: 
+								{selectHtml}
+							</label>
+						</div>
+					</details>
+					<div class="form-button">
 						<button type="submit">Generate</button>
-					</p>
+					</div>
 				</form>
 				<p class="feedUrl">{fromUrlLink}</p>
 			</div>
-			<div class="item">
-				<p><a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a></p>
-				<span class="small"><a href="https://github.com/VerifiedJoseph/BetterVideoRss/releases/tag/v{version}">v{version}</a></span>
-			</div>
+		</div>
+		<div class="index-footer">
+			<p><a href="tools.html">Tools</a> - <a href="https://github.com/VerifiedJoseph/BetterVideoRss">Source Code</a></p>
+			<span class="small"><a href="https://github.com/VerifiedJoseph/BetterVideoRss/releases/tag/v{version}">v{version}</a></span>
 		</div>
 	</div>
 </body>

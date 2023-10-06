@@ -125,17 +125,63 @@ li {
 
 #items, #feeds, #links {
 	max-width: 700px;
-	margin: 15px auto;
+	margin: 14px auto;
+	margin-top:0;
+}
+
+.index-footer {
+	text-align: center;
+}
+
+#forms {
+	max-width: 400px;
+	margin: 14px auto;
 	margin-top:0;
 }
 
 #links {
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-top: 14px;
+	margin-bottom: 14px;
 }
 
 .item, .viewer, .tools, article {
-	margin-top: 15px;
+	margin-top: 14px;
+}
+
+#forms > .item {
+	margin: 14px 4px;
+	border-bottom: 1px solid #8F8F9D;
+}
+
+#forms > .item > h2 {
+	margin-bottom: 10px;
+}
+
+form > .form-input {
+	width: 100%;
+}
+
+form > details {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+form > details > .form-option {
+	padding: 4px;
+}
+
+form > .form-option {
+	width: 200px;
+	margin: 0px auto;
+	margin-bottom: 8px;
+	display: flex;
+}
+
+form > .form-button {
+	margin-top: 4px;
+	margin-bottom: 14px;
+	width: 100%;
+	text-align: center;
 }
 
 article .title {
@@ -164,10 +210,12 @@ textarea.tags, textarea.videos {
 
 button {
 	width: 90px;
+	height: 30px;
 }
 
 .input {
-	width:280px;
+	width: 100%;
+	display: flex;
 }
 
 #error {
@@ -176,7 +224,7 @@ button {
 	border-color: #f5c6cb;
 	text-align: center;
 	padding: 5px;
-	margin-bottom: 15px;
+	margin-bottom: 14px;
 }
 
 .crumbs ol {
@@ -196,4 +244,29 @@ button {
 	font-size: 80%;
 	font-weight: bold;
 	padding: 0 3px;
+}
+
+select, input {
+	height: 30px;
+	border: 1px solid #8F8F9D;
+}
+
+select {
+	background-color: #e9e9ed;
+}
+
+.center-text {
+	text-align: center;
+}
+
+.checkbox {
+	width: 20px;
+	height: 20px;
+	margin-left: 0;
+}
+
+.checkbox-text {
+	margin-top: 5px;
+	margin-left: 5px;
+	width: 250px;
 }
