@@ -18,7 +18,7 @@ class Template
 
     /**
      * @param string $name Template filename
-     * @param array<string, string> $variables Template variables
+     * @param array<string, mixed> $variables Template variables
      */
     function __construct(string $name, array $variables = [])
     {
@@ -49,7 +49,7 @@ class Template
     /**
      * Load Template
      * 
-     * @var string $name Template filename
+     * @param string $name Template filename
      * @throws ConfigException if template file is not found.
      */
     private function load(string $name): void
