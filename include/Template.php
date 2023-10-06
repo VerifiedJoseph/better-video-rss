@@ -17,7 +17,7 @@ class Template
     private array $variables = [];
 
     /**
-     * @param string $name Template name
+     * @param string $name Template filename
      * @param array<string, string> $variables Template variables
      */
     function __construct(string $name, array $variables = [])
@@ -49,12 +49,12 @@ class Template
     /**
      * Load Template
      * 
-     * @var string $name Template name
+     * @var string $name Template filename
      * @throws ConfigException if template file is not found.
      */
     private function load(string $name): void
     {
-        $path = 'include/templates/' . $name . '.html';
+        $path = 'include/templates/' . $name;
 
         if (file_exists($path) === false) {
             throw new ConfigurationException('Template file not found: ' . $path);
