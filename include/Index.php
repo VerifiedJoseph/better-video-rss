@@ -83,7 +83,7 @@ class Index
             }
         }
 
-        $html = new Template('index-page', [
+        $html = new Template('index-page.html', [
             'error' => $error,
             'selectHtml' => $this->createFormatSelect(),
             'channelLink' => $channelLink,
