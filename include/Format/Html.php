@@ -26,7 +26,7 @@ class Html extends Format
             Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos)
         );
 
-        $html = new Template('feed', [
+        $html = new Template('feed.html', [
             'feedTitle' => $this->data['details']['title'],
             'feedDescription' => $feedDescription,
             'feedUrl' => $this->data['details']['url'],
