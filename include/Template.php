@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Helper\File;
+use App\Helper\Format;
 use App\Exception\ConfigurationException;
 
 /**
@@ -27,12 +28,19 @@ class Template
 
     /**
      * Render template into page
+     * 
+     * @param bool $minify Minify HTML
+     * @return string HTML
      */
-    public function render(): string
+    public function render(bool $minify = false): string
     {
         foreach ($this->variables as $name => $value) {
             $name = sprintf('{%s}', $name);
             $this->html = str_replace($name, $value, $this->html);
+        }
+
+        if ($minify === true) {
+            return Format::minify($this->html);
         }
 
         return $this->html;
