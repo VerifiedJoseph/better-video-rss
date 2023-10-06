@@ -4,7 +4,6 @@ namespace App;
 
 use App\Configuration as Config;
 use App\Helper\Validate;
-use App\Helper\Format;
 use App\Helper\Url;
 use Exception;
 
