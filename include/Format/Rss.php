@@ -3,6 +3,7 @@
 namespace App\Format;
 
 use App\Configuration as Config;
+use App\Template;
 use App\Helper\Convert;
 use App\Helper\Url;
 
@@ -18,7 +19,6 @@ class Rss extends Format
     {
         $feedDescription = $this->xmlEncode($this->data['details']['description']);
         $feedTitle = $this->xmlEncode($this->data['details']['title']);
-        $feedAuthor = $this->xmlEncode($this->data['details']['title']);
         $feedUrl = $this->xmlEncode($this->data['details']['url']);
         $feedUpdated = $this->xmlEncode(
             Convert::unixTime($this->data['updated'], 'r')
@@ -29,26 +29,17 @@ class Rss extends Format
             Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos)
         );
 
-        $items = $this->buildItems();
+        $xml = new Template('feed.xml', [
+            'feedTitle' => $feedTitle,
+            'feedUrl' => $feedUrl,
+            'feedDescription' => $feedDescription,
+            'feedUpdated' => $feedUpdated,
+            'feedImage' => $feedImage,
+            'selfUrl' => $selfUrl,
+            'items' => $this->buildItems()
+        ]);
 
-        $this->feed = <<<XML
-<?xml version="1.0" encoding="utf-8"?>
-    <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
-        <channel>
-            <title>{$feedTitle}</title>
-            <link>{$feedUrl}</link>
-            <atom:link href="{$selfUrl}" rel="self"/>
-            <description>{$feedDescription}</description>
-            <pubDate>{$feedUpdated}</pubDate>
-            <image>
-                <url>{$feedImage}</url>
-            </image>
-            {$items}
-        </channel>
-    </rss>
-XML;
-
-        $this->feed = \App\Helper\Format::minify($this->feed);
+        $this->feed = $xml->render(minify: true);
     }
 
     /**
@@ -84,19 +75,19 @@ XML;
             }
 
             $items .= <<<XML
-<item>
-	<title>{$itemTitle}</title>
-	<pubDate>{$itemTimestamp}</pubDate>
-	<link>{$itemUrl}</link>
-	<guid isPermaLink="true">{$itemUrl}</guid>
-	<author>
-	<name>{$itemAuthor}</name>
-	</author>
-	<content:encoded>{$itemContent}</content:encoded>
-	<enclosure url="{$itemEnclosure}" type="image/jpeg" />
-	{$itemCategories}
-	</item>
-XML;
+                <item>
+                    <title>{$itemTitle}</title>
+                    <pubDate>{$itemTimestamp}</pubDate>
+                    <link>{$itemUrl}</link>
+                    <guid isPermaLink="true">{$itemUrl}</guid>
+                    <author>
+                        <name>{$itemAuthor}</name>
+                    </author>
+                    <content:encoded>{$itemContent}</content:encoded>
+                    <enclosure url="{$itemEnclosure}" type="image/jpeg" />
+                    {$itemCategories}
+                </item>
+            XML;
         }
 
         return $items;

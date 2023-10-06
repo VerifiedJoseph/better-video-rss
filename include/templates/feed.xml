@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{feedTitle}</title>
+        <link>{feedUrl}</link>
+        <atom:link href="{selfUrl}" rel="self"/>
+        <description>{feedDescription}</description>
+        <pubDate>{feedUpdated}</pubDate>
+        <image>
+            <url>{feedImage}</url>
+        </image>
+        {items}
+    </channel>
+</rss>

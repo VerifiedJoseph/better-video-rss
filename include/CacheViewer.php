@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Configuration as Config;
+use App\Template;
 use App\Helper\File;
 use App\Helper\Convert;
 use App\Helper\Url;
@@ -168,59 +169,13 @@ HTML;
             }
         }
 
-        $html = <<<HTML
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>CacheViewer</title>
-	<link rel="stylesheet" type="text/css" href="static/style.css" />
-</head>
-<body>
-	<header>
-		<nav class="crumbs">
-			<ol>
-				<li><a href="index.php">BetterVideoRss</a></li>
-				<li><a href="tools.html">Tools</a></li>
-				<li>Cache Viewer</li>
-			</ol>
-		</nav>
-	</header>
-	<div id="main" class="viewer">
-		<table class="stats">
-			<thead>
-				<tr>
-					<th>Files</th>
-					<th>Size</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="center">
-					<td>{$fileCount}</td>
-					<td>{$cacheSize}</td>
-				</tr>
-			</tbody>
-		</table>
-		<table>
-			<thead>
-				<tr class="center">
-					<th>#</th>
-					<th>Name</th>
-					<th>Type</th>
-					<th>Last Modified</th>
-					<th>Size</th>
-					<th>View</th>
-				</tr>
-			</thead>
-			<tbody>
-				{$tbody}
-			<tbody>
-		</table>
-	</div>
-</body>
-</html>
-HTML;
+        $html = new Template('cache-viewer.html', [
+            'fileCount' => $fileCount,
+            'cacheSize' => $cacheSize,
+            'tbody' => $tbody
+        ]);
 
-        echo $html;
+        echo $html->render();
     }
 
     /**
