@@ -169,7 +169,7 @@ HTML;
             }
         }
 
-        $html = new Template('cache-viewer', [
+        $html = new Template('cache-viewer.html', [
             'fileCount' => $fileCount,
             'cacheSize' => $cacheSize,
             'tbody' => $tbody
