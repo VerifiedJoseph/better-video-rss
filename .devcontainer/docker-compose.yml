@@ -1,0 +1,24 @@
+services:
+  workspace:
+    build:
+      context: ./workspace
+    tty: true
+    working_dir: /better-video-rss
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - 8080:8080
+    volumes:
+      - ../:/better-video-rss:ro
+    working_dir: /better-video-rss
+
+  php:
+    build:
+      context: ./php
+    expose:
+      - "9000"
+    volumes:
+      - ../:/better-video-rss
+    working_dir: /better-video-rss
