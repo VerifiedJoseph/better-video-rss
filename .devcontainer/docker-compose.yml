@@ -3,6 +3,8 @@ services:
     build:
       context: ./workspace
     tty: true
+    volumes:
+      - ../:/better-video-rss
     working_dir: /better-video-rss
 
   nginx:
