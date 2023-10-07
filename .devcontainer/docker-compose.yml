@@ -3,6 +3,8 @@ services:
     build:
       context: ./workspace
     tty: true
+    expose:
+      - "9000"
     volumes:
       - ../:/better-video-rss
     working_dir: /better-video-rss
@@ -14,13 +16,4 @@ services:
       - 8080:8080
     volumes:
       - ../:/better-video-rss:ro
-    working_dir: /better-video-rss
-
-  php:
-    build:
-      context: ./php
-    expose:
-      - "9000"
-    volumes:
-      - ../:/better-video-rss
     working_dir: /better-video-rss
