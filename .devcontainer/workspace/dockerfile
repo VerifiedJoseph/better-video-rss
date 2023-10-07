@@ -1,0 +1,6 @@
+FROM composer:2.6.4 AS composer
+FROM php:8.2.11-fpm-alpine3.18
+
+RUN apk add git
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer

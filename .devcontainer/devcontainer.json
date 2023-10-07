@@ -1,0 +1,18 @@
+{
+    "name": "better-video-rss-dev-container",
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "workspace",
+    "workspaceFolder": "/better-video-rss",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "EditorConfig.EditorConfig",
+                "streetsidesoftware.code-spell-checker",
+                "dbaeumer.vscode-eslint"
+            ]
+        }
+    },
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && composer install"
+}
