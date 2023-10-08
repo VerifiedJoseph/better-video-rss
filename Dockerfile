@@ -13,7 +13,7 @@ RUN composer install \
 FROM alpine:3.18.4
 
 # Install packages
- RUN apk add --no-cache \
+RUN apk add --no-cache \
   nginx \
   supervisor \
   php82 \
