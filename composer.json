@@ -1,5 +1,6 @@
 {
     "require": {
+        "php": "^8.1",
         "php-curl-class/php-curl-class": "^9.0"
     },
     "require-dev": {
