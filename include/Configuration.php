@@ -12,7 +12,7 @@ class Configuration
     private static string $minPhpVersion = '8.0.0';
 
     /** @var array<int, string> $extensions Required PHP extensions */
-    private static array $extensions = ['curl', 'json', 'mbstring'];
+    private static array $extensions = ['curl', 'json', 'mbstring', 'simplexml'];
 
     /** @var int $mkdirMode mkdir() access mode */
     private static int $mkdirMode = 0775;
