@@ -87,9 +87,9 @@ Environment variables are used to adjust the configuration. Alternatively, you c
 - PHP >= 8.1
 - Composer
 - PHP Extensions:
-  - [`JSON`](https://www.php.net/manual/en/book.json.php)
-  - [`cURL`](https://secure.php.net/manual/en/book.curl.php)
+  - [`curl`](https://secure.php.net/manual/en/book.curl.php)
   - [`mbstring`](https://secure.php.net/manual/en/book.mbstring.php)
+  - [`simplexml`](https://secure.php.net/manual/en/book.simplexml.php)
 
 ## Dependencies
 
