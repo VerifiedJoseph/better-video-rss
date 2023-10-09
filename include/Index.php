@@ -19,7 +19,7 @@ class Index
     private string $feedId = '';
 
     /** @var string $feedType Feed type (channel or playlist) */
-    private string $feedType = 'channel';
+    private string $feedType = '';
 
     /** @var array<int, string> $supportedTypes Supported feed types */
     private array $supportedTypes = ['channel', 'playlist'];
@@ -113,9 +113,11 @@ class Index
                 throw new Exception('Type parameter not given.');
             }
 
-            if (in_array($_POST['type'], $this->supportedTypes)) {
-                $this->feedType = $_POST['type'];
+            if (in_array($_POST['type'], $this->supportedTypes) === false) {
+                throw new Exception('Unknown type parameter given.');
             }
+
+            $this->feedType = $_POST['type'];
 
             if ($_POST['type'] === 'url') {
                 $this->fromUrl = true;
@@ -157,68 +159,59 @@ class Index
             }
 
             if ($this->feedType === 'channel') {
-                $this->findChannel();
-            }
-
-            if ($this->feedType === 'playlist') {
-                $this->findPlaylist();
+                $this->feedId = $this->findChannel($this->query);
+            } else {
+                $this->feedId = $this->findPlaylist($this->query);
             }
         }
     }
 
     /**
      * Find channel
+     *
+     * @param string $query
+     * @return string Channel Id
+     *
+     * @throws Exception if channel is not found
      */
-    private function findChannel(): void
+    private function findChannel(string $query): string
     {
-        if (Validate::channelId($this->query) === true) {
-            $this->feedId = $this->query;
-        } else {
-            $this->searchApi($this->query);
+        if (Validate::channelId($query) === true) {
+            return $query;
         }
+
+        $api = new Api();
+        $response = $api->searchChannels($query);
+
+        if (empty($response->items)) {
+            throw new Exception('Channel not found');
+        }
+
+        return $response->items[0]->id->channelId;
     }
 
     /**
      * Find playlist
-     */
-    private function findPlaylist(): void
-    {
-        if (Validate::playlistId($this->query) === true) {
-            $this->feedId = $this->query;
-        } else {
-            $this->searchApi($this->query);
-        }
-    }
-
-    /**
-     * Search YouTube data API for channel or playlist
      *
-     * @param string $query Query string
-     * @throws Exception if the channel or playlist was not found
+     * @param string $query
+     * @return string Playlist Id
+     *
+     * @throws Exception if playlist is not found
      */
-    private function searchApi(string $query): void
+    private function findPlaylist(string $query): string
     {
+        if (Validate::playlistId($query) === true) {
+            return $query;
+        }
+
         $api = new Api();
-
-        if ($this->feedType === 'channel') {
-            $response = $api->searchChannels($query);
-        }
-
-        if ($this->feedType === 'playlist') {
-            $response = $api->searchPlaylists($query);
-        }
+        $response = $api->searchPlaylists($query);
 
         if (empty($response->items)) {
-            throw new Exception(ucfirst($this->feedType) . ' not found');
+            throw new Exception('Playlist not found');
         }
 
-        if ($this->feedType === 'channel') {
-            $this->feedId = $response->items['0']->id->channelId;
-        }
-
-        if ($this->feedType === 'playlist') {
-            $this->feedId = $response->items['0']->id->playlistId;
-        }
+        return $response->items[0]->id->playlistId;
     }
 
     /**
@@ -228,12 +221,11 @@ class Index
      */
     private function createFormatSelect(): string
     {
-        $html = '<select name="format">';
-
+        $options = '';
         foreach (Config::getFeedFormats() as $format) {
-            $html .= sprintf('<option value="%s">%s</option>', $format, strtoupper($format));
+            $options .= sprintf('<option value="%s">%s</option>', $format, strtoupper($format));
         }
 
-        return $html .= '</select>';
+        return sprintf('<select name="format">%s</select>', $options);
     }
 }
