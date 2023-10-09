@@ -128,9 +128,7 @@ class Feed
 
             $this->feedId = $_GET['channel_id'];
             $this->feedType = 'channel';
-        }
-
-        if (isset($_GET['playlist_id'])) {
+        } elseif (isset($_GET['playlist_id'])) {
             if (empty($_GET['playlist_id']) === true || Validate::playlistId($_GET['playlist_id']) === false) {
                 throw new Exception('Invalid playlist ID parameter given.');
             }
