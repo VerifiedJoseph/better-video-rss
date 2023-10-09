@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Format;
+namespace App\FeedFormat;
 
 use App\Configuration as Config;
 use App\Helper\Convert;
+use App\Helper\Format;
 use App\Helper\Url;
 
-abstract class Format
+abstract class FeedFormat
 {
     /** @var array<string, mixed> $data Feed data */
     protected array $data = [];
@@ -122,7 +123,7 @@ HTML;
             <hr/><p>{$description}</p>
         HTML;
 
-        return \App\Helper\Format::minify(trim($html));
+        return Format::minify(trim($html));
     }
 
     /**

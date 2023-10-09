@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Format;
+namespace App\FeedFormat;
 
 use App\Configuration as Config;
 use App\Template;
 use App\Helper\Url;
 
-class Html extends Format
+class Html extends FeedFormat
 {
     /** @var string $contentType HTTP content-type header value */
     protected string $contentType = 'text/html; charset=UTF-8';
@@ -51,7 +51,6 @@ class Html extends Format
         foreach ($this->data['videos'] as $video) {
             $itemTitle = htmlspecialchars($this->buildTitle($video));
             $itemUrl = $video['url'];
-            $itemEnclosure = $video['thumbnail'];
             $itemCategories = $this->buildCategories($video['tags']);
             $itemContent = $this->buildContent($video);
 
