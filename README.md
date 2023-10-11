@@ -30,6 +30,9 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
+
+volumes:
+  cache:
 ```
 
 </details>
