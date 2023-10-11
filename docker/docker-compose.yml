@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    container_name: BetterVideoRss
+    build: ../
+    environment:
+      BVRSS_YOUTUBE_API_KEY: ''
+      BVRSS_SELF_URL_PATH: 'http://127.0.0.1:8080'
+      BVRSS_TIMEZONE: 'Europe/London'
+    ports:
+      - '127.0.0.1:8080:8080'
+    volumes:
+      - cache:/app/cache
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  cache:
