@@ -58,7 +58,9 @@ class Html extends FeedFormat
 <article>
     <h2 class="title"><a target="_blank" href="{$itemUrl}">{$itemTitle}</a></h2>
     {$itemContent}
-    {$itemCategories}
+    <div class="categories">
+        {$itemCategories}
+    </div>
 </article>
 HTML;
         }
