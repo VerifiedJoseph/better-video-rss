@@ -2,8 +2,8 @@ version: '3'
 
 services:
   app:
+    image: ghcr.io/verifiedjoseph/better-video-rss:1.0.0
     container_name: BetterVideoRss
-    build: .
     environment:
       BVRSS_YOUTUBE_API_KEY: ''
       BVRSS_SELF_URL_PATH: 'https://example.com/'
