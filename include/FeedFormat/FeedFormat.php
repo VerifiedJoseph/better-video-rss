@@ -117,10 +117,13 @@ HTML;
         }
 
         $html = <<<HTML
-            {$media}<hr/>
-            <span>Published: <time datetime="{$datetime}">{$published}</time></span>
-            <span> - Duration: <span class="duration">{$video['duration']}</span></span>
-            <hr/><p>{$description}</p>
+            {$media}
+            <div class="description">
+                <hr/>
+                <span>Published: <time datetime="{$datetime}">{$published}</time></span>
+                <span> - Duration: <span class="duration">{$video['duration']}</span></span>
+                <hr/><p>{$description}</p>
+            </div>
         HTML;
 
         return Format::minify(trim($html));
