@@ -28,6 +28,7 @@ class Json extends FeedFormat
         $feedTitle = $this->data['details']['title'];
         $feedHomePageUrl = $this->data['details']['url'];
         $feedUrl = Url::getFeed(
+            $this->config->getSelfUrl(),
             $this->data['details']['type'],
             $this->data['details']['id'],
             'json',
