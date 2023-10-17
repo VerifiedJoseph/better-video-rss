@@ -255,6 +255,15 @@ class Config
     }
 
     /**
+     * Returns raw API error status
+     * @return boolean
+     */
+    public function getRawApiErrorStatus(): bool
+    {
+        return $this->config['RAW_API_ERRORS'];
+    }
+
+    /**
      * Returns version string
      * @return string
      */

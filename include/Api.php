@@ -134,7 +134,7 @@ class Api
     {
         $error = $response->error->errors[0];
 
-        if ($this->config->get('RAW_API_ERRORS') === true) {
+        if ($this->config->getRawApiErrorStatus() === true) {
             $raw = json_encode($response->error, JSON_PRETTY_PRINT);
 
             throw new Exception(
