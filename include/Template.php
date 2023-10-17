@@ -20,7 +20,7 @@ class Template
      * @param string $name Template filename
      * @param array<string, mixed> $variables Template variables
      */
-    public function __construct(string $name, array $variables = [])
+    public function __construct(string $name, array $variables)
     {
         $this->variables = $variables;
         $this->load($name);
