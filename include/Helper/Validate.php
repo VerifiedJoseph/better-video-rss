@@ -44,7 +44,7 @@ class Validate
      * Checks given feed format against list of formats.
      *
      * @param string $format Feed format
-     * @param array $feedFormats Feed formats
+     * @param array<int, string> $feedFormats Feed formats
      * @return boolean
      */
     public static function feedFormat(string $format, array $feedFormats): bool
