@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="gotify-api-php">
-  <file>./include/</file>
-  <file>./feed.php</file>
-  <file>./proxy.php</file>
-  <file>./index.php</file>
+  <file>./</file>
 
   <exclude-pattern>./vendor</exclude-pattern>
 
