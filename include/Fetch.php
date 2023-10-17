@@ -13,7 +13,7 @@ class Fetch
     private Config $config;
 
     /**
-     * @param Config Config class instance
+     * @param Config $config Config class instance
      */
     public function __construct(Config $config)
     {
