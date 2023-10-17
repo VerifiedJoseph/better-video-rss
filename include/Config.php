@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Helper\Validate;
-use App\Exception\ConfigException as ConfigException;
+use App\Exception\ConfigException;
 use Exception;
 
 class Config
@@ -158,22 +158,6 @@ class Config
     }
 
     /**
-     * Returns config value
-     *
-     * @param string $key Config key
-     * @return string|boolean
-     * @throws Exception if config key is invalid
-     */
-    public function get(string $key)
-    {
-        if (array_key_exists($key, $this->config) === false) {
-            throw new Exception('Invalid config key given: ' . $key);
-        }
-
-        return $this->config[$key];
-    }
-
-    /**
      * Returns self URL
      * @return string
      */
@@ -183,12 +167,39 @@ class Config
     }
 
     /**
+     * Returns cache directory
+     * @return boolean
+     */
+    public function getCacheDirectory(): bool
+    {
+        return $this->config['CACHE_DIR'];
+    }
+
+    /**
      * Returns cache disabled status
      * @return boolean
      */
     public function getCacheDisableStatus(): bool
     {
         return $this->config['DISABLE_CACHE'];
+    }
+
+    /**
+     * Returns cache viewer status
+     * @return boolean
+     */
+    public function getCacheViewerStatus(): bool
+    {
+        return $this->config['ENABLE_CACHE_VIEWER'];
+    }
+
+    /**
+     * Returns image proxy status
+     * @return boolean
+     */
+    public function getImageProxyStatus(): bool
+    {
+        return $this->config['ENABLE_IMAGE_PROXY'];
     }
 
     /**
@@ -225,6 +236,15 @@ class Config
     public function getTimeFormat(): string
     {
         return $this->config['TIME_FORMAT'];
+    }
+
+    /**
+     * Returns raw API error status
+     * @return boolean
+     */
+    public function getRawApiErrorStatus(): bool
+    {
+        return $this->config['RAW_API_ERRORS'];
     }
 
     /**
@@ -283,11 +303,11 @@ class Config
      */
     public function getCacheDirPath(): string
     {
-        if (Validate::absolutePath((string) $this->get('CACHE_DIR')) === false) {
-            return dirname(__DIR__) . DIRECTORY_SEPARATOR . $this->get('CACHE_DIR');
+        if (Validate::absolutePath($this->config['CACHE_DIR']) === false) {
+            return dirname(__DIR__) . DIRECTORY_SEPARATOR . $this->config['CACHE_DIR'];
         }
 
-        return (string) $this->get('CACHE_DIR');
+        return $this->config['CACHE_DIR'];
     }
 
     /**

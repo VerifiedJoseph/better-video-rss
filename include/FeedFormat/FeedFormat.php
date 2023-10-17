@@ -109,7 +109,7 @@ abstract class FeedFormat
             $this->config->getTimezone()
         );
 
-        if ($this->config->get('ENABLE_IMAGE_PROXY') === true && $this->config->getCacheDisableStatus() === false) {
+        if ($this->config->getImageProxyStatus() === true && $this->config->getCacheDisableStatus() === false) {
             $thumbnailUrl = Url::getImageProxy(
                 $this->config->getSelfUrl(),
                 $video['id'],

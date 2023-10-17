@@ -36,7 +36,7 @@ class CacheViewer
     {
         $this->config = $config;
 
-        if ($this->config->get('ENABLE_CACHE_VIEWER') === false) {
+        if ($this->config->getCacheViewerStatus() === false) {
             throw new Exception('Cache viewer is disabled.');
         }
 
