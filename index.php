@@ -3,15 +3,16 @@
 require 'vendor/autoload.php';
 require 'include/version.php';
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Output;
 use App\Index;
 
 try {
-    Config::checkInstall();
-    Config::checkConfig();
+    $config = new Config();
+    $config->checkInstall();
+    $config->checkConfig();
 
-    $index = new Index();
+    $index = new Index($config);
     $index->display();
 } catch (Exception $e) {
     Output::error($e->getMessage());
