@@ -227,6 +227,10 @@ button {
 	display: flex;
 }
 
+summary {
+	margin-top: 6px;
+}
+
 #error {
 	color: #721c24;
 	background-color: #f8d7da;
