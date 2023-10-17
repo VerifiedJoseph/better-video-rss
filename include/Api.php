@@ -25,7 +25,7 @@ class Api
      */
     public function getDetails(string $type, string $parameter, string $eTag)
     {
-        $url = Url::getApi($type, $parameter);
+        $url = Url::getApi($type, $parameter, Config::get('YOUTUBE_API_KEY'));
         $response = $this->fetch($url, $eTag);
 
         if ($response['statusCode'] === 200 && empty($response['data']->items)) {
@@ -43,7 +43,7 @@ class Api
      */
     public function getVideos(string $parameter)
     {
-        $url = Url::getApi('videos', $parameter);
+        $url = Url::getApi('videos', $parameter, Config::get('YOUTUBE_API_KEY'));
         $response = $this->fetch($url);
 
         return $response['data'];
@@ -57,7 +57,7 @@ class Api
      */
     public function searchChannels(string $parameter): object
     {
-        $url = Url::getApi('searchChannels', $parameter);
+        $url = Url::getApi('searchChannels', $parameter, Config::get('YOUTUBE_API_KEY'));
         $response = $this->fetch($url);
 
         return $response['data'];
@@ -71,7 +71,7 @@ class Api
      */
     public function searchPlaylists(string $parameter): object
     {
-        $url = Url::getApi('searchPlaylists', $parameter);
+        $url = Url::getApi('searchPlaylists', $parameter, Config::get('YOUTUBE_API_KEY'));
         $response = $this->fetch($url);
 
         return $response['data'];

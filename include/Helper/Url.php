@@ -135,9 +135,10 @@ class Url
      *
      * @param string $type API request type
      * @param string $parameter API request Parameter
+     * @param string $apiKey YouTube API key
      * @return string Returns url
      */
-    public static function getApi(string $type, string $parameter)
+    public static function getApi(string $type, string $parameter, string $apiKey)
     {
         $url = self::getEndpoint('api');
 
@@ -153,7 +154,7 @@ class Url
                 break;
         }
 
-        return $url . '&prettyPrint=false&key=' . Config::get('YOUTUBE_API_KEY');
+        return $url . '&prettyPrint=false&key=' . $apiKey;
     }
 
     /**
