@@ -2,121 +2,121 @@
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}strong,b{font-weight:bold}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}html{box-sizing:border-box}html,html a{-webkit-font-smoothing:antialiased;}*,*:before,*:after{box-sizing:inherit}
 
 html {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *,
 *:before,
 *:after {
-	box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 body {
-	background-color: #FFF;
-	font-family: sans-serif;
-	font-size: 14px;
-	margin: 0;
+    background-color: #FFF;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 0;
 }
 
 h2 {
-	font-size: 16px;
-	text-align: center;
+    font-size: 16px;
+    text-align: center;
 }
 
 a {
-	word-break: break-all;
+    word-break: break-all;
 }
 
 p {
-	margin: 0;
-	margin-bottom: 10px;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 p.margin {
-	margin-top: 5px;
-	margin-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 p.feedUrl {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 .gray {
-	color: gray;
+    color: gray;
 }
 
 .small {
-	font-size:13px;
+    font-size:13px;
 }
 
 .left {
-	float: left;
+    float: left;
 }
 
 .right {
-	float: right;
+    float: right;
 }
 
 .clear {
-	clear: both;
+    clear: both;
 }
 
 footer, header {
-	padding: 10px;
-	padding-left: 25px;
-	background-color: rgb(233, 236, 239);
+    padding: 10px;
+    padding-left: 25px;
+    background-color: rgb(233, 236, 239);
 }
 
 .center {
-	text-align: center;
+    text-align: center;
 }
 
 #main {
-	margin-left: 10px;
-	margin-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 table {
-	padding: 0;
-	border-spacing: 0;
-	background-color: rgb(233, 236, 239);
-	border : 1px solid rgb(0, 0, 0);
+    padding: 0;
+    border-spacing: 0;
+    background-color: rgb(233, 236, 239);
+    border : 1px solid rgb(0, 0, 0);
 }
 
 table.stats {
-	width:200px;
-	margin-bottom: 10px;
+    width:200px;
+    margin-bottom: 10px;
 }
 
 table.files {
-	width:1150px;
+    width:1150px;
 }
 
 table.part {
-	width: 1153px;
+    width: 1153px;
 }
 
 table th {
-	padding: 4px;
+    padding: 4px;
 }
 
 table tr.center {
-	text-align:center;
+    text-align:center;
 }
 
 table td {
-	border-top: 1px solid #808080;
-	border-right: 1px solid #808080;
-	padding: 4px 4px;
-	vertical-align: middle;
+    border-top: 1px solid #808080;
+    border-right: 1px solid #808080;
+    padding: 4px 4px;
+    vertical-align: middle;
 }
 
 table td.videoDetails {
-	width:440px;
+    width:440px;
 }
 
 table td.buttons {
-	width:190px;
+    width:190px;
 }
 
 ul {
@@ -124,162 +124,162 @@ ul {
 }
 
 li {
-	margin-left: 1em;
+    margin-left: 1em;
 }
 
 #items, #feeds, #links {
-	max-width: 700px;
-	margin: 14px auto;
-	margin-top:0;
+    max-width: 700px;
+    margin: 14px auto;
+    margin-top:0;
 }
 
 .index-footer {
-	text-align: center;
+    text-align: center;
 }
 
 #forms {
-	max-width: 400px;
-	margin: 14px auto;
-	margin-top:0;
+    max-width: 400px;
+    margin: 14px auto;
+    margin-top:0;
 }
 
 #links {
-	margin-top: 14px;
-	margin-bottom: 14px;
-	padding: 0px 10px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    padding: 0px 10px;
 }
 
 .item, .viewer, .tools, article {
-	margin-top: 14px;
+    margin-top: 14px;
 }
 
 #forms > .item {
-	margin: 14px 4px;
-	border-bottom: 1px solid #8F8F9D;
+    margin: 14px 4px;
+    border-bottom: 1px solid #8F8F9D;
 }
 
 #forms > .item > h2 {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 form > .form-input {
-	width: 100%;
+    width: 100%;
 }
 
 form > details {
-	padding-top: 4px;
-	padding-bottom: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 form > details > .form-option {
-	padding: 4px;
+    padding: 4px;
 }
 
 form > .form-option {
-	width: 200px;
-	margin: 0px auto;
-	margin-bottom: 8px;
-	display: flex;
+    width: 200px;
+    margin: 0px auto;
+    margin-bottom: 8px;
+    display: flex;
 }
 
 form > .form-button {
-	margin-top: 4px;
-	margin-bottom: 14px;
-	width: 100%;
-	text-align: center;
+    margin-top: 4px;
+    margin-bottom: 14px;
+    width: 100%;
+    text-align: center;
 }
 
 article .title {
-	background-color: rgb(233, 236, 239);
-	text-align: center;
-	padding: 10px;
+    background-color: rgb(233, 236, 239);
+    text-align: center;
+    padding: 10px;
 }
 
 article img {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 article > .description, article > .categories {
-	margin: 0px 5px;
+    margin: 0px 5px;
 }
 
 textarea.description {
-	width: 590px;
-	height: 90px;
+    width: 590px;
+    height: 90px;
 }
 
 textarea.tags, textarea.videos {
-	width: 100%;
-	height: 55px;
+    width: 100%;
+    height: 55px;
 }
 
 .thumbnail {
-	width:100px;
+    width:100px;
 }
 
 button {
-	width: 90px;
-	height: 30px;
+    width: 90px;
+    height: 30px;
 }
 
 .input {
-	width: 100%;
-	display: flex;
+    width: 100%;
+    display: flex;
 }
 
 summary {
-	margin-top: 6px;
+    margin-top: 6px;
 }
 
 #error {
-	color: #721c24;
-	background-color: #f8d7da;
-	border-color: #f5c6cb;
-	text-align: center;
-	padding: 5px;
-	margin-bottom: 14px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 14px;
 }
 
 .crumbs ol {
-	list-style-type: none;
-	padding-left: 0;
+    list-style-type: none;
+    padding-left: 0;
 }
 
 .crumbs li {
-	margin-left: 0em;
-	display: inline-block;
+    margin-left: 0em;
+    display: inline-block;
 }
 
 .crumbs li > a::after {
-	display: inline-block;
-	color: #000;
-	content: '>';
-	font-size: 80%;
-	font-weight: bold;
-	padding: 0 3px;
+    display: inline-block;
+    color: #000;
+    content: '>';
+    font-size: 80%;
+    font-weight: bold;
+    padding: 0 3px;
 }
 
 select, input {
-	height: 30px;
-	border: 1px solid #8F8F9D;
+    height: 30px;
+    border: 1px solid #8F8F9D;
 }
 
 select {
-	background-color: #e9e9ed;
+    background-color: #e9e9ed;
 }
 
 .center-text {
-	text-align: center;
+    text-align: center;
 }
 
 .checkbox {
-	width: 20px;
-	height: 20px;
-	margin-left: 0;
+    width: 20px;
+    height: 20px;
+    margin-left: 0;
 }
 
 .checkbox-text {
-	margin-top: 5px;
-	margin-left: 5px;
-	width: 100px;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 100px;
 }

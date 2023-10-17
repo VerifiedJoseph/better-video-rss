@@ -12,8 +12,7 @@ try {
     $config->checkInstall();
     $config->checkConfig();
 
-	$viewer = new CacheViewer($config);
-
+    $viewer = new CacheViewer($config);
 } catch (Exception $e) {
-	Output::Error($e->getMessage());
+    Output::Error($e->getMessage());
 }
