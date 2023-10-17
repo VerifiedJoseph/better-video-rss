@@ -158,22 +158,6 @@ class Config
     }
 
     /**
-     * Returns config value
-     *
-     * @param string $key Config key
-     * @return string|boolean
-     * @throws Exception if config key is invalid
-     */
-    public function get(string $key)
-    {
-        if (array_key_exists($key, $this->config) === false) {
-            throw new Exception('Invalid config key given: ' . $key);
-        }
-
-        return $this->config[$key];
-    }
-
-    /**
      * Returns self URL
      * @return string
      */
