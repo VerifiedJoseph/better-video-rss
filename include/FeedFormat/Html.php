@@ -2,7 +2,6 @@
 
 namespace App\FeedFormat;
 
-use App\Configuration as Config;
 use App\Template;
 use App\Helper\Url;
 
@@ -95,7 +94,7 @@ HTML;
     {
         $html = '';
 
-        foreach (Config::getFeedFormats() as $format) {
+        foreach ($this->config->getFeedFormats() as $format) {
             $text = strtoupper($format);
             $url = Url::getFeed(
                 $this->data['details']['type'],

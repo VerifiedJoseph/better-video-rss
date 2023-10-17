@@ -2,13 +2,16 @@
 
 namespace App\FeedFormat;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Convert;
 use App\Helper\Format;
 use App\Helper\Url;
 
 abstract class FeedFormat
 {
+    /** @var Config Config class instance */
+    protected Config $config;
+
     /** @var array<string, mixed> $data Feed data */
     protected array $data = [];
 
@@ -22,13 +25,13 @@ abstract class FeedFormat
     protected bool $embedVideos = false;
 
     /**
-     * Constructor
-     *
      * @param array<string, mixed> $data Cache/fetch data
      * @param boolean $embedVideos Embed YouTube videos in feed
+     * @param Config $config Config class instance
      */
-    public function __construct(array $data, bool $embedVideos = false)
+    public function __construct(array $data, bool $embedVideos = false, Config $config)
     {
+        $this->config = $config;
         $this->data = $data;
         $this->embedVideos = $embedVideos;
     }
@@ -90,11 +93,11 @@ abstract class FeedFormat
     {
         $description = Convert::newlines($video['description']);
         $description = Convert::urls($description);
-        $published = Convert::unixTime((int) $video['published'], (string) Config::get('DATE_FORMAT'));
+        $published = Convert::unixTime((int) $video['published'], (string) $this->config->getDateFormat());
         $datetime = Convert::unixTime((int) $video['published'], 'c');
         $thumbnailUrl = $video['thumbnail'];
 
-        if (Config::get('ENABLE_IMAGE_PROXY') === true && Config::get('DISABLE_CACHE') === false) {
+        if ($this->config->get('ENABLE_IMAGE_PROXY') === true && $this->config->getCacheDisableStatus() === false) {
             $thumbnailUrl = Url::getImageProxy(
                 $video['id'],
                 $this->data['details']['type'],
@@ -143,7 +146,7 @@ HTML;
             if ($video['liveStreamStatus'] === 'upcoming') {
                 $scheduled = Convert::unixTime(
                     $video['liveStreamScheduled'],
-                    Config::get('DATE_FORMAT') . ' ' . Config::get('TIME_FORMAT')
+                    $this->config->getDateFormat() . ' ' . $this->config->getTimeFormat()
                 );
 
                 if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere

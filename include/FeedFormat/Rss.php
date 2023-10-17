@@ -2,7 +2,6 @@
 
 namespace App\FeedFormat;
 
-use App\Configuration as Config;
 use App\Template;
 use App\Helper\Convert;
 use App\Helper\Url;
@@ -64,7 +63,7 @@ class Rss extends FeedFormat
             $itemContent = $this->xmlEncode($this->buildContent($video));
             $itemEnclosure = $this->xmlEncode($video['thumbnail']);
 
-            if (Config::get('ENABLE_IMAGE_PROXY') === true) {
+            if ($this->config->get('ENABLE_IMAGE_PROXY') === true) {
                 $itemEnclosure = $this->xmlEncode(
                     Url::getImageProxy(
                         $video['id'],

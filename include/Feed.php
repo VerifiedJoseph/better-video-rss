@@ -95,7 +95,8 @@ class Feed
         /** @var FeedFormat\Rss|FeedFormat\Json|FeedFormat\Html */
         $format = new $formatClass(
             $this->getFeedData(),
-            $this->getEmbedStatus()
+            $this->getEmbedStatus(),
+            $this->config
         );
 
         $format->build();

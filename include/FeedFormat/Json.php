@@ -11,7 +11,6 @@
 
 namespace App\FeedFormat;
 
-use App\Configuration as Config;
 use App\Helper\Convert;
 use App\Helper\Url;
 
@@ -65,7 +64,7 @@ class Json extends FeedFormat
             );
             $item['title'] = $this->buildTitle($video);
             $attachmentUrl = $video['thumbnail'];
-            if (Config::get('ENABLE_IMAGE_PROXY') === true) {
+            if ($this->config->get('ENABLE_IMAGE_PROXY') === true) {
                 $attachmentUrl = Url::getImageProxy(
                     $video['id'],
                     $this->data['details']['type'],
