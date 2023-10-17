@@ -174,6 +174,15 @@ class Config
     }
 
     /**
+     * Returns self URL
+     * @return string
+     */
+    public function getSelfUrl(): string
+    {
+        return $this->config['SELF_URL_PATH'];
+    }
+
+    /**
      * Returns cache disabled status
      * @return boolean
      */
