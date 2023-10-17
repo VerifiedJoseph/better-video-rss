@@ -121,7 +121,7 @@ class Feed
         if (isset($_GET['format']) && empty($_GET['format']) === false) {
             $format = strtolower($_GET['format']);
 
-            if (Validate::feedFormat($format) === false) {
+            if (Validate::feedFormat($format, $this->config->getFeedFormats()) === false) {
                 throw new Exception('Invalid format parameter given.');
             }
 
