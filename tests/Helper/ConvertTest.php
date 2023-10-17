@@ -12,7 +12,7 @@ class ConvertTest extends TestCase
     {
         self::assertEquals('03:45', Convert::videoDuration('PT3M45S'));
         self::assertEquals('01:33:05', Convert::videoDuration('PT1H33M5S'));
-		self::assertEquals('10:00:05', Convert::videoDuration('PT10H5S'));
+        self::assertEquals('10:00:05', Convert::videoDuration('PT10H5S'));
         self::assertEquals('1:00:00:45', Convert::videoDuration('P1DT45S'));
     }
 
