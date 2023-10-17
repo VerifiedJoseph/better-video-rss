@@ -3,15 +3,16 @@
 require 'vendor/autoload.php';
 require 'include/version.php';
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Output;
 use App\Feed;
 
 try {
-    Config::checkInstall();
-    Config::checkConfig();
+    $config = new Config();
+    $config->checkInstall();
+    $config->checkConfig();
 
-    $feed = new Feed();
+    $feed = new Feed($config);
     $feed->generate();
     $feed->output();
 } catch (Exception $e) {
