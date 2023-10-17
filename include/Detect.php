@@ -14,7 +14,7 @@ class Detect
      * @var string $channelUrlRegex Channel URL Regex
      *
      * Supported format:
-     *  https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A
+     *  - https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A
      */
     private string $channelUrlRegex = '/youtube\.com\/channel\/(UC[\w-]+)/';
 
@@ -22,9 +22,9 @@ class Detect
      * @var string $playlistUrlRegex Playlist URL regex
      *
      * Supported formats:
-     *  https://www.youtube.com/playlist?list=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC
-     *  https://www.youtube.com/playlist?list=UUBa659QWEk1AI4Tg--mrJ2A
-     *  https://www.youtube.com/watch?v=TfVYxnhuEdU&list=UUBa659QWEk1AI4Tg--mrJ2A
+     * - https://www.youtube.com/playlist?list=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC
+     * - https://www.youtube.com/playlist?list=UUBa659QWEk1AI4Tg--mrJ2A
+     * - https://www.youtube.com/watch?v=TfVYxnhuEdU&list=UUBa659QWEk1AI4Tg--mrJ2A
      */
     private string $playlistUrlRegex = '/youtube\.com\/(?:playlist\/\?|[\w?=&]+)list=((?:PL|UU)[\w-]+)/';
 
@@ -32,9 +32,9 @@ class Detect
      * @var string $usernameUrlRegex Channel username URL regex
      *
      * Supported formats:
-     *  https://www.youtube.com/c/TomScottGo
-     *  https://www.youtube.com/user/enyay
-     *  https://www.youtube.com/@TomScottGo
+     * - https://www.youtube.com/c/TomScottGo
+     * - https://www.youtube.com/user/enyay
+     * - https://www.youtube.com/@TomScottGo
      */
     private string $usernameUrlRegex = '/youtube\.com\/(?:(?:c|user)\/|@)([a-zA-z0-9]+)/';
 
@@ -42,9 +42,9 @@ class Detect
      * @var string $rssFeedUrlRegex YouTube RSS feed URL regex
      *
      * Supported formats:
-     *  https://www.youtube.com/feeds/videos.xml?user=enyay
-     *  https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A
-     *  https://www.youtube.com/feeds/videos.xml?playlist_id=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC
+     * - https://www.youtube.com/feeds/videos.xml?user=enyay
+     * - https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A
+     * - https://www.youtube.com/feeds/videos.xml?playlist_id=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC
      */
     private string $rssFeedUrlRegex = '/youtube\.com\/feeds\/videos\.xml\?(user|channel|playlist)(?:_id)?=([\w-]+)/';
 
