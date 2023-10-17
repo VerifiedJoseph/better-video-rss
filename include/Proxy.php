@@ -2,13 +2,16 @@
 
 namespace App;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Validate;
 use App\Helper\Output;
 use Exception;
 
 class Proxy
 {
+    /** @var Config Config class instance */
+    private Config $config;
+
     /** @var string $feedId YouTube channel or playlist ID */
     private string $feedId = '';
 
@@ -19,14 +22,15 @@ class Proxy
     private string $image = '';
 
     /**
-     * Constructor
+     * @param Config $config Config class instance
      *
      * @throws Exception if ENABLE_IMAGE_PROXY is false
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
+        $this->config = $config;
 
-        if (Config::get('ENABLE_IMAGE_PROXY') === false) {
+        if ($this->config->get('ENABLE_IMAGE_PROXY') === false) {
             throw new Exception('Image proxy is disabled.');
         }
 
@@ -41,8 +45,11 @@ class Proxy
      */
     public function getImage(): void
     {
-        $fetch = new Fetch();
-        $cache = new Cache($this->feedId);
+        $fetch = new Fetch($this->config);
+        $cache = new Cache(
+            $this->feedId,
+            $this->config
+        );
 
         $cache->load();
         $data = $cache->getData();
