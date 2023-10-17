@@ -116,7 +116,7 @@ HTML;
                 $this->embedVideos
             );
 
-            $html .= sprintf('<a href="%s"><button>%s</button></a> ', $url, $text);
+            $html .= sprintf('<a href="%s"><button>%s</button></a>', $url, $text);
         }
 
         return $html;

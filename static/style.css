@@ -297,3 +297,19 @@ select {
     width: 100%;
     height: 100%;
 }
+
+
+#links > div {
+    display: inline-block;
+}
+
+#links > div:first-child {
+    margin-right: 6px;
+}
+
+#feedFormatBts {
+    display: flex;
+    gap: 6px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
