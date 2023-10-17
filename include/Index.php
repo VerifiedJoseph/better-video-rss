@@ -24,8 +24,8 @@ class Index
     /** @var string $feedType Feed type (channel or playlist) */
     private string $feedType = '';
 
-    /** @var array<int, string> $supportedTypes Supported feed types */
-    private array $supportedTypes = ['channel', 'playlist'];
+    /** @var array<int, string> $supportedTypes Supported form types */
+    private array $supportedTypes = ['channel', 'playlist', 'url'];
 
     /** @var string $feedFormat Feed Format */
     private string $feedFormat = '';
