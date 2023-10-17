@@ -6,7 +6,7 @@ use App\Helper\Validate;
 use App\Exception\ConfigurationException as ConfigException;
 use Exception;
 
-class Configuration
+class Config
 {
     /** @var string $minPhpVersion Minimum PHP version */
     private string $minPhpVersion = '8.0.0';
