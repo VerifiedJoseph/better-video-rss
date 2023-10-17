@@ -74,7 +74,13 @@ class Index
         }
 
         if ($this->error === false && empty($this->feedId) === false) {
-            $url = Url::getFeed($this->feedType, $this->feedId, $this->feedFormat, $this->embedVideos);
+            $url = Url::getFeed(
+                $this->config->getSelfUrl(),
+                $this->feedType,
+                $this->feedId,
+                $this->feedFormat,
+                $this->embedVideos
+            );
 
             $link = sprintf('Feed URL: <a href="%s">%s</a>', $url, $url);
 
