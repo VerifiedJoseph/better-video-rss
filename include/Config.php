@@ -183,6 +183,15 @@ class Config
     }
 
     /**
+     * Returns cache directory
+     * @return boolean
+     */
+    public function getCacheDirectory(): bool
+    {
+        return $this->config['CACHE_DIR'];
+    }
+
+    /**
      * Returns cache disabled status
      * @return boolean
      */
@@ -283,11 +292,11 @@ class Config
      */
     public function getCacheDirPath(): string
     {
-        if (Validate::absolutePath((string) $this->get('CACHE_DIR')) === false) {
-            return dirname(__DIR__) . DIRECTORY_SEPARATOR . $this->get('CACHE_DIR');
+        if (Validate::absolutePath($this->config['CACHE_DIR']) === false) {
+            return dirname(__DIR__) . DIRECTORY_SEPARATOR . $this->config['CACHE_DIR'];
         }
 
-        return (string) $this->get('CACHE_DIR');
+        return $this->config['CACHE_DIR'];
     }
 
     /**
