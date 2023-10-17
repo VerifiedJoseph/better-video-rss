@@ -128,7 +128,9 @@ HTML;
             $url = Url::getEmbed($video['id']);
 
             $media = <<<HTML
-<iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" loading="lazy"></iframe>
+<div class="videoWrapper">
+    <iframe width="100%" height="410" src="{$url}" frameborder="0" allow="encrypted-media;" loading="lazy"></iframe>
+</div>
 HTML;
         }
 
