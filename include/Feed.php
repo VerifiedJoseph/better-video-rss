@@ -28,7 +28,7 @@ class Feed
     private bool $embedVideos = false;
 
     /**
-     * @param Config Config class instance
+     * @param Config $config Config class instance
      */
     public function __construct(Config $config)
     {
