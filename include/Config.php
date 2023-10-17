@@ -192,6 +192,15 @@ class Config
     }
 
     /**
+     * Returns timezone
+     * @return string
+     */
+    public function getTimezone(): string
+    {
+        return $this->config['TIMEZONE'];
+    }
+
+    /**
      * Returns date format
      * @return string
      */
