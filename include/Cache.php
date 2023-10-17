@@ -21,7 +21,7 @@ class Cache
 
     /**
      * @param string $feedId Feed ID
-     * @param Config Config class instance
+     * @param Config $config Config class instance
      */
     public function __construct(string $feedId, Config $config)
     {
