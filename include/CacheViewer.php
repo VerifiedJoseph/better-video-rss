@@ -124,12 +124,26 @@ HTML;
         foreach ($this->data as $index => $data) {
             $number = $index + 1;
 
-            $modified = Convert::unixTime($data['modified']);
+            $modified = Convert::unixTime(
+                $data['modified'],
+                'Y-m-d H:i:s',
+                $this->config->getTimezone()
+            );
             $size = Convert::fileSize($data['size']);
 
-            $xmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
-            $htmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'html');
+            $xmlUrl = Url::getFeed(
+                $this->config->getSelfUrl(),
+                $data['contents']['details']['type'],
+                $data['contents']['details']['id'],
+                'rss'
+            );
 
+            $htmlUrl = Url::getFeed(
+                $this->config->getSelfUrl(),
+                $data['contents']['details']['type'],
+                $data['contents']['details']['id'],
+                'html'
+            );
             $tbody .= <<<HTML
 <tr class="center">
 	<td id="{$data['id']}">$number</td>
@@ -228,8 +242,17 @@ HTML;
      */
     private function displayChannel(array $channel): string
     {
-        $fetched = Convert::unixTime($channel['fetched']);
-        $expires = Convert::unixTime($channel['expires']);
+        $fetched = Convert::unixTime(
+            $channel['fetched'],
+            'Y-m-d H:i:s',
+            $this->config->getTimezone()
+        );
+
+        $expires = Convert::unixTime(
+            $channel['expires'],
+            'Y-m-d H:i:s',
+            $this->config->getTimezone()
+        );
 
         $html = <<<HTML
             <strong>Details:</strong>
@@ -267,8 +290,17 @@ HTML;
     {
         $videoIDs = implode(' ', $feed['videos']);
 
-        $fetched = Convert::unixTime($feed['fetched']);
-        $expires = Convert::unixTime($feed['expires']);
+        $fetched = Convert::unixTime(
+            $feed['fetched'],
+            'Y-m-d H:i:s',
+            $this->config->getTimezone()
+        );
+
+        $expires = Convert::unixTime(
+            $feed['expires'],
+            'Y-m-d H:i:s',
+            $this->config->getTimezone()
+        );
 
         $html = <<<HTML
             <strong>Feed:</strong>
@@ -302,9 +334,23 @@ HTML;
             $tags = implode(', ', $video['tags']);
             $tagCount = count($video['tags']);
 
-            $fetched = Convert::unixTime($video['fetched']);
-            $expires = Convert::unixTime($video['expires']);
-            $published = Convert::unixTime($video['published']);
+            $fetched = Convert::unixTime(
+                $video['fetched'],
+                'Y-m-d H:i:s',
+                $this->config->getTimezone()
+            );
+
+            $expires = Convert::unixTime(
+                $video['expires'],
+                'Y-m-d H:i:s',
+                $this->config->getTimezone()
+            );
+
+            $published = Convert::unixTime(
+                $video['published'],
+                'Y-m-d H:i:s',
+                $this->config->getTimezone()
+            );
 
             $videoHtml .= <<<HTML
                 <tr>
