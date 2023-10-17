@@ -2,13 +2,16 @@
 
 namespace App;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Validate;
 use App\Helper\Url;
 use Exception;
 
 class Index
 {
+    /** @var Config Config class instance */
+    private Config $config;
+
     /** @var string $query Search query */
     private string $query = '';
 
@@ -39,9 +42,10 @@ class Index
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
-        $this->feedFormat = Config::getDefaultFeedFormat();
+        $this->config = $config;
+        $this->feedFormat = $this->config->getDefaultFeedFormat();
 
         try {
             $this->checkInputs();
@@ -63,7 +67,7 @@ class Index
         $playlistLink = '';
         $fromUrlLink = '';
 
-        $version = Config::getVersion();
+        $version = $this->config->getVersion();
 
         if ($this->error === true) {
             $error = sprintf('<div id="error"><strong>%s</strong></div>', $this->errorMessage);
@@ -127,7 +131,7 @@ class Index
                 }
             }
 
-            if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
+            if (isset($_POST['format']) && in_array($_POST['format'], $this->config->getFeedFormats())) {
                 $this->feedFormat = $_POST['format'];
             }
 
@@ -222,7 +226,7 @@ class Index
     private function createFormatSelect(): string
     {
         $options = '';
-        foreach (Config::getFeedFormats() as $format) {
+        foreach ($this->config->getFeedFormats() as $format) {
             $options .= sprintf('<option value="%s">%s</option>', $format, strtoupper($format));
         }
 
