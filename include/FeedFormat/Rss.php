@@ -20,7 +20,7 @@ class Rss extends FeedFormat
         $feedTitle = $this->xmlEncode($this->data['details']['title']);
         $feedUrl = $this->xmlEncode($this->data['details']['url']);
         $feedUpdated = $this->xmlEncode(
-            Convert::unixTime($this->data['updated'], 'r')
+            Convert::unixTime($this->data['updated'], 'r', $this->config->getTimezone())
         );
         $feedImage = $this->xmlEncode($this->data['details']['thumbnail']);
 
@@ -57,7 +57,11 @@ class Rss extends FeedFormat
             $itemAuthor = $this->xmlEncode($video['author']);
             $itemUrl = $this->xmlEncode($video['url']);
             $itemTimestamp = $this->xmlEncode(
-                Convert::unixTime($video['published'], 'r')
+                Convert::unixTime(
+                    $video['published'],
+                    'r',
+                    $this->config->getTimezone()
+                )
             );
             $itemCategories = $this->buildCategories($video['tags']);
             $itemContent = $this->xmlEncode($this->buildContent($video));

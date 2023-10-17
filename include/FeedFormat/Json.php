@@ -72,7 +72,11 @@ class Json extends FeedFormat
                 );
             }
 
-            $item['date_published'] = Convert::unixTime($video['published'], 'Y-m-d\TH:i:s\Z');
+            $item['date_published'] = Convert::unixTime(
+                $video['published'],
+                'Y-m-d\TH:i:s\Z',
+                $this->config->getTimezone()
+            );
             $item['content_html'] = $this->buildContent($video);
             $item['tags'] = $this->buildCategories($video['tags']);
             $item['attachments'][] = array(

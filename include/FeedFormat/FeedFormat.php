@@ -68,7 +68,11 @@ abstract class FeedFormat
      */
     public function getLastModified(): string
     {
-        return Convert::unixTime($this->data['updated'], 'D, d M Y H:i:s T');
+        return Convert::unixTime(
+            $this->data['updated'],
+            'D, d M Y H:i:s T',
+            $this->config->getTimezone()
+        );
     }
 
     /**
@@ -93,9 +97,17 @@ abstract class FeedFormat
     {
         $description = Convert::newlines($video['description']);
         $description = Convert::urls($description);
-        $published = Convert::unixTime((int) $video['published'], (string) $this->config->getDateFormat());
-        $datetime = Convert::unixTime((int) $video['published'], 'c');
         $thumbnailUrl = $video['thumbnail'];
+        $published = Convert::unixTime(
+            (int) $video['published'],
+            $this->config->getDateFormat(),
+            $this->config->getTimezone()
+        );
+        $datetime = Convert::unixTime(
+            (int) $video['published'],
+            'c',
+            $this->config->getTimezone()
+        );
 
         if ($this->config->get('ENABLE_IMAGE_PROXY') === true && $this->config->getCacheDisableStatus() === false) {
             $thumbnailUrl = Url::getImageProxy(
@@ -144,9 +156,16 @@ HTML;
 
         if ($video['liveStream'] === true) {
             if ($video['liveStreamStatus'] === 'upcoming') {
+                $datetimeFormat = sprintf(
+                    '%s %s',
+                    $this->config->getDateFormat(),
+                    $this->config->getTimeFormat()
+                );
+
                 $scheduled = Convert::unixTime(
                     $video['liveStreamScheduled'],
-                    $this->config->getDateFormat() . ' ' . $this->config->getTimeFormat()
+                    $datetimeFormat,
+                    $this->config->getTimezone()
                 );
 
                 if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere
