@@ -40,7 +40,7 @@ class Index
     private string $errorMessage = '';
 
     /**
-     * Constructor
+     * @param Config Config class instance
      */
     public function __construct(Config $config)
     {
