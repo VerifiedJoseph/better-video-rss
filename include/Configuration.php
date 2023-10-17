@@ -9,28 +9,28 @@ use Exception;
 class Configuration
 {
     /** @var string $minPhpVersion Minimum PHP version */
-    private static string $minPhpVersion = '8.0.0';
+    private string $minPhpVersion = '8.0.0';
 
     /** @var array<int, string> $extensions Required PHP extensions */
-    private static array $extensions = ['curl', 'json', 'mbstring', 'simplexml'];
+    private array $extensions = ['curl', 'json', 'mbstring', 'simplexml'];
 
     /** @var int $mkdirMode mkdir() access mode */
-    private static int $mkdirMode = 0775;
+    private int $mkdirMode = 0775;
 
     /** @var string $userAgent User agent used for Curl requests */
-    private static string $userAgent = 'BetterVideoRss (+https://github.com/VerifiedJoseph/BetterVideoRss)';
+    private string $userAgent = 'BetterVideoRss (+https://github.com/VerifiedJoseph/BetterVideoRss)';
 
     /** @var array<int, string> $feedFormats Supported feed formats */
-    private static array $feedFormats = ['rss', 'html', 'json'];
+    private array $feedFormats = ['rss', 'html', 'json'];
 
     /** @var string $defaultFeedFormats Default feed format */
-    private static string $defaultFeedFormat = 'rss';
+    private string $defaultFeedFormat = 'rss';
 
     /** @var string $cacheFileExtension Cache filename extension */
-    private static string $cacheFileExtension = 'cache';
+    private string $cacheFileExtension = 'cache';
 
     /** @var array<string, mixed> $defaults Default values for optional config parameters */
-    private static array $defaults = [
+    private array $defaults = [
         'RAW_API_ERRORS' => false,
         'TIMEZONE' => 'UTC',
         'DATE_FORMAT' => 'F j, Y',
@@ -42,7 +42,7 @@ class Configuration
     ];
 
     /** @var array<string, mixed> $config Loaded config parameters */
-    private static array $config = [];
+    private array $config = [];
 
     /**
      * Check PHP version and loaded extensions
@@ -51,13 +51,13 @@ class Configuration
      * @throws Exception if a PHP extension is not loaded
      * @throws Exception if a api-endpoints.json is not found
      */
-    public static function checkInstall(): void
+    public function checkInstall(): void
     {
-        if (version_compare(PHP_VERSION, self::$minPhpVersion) === -1) {
-            throw new Exception('BetterVideoRss requires at least PHP version ' . self::$minPhpVersion);
+        if (version_compare(PHP_VERSION, $this->minPhpVersion) === -1) {
+            throw new Exception('BetterVideoRss requires at least PHP version ' . $this->minPhpVersion);
         }
 
-        foreach (self::$extensions as $ext) {
+        foreach ($this->extensions as $ext) {
             if (extension_loaded($ext) === false) {
                 throw new Exception(sprintf('Extension Error: %s extension not loaded.', $ext));
             }
@@ -79,64 +79,64 @@ class Configuration
      * @throws ConfigException if cache directory could not be created.
      * @throws ConfigException if cache directory is not writable.
      */
-    public static function checkConfig(): void
+    public function checkConfig(): void
     {
-        self::requireConfigFile();
-        self::setDefaults();
+        $this->requireConfigFile();
+        $this->setDefaults();
 
-        if (self::hasEnv('SELF_URL_PATH') === false || self::getEnv('SELF_URL_PATH') === '') {
+        if ($this->hasEnv('SELF_URL_PATH') === false || $this->getEnv('SELF_URL_PATH') === '') {
             throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
         }
 
-        if (Validate::selfUrlSlash((string) self::getEnv('SELF_URL_PATH')) === false) {
+        if (Validate::selfUrlSlash((string) $this->getEnv('SELF_URL_PATH')) === false) {
             throw new ConfigException(sprintf(
                 'Self URL must end with a forward slash. e.g: %s [BVRSS_SELF_URL_PATH]',
-                self::getEnv('SELF_URL_PATH')
+                $this->getEnv('SELF_URL_PATH')
             ));
         }
 
-        if (Validate::selfUrlHttp((string) self::getEnv('SELF_URL_PATH')) === false) {
+        if (Validate::selfUrlHttp((string) $this->getEnv('SELF_URL_PATH')) === false) {
             throw new ConfigException('Self URL must start with http:// or https:// [BVRSS_SELF_URL_PATH]');
         }
 
-        self::$config['SELF_URL_PATH'] = self::getEnv('SELF_URL_PATH');
+        $this->config['SELF_URL_PATH'] = $this->getEnv('SELF_URL_PATH');
 
-        if (self::hasEnv('YOUTUBE_API_KEY') === false || self::getEnv('YOUTUBE_API_KEY') === '') {
+        if ($this->hasEnv('YOUTUBE_API_KEY') === false || $this->getEnv('YOUTUBE_API_KEY') === '') {
             throw new ConfigException('YouTube API key must be set. [BVRSS_YOUTUBE_API_KEY]');
         }
 
-        self::$config['YOUTUBE_API_KEY'] = self::getEnv('YOUTUBE_API_KEY');
+        $this->config['YOUTUBE_API_KEY'] = $this->getEnv('YOUTUBE_API_KEY');
 
-        if (self::getEnv('RAW_API_ERRORS') === 'true') {
-            self::$config['RAW_API_ERRORS'] = true;
+        if ($this->getEnv('RAW_API_ERRORS') === 'true') {
+            $this->config['RAW_API_ERRORS'] = true;
         }
 
-        if (self::hasEnv('TIMEZONE') === true && self::getEnv('TIMEZONE') !== '') {
-            if (Validate::timezone((string) self::getEnv('TIMEZONE')) === false) {
+        if ($this->hasEnv('TIMEZONE') === true && $this->getEnv('TIMEZONE') !== '') {
+            if (Validate::timezone((string) $this->getEnv('TIMEZONE')) === false) {
                 throw new ConfigException(sprintf(
                     'Invalid timezone given (%s). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]',
-                    self::getEnv('TIMEZONE')
+                    $this->getEnv('TIMEZONE')
                 ));
             }
 
-            self::$config['TIMEZONE'] = self::getEnv('TIMEZONE');
+            $this->config['TIMEZONE'] = $this->getEnv('TIMEZONE');
         }
 
-        if (self::hasEnv('DATE_FORMAT') === true && self::getEnv('DATE_FORMAT') !== '') {
-            self::$config['DATE_FORMAT'] = self::getEnv('DATE_FORMAT');
+        if ($this->hasEnv('DATE_FORMAT') === true && $this->getEnv('DATE_FORMAT') !== '') {
+            $this->config['DATE_FORMAT'] = $this->getEnv('DATE_FORMAT');
         }
 
-        if (self::hasEnv('TIME_FORMAT') === true && self::getEnv('TIME_FORMAT') !== '') {
-            self::$config['TIME_FORMAT'] = self::getEnv('TIME_FORMAT');
+        if ($this->hasEnv('TIME_FORMAT') === true && $this->getEnv('TIME_FORMAT') !== '') {
+            $this->config['TIME_FORMAT'] = $this->getEnv('TIME_FORMAT');
         }
 
-        if (self::hasEnv('CACHE_DIR') === true && self::getEnv('CACHE_DIR') !== '') {
-            self::$config['CACHE_DIR'] = self::getEnv('CACHE_DIR');
+        if ($this->hasEnv('CACHE_DIR') === true && $this->getEnv('CACHE_DIR') !== '') {
+            $this->config['CACHE_DIR'] = $this->getEnv('CACHE_DIR');
         }
 
-        $cacheDir = self::getCacheDirPath();
+        $cacheDir = $this->getCacheDirPath();
 
-        if (is_dir($cacheDir) === false && mkdir($cacheDir, self::$mkdirMode) === false) {
+        if (is_dir($cacheDir) === false && mkdir($cacheDir, $this->mkdirMode) === false) {
             throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
         }
 
@@ -144,16 +144,16 @@ class Configuration
             throw new ConfigException('Cache directory is not writable. [BVRSS_CACHE_DIR]');
         }
 
-        if (self::getEnv('DISABLE_CACHE') === 'true') {
-            self::$config['DISABLE_CACHE'] = true;
+        if ($this->getEnv('DISABLE_CACHE') === 'true') {
+            $this->config['DISABLE_CACHE'] = true;
         }
 
-        if (self::getEnv('ENABLE_CACHE_VIEWER') === 'true') {
-            self::$config['ENABLE_CACHE_VIEWER'] = true;
+        if ($this->getEnv('ENABLE_CACHE_VIEWER') === 'true') {
+            $this->config['ENABLE_CACHE_VIEWER'] = true;
         }
 
-        if (self::getEnv('ENABLE_IMAGE_PROXY') === 'true') {
-            self::$config['ENABLE_IMAGE_PROXY'] = true;
+        if ($this->getEnv('ENABLE_IMAGE_PROXY') === 'true') {
+            $this->config['ENABLE_IMAGE_PROXY'] = true;
         }
     }
 
@@ -164,20 +164,20 @@ class Configuration
      * @return string|boolean
      * @throws Exception if config key is invalid
      */
-    public static function get(string $key)
+    public function get(string $key)
     {
-        if (array_key_exists($key, self::$config) === false) {
+        if (array_key_exists($key, $this->config) === false) {
             throw new Exception('Invalid config key given: ' . $key);
         }
 
-        return self::$config[$key];
+        return $this->config[$key];
     }
 
     /**
      * Returns version string
      * @return string
      */
-    public static function getVersion(): string
+    public function getVersion(): string
     {
         return (string) constant('VERSION');
     }
@@ -187,9 +187,9 @@ class Configuration
      *
      * @return string
      */
-    public static function getUserAgent(): string
+    public function getUserAgent(): string
     {
-        return self::$userAgent;
+        return $this->userAgent;
     }
 
     /**
@@ -197,9 +197,9 @@ class Configuration
      *
      * @return string
      */
-    public static function getDefaultFeedFormat(): string
+    public function getDefaultFeedFormat(): string
     {
-        return self::$defaultFeedFormat;
+        return $this->defaultFeedFormat;
     }
 
     /**
@@ -207,9 +207,9 @@ class Configuration
      *
      * @return array<int, string>
      */
-    public static function getFeedFormats(): array
+    public function getFeedFormats(): array
     {
-        return self::$feedFormats;
+        return $this->feedFormats;
     }
 
     /**
@@ -217,9 +217,9 @@ class Configuration
      *
      * @return string
      */
-    public static function getCacheFileExtension(): string
+    public function getCacheFileExtension(): string
     {
-        return self::$cacheFileExtension;
+        return $this->cacheFileExtension;
     }
 
     /**
@@ -227,19 +227,19 @@ class Configuration
      *
      * @return string
      */
-    public static function getCacheDirPath(): string
+    public function getCacheDirPath(): string
     {
-        if (Validate::absolutePath((string) self::get('CACHE_DIR')) === false) {
-            return dirname(__DIR__) . DIRECTORY_SEPARATOR . self::get('CACHE_DIR');
+        if (Validate::absolutePath((string) $this->get('CACHE_DIR')) === false) {
+            return dirname(__DIR__) . DIRECTORY_SEPARATOR . $this->get('CACHE_DIR');
         }
 
-        return (string) self::get('CACHE_DIR');
+        return (string) $this->get('CACHE_DIR');
     }
 
     /**
      * Include (require) config file
      */
-    private static function requireConfigFile(): void
+    private function requireConfigFile(): void
     {
         if (file_exists('config.php') === true) {
             require 'config.php';
@@ -249,9 +249,9 @@ class Configuration
     /**
      * Set defaults as config values
      */
-    private static function setDefaults(): void
+    private function setDefaults(): void
     {
-        self::$config = self::$defaults;
+        $this->config = $this->defaults;
     }
 
     /**
@@ -259,7 +259,7 @@ class Configuration
      *
      * @param string $name Variable name excluding prefix
      */
-    private static function hasEnv(string $name): bool
+    private function hasEnv(string $name): bool
     {
         if (getenv('BVRSS_' . $name) === false) {
             return false;
@@ -273,7 +273,7 @@ class Configuration
      *
      * @param string $name Variable name excluding prefix
      */
-    private static function getEnv(string $name): mixed
+    private function getEnv(string $name): mixed
     {
         return getenv('BVRSS_' . $name);
     }
