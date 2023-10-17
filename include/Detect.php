@@ -7,7 +7,7 @@ class Detect
     /** @var string $type Feed type detected from URL */
     private string $type = '';
 
-    /** @var string $value Vaule (channel id, username etc) extracted from URL */
+    /** @var string $value Value (channel id, username etc) extracted from URL */
     private string $value = '';
 
     /**
@@ -46,7 +46,7 @@ class Detect
      *  https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A
      *  https://www.youtube.com/feeds/videos.xml?playlist_id=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC
      */
-    private string $rssFeedUrlRegex = '/youtube\.com\/feeds\/videos\.xml\?(channel_id|user|playlist_id)=([\w-]+)/';
+    private string $rssFeedUrlRegex = '/youtube\.com\/feeds\/videos\.xml\?(user|channel|playlist)(?:_id)?=([\w-]+)/';
 
     /**
      * Find and extract channel ID, channel username or playlist ID from a URL using regex
@@ -56,7 +56,6 @@ class Detect
      */
     public function fromUrl($url)
     {
-
         if (preg_match($this->channelUrlRegex, $url, $match) || preg_match($this->usernameUrlRegex, $url, $match)) {
             $this->type = 'channel';
             $this->value = $match[1];
@@ -72,10 +71,10 @@ class Detect
         }
 
         if (preg_match($this->rssFeedUrlRegex, $url, $match)) {
-            $this->type = 'channel';
-
-            if ($match[1] == 'playlist_id') {
-                $this->type = 'playlist';
+            if ($match[1] == 'user') {
+                $this->type = 'channel';
+            } else {
+                $this->type = $match[1];
             }
 
             $this->value = $match[2];
