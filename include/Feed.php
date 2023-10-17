@@ -48,7 +48,8 @@ class Feed
 
         $data = new Data(
             $this->getFeedId(),
-            $this->getFeedType()
+            $this->getFeedType(),
+            $this->config->getCacheDisableStatus()
         );
 
         foreach ($data->getExpiredParts() as $part) {
