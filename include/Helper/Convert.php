@@ -2,7 +2,6 @@
 
 namespace App\Helper;
 
-use App\Configuration as Config;
 use DateTime;
 use DateTimeZone;
 
