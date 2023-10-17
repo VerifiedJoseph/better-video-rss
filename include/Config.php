@@ -201,6 +201,15 @@ class Config
     }
 
     /**
+     * Returns cache viewer status
+     * @return boolean
+     */
+    public function getCacheViewerStatus(): bool
+    {
+        return $this->config['ENABLE_CACHE_VIEWER'];
+    }
+
+    /**
      * Returns YouTube API key
      * @return string
      */
