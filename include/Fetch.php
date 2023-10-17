@@ -3,12 +3,23 @@
 namespace App;
 
 use Curl\Curl;
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Url;
 use Exception;
 
 class Fetch
 {
+    /** @var Config Config class instance */
+    private Config $config;
+
+    /**
+     * @param Config Config class instance
+     */
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
+    }
+
     /**
      * Fetch YouTube RSS feed
      *
@@ -25,7 +36,7 @@ class Fetch
         $url = Url::getRssFeed($feedType, $feedId);
 
         $curl = new Curl();
-        $curl->setUserAgent(Config::getUserAgent());
+        $curl->setUserAgent($this->config->getUserAgent());
         $curl->get($url);
 
         if ($curl->getCurlErrorCode() !== 0) {
