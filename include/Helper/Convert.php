@@ -120,15 +120,11 @@ class Convert
      *
      * @param int $timestamp Unix timestamp
      * @param string $format DateTime format
-     * @param string $timezone DateTime timezone (overrides use of config constant TIMEZONE)
+     * @param string $timezone DateTime timezone
      * @return string
      */
-    public static function unixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s', string $timezone = ''): string
+    public static function unixTime(int $timestamp, string $format, string $timezone): string
     {
-        if (empty($timezone) === true) {
-            $timezone = (string) Config::get('TIMEZONE');
-        }
-
         $dt = new DateTime();
         $dt->setTimestamp($timestamp);
         $dt->setTimezone(new DateTimeZone($timezone));

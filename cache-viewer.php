@@ -3,15 +3,16 @@
 require 'vendor/autoload.php';
 require 'include/version.php';
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Output;
 use App\CacheViewer;
 
 try {
-	Config::checkInstall();
-	Config::checkConfig();
+    $config = new Config();
+    $config->checkInstall();
+    $config->checkConfig();
 
-	$viewer = new CacheViewer();
+	$viewer = new CacheViewer($config);
 
 } catch (Exception $e) {
 	Output::Error($e->getMessage());

@@ -2,7 +2,6 @@
 
 namespace App\FeedFormat;
 
-use App\Configuration as Config;
 use App\Template;
 use App\Helper\Url;
 
@@ -19,11 +18,23 @@ class Html extends FeedFormat
         $feedDescription = htmlspecialchars($this->data['details']['description'], ENT_QUOTES);
 
         $rssUrl = htmlspecialchars(
-            Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos)
+            Url::getFeed(
+                $this->config->getSelfUrl(),
+                $this->data['details']['type'],
+                $this->data['details']['id'],
+                'rss',
+                $this->embedVideos
+            )
         );
 
         $jsonUrl = htmlspecialchars(
-            Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'json', $this->embedVideos)
+            Url::getFeed(
+                $this->config->getSelfUrl(),
+                $this->data['details']['type'],
+                $this->data['details']['id'],
+                'json',
+                $this->embedVideos
+            )
         );
 
         $html = new Template('feed.html', [
@@ -95,9 +106,10 @@ HTML;
     {
         $html = '';
 
-        foreach (Config::getFeedFormats() as $format) {
+        foreach ($this->config->getFeedFormats() as $format) {
             $text = strtoupper($format);
             $url = Url::getFeed(
+                $this->config->getSelfUrl(),
                 $this->data['details']['type'],
                 $this->data['details']['id'],
                 $format,

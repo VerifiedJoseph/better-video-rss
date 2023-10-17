@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Template;
 use App\Helper\File;
 use App\Helper\Convert;
@@ -11,6 +11,9 @@ use Exception;
 
 class CacheViewer
 {
+    /** @var Config Config class instance */
+    private Config $config;
+
     /** @var string $cacheId Current cache file ID */
     private string $cacheId = '';
 
@@ -24,18 +27,20 @@ class CacheViewer
     private int $cacheSize = 0;
 
     /**
-     * Constructor
+     * @param Config $config Config class instance
      *
      * @throws Exception if ENABLE_CACHE_VIEWER is false
      * @throws Exception if DISABLE_CACHE is true
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
-        if (Config::get('ENABLE_CACHE_VIEWER') === false) {
+        $this->config = $config;
+
+        if ($this->config->get('ENABLE_CACHE_VIEWER') === false) {
             throw new Exception('Cache viewer is disabled.');
         }
 
-        if (Config::get('DISABLE_CACHE') === true) {
+        if ($this->config->getCacheDisableStatus() === true) {
             throw new Exception('Cache viewer not available. Cache is disabled.');
         }
 
@@ -73,9 +78,9 @@ class CacheViewer
      */
     private function loadFiles(): void
     {
-        $regex = '/.' . preg_quote(Config::getCacheFileExtension()) . '$/';
+        $regex = '/.' . preg_quote($this->config->getCacheFileExtension()) . '$/';
 
-        $cacheDirectory = new \RecursiveDirectoryIterator(Config::getCacheDirPath());
+        $cacheDirectory = new \RecursiveDirectoryIterator($this->config->getCacheDirPath());
         $cacheFiles = new \RegexIterator($cacheDirectory, $regex);
 
         foreach ($cacheFiles as $file) {
@@ -87,7 +92,7 @@ class CacheViewer
             }
 
             $this->data[] = array(
-                'id' => $file->getBasename('.' . Config::getCacheFileExtension()),
+                'id' => $file->getBasename('.' . $this->config->getCacheFileExtension()),
                 'modified' => $file->getMTime(),
                 'size' => $file->getSize(),
                 'contents' => $data
@@ -119,12 +124,26 @@ HTML;
         foreach ($this->data as $index => $data) {
             $number = $index + 1;
 
-            $modified = Convert::unixTime($data['modified']);
+            $modified = Convert::unixTime(
+                $data['modified'],
+                'Y-m-d H:i:s',
+                $this->config->getTimezone()
+            );
             $size = Convert::fileSize($data['size']);
 
-            $xmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'rss');
-            $htmlUrl = Url::getFeed($data['contents']['details']['type'], $data['contents']['details']['id'], 'html');
+            $xmlUrl = Url::getFeed(
+                $this->config->getSelfUrl(),
+                $data['contents']['details']['type'],
+                $data['contents']['details']['id'],
+                'rss'
+            );
 
+            $htmlUrl = Url::getFeed(
+                $this->config->getSelfUrl(),
+                $data['contents']['details']['type'],
+                $data['contents']['details']['id'],
+                'html'
+            );
             $tbody .= <<<HTML
 <tr class="center">
 	<td id="{$data['id']}">$number</td>
@@ -223,8 +242,17 @@ HTML;
      */
     private function displayChannel(array $channel): string
     {
-        $fetched = Convert::unixTime($channel['fetched']);
-        $expires = Convert::unixTime($channel['expires']);
+        $fetched = Convert::unixTime(
+            $channel['fetched'],
+            'Y-m-d H:i:s',
+            $this->config->getTimezone()
+        );
+
+        $expires = Convert::unixTime(
+            $channel['expires'],
+            'Y-m-d H:i:s',
+            $this->config->getTimezone()
+        );
 
         $html = <<<HTML
             <strong>Details:</strong>
@@ -262,8 +290,17 @@ HTML;
     {
         $videoIDs = implode(' ', $feed['videos']);
 
-        $fetched = Convert::unixTime($feed['fetched']);
-        $expires = Convert::unixTime($feed['expires']);
+        $fetched = Convert::unixTime(
+            $feed['fetched'],
+            'Y-m-d H:i:s',
+            $this->config->getTimezone()
+        );
+
+        $expires = Convert::unixTime(
+            $feed['expires'],
+            'Y-m-d H:i:s',
+            $this->config->getTimezone()
+        );
 
         $html = <<<HTML
             <strong>Feed:</strong>
@@ -297,9 +334,23 @@ HTML;
             $tags = implode(', ', $video['tags']);
             $tagCount = count($video['tags']);
 
-            $fetched = Convert::unixTime($video['fetched']);
-            $expires = Convert::unixTime($video['expires']);
-            $published = Convert::unixTime($video['published']);
+            $fetched = Convert::unixTime(
+                $video['fetched'],
+                'Y-m-d H:i:s',
+                $this->config->getTimezone()
+            );
+
+            $expires = Convert::unixTime(
+                $video['expires'],
+                'Y-m-d H:i:s',
+                $this->config->getTimezone()
+            );
+
+            $published = Convert::unixTime(
+                $video['published'],
+                'Y-m-d H:i:s',
+                $this->config->getTimezone()
+            );
 
             $videoHtml .= <<<HTML
                 <tr>

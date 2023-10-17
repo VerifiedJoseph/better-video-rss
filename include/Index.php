@@ -2,13 +2,16 @@
 
 namespace App;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Validate;
 use App\Helper\Url;
 use Exception;
 
 class Index
 {
+    /** @var Config Config class instance */
+    private Config $config;
+
     /** @var string $query Search query */
     private string $query = '';
 
@@ -37,11 +40,12 @@ class Index
     private string $errorMessage = '';
 
     /**
-     * Constructor
+     * @param Config $config Config class instance
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
-        $this->feedFormat = Config::getDefaultFeedFormat();
+        $this->config = $config;
+        $this->feedFormat = $this->config->getDefaultFeedFormat();
 
         try {
             $this->checkInputs();
@@ -63,14 +67,20 @@ class Index
         $playlistLink = '';
         $fromUrlLink = '';
 
-        $version = Config::getVersion();
+        $version = $this->config->getVersion();
 
         if ($this->error === true) {
             $error = sprintf('<div id="error"><strong>%s</strong></div>', $this->errorMessage);
         }
 
         if ($this->error === false && empty($this->feedId) === false) {
-            $url = Url::getFeed($this->feedType, $this->feedId, $this->feedFormat, $this->embedVideos);
+            $url = Url::getFeed(
+                $this->config->getSelfUrl(),
+                $this->feedType,
+                $this->feedId,
+                $this->feedFormat,
+                $this->embedVideos
+            );
 
             $link = sprintf('Feed URL: <a href="%s">%s</a>', $url, $url);
 
@@ -127,7 +137,7 @@ class Index
                 }
             }
 
-            if (isset($_POST['format']) && in_array($_POST['format'], Config::getFeedFormats())) {
+            if (isset($_POST['format']) && in_array($_POST['format'], $this->config->getFeedFormats())) {
                 $this->feedFormat = $_POST['format'];
             }
 
@@ -180,7 +190,7 @@ class Index
             return $query;
         }
 
-        $api = new Api();
+        $api = new Api($this->config);
         $response = $api->searchChannels($query);
 
         if (empty($response->items)) {
@@ -204,7 +214,7 @@ class Index
             return $query;
         }
 
-        $api = new Api();
+        $api = new Api($this->config);
         $response = $api->searchPlaylists($query);
 
         if (empty($response->items)) {
@@ -222,7 +232,7 @@ class Index
     private function createFormatSelect(): string
     {
         $options = '';
-        foreach (Config::getFeedFormats() as $format) {
+        foreach ($this->config->getFeedFormats() as $format) {
             $options .= sprintf('<option value="%s">%s</option>', $format, strtoupper($format));
         }
 

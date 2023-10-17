@@ -3,7 +3,6 @@
 namespace App\Helper;
 
 use DateTimeZone;
-use App\Configuration as Config;
 
 class Validate
 {
@@ -42,14 +41,15 @@ class Validate
     /**
      * Validate a feed format
      *
-     * Checks given feed format against list of formats returned by Config::getFeedFormats().
+     * Checks given feed format against list of formats.
      *
      * @param string $format Feed format
+     * @param array<int, string> $feedFormats Feed formats
      * @return boolean
      */
-    public static function feedFormat(string $format)
+    public static function feedFormat(string $format, array $feedFormats): bool
     {
-        if (in_array($format, Config::getFeedFormats())) {
+        if (in_array($format, $feedFormats)) {
             return true;
         }
 

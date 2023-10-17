@@ -2,13 +2,16 @@
 
 namespace App;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Validate;
 use App\Helper\Output;
 use Exception;
 
 class Feed
 {
+    /** @var Config Config class instance */
+    private Config $config;
+
     /** @var array<string, mixed> $feedData Feed data from data class */
     private array $feedData = [];
 
@@ -25,11 +28,13 @@ class Feed
     private bool $embedVideos = false;
 
     /**
-     * Constructor
+     * @param Config $config Config class instance
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
-        $this->feedFormat = Config::getDefaultFeedFormat();
+        $this->config = $config;
+        $this->feedFormat = $this->config->getDefaultFeedFormat();
+
         $this->checkInputs();
     }
 
@@ -38,12 +43,13 @@ class Feed
      */
     public function generate(): void
     {
-        $api = new Api();
-        $fetch = new Fetch();
+        $api = new Api($this->config);
+        $fetch = new Fetch($this->config);
 
         $data = new Data(
             $this->getFeedId(),
-            $this->getFeedType()
+            $this->getFeedType(),
+            $this->config
         );
 
         foreach ($data->getExpiredParts() as $part) {
@@ -89,7 +95,8 @@ class Feed
         /** @var FeedFormat\Rss|FeedFormat\Json|FeedFormat\Html */
         $format = new $formatClass(
             $this->getFeedData(),
-            $this->getEmbedStatus()
+            $this->getEmbedStatus(),
+            $this->config
         );
 
         $format->build();
@@ -114,7 +121,7 @@ class Feed
         if (isset($_GET['format']) && empty($_GET['format']) === false) {
             $format = strtolower($_GET['format']);
 
-            if (Validate::feedFormat($format) === false) {
+            if (Validate::feedFormat($format, $this->config->getFeedFormats()) === false) {
                 throw new Exception('Invalid format parameter given.');
             }
 

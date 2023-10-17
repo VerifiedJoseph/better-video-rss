@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Cache;
 use App\Helper\Convert;
 use App\Helper\Url;
@@ -10,7 +10,10 @@ use stdClass;
 
 class Data
 {
-    /** @var Cache $cache Cache class object */
+    /** @var Config Config class instance */
+    private Config $config;
+
+    /** @var Cache $cache Cache class instance */
     private Cache $cache;
 
     /** @var array<int, string> $parts Data part names */
@@ -40,13 +43,15 @@ class Data
      *
      * @param string $feedId Feed id (channel or playlist ID)
      * @param string $feedType Feed type (channel or playlist)
+     * @param Config $config Config class instance
      */
-    public function __construct(string $feedId, string $feedType)
+    public function __construct(string $feedId, string $feedType, Config $config)
     {
+        $this->config = $config;
         $this->data['details']['id'] = $feedId;
         $this->data['details']['type'] = $feedType;
 
-        $this->cache = new Cache($feedId);
+        $this->cache = new Cache($feedId, $config);
 
         // Load cache
         $this->cache->load();
@@ -116,7 +121,7 @@ class Data
     {
         $expiredParts = array();
 
-        if (Config::get('DISABLE_CACHE') === true) {
+        if ($this->config->getCacheDisableStatus() === true) {
             return $this->parts;
         }
 
@@ -141,7 +146,7 @@ class Data
         $expiredVideos = array();
 
         // Return all video IDs if videos array is empty or cache is disabled
-        if (empty($this->data['videos']) || Config::get('DISABLE_CACHE') === true) {
+        if (empty($this->data['videos']) || $this->config->getCacheDisableStatus() === true) {
             return implode(',', $this->data['feed']['videos']);
         }
 

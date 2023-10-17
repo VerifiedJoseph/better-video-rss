@@ -2,13 +2,16 @@
 
 namespace App\FeedFormat;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Convert;
 use App\Helper\Format;
 use App\Helper\Url;
 
 abstract class FeedFormat
 {
+    /** @var Config Config class instance */
+    protected Config $config;
+
     /** @var array<string, mixed> $data Feed data */
     protected array $data = [];
 
@@ -22,13 +25,13 @@ abstract class FeedFormat
     protected bool $embedVideos = false;
 
     /**
-     * Constructor
-     *
      * @param array<string, mixed> $data Cache/fetch data
      * @param boolean $embedVideos Embed YouTube videos in feed
+     * @param Config $config Config class instance
      */
-    public function __construct(array $data, bool $embedVideos = false)
+    public function __construct(array $data, bool $embedVideos, Config $config)
     {
+        $this->config = $config;
         $this->data = $data;
         $this->embedVideos = $embedVideos;
     }
@@ -65,7 +68,11 @@ abstract class FeedFormat
      */
     public function getLastModified(): string
     {
-        return Convert::unixTime($this->data['updated'], 'D, d M Y H:i:s T');
+        return Convert::unixTime(
+            $this->data['updated'],
+            'D, d M Y H:i:s T',
+            $this->config->getTimezone()
+        );
     }
 
     /**
@@ -90,12 +97,21 @@ abstract class FeedFormat
     {
         $description = Convert::newlines($video['description']);
         $description = Convert::urls($description);
-        $published = Convert::unixTime((int) $video['published'], (string) Config::get('DATE_FORMAT'));
-        $datetime = Convert::unixTime((int) $video['published'], 'c');
         $thumbnailUrl = $video['thumbnail'];
+        $published = Convert::unixTime(
+            (int) $video['published'],
+            $this->config->getDateFormat(),
+            $this->config->getTimezone()
+        );
+        $datetime = Convert::unixTime(
+            (int) $video['published'],
+            'c',
+            $this->config->getTimezone()
+        );
 
-        if (Config::get('ENABLE_IMAGE_PROXY') === true && Config::get('DISABLE_CACHE') === false) {
+        if ($this->config->get('ENABLE_IMAGE_PROXY') === true && $this->config->getCacheDisableStatus() === false) {
             $thumbnailUrl = Url::getImageProxy(
+                $this->config->getSelfUrl(),
                 $video['id'],
                 $this->data['details']['type'],
                 $this->data['details']['id']
@@ -141,9 +157,16 @@ HTML;
 
         if ($video['liveStream'] === true) {
             if ($video['liveStreamStatus'] === 'upcoming') {
+                $datetimeFormat = sprintf(
+                    '%s %s',
+                    $this->config->getDateFormat(),
+                    $this->config->getTimeFormat()
+                );
+
                 $scheduled = Convert::unixTime(
                     $video['liveStreamScheduled'],
-                    Config::get('DATE_FORMAT') . ' ' . Config::get('TIME_FORMAT')
+                    $datetimeFormat,
+                    $this->config->getTimezone()
                 );
 
                 if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere

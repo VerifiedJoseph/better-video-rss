@@ -2,7 +2,6 @@
 
 namespace App\FeedFormat;
 
-use App\Configuration as Config;
 use App\Template;
 use App\Helper\Convert;
 use App\Helper\Url;
@@ -21,12 +20,18 @@ class Rss extends FeedFormat
         $feedTitle = $this->xmlEncode($this->data['details']['title']);
         $feedUrl = $this->xmlEncode($this->data['details']['url']);
         $feedUpdated = $this->xmlEncode(
-            Convert::unixTime($this->data['updated'], 'r')
+            Convert::unixTime($this->data['updated'], 'r', $this->config->getTimezone())
         );
         $feedImage = $this->xmlEncode($this->data['details']['thumbnail']);
 
         $selfUrl = $this->xmlEncode(
-            Url::getFeed($this->data['details']['type'], $this->data['details']['id'], 'rss', $this->embedVideos)
+            Url::getFeed(
+                $this->config->getSelfUrl(),
+                $this->data['details']['type'],
+                $this->data['details']['id'],
+                'rss',
+                $this->embedVideos
+            )
         );
 
         $xml = new Template('feed.xml', [
@@ -58,15 +63,20 @@ class Rss extends FeedFormat
             $itemAuthor = $this->xmlEncode($video['author']);
             $itemUrl = $this->xmlEncode($video['url']);
             $itemTimestamp = $this->xmlEncode(
-                Convert::unixTime($video['published'], 'r')
+                Convert::unixTime(
+                    $video['published'],
+                    'r',
+                    $this->config->getTimezone()
+                )
             );
             $itemCategories = $this->buildCategories($video['tags']);
             $itemContent = $this->xmlEncode($this->buildContent($video));
             $itemEnclosure = $this->xmlEncode($video['thumbnail']);
 
-            if (Config::get('ENABLE_IMAGE_PROXY') === true) {
+            if ($this->config->get('ENABLE_IMAGE_PROXY') === true) {
                 $itemEnclosure = $this->xmlEncode(
                     Url::getImageProxy(
+                        $this->config->getSelfUrl(),
                         $video['id'],
                         $this->data['details']['type'],
                         $this->data['details']['id']

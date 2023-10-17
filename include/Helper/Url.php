@@ -2,8 +2,6 @@
 
 namespace App\Helper;
 
-use App\Configuration as Config;
-
 class Url
 {
     /** @var array<string, string> $endpoints YouTube endpoints */
@@ -34,9 +32,9 @@ class Url
      * @param boolean $embed Embed video status
      * @return string
      */
-    public static function getFeed(string $type, string $id, string $format, bool $embed = false)
+    public static function getFeed(string $selfUrl, string $type, string $id, string $format, bool $embed = false)
     {
-        $url = Config::get('SELF_URL_PATH') . 'feed.php?' . $type . '_id=' . $id . '&format=' . $format;
+        $url = $selfUrl . 'feed.php?' . $type . '_id=' . $id . '&format=' . $format;
 
         if ($embed === true) {
             $url .= '&embed_videos=true';
@@ -53,9 +51,9 @@ class Url
      * @param string $feedId Feed id
      * @return string
      */
-    public static function getImageProxy(string $videoId, string $feedType, string $feedId)
+    public static function getImageProxy(string $selfUrl, string $videoId, string $feedType, string $feedId)
     {
-        return Config::get('SELF_URL_PATH') . 'proxy.php?video_id=' . $videoId . '&' . $feedType . '_id=' . $feedId;
+        return $selfUrl . 'proxy.php?video_id=' . $videoId . '&' . $feedType . '_id=' . $feedId;
     }
 
     /**

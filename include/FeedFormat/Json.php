@@ -11,7 +11,6 @@
 
 namespace App\FeedFormat;
 
-use App\Configuration as Config;
 use App\Helper\Convert;
 use App\Helper\Url;
 
@@ -29,6 +28,7 @@ class Json extends FeedFormat
         $feedTitle = $this->data['details']['title'];
         $feedHomePageUrl = $this->data['details']['url'];
         $feedUrl = Url::getFeed(
+            $this->config->getSelfUrl(),
             $this->data['details']['type'],
             $this->data['details']['id'],
             'json',
@@ -65,15 +65,20 @@ class Json extends FeedFormat
             );
             $item['title'] = $this->buildTitle($video);
             $attachmentUrl = $video['thumbnail'];
-            if (Config::get('ENABLE_IMAGE_PROXY') === true) {
+            if ($this->config->get('ENABLE_IMAGE_PROXY') === true) {
                 $attachmentUrl = Url::getImageProxy(
+                    $this->config->getSelfUrl(),
                     $video['id'],
                     $this->data['details']['type'],
                     $this->data['details']['id']
                 );
             }
 
-            $item['date_published'] = Convert::unixTime($video['published'], 'Y-m-d\TH:i:s\Z');
+            $item['date_published'] = Convert::unixTime(
+                $video['published'],
+                'Y-m-d\TH:i:s\Z',
+                $this->config->getTimezone()
+            );
             $item['content_html'] = $this->buildContent($video);
             $item['tags'] = $this->buildCategories($video['tags']);
             $item['attachments'][] = array(
