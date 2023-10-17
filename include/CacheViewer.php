@@ -28,7 +28,7 @@ class CacheViewer
 
     /**
      * @param Config $config Config class instance
-     * 
+     *
      * @throws Exception if ENABLE_CACHE_VIEWER is false
      * @throws Exception if DISABLE_CACHE is true
      */
