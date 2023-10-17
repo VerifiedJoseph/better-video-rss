@@ -2,11 +2,14 @@
 
 namespace App;
 
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\File;
 
 class Cache
 {
+    /** @var Config Config class instance */
+    private Config $config;
+
     /** @var string $name Cache filename */
     private string $name = '';
 
@@ -17,12 +20,12 @@ class Cache
     private string $path = '';
 
     /**
-     * Constructor
-     *
      * @param string $feedId Feed ID
+     * @param Config Config class instance
      */
-    public function __construct(string $feedId)
+    public function __construct(string $feedId, Config $config)
     {
+        $this->config = $config;
         $this->setName($feedId);
         $this->setPath();
     }
@@ -42,7 +45,7 @@ class Cache
      */
     public function load(): void
     {
-        if (Config::get('DISABLE_CACHE') === false) {
+        if ($this->config->getCacheDisableStatus() === false) {
             $contents = File::read($this->path);
             $decoded = json_decode($contents, true);
 
@@ -59,7 +62,7 @@ class Cache
      */
     public function save(array $data = []): void
     {
-        if (Config::get('DISABLE_CACHE') === false) {
+        if ($this->config->getCacheDisableStatus() === false) {
             $data = (string) json_encode($data);
             File::write($this->path, $data);
         }
@@ -80,7 +83,7 @@ class Cache
      */
     private function setPath(): void
     {
-        $this->path = Config::getCacheDirPath() . DIRECTORY_SEPARATOR .
-        $this->name . '.' . Config::getCacheFileExtension();
+        $this->path = $this->config->getCacheDirPath() . DIRECTORY_SEPARATOR .
+        $this->name . '.' . $this->config->getCacheFileExtension();
     }
 }
