@@ -66,6 +66,7 @@ class Json extends FeedFormat
             $attachmentUrl = $video['thumbnail'];
             if ($this->config->get('ENABLE_IMAGE_PROXY') === true) {
                 $attachmentUrl = Url::getImageProxy(
+                    $this->config->getSelfUrl(),
                     $video['id'],
                     $this->data['details']['type'],
                     $this->data['details']['id']

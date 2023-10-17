@@ -111,6 +111,7 @@ abstract class FeedFormat
 
         if ($this->config->get('ENABLE_IMAGE_PROXY') === true && $this->config->getCacheDisableStatus() === false) {
             $thumbnailUrl = Url::getImageProxy(
+                $this->config->getSelfUrl(),
                 $video['id'],
                 $this->data['details']['type'],
                 $this->data['details']['id']
