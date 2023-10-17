@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Helper\Validate;
-use App\Exception\ConfigurationException as ConfigException;
+use App\Exception\ConfigException as ConfigException;
 use Exception;
 
 class Config
