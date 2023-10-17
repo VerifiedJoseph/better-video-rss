@@ -35,14 +35,18 @@ class Data
     /** @var bool $updated Data update status */
     private bool $updated = false;
 
+    /** @var bool $cacheDisabled Cache disable status */
+    private bool $cacheDisabled = true;
+
     /**
      * Constructor
      *
      * @param string $feedId Feed id (channel or playlist ID)
      * @param string $feedType Feed type (channel or playlist)
      */
-    public function __construct(string $feedId, string $feedType)
+    public function __construct(string $feedId, string $feedType, bool $cacheDisabled = true)
     {
+        $this->cacheDisabled = $cacheDisabled;
         $this->data['details']['id'] = $feedId;
         $this->data['details']['type'] = $feedType;
 
@@ -116,7 +120,7 @@ class Data
     {
         $expiredParts = array();
 
-        if (Config::get('DISABLE_CACHE') === true) {
+        if ($this->cacheDisabled === true) {
             return $this->parts;
         }
 
@@ -141,7 +145,7 @@ class Data
         $expiredVideos = array();
 
         // Return all video IDs if videos array is empty or cache is disabled
-        if (empty($this->data['videos']) || Config::get('DISABLE_CACHE') === true) {
+        if (empty($this->data['videos']) || $this->cacheDisabled === true) {
             return implode(',', $this->data['feed']['videos']);
         }
 
