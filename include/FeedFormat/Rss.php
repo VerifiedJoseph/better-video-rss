@@ -73,7 +73,7 @@ class Rss extends FeedFormat
             $itemContent = $this->xmlEncode($this->buildContent($video));
             $itemEnclosure = $this->xmlEncode($video['thumbnail']);
 
-            if ($this->config->get('ENABLE_IMAGE_PROXY') === true) {
+            if ($this->config->getImageProxyStatus() === true) {
                 $itemEnclosure = $this->xmlEncode(
                     Url::getImageProxy(
                         $this->config->getSelfUrl(),

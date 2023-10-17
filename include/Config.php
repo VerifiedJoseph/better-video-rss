@@ -210,6 +210,15 @@ class Config
     }
 
     /**
+     * Returns image proxy status
+     * @return boolean
+     */
+    public function getImageProxyStatus(): bool
+    {
+        return $this->config['ENABLE_IMAGE_PROXY'];
+    }
+
+    /**
      * Returns YouTube API key
      * @return string
      */

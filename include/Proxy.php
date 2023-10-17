@@ -30,7 +30,7 @@ class Proxy
     {
         $this->config = $config;
 
-        if ($this->config->get('ENABLE_IMAGE_PROXY') === false) {
+        if ($this->config->getImageProxyStatus() === false) {
             throw new Exception('Image proxy is disabled.');
         }
 
