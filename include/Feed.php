@@ -44,7 +44,7 @@ class Feed
     public function generate(): void
     {
         $api = new Api($this->config);
-        $fetch = new Fetch();
+        $fetch = new Fetch($this->config);
 
         $data = new Data(
             $this->getFeedId(),
