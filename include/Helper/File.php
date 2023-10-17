@@ -12,7 +12,6 @@ class File
      * @param string $path File path
      * @return string $contents File contents
      *
-     * @throws Exception if file was not opened.
      * @throws Exception if file was not read.
      */
     public static function read(string $path): string
@@ -23,11 +22,6 @@ class File
         }
 
         $handle = fopen($path, 'r');
-
-        if ($handle === false) {
-            throw new Exception('File not opened: ' . $path);
-        }
-
         $contents = fread($handle, (int) filesize($path));
 
         if ($contents === false) {
