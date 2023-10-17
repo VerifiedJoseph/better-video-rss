@@ -17,7 +17,7 @@ class Api
     private array $expectedStatusCodes = [200, 304];
 
     /**
-     * @param Config Config class instance
+     * @param Config $config Config class instance
      */
     public function __construct(Config $config)
     {
