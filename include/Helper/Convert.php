@@ -141,7 +141,7 @@ class Convert
     {
         return (string) preg_replace(
             self::$urlRegex,
-            '<a target="_blank" href="$1" target="_blank">$1</a>',
+            '<a href="$1" target="_blank">$1</a>',
             $string
         );
     }
