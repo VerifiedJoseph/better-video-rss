@@ -5,7 +5,7 @@ use App\Detect;
 
 class DetectTest extends TestCase
 {
-    /** @var array<int, array<string, string>> $playlistUrls YouTube playlist URLs */
+    /** @var array<int, array<string, mixed>> $playlistUrls YouTube playlist URLs */
     private array $playlistUrls = [
         [
             'url' => 'https://www.youtube.com/playlist?list=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC',
@@ -22,10 +22,10 @@ class DetectTest extends TestCase
         [
             'url' => 'https://www.youtube.com/watch?v=ZNVuIU6UUiM&list=PL96C35uN7xGI9HGKHsArwxiOejecVyNem&index=1',
             'value' => 'PL96C35uN7xGI9HGKHsArwxiOejecVyNem'
-        ],
+        ]
     ];
 
-    /** @var array<int, array<string, string>> $usernameUrls YouTube username URLs */
+    /** @var array<int, array<string, mixed>> $usernameUrls YouTube username URLs */
     private array $usernameUrls = [
         [
             'url' => 'https://www.youtube.com/c/TomScottGo',
@@ -38,10 +38,10 @@ class DetectTest extends TestCase
         [
             'url' => 'https://www.youtube.com/@TomScottGo',
             'value' => 'TomScottGo'
-        ],
+        ]
     ];
 
-    /** @var array<int, array<string, string>> $rssFeedUrls YouTube RSS feed URLs */
+    /** @var array<int, array<string, mixed>> $rssFeedUrls YouTube RSS feed URLs */
     private array $rssFeedUrls = [
         [
             'url' => 'https://www.youtube.com/feeds/videos.xml?user=enyay',
@@ -57,7 +57,7 @@ class DetectTest extends TestCase
             'url' => 'https://www.youtube.com/feeds/videos.xml?playlist_id=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC',
             'type' => 'playlist',
             'value' => 'PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC'
-        ],
+        ]
     ];
 
     /**
@@ -66,8 +66,8 @@ class DetectTest extends TestCase
     public function testFromUrlWithChannelUrl(): void
     {
         $detect = new Detect();
-        $detect->fromUrl('https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A');
 
+        $this->assertTrue($detect->fromUrl('https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A'));
         $this->assertEquals('channel', $detect->getType());
         $this->assertEquals('UCBa659QWEk1AI4Tg--mrJ2A', $detect->getValue());
     }
@@ -77,12 +77,12 @@ class DetectTest extends TestCase
      */
     public function testFromUrlWithPlaylistUrls(): void
     {
-        foreach ($this->playlistUrls as $playlist) {
+        foreach ($this->playlistUrls as $item) {
             $detect = new Detect();
-            $detect->fromUrl($playlist['url']);
 
+            $this->assertTrue($detect->fromUrl($item['url']));
             $this->assertEquals('playlist', $detect->getType());
-            $this->assertEquals($playlist['value'], $detect->getValue());
+            $this->assertEquals($item['value'], $detect->getValue());
         }
     }
 
@@ -91,12 +91,12 @@ class DetectTest extends TestCase
      */
     public function testFromUrlWithUsernameUrls(): void
     {
-        foreach ($this->usernameUrls as $username) {
+        foreach ($this->usernameUrls as $item) {
             $detect = new Detect();
-            $detect->fromUrl($username['url']);
 
+            $this->assertTrue($detect->fromUrl($item['url']));
             $this->assertEquals('channel', $detect->getType());
-            $this->assertEquals($username['value'], $detect->getValue());
+            $this->assertEquals($item['value'], $detect->getValue());
         }
     }
 
@@ -105,12 +105,12 @@ class DetectTest extends TestCase
      */
     public function testFromUrlWithRssFeedUrl(): void
     {
-        foreach ($this->rssFeedUrls as $feed) {
+        foreach ($this->rssFeedUrls as $item) {
             $detect = new Detect();
-            $detect->fromUrl($feed['url']);
 
-            $this->assertEquals($feed['type'], $detect->getType());
-            $this->assertEquals($feed['value'], $detect->getValue());
+            $this->assertTrue($detect->fromUrl($item['url']));
+            $this->assertEquals($item['type'], $detect->getType());
+            $this->assertEquals($item['value'], $detect->getValue());
         }
     }
 }
