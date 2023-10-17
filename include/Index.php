@@ -184,7 +184,7 @@ class Index
             return $query;
         }
 
-        $api = new Api();
+        $api = new Api($this->config);
         $response = $api->searchChannels($query);
 
         if (empty($response->items)) {
@@ -208,7 +208,7 @@ class Index
             return $query;
         }
 
-        $api = new Api();
+        $api = new Api($this->config);
         $response = $api->searchPlaylists($query);
 
         if (empty($response->items)) {
