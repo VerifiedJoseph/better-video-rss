@@ -7,6 +7,7 @@ class UrlTest extends TestCase
 {
     private string $selfUrl = 'https://example.com/';
 
+    /** @var array<int, array<string, mixed>> $feedUrls */
     private array $feedUrls = [
         [
             'url' => 'https://example.com/feed.php?channel_id=UCBa659QWEk1AI4Tg--mrJ2A&format=html',
@@ -31,6 +32,7 @@ class UrlTest extends TestCase
         ]
     ];
 
+    /** @var array<int, array<string, string>> $thumbnailTypes */
     private array $thumbnailTypes = [
         [
             'url' => 'https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg',
