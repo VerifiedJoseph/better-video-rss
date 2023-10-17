@@ -77,7 +77,9 @@ class Convert
                 $result['second'] = 0 . $result['second'];
             }
 
-            if ($result['hour'] > 0) {
+            if ($result['day'] > 0) {
+                $result = $result['day'] . ':' . $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
+            } elseif ($result['hour'] > 0) {
                 $result = $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
             } else {
                 $result = $result['minute'] . ':' . $result['second'];

@@ -6,6 +6,16 @@ use App\Helper\Convert;
 class ConvertTest extends TestCase
 {
     /**
+     * Test `videoDuration()`
+     */
+    public function testVideoDuration(): void
+    {
+        self::assertEquals('03:45', Convert::videoDuration('PT3M45S'));
+        self::assertEquals('10:00:05', Convert::videoDuration('PT10H5S'));
+        self::assertEquals('1:00:00:45', Convert::videoDuration('P1DT45S'));
+    }
+
+    /**
      * Test `fileSize()`
      */
     public function testFileSize(): void
