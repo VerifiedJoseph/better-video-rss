@@ -123,7 +123,7 @@ class Convert
      * @param string $timezone DateTime timezone
      * @return string
      */
-    public static function unixTime(int $timestamp = 0, string $format = 'Y-m-d H:i:s', string $timezone): string
+    public static function unixTime(int $timestamp, string $format, string $timezone): string
     {
         $dt = new DateTime();
         $dt->setTimestamp($timestamp);
