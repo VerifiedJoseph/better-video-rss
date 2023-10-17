@@ -29,7 +29,7 @@ abstract class FeedFormat
      * @param boolean $embedVideos Embed YouTube videos in feed
      * @param Config $config Config class instance
      */
-    public function __construct(array $data, bool $embedVideos = false, Config $config)
+    public function __construct(array $data, bool $embedVideos, Config $config)
     {
         $this->config = $config;
         $this->data = $data;
