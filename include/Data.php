@@ -43,7 +43,7 @@ class Data
      *
      * @param string $feedId Feed id (channel or playlist ID)
      * @param string $feedType Feed type (channel or playlist)
-     * @param Config Config class instance
+     * @param Config $config Config class instance
      */
     public function __construct(string $feedId, string $feedType, Config $config)
     {
