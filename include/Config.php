@@ -174,6 +174,15 @@ class Config
     }
 
     /**
+     * Returns YouTube API key
+     * @return string
+     */
+    public function getApiKey(): string
+    {
+        return $this->config['YOUTUBE_API_KEY'];
+    }
+
+    /**
      * Returns version string
      * @return string
      */
