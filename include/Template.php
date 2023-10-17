@@ -4,7 +4,7 @@ namespace App;
 
 use App\Helper\File;
 use App\Helper\Format;
-use App\Exception\ConfigurationException as ConfigException;
+use App\Exception\ConfigException;
 
 /**
  * Class for rendering pages using HTML/XML templates
