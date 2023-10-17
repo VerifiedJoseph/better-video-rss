@@ -3,15 +3,26 @@
 namespace App;
 
 use Curl\Curl;
-use App\Configuration as Config;
+use App\Config;
 use App\Helper\Url;
 use stdClass;
 use Exception;
 
 class Api
 {
+    /** @var Config Config class instance */
+    private Config $config;
+
     /** @var array<int, int> $expectedStatusCodes Non-error HTTP status codes returned by the API */
     private array $expectedStatusCodes = [200, 304];
+
+    /**
+     * @param Config Config class instance
+     */
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * Get channel or playlist details
@@ -25,7 +36,7 @@ class Api
      */
     public function getDetails(string $type, string $parameter, string $eTag)
     {
-        $url = Url::getApi($type, $parameter, (string) Config::get('YOUTUBE_API_KEY'));
+        $url = Url::getApi($type, $parameter, $this->config->getApiKey());
         $response = $this->fetch($url, $eTag);
 
         if ($response['statusCode'] === 200 && empty($response['data']->items)) {
@@ -43,7 +54,7 @@ class Api
      */
     public function getVideos(string $parameter)
     {
-        $url = Url::getApi('videos', $parameter, (string) Config::get('YOUTUBE_API_KEY'));
+        $url = Url::getApi('videos', $parameter, $this->config->getApiKey());
         $response = $this->fetch($url);
 
         return $response['data'];
@@ -57,7 +68,7 @@ class Api
      */
     public function searchChannels(string $parameter): object
     {
-        $url = Url::getApi('searchChannels', $parameter, (string) Config::get('YOUTUBE_API_KEY'));
+        $url = Url::getApi('searchChannels', $parameter, $this->config->getApiKey());
         $response = $this->fetch($url);
 
         return $response['data'];
@@ -71,7 +82,7 @@ class Api
      */
     public function searchPlaylists(string $parameter): object
     {
-        $url = Url::getApi('searchPlaylists', $parameter, (string) Config::get('YOUTUBE_API_KEY'));
+        $url = Url::getApi('searchPlaylists', $parameter, $this->config->getApiKey());
         $response = $this->fetch($url);
 
         return $response['data'];
@@ -95,7 +106,7 @@ class Api
             $curl->setHeader('If-None-Match', $eTag);
         }
 
-        $curl->setUserAgent(Config::getUserAgent());
+        $curl->setUserAgent($this->config->getUserAgent());
         $curl->get($url);
 
         if ($curl->getCurlErrorCode() !== 0) {
@@ -123,7 +134,7 @@ class Api
     {
         $error = $response->error->errors[0];
 
-        if (Config::get('RAW_API_ERRORS') === true) {
+        if ($this->config->get('RAW_API_ERRORS') === true) {
             $raw = json_encode($response->error, JSON_PRETTY_PRINT);
 
             throw new Exception(
