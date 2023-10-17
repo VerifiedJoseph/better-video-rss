@@ -174,6 +174,15 @@ class Config
     }
 
     /**
+     * Returns cache disabled status
+     * @return boolean
+     */
+    public function getCacheDisableStatus(): bool
+    {
+        return $this->config['DISABLE_CACHE'];
+    }
+
+    /**
      * Returns YouTube API key
      * @return string
      */
