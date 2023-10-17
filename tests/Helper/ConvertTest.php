@@ -33,7 +33,7 @@ class ConvertTest extends TestCase
     public function testUrls(): void
     {
         $plaintext = 'Visit us at https://example.com/phpuint/';
-        $html = 'Visit us at <a target="_blank" href="https://example.com/phpuint/" target="_blank">https://example.com/phpuint/</a>';
+        $html = 'Visit us at <a href="https://example.com/phpuint/" target="_blank">https://example.com/phpuint/</a>';
 
         self::assertEquals($html, Convert::urls($plaintext));
     }
