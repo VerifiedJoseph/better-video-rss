@@ -18,6 +18,7 @@
         "lint-phpstan": "phpstan",
         "lint-phpcs": "phpcs",
         "lint-phpcs-gh-action": "phpcs --report=checkstyle | cs2pr",
-        "fix": "phpcbf"
+        "fix": "phpcbf",
+        "test": "phpunit --colors"
     }
 }
