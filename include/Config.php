@@ -192,6 +192,24 @@ class Config
     }
 
     /**
+     * Returns date format
+     * @return string
+     */
+    public function getDateFormat(): string
+    {
+        return $this->config['DATE_FORMAT'];
+    }
+
+    /**
+     * Returns time format
+     * @return string
+     */
+    public function getTimeFormat(): string
+    {
+        return $this->config['TIME_FORMAT'];
+    }
+
+    /**
      * Returns version string
      * @return string
      */
