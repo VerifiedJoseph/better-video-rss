@@ -110,7 +110,8 @@ class Feed
         Output::feed(
             $format->get(),
             $format->getContentType(),
-            $format->getLastModified()
+            $format->getLastModified(),
+            $this->config->getCsp()
         );
     }
 
