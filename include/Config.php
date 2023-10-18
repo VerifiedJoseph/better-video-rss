@@ -20,6 +20,16 @@ class Config
     /** @var string $userAgent User agent used for Curl requests */
     private string $userAgent = 'BetterVideoRss/%s (+https://github.com/VerifiedJoseph/BetterVideoRss)';
 
+    /** @var array<int, string> $cspParts Content Security Policy header parts */
+    private array $cspParts = [
+        "default-src 'self'",
+        "base-uri 'self'",
+        "img-src 'self' i.ytimg.com ggpht.com",
+        "script-src 'none'",
+        "connect-src 'none'",
+        "upgrade-insecure-requests"
+    ];
+
     /** @var array<int, string> $feedFormats Supported feed formats */
     private array $feedFormats = ['rss', 'html', 'json'];
 
@@ -152,6 +162,15 @@ class Config
         if ($this->getEnv('ENABLE_IMAGE_PROXY') === 'true') {
             $this->config['ENABLE_IMAGE_PROXY'] = true;
         }
+    }
+
+    /**
+     * Returns Content Security Policy header value
+     * @return string
+     */
+    public function getCsp(): string
+    {
+        return implode('; ', $this->cspParts);
     }
 
     /**

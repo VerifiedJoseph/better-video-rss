@@ -76,7 +76,11 @@ class Proxy
      */
     public function output(): void
     {
-        Output::image($this->image);
+        Output::image(
+            $this->image,
+            'image/jpeg',
+            $this->config->getCsp()
+        );
     }
 
     /**
