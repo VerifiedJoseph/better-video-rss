@@ -12,6 +12,9 @@ class Feed
     /** @var Config Config class instance */
     private Config $config;
 
+    /** @var Api Api class instance */
+    private Api $api;
+
     /** @var array<string, mixed> $feedData Feed data from data class */
     private array $feedData = [];
 
@@ -30,10 +33,13 @@ class Feed
     /**
      * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
      * @param Config $config Config class instance
+     * @param Api $api Api class instance
      */
-    public function __construct(array $inputs, Config $config)
+    public function __construct(array $inputs, Config $config, Api $api)
     {
         $this->config = $config;
+        $this->api = $api;
+
         $this->feedFormat = $this->config->getDefaultFeedFormat();
 
         $this->checkInputs($inputs);
@@ -44,7 +50,6 @@ class Feed
      */
     public function generate(): void
     {
-        $api = new Api($this->config);
         $fetch = new Fetch($this->config);
 
         $data = new Data(
@@ -64,7 +69,7 @@ class Feed
             }
 
             if ($part === 'details') {
-                $response = $api->getDetails(
+                $response = $this->api->getDetails(
                     $this->getFeedType(),
                     $this->getFeedId(),
                     $data->getPartEtag($part)
@@ -80,7 +85,7 @@ class Feed
                     continue;
                 }
 
-                $response = $api->getVideos($videos);
+                $response = $this->api->getVideos($videos);
 
                 $data->updateVideos($response);
             }
