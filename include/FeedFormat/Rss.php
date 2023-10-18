@@ -132,6 +132,6 @@ class Rss extends FeedFormat
      */
     private function xmlEncode($text): string
     {
-        return htmlspecialchars($text, ENT_XML1);
+        return htmlentities($text, ENT_XML1);
     }
 }
