@@ -148,7 +148,7 @@ HTML;
                 'html'
             );
 
-            $title = htmlspecialchars($data['contents']['details']['title']);
+            $title = htmlEntities($data['contents']['details']['title'], ENT_QUOTES);
 
             $tbody .= <<<HTML
 <tr class="center">
@@ -260,8 +260,8 @@ HTML;
             $this->config->getTimezone()
         );
 
-        $title = htmlspecialchars($channel['title']);
-        $description = htmlspecialchars($channel['description']);
+        $title = htmlEntities($channel['title'], ENT_QUOTES);
+        $description = htmlEntities($channel['description'], ENT_QUOTES);
 
         $html = <<<HTML
             <strong>Details:</strong>
@@ -361,8 +361,8 @@ HTML;
                 $this->config->getTimezone()
             );
 
-            $title = htmlspecialchars($video['title']);
-            $description = htmlspecialchars($video['description']);
+            $title = htmlEntities($video['title'], ENT_QUOTES);
+            $description = htmlEntities($video['description'], ENT_QUOTES);
 
             $videoHtml .= <<<HTML
                 <tr>
