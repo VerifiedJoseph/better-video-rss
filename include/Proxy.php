@@ -22,7 +22,7 @@ class Proxy
     private string $image = '';
 
     /**
-     * @param array $inputs Inputs parameters from `$_GET`
+     * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
      * @param Config $config Config class instance
      *
      * @throws Exception if ENABLE_IMAGE_PROXY is false
@@ -82,7 +82,7 @@ class Proxy
     /**
      * Check user inputs
      *
-     * @param array $inputs Inputs parameters from `$_GET`
+     * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
      *
      * @throws Exception if a invalid format parameter is given.
      * @throws Exception if an empty or invalid channel ID parameter is given.
