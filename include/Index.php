@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Config;
+use App\Helper\Output;
 use App\Helper\Validate;
 use App\Helper\Url;
 use Exception;
@@ -109,7 +110,10 @@ class Index
             'version' => $version
         ]);
 
-        echo $html->render(minify: true);
+        Output::html(
+            $html->render(minify: true),
+            $this->config->getCsp()
+        );
     }
 
     /**
