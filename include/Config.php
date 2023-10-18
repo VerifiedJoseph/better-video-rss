@@ -89,10 +89,9 @@ class Config
         }
 
         if (Validate::selfUrlSlash((string) $this->getEnv('SELF_URL_PATH')) === false) {
-            throw new ConfigException(sprintf(
-                'Self URL must end with a forward slash. e.g: %s [BVRSS_SELF_URL_PATH]',
-                $this->getEnv('SELF_URL_PATH')
-            ));
+            throw new ConfigException(
+                'Self URL must end with a forward slash. e.g: https://example.con/better-video-rss/ [BVRSS_SELF_URL_PATH]',
+            );
         }
 
         if (Validate::selfUrlHttp((string) $this->getEnv('SELF_URL_PATH')) === false) {
