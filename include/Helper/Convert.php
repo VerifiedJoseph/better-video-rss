@@ -2,7 +2,6 @@
 
 namespace App\Helper;
 
-use App\Configuration as Config;
 use DateTime;
 use DateTimeZone;
 
@@ -78,7 +77,9 @@ class Convert
                 $result['second'] = 0 . $result['second'];
             }
 
-            if ($result['hour'] > 0) {
+            if ($result['day'] > 0) {
+                $result = $result['day'] . ':' . $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
+            } elseif ($result['hour'] > 0) {
                 $result = $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
             } else {
                 $result = $result['minute'] . ':' . $result['second'];
@@ -142,7 +143,7 @@ class Convert
     {
         return (string) preg_replace(
             self::$urlRegex,
-            '<a target="_blank" href="$1" target="_blank">$1</a>',
+            '<a href="$1" target="_blank">$1</a>',
             $string
         );
     }

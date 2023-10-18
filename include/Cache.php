@@ -62,6 +62,8 @@ class Cache
      */
     public function save(array $data = []): void
     {
+        $this->data = $data;
+
         if ($this->config->getCacheDisableStatus() === false) {
             $data = (string) json_encode($data);
             File::write($this->path, $data);

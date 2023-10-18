@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>phpunit</title>
+        <link>https://example.com/feed.rss</link>
+        <atom:link href="https://example.com" rel="self"/>
+        <description>Feed for phpunit</description>
+        <pubDate>1970-01-01 00:00:00</pubDate>
+        <image>
+            <url>https://example.com/inage.png</url>
+        </image>
+        <items>items here</items>
+    </channel>
+</rss>

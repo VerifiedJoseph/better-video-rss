@@ -12,8 +12,8 @@ class File
      * @param string $path File path
      * @return string $contents File contents
      *
-     * @throws Exception if file was not opened.
      * @throws Exception if file was not read.
+     * @throws Exception if file was not opened.
      */
     public static function read(string $path): string
     {
