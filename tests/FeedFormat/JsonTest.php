@@ -37,14 +37,12 @@ class JsonTest extends TestCase
      */
     public function testBuild(): void
     {
-        $output = (string) file_get_contents('tests/files/FeedFormats/channel.json');
-
         $format = new Json($this->data, false, $this->config);
         $format->build();
 
-        $this->assertEquals(
-            json_decode($output),
-            json_decode($format->get())
+        $this->assertJsonStringEqualsJsonFile(
+            'tests/files/FeedFormats/channel.json',
+            $format->get()
         );
     }
 
