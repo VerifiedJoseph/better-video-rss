@@ -12,10 +12,11 @@ class JsonTest extends TestCase
     private array $data = [];
 
     /**
-     * @return Config&PHPUnit\Framework\MockObject\Stub
+     * @return PHPUnit\Framework\MockObject\Stub&Config
      */
     private function createConfigStub(): Config
     {
+        /** @var PHPUnit\Framework\MockObject\Stub&Config */
         $config = $this->createStub(Config::class);
         $config->method('getImageProxyStatus')->willReturn(false);
         $config->method('getSelfUrl')->willReturn('https://example.com/');
