@@ -147,10 +147,13 @@ HTML;
                 $data['contents']['details']['id'],
                 'html'
             );
+
+            $title = htmlspecialchars($data['contents']['details']['title']);
+
             $tbody .= <<<HTML
 <tr class="center">
 	<td id="{$data['id']}">$number</td>
-	<td>{$data['contents']['details']['title']}<br>
+	<td>{$title}<br>
 		<span class="small">
 			(Cache ID: {$data['id']}
 		</span>
@@ -257,20 +260,23 @@ HTML;
             $this->config->getTimezone()
         );
 
+        $title = htmlspecialchars($channel['title']);
+        $description = htmlspecialchars($channel['description']);
+
         $html = <<<HTML
             <strong>Details:</strong>
             <table class="part">
                 <tr>
                     <td>
                         <strong>ID:</strong> {$channel['id']}<br>
-                        <strong>Title:</strong> {$channel['title']}<br>
+                        <strong>Title:</strong> {$title}<br>
                         <strong>URL:</strong> <a target="_blank" href="{$channel['url']}">{$channel['url']}</a><br>
                         <strong>Fetched:</strong> $fetched<br>
                         <strong>Expires:</strong> $expires<br>
                     </td>
                     <td>
                         <strong>Description:</strong><br>
-                        <textarea class="description" readonly>{$channel['description']}</textarea>
+                        <textarea class="description" readonly>{$description}</textarea>
                     </td>
                     <td>
                         <strong>Thumbnail:</strong><br>
@@ -355,10 +361,13 @@ HTML;
                 $this->config->getTimezone()
             );
 
+            $title = htmlspecialchars($video['title']);
+            $description = htmlspecialchars($video['description']);
+
             $videoHtml .= <<<HTML
                 <tr>
                     <td class="videoDetails">
-                    <strong>Title:</strong> {$video['title']}<br>
+                    <strong>Title:</strong> {$title}<br>
                         <strong>URL:</strong> <a target="_blank" href="{$video['url']}">{$video['url']}</a><br>
                         <strong>Published:</strong> {$published}<br>
                         <strong>Duration:</strong> {$video['duration']}<br>
@@ -367,7 +376,7 @@ HTML;
                     </td>
                     <td>
                         <strong>Description</strong>:<br>
-                        <textarea class="description" readonly>{$video['description']}</textarea>
+                        <textarea class="description" readonly>{$description}</textarea>
                     </td>
                     <td>
                         <strong>Thumbnail:</strong><br>
