@@ -40,7 +40,7 @@ class RssTest extends TestCase
         $format = new Rss($this->data, false, $this->config);
         $format->build();
 
-		$expected = 'tests/files/FeedFormats/expected-rss-feed.xml';
+        $expected = 'tests/files/FeedFormats/expected-rss-feed.xml';
         $this->assertXmlStringEqualsXmlFile(
             $expected,
             $format->get()
