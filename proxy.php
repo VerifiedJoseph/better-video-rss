@@ -12,7 +12,7 @@ try {
     $config->checkInstall();
     $config->checkConfig();
 
-    $proxy = new Proxy($config);
+    $proxy = new Proxy($_GET, $config);
     $proxy->getImage();
     $proxy->output();
 } catch (Exception $e) {

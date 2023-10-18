@@ -22,11 +22,12 @@ class Proxy
     private string $image = '';
 
     /**
+     * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
      * @param Config $config Config class instance
      *
      * @throws Exception if ENABLE_IMAGE_PROXY is false
      */
-    public function __construct(Config $config)
+    public function __construct(array $inputs, Config $config)
     {
         $this->config = $config;
 
@@ -34,7 +35,7 @@ class Proxy
             throw new Exception('Image proxy is disabled.');
         }
 
-        $this->checkInputs();
+        $this->checkInputs($inputs);
     }
 
     /**
@@ -81,44 +82,46 @@ class Proxy
     /**
      * Check user inputs
      *
+     * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
+     *
      * @throws Exception if a invalid format parameter is given.
      * @throws Exception if an empty or invalid channel ID parameter is given.
      * @throws Exception if an empty or invalid playlist ID parameter is given.
      */
-    private function checkInputs(): void
+    private function checkInputs(array $inputs): void
     {
-        if (isset($_GET['video_id']) === false || empty($_GET['video_id'])) {
+        if (isset($inputs['video_id']) === false || empty($inputs['video_id'])) {
             throw new Exception('No video ID parameter given.');
         }
 
-        if (Validate::videoId($_GET['video_id']) === false) {
+        if (Validate::videoId($inputs['video_id']) === false) {
             throw new Exception('Invalid video ID parameter given.');
         }
 
-        $this->videoId = $_GET['video_id'];
+        $this->videoId = $inputs['video_id'];
 
-        if (isset($_GET['channel_id'])) {
-            if (empty($_GET['channel_id'])) {
+        if (isset($inputs['channel_id'])) {
+            if (empty($inputs['channel_id'])) {
                 throw new Exception('No channel ID parameter given.');
             }
 
-            if (Validate::channelId($_GET['channel_id']) === false) {
+            if (Validate::channelId($inputs['channel_id']) === false) {
                 throw new Exception('Invalid channel ID parameter given.');
             }
 
-            $this->feedId = $_GET['channel_id'];
+            $this->feedId = $inputs['channel_id'];
         }
 
-        if (isset($_GET['playlist_id'])) {
-            if (empty($_GET['playlist_id'])) {
+        if (isset($inputs['playlist_id'])) {
+            if (empty($inputs['playlist_id'])) {
                 throw new Exception('No playlist ID parameter given.');
             }
 
-            if (Validate::playlistId($_GET['playlist_id']) === false) {
+            if (Validate::playlistId($inputs['playlist_id']) === false) {
                 throw new Exception('Invalid playlist ID parameter given.');
             }
 
-            $this->feedId = $_GET['playlist_id'];
+            $this->feedId = $inputs['playlist_id'];
         }
 
         if (empty($this->feedId)) {
