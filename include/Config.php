@@ -18,7 +18,7 @@ class Config
     private int $mkdirMode = 0775;
 
     /** @var string $userAgent User agent used for Curl requests */
-    private string $userAgent = 'BetterVideoRss (+https://github.com/VerifiedJoseph/BetterVideoRss)';
+    private string $userAgent = 'BetterVideoRss/%s (+https://github.com/VerifiedJoseph/BetterVideoRss)';
 
     /** @var array<int, string> $feedFormats Supported feed formats */
     private array $feedFormats = ['rss', 'html', 'json'];
@@ -263,7 +263,7 @@ class Config
      */
     public function getUserAgent(): string
     {
-        return $this->userAgent;
+        return sprintf($this->userAgent, $this->getVersion());
     }
 
     /**
