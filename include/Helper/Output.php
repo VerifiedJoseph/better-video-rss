@@ -27,11 +27,13 @@ class Output
      * @param string $data Feed data
      * @param string $contentType Content-type header value
      * @param string $lastModified Last-modified header value
+     * @param string $csp Content-Security-Policy header value
      */
-    public static function feed(string $data, string $contentType, string $lastModified): void
+    public static function feed(string $data, string $contentType, string $lastModified, string $csp): void
     {
         header('content-type: ' . $contentType);
         header('last-modified:' . $lastModified);
+        header('Content-Security-Policy:' . $csp);
         echo $data;
     }
 
