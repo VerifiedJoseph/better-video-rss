@@ -12,6 +12,9 @@ class Index
     /** @var Config Config class instance */
     private Config $config;
 
+    /** @var Api Api class instance */
+    private Api $api;
+
     /** @var string $query Search query */
     private string $query = '';
 
@@ -42,10 +45,13 @@ class Index
     /**
      * @param array<string, mixed> $inputs Inputs parameters from `$_POST`
      * @param Config $config Config class instance
+     * @param Api $api Api class instance
      */
-    public function __construct(array $inputs, Config $config)
+    public function __construct(array $inputs, Config $config, Api $api)
     {
         $this->config = $config;
+        $this->api = $api;
+
         $this->feedFormat = $this->config->getDefaultFeedFormat();
 
         try {
@@ -193,8 +199,7 @@ class Index
             return $query;
         }
 
-        $api = new Api($this->config);
-        $response = $api->searchChannels($query);
+        $response = $this->api->searchChannels($query);
 
         if (empty($response->items)) {
             throw new Exception('Channel not found');
@@ -217,8 +222,7 @@ class Index
             return $query;
         }
 
-        $api = new Api($this->config);
-        $response = $api->searchPlaylists($query);
+        $response = $this->api->searchPlaylists($query);
 
         if (empty($response->items)) {
             throw new Exception('Playlist not found');
