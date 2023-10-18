@@ -8,6 +8,7 @@ class JsonTest extends TestCase
 {
     private Config $config;
 
+    /** @var array<string, mixed> $data */
     private array $data = [];
 
     /**
@@ -27,7 +28,7 @@ class JsonTest extends TestCase
 
     public function setUp(): void
     {
-        $this->data = (array) json_decode(file_get_contents('tests/files/channel-cache-data.json'), true);
+        $this->data = (array) json_decode((string) file_get_contents('tests/files/channel-cache-data.json'), true);
         $this->config = $this->createConfigStub();
     }
 
@@ -36,14 +37,14 @@ class JsonTest extends TestCase
      */
     public function testBuild(): void
     {
-        $output = file_get_contents('tests/files/FeedFormats/channel.json');
+        $output = (string) file_get_contents('tests/files/FeedFormats/channel.json');
 
         $format = new Json($this->data, false, $this->config);
         $format->build();
 
         $this->assertEquals(
-           json_decode($output),
-           json_decode($format->get())
+            json_decode($output),
+            json_decode($format->get())
         );
     }
 
