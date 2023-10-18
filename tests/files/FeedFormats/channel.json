@@ -1,0 +1,50 @@
+{
+    "version": "https:\/\/jsonfeed.org\/version\/1",
+    "title": "Tom Scott",
+    "description": "Hi, I'm Tom Scott. These are some of the things I've made and done. They'll probably come back to haunt me in a few years' time.\n\nContact me: https:\/\/www.tomscott.com\/contact\/\n\n\u2022 \u2022 \u2022\n\nThis channel is a production of Pad 26 Limited, registered in England and Wales, \u2116 11662641.\nRegistered office: Amelia House, Crescent Road, Worthing, West Sussex, BN11 1QR\n(This address is only for legal documents; no other mail will be forwarded.)",
+    "home_page_url": "https:\/\/www.youtube.com\/channel\/UCBa659QWEk1AI4Tg--mrJ2A",
+    "feed_url": "https:\/\/example.com\/feed.php?channel_id=UCBa659QWEk1AI4Tg--mrJ2A&format=json",
+    "icon": "https:\/\/yt3.ggpht.com\/ytc\/APkrFKbAM4yMQo1QLC5VYC1aoIf_49jnh4jEAMSXc9vM5g=s88-c-k-c0x00ffffff-no-rj",
+    "items": [
+        {
+            "id": "https:\/\/www.youtube.com\/watch?v=CkZyZFa5qO0",
+            "url": "https:\/\/www.youtube.com\/watch?v=CkZyZFa5qO0",
+            "author": {
+                "name": "Tom Scott"
+            },
+            "title": "there\u2019dn\u2019t\u2019ve (04:35)",
+            "date_published": "2023-10-16T16:00:09Z",
+            "content_html": "<a target=\"_blank\" title=\"Watch on YouTube\" href=\"https:\/\/www.youtube.com\/watch?v=CkZyZFa5qO0\"><img title=\"video thumbnail\" src=\"https:\/\/i.ytimg.com\/vi\/CkZyZFa5qO0\/maxresdefault.jpg\" loading=\"lazy\"\/><\/a> <div class=\"description\"> <hr\/> <span>Published: <time datetime=\"2023-10-16T16:00:09+01:00\">October 16, 2023<\/time><\/span> <span> - Duration: <span class=\"duration\">04:35<\/span><\/span> <hr\/><p>This script was a nightmare to pronounce. \u2022 <br \/>Written with Molly Ruhl and Gretchen McCulloch. Gretchen's podcast has an episode all about this: <a href=\"https:\/\/lingthusiasm.com\/post\/662535562508517376\/lingthusiasm-episode-60-thats-the-kind-of\" target=\"_blank\">https:\/\/lingthusiasm.com\/post\/662535562508517376\/lingthusiasm-episode-60-thats-the-kind-of<\/a> \u2022 <br \/>More Language Files: <a href=\"https:\/\/www.youtube.com\/playlist?list=PL96C35uN7xGLDEnHuhD7CTZES3KXFnwm0\" target=\"_blank\">https:\/\/www.youtube.com\/playlist?list=PL96C35uN7xGLDEnHuhD7CTZES3KXFnwm0<\/a><br \/><br \/>Gretchen's book BECAUSE INTERNET, all about the evolution of internet language, is available:<br \/>\ud83c\uddfa\ud83c\uddf8 US: <a href=\"https:\/\/amzn.to\/30tLpjT\" target=\"_blank\">https:\/\/amzn.to\/30tLpjT<\/a><br \/>\ud83c\udde8\ud83c\udde6 CA: <a href=\"https:\/\/amzn.to\/2JsTYWH\" target=\"_blank\">https:\/\/amzn.to\/2JsTYWH<\/a><br \/>\ud83c\uddec\ud83c\udde7 UK: <a href=\"https:\/\/amzn.to\/31K8eRD\" target=\"_blank\">https:\/\/amzn.to\/31K8eRD<\/a><br \/><br \/>(Those are affiliate links that give a commission to me or Gretchen, depending on country!)<br \/><br \/>Graphics by William Marler: <a href=\"https:\/\/wmad.co.uk\" target=\"_blank\">https:\/\/wmad.co.uk<\/a><br \/>Audio mix by Graham Haerther and Manuel Simon at Standard Studios: <a href=\"https:\/\/haerther.net\" target=\"_blank\">https:\/\/haerther.net<\/a><br \/><br \/>REFERENCES:<br \/>Zwicky, Arnold M. 1977. On clitics. Bloomington: Indiana University Linguistics Club.<br \/>Anderson, S. R. 2005. Aspects of the theory of Clitics. New York: Oxford University.<br \/>Palmer, F., Huddleston, R., & Pullum, G. 2002. Inflectional morphology and related matters. In R. Huddleston & G. Pullum (Authors), The Cambridge Grammar of the English Language (pp. 1565-1620). Cambridge: Cambridge University Press. doi:10.1017\/9781316423530.019<br \/>Zwicky, Arnold M. 1994. What is a clitic? In Nevis, Joel A. & Joseph, Brian D. & Wanner, Dieter & Zwicky, Arnold M. (eds.), Clitics: a comprehensive bibliography 1892-1991, xii\u2013xx. Amsterdam: Benjamins.<br \/>Pullum, G.K., & Zwicky, A.M. 1997. Licensing of prosodic features by syntactic rules: the key to auxiliary reduction.<br \/>Zwicky, A.M. 1970. Auxiliary Reduction in English. Linguistic Inquiry, 1(3), 323\u2013336.<br \/>Traugott, Elizabeth Closs. 2003. \u2018Constructions in grammaticalization.\u2019 In Brian D. Joseph &<br \/>Richard D. Janda (eds.) The Handbook of Historical Linguistics. Oxford: Blackwel<br \/><br \/>I'm at <a href=\"https:\/\/tomscott.com\" target=\"_blank\">https:\/\/tomscott.com<\/a><br \/>on Twitter at <a href=\"https:\/\/twitter.com\/tomscott\" target=\"_blank\">https:\/\/twitter.com\/tomscott<\/a><br \/>on Facebook at <a href=\"https:\/\/facebook.com\/tomscott\" target=\"_blank\">https:\/\/facebook.com\/tomscott<\/a><br \/>and on Instagram as tomscottgo<\/p> <\/div>",
+            "tags": [
+                "tom scott",
+                "tomscott"
+            ],
+            "attachments": [
+                {
+                    "url": "https:\/\/i.ytimg.com\/vi\/CkZyZFa5qO0\/maxresdefault.jpg",
+                    "mime_type": "image\/jpeg"
+                }
+            ]
+        },
+        {
+            "id": "https:\/\/www.youtube.com\/watch?v=ZgDBIzClmPg",
+            "url": "https:\/\/www.youtube.com\/watch?v=ZgDBIzClmPg",
+            "author": {
+                "name": "Tom Scott"
+            },
+            "title": "I finally rode the weird, curved German elevator. (03:31)",
+            "date_published": "2023-10-09T16:00:33Z",
+            "content_html": "<a target=\"_blank\" title=\"Watch on YouTube\" href=\"https:\/\/www.youtube.com\/watch?v=ZgDBIzClmPg\"><img title=\"video thumbnail\" src=\"https:\/\/i.ytimg.com\/vi\/ZgDBIzClmPg\/maxresdefault.jpg\" loading=\"lazy\"\/><\/a> <div class=\"description\"> <hr\/> <span>Published: <time datetime=\"2023-10-09T16:00:33+01:00\">October 9, 2023<\/time><\/span> <span> - Duration: <span class=\"duration\">03:31<\/span><\/span> <hr\/><p>At the New Town Hall, the Neues Rathaus, in Hanover, there's a strange elevator where the track curves unevenly. For years, people from Germany have been emailing me about it: well, I finally visited. \u25a0 More about the Hall: <a href=\"https:\/\/www.visit-hannover.com\/en\/Sightseeing-City-Tours\/Tourist-Highlights\/The-New-Town-Hall\" target=\"_blank\">https:\/\/www.visit-hannover.com\/en\/Sightseeing-City-Tours\/Tourist-Highlights\/The-New-Town-Hall<\/a><br \/><br \/>Camera: Maximilian Unger<br \/>Producer: Viktor Sramo at Klein Aber<br \/><br \/>I'm at <a href=\"https:\/\/tomscott.com\" target=\"_blank\">https:\/\/tomscott.com<\/a><br \/>on Twitter at <a href=\"https:\/\/twitter.com\/tomscott\" target=\"_blank\">https:\/\/twitter.com\/tomscott<\/a><br \/>on Facebook at <a href=\"https:\/\/facebook.com\/tomscott\" target=\"_blank\">https:\/\/facebook.com\/tomscott<\/a><br \/>and on Instagram as tomscottgo<\/p> <\/div>",
+            "tags": [
+                "tom scott",
+                "tomscott"
+            ],
+            "attachments": [
+                {
+                    "url": "https:\/\/i.ytimg.com\/vi\/ZgDBIzClmPg\/maxresdefault.jpg",
+                    "mime_type": "image\/jpeg"
+                }
+            ]
+        }
+    ]
+}
