@@ -22,6 +22,18 @@ class Output
     }
 
     /**
+     * Output html
+     *
+     * @param string $html Page HTML
+     * @param string $csp Content-Security-Policy header value
+     */
+    public static function html(string $html, string $csp): void
+    {
+        header('Content-Security-Policy:' . $csp);
+        echo $html;
+    }
+
+    /**
      * Output feed
      *
      * @param string $data Feed data
@@ -42,10 +54,13 @@ class Output
      *
      * @param string $data Image data
      * @param string $contentType Content-type header value
+     * @param string $csp Content-Security-Policy header value
+     * 
      */
-    public static function image(string $data, string $contentType = 'image/jpeg'): void
+    public static function image(string $data, string $contentType, string $csp): void
     {
         header('content-type: ' . $contentType);
+        header('Content-Security-Policy:' . $csp);
         echo $data;
     }
 }
