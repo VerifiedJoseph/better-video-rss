@@ -20,7 +20,7 @@ class Config
     /** @var string $userAgent User agent used for Curl requests */
     private string $userAgent = 'BetterVideoRss/%s (+https://github.com/VerifiedJoseph/BetterVideoRss)';
 
-    /** @var array $cspParts Content Security Policy header parts */
+    /** @var array<int, string> $cspParts Content Security Policy header parts */
     private array $cspParts = [
         "default-src 'self'",
         "base-uri 'self'",
