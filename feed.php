@@ -4,15 +4,17 @@ require 'vendor/autoload.php';
 require 'include/version.php';
 
 use App\Config;
-use App\Helper\Output;
+use App\Api;
 use App\Feed;
+use App\Helper\Output;
 
 try {
     $config = new Config();
     $config->checkInstall();
     $config->checkConfig();
 
-    $feed = new Feed($_GET, $config);
+    $api = new Api($config);
+    $feed = new Feed($_GET, $config, $api);
     $feed->generate();
     $feed->output();
 } catch (Exception $e) {
