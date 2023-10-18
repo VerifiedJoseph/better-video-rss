@@ -37,11 +37,6 @@ class ProxyTest extends TestCase
         unlink(self::$cacheFilepath);
     }
 
-    protected function tearDown(): void
-    {
-        $_GET = [];
-    }
-
     /**
      * Test Proxy class with ImageProxy disabled
      *
