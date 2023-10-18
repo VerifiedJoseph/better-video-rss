@@ -55,7 +55,6 @@ class Output
      * @param string $data Image data
      * @param string $contentType Content-type header value
      * @param string $csp Content-Security-Policy header value
-     * 
      */
     public static function image(string $data, string $contentType, string $csp): void
     {
