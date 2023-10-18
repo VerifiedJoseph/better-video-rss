@@ -28,14 +28,15 @@ class Feed
     private bool $embedVideos = false;
 
     /**
+     * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
      * @param Config $config Config class instance
      */
-    public function __construct(Config $config)
+    public function __construct(array $inputs, Config $config)
     {
         $this->config = $config;
         $this->feedFormat = $this->config->getDefaultFeedFormat();
 
-        $this->checkInputs();
+        $this->checkInputs($inputs);
     }
 
     /**
@@ -111,15 +112,17 @@ class Feed
     /**
      * Check user inputs
      *
+     * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
+     *
      * @throws Exception if an invalid format parameter is given.
      * @throws Exception if no channel or playlist ID parameter given.
      * @throws Exception if an empty or invalid channel ID parameter is given.
      * @throws Exception if an empty or invalid playlist ID parameter is given.
      */
-    private function checkInputs(): void
+    private function checkInputs($inputs): void
     {
-        if (isset($_GET['format']) && empty($_GET['format']) === false) {
-            $format = strtolower($_GET['format']);
+        if (isset($inputs['format']) && empty($inputs['format']) === false) {
+            $format = strtolower($inputs['format']);
 
             if (Validate::feedFormat($format, $this->config->getFeedFormats()) === false) {
                 throw new Exception('Invalid format parameter given.');
@@ -128,24 +131,24 @@ class Feed
             $this->feedFormat = $format;
         }
 
-        if (isset($_GET['channel_id'])) {
-            if (empty($_GET['channel_id']) === true || Validate::channelId($_GET['channel_id']) === false) {
+        if (isset($inputs['channel_id'])) {
+            if (empty($inputs['channel_id']) === true || Validate::channelId($inputs['channel_id']) === false) {
                 throw new Exception('Invalid channel ID parameter given.');
             }
 
-            $this->feedId = $_GET['channel_id'];
+            $this->feedId = $inputs['channel_id'];
             $this->feedType = 'channel';
-        } elseif (isset($_GET['playlist_id'])) {
-            if (empty($_GET['playlist_id']) === true || Validate::playlistId($_GET['playlist_id']) === false) {
+        } elseif (isset($inputs['playlist_id'])) {
+            if (empty($inputs['playlist_id']) === true || Validate::playlistId($inputs['playlist_id']) === false) {
                 throw new Exception('Invalid playlist ID parameter given.');
             }
 
-            $this->feedId = $_GET['playlist_id'];
+            $this->feedId = $inputs['playlist_id'];
             $this->feedType = 'playlist';
         }
 
-        if (isset($_GET['embed_videos'])) {
-            $this->embedVideos = filter_var($_GET['embed_videos'], FILTER_VALIDATE_BOOLEAN);
+        if (isset($inputs['embed_videos'])) {
+            $this->embedVideos = filter_var($inputs['embed_videos'], FILTER_VALIDATE_BOOLEAN);
         }
 
         if (empty($this->feedId) === true) {

@@ -12,7 +12,7 @@ try {
     $config->checkInstall();
     $config->checkConfig();
 
-    $feed = new Feed($config);
+    $feed = new Feed($_GET, $config);
     $feed->generate();
     $feed->output();
 } catch (Exception $e) {
