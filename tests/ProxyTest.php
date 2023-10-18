@@ -3,7 +3,6 @@
 use PHPUnit\Framework\TestCase;
 use App\Config;
 use App\Proxy;
-use App\Help\File;
 
 class ProxyTest extends TestCase
 {
@@ -57,7 +56,7 @@ class ProxyTest extends TestCase
         $config = $this->createStub(Config::class);
         $config->method('getImageProxyStatus')->willReturn(false);
 
-        new Proxy($config);
+        new Proxy([], $config);
     }
 
     /**
@@ -70,7 +69,7 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No video ID parameter given.');
 
-        new Proxy(self::$config);
+        new Proxy([], self::$config);
     }
 
     /**
@@ -83,9 +82,11 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No video ID parameter given.');
 
-        $_GET['video_id'] = '';
+        $inputs = [
+            'video_id' => ''
+        ];
 
-        new Proxy(self::$config);
+        new Proxy($inputs, self::$config);
     }
 
     /**
@@ -98,10 +99,12 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No channel ID parameter given.');
 
-        $_GET['video_id'] = $this->videoId;
-        $_GET['channel_id'] = '';
+        $inputs = [
+            'video_id' => $this->videoId,
+            'channel_id' => ''
+        ];
 
-        new Proxy(self::$config);
+        new Proxy($inputs, self::$config);
     }
 
     /**
@@ -114,10 +117,12 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid channel ID parameter given.');
 
-        $_GET['video_id'] = $this->videoId;
-        $_GET['channel_id'] = 'NoAChannelId';
+        $inputs = [
+            'video_id' => $this->videoId,
+            'channel_id' => 'NoAChannelId'
+        ];
 
-        new Proxy(self::$config);
+        new Proxy($inputs, self::$config);
     }
 
     /**
@@ -130,10 +135,12 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No playlist ID parameter given.');
 
-        $_GET['video_id'] = $this->videoId;
-        $_GET['playlist_id'] = '';
+        $inputs = [
+            'video_id' => $this->videoId,
+            'playlist_id' => ''
+        ];
 
-        new Proxy(self::$config);
+        new Proxy($inputs, self::$config);
     }
 
     /**
@@ -146,10 +153,12 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid playlist ID parameter given.');
 
-        $_GET['video_id'] = $this->videoId;
-        $_GET['playlist_id'] = 'NoAPlaylistId';
+        $inputs = [
+            'video_id' => $this->videoId,
+            'playlist_id' => 'NoAPlaylistId'
+        ];
 
-        new Proxy(self::$config);
+        new Proxy($inputs, self::$config);
     }
 
     /**
@@ -162,9 +171,11 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No feed ID (channel or playlist) parameter given.');
 
-        $_GET['video_id'] = $this->videoId;
+        $inputs = [
+            'video_id' => $this->videoId
+        ];
 
-        new Proxy(self::$config);
+        new Proxy($inputs, self::$config);
     }
 
     /**
@@ -177,10 +188,12 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Feed ID not in cache');
 
-        $_GET['video_id'] = $this->videoId;
-        $_GET['channel_id'] = 'UCNoAChannelId';
+        $inputs = [
+            'video_id' => $this->videoId,
+            'channel_id' => 'UCChannelIdNotInCache'
+        ];
 
-        $proxy = new Proxy(self::$config);
+        $proxy = new Proxy($inputs, self::$config);
         $proxy->getImage();
     }
 
@@ -194,10 +207,12 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Video ID not in cache');
 
-        $_GET['video_id'] = 'dQw4w9WgXcQ';
-        $_GET['channel_id'] = self::$channelId;
+        $inputs = [
+            'video_id' => 'dQw4w9WgXcQ',
+            'channel_id' => self::$channelId
+        ];
 
-        $proxy = new Proxy(self::$config);
+        $proxy = new Proxy($inputs, self::$config);
         $proxy->getImage();
     }
 }
