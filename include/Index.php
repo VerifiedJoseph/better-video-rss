@@ -40,15 +40,16 @@ class Index
     private string $errorMessage = '';
 
     /**
+     * @param array<string, mixed> $inputs Inputs parameters from `$_POST`
      * @param Config $config Config class instance
      */
-    public function __construct(Config $config)
+    public function __construct(array $inputs, Config $config)
     {
         $this->config = $config;
         $this->feedFormat = $this->config->getDefaultFeedFormat();
 
         try {
-            $this->checkInputs();
+            $this->checkInputs($inputs);
             $this->generate();
         } catch (Exception $e) {
             $this->error = true;
@@ -108,43 +109,45 @@ class Index
     /**
      * Check user inputs
      *
+     * @param array<string, mixed> $inputs Inputs parameters from `$_POST`
+     *
      * @throws Exception if a query parameter is not given
      * @throws Exception if a type parameter is not given
      * @throws Exception if a query parameter is not a valid YouTube URL when type is URL
      */
-    private function checkInputs(): void
+    private function checkInputs(array $inputs): void
     {
-        if (isset($_POST['query'])) {
-            if (empty($_POST['query'])) {
+        if (isset($inputs['query'])) {
+            if (empty($inputs['query'])) {
                 throw new Exception('Query parameter not given.');
             }
 
-            if (isset($_POST['type']) === false || empty($_POST['type'])) {
+            if (isset($inputs['type']) === false || empty($inputs['type'])) {
                 throw new Exception('Type parameter not given.');
             }
 
-            if (in_array($_POST['type'], $this->supportedTypes) === false) {
+            if (in_array($inputs['type'], $this->supportedTypes) === false) {
                 throw new Exception('Unknown type parameter given.');
             }
 
-            $this->feedType = $_POST['type'];
+            $this->feedType = $inputs['type'];
 
-            if ($_POST['type'] === 'url') {
+            if ($inputs['type'] === 'url') {
                 $this->fromUrl = true;
 
-                if (Validate::youTubeUrl($_POST['query']) === false) {
+                if (Validate::youTubeUrl($inputs['query']) === false) {
                     throw new Exception('URL is not a valid YouTube URL.');
                 }
             }
 
-            if (isset($_POST['format']) && in_array($_POST['format'], $this->config->getFeedFormats())) {
-                $this->feedFormat = $_POST['format'];
+            if (isset($inputs['format']) && in_array($inputs['format'], $this->config->getFeedFormats())) {
+                $this->feedFormat = $inputs['format'];
             }
 
-            $this->query = $_POST['query'];
+            $this->query = $inputs['query'];
         }
 
-        if (isset($_POST['embed_videos'])) {
+        if (isset($inputs['embed_videos'])) {
             $this->embedVideos = true;
         }
     }

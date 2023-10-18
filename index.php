@@ -12,7 +12,7 @@ try {
     $config->checkInstall();
     $config->checkConfig();
 
-    $index = new Index($config);
+    $index = new Index($_POST, $config);
     $index->display();
 } catch (Exception $e) {
     Output::error($e->getMessage());
