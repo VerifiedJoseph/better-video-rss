@@ -40,8 +40,9 @@ class JsonTest extends TestCase
         $format = new Json($this->data, false, $this->config);
         $format->build();
 
+		$expected = 'tests/files/FeedFormats/expected-json-feed.json';
         $this->assertJsonStringEqualsJsonFile(
-            'tests/files/FeedFormats/channel.json',
+            $expected,
             $format->get()
         );
     }
