@@ -27,12 +27,13 @@ class CacheViewer
     private int $cacheSize = 0;
 
     /**
+     * @param array<string, mixed> $inputs Inputs parameters from `$_POST`
      * @param Config $config Config class instance
      *
      * @throws Exception if ENABLE_CACHE_VIEWER is false
      * @throws Exception if DISABLE_CACHE is true
      */
-    public function __construct(Config $config)
+    public function __construct(array $inputs, Config $config)
     {
         $this->config = $config;
 
@@ -44,7 +45,7 @@ class CacheViewer
             throw new Exception('Cache viewer not available. Cache is disabled.');
         }
 
-        $this->checkInputs();
+        $this->checkInputs($inputs);
         $this->loadFiles();
         $this->orderByModified();
         $this->display();
@@ -53,19 +54,21 @@ class CacheViewer
     /**
      * Check user inputs
      *
+     * @param array<string, mixed> $inputs Inputs parameters from `$_POST`
+     *
      * @throws Exception If a cache ID is not given.
      */
-    private function checkInputs(): void
+    private function checkInputs(array $inputs): void
     {
-        if (isset($_POST['id'])) {
-            if (empty($_POST['id'])) {
+        if (isset($inputs['id'])) {
+            if (empty($inputs['id'])) {
                 throw new Exception('No cache ID parameter given.');
             }
 
-            $this->cacheId = $_POST['id'];
+            $this->cacheId = $inputs['id'];
         }
 
-        if (isset($_POST['raw'])) {
+        if (isset($inputs['raw'])) {
             $this->showRaw = true;
         }
     }
