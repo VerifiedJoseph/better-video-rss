@@ -4,15 +4,17 @@ require 'vendor/autoload.php';
 require 'include/version.php';
 
 use App\Config;
-use App\Helper\Output;
 use App\Index;
+use App\Api;
+use App\Helper\Output;
 
 try {
     $config = new Config();
     $config->checkInstall();
     $config->checkConfig();
 
-    $index = new Index($_POST, $config);
+    $api = new Api($config);
+    $index = new Index($_POST, $config, $api);
     $index->display();
 } catch (Exception $e) {
     Output::error($e->getMessage());
