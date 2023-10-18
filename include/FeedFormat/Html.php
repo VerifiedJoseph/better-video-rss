@@ -15,9 +15,9 @@ class Html extends FeedFormat
      */
     public function build(): void
     {
-        $feedDescription = htmlspecialchars($this->data['details']['description'], ENT_QUOTES);
+        $feedDescription = htmlEntities($this->data['details']['description'], ENT_QUOTES);
 
-        $rssUrl = htmlspecialchars(
+        $rssUrl = htmlEntities(
             Url::getFeed(
                 $this->config->getSelfUrl(),
                 $this->data['details']['type'],
@@ -27,7 +27,7 @@ class Html extends FeedFormat
             )
         );
 
-        $jsonUrl = htmlspecialchars(
+        $jsonUrl = htmlEntities(
             Url::getFeed(
                 $this->config->getSelfUrl(),
                 $this->data['details']['type'],
@@ -38,7 +38,7 @@ class Html extends FeedFormat
         );
 
         $html = new Template('feed.html', [
-            'feedTitle' => $this->data['details']['title'],
+            'feedTitle' => htmlEntities($this->data['details']['title'], ENT_QUOTES),
             'feedDescription' => $feedDescription,
             'feedUrl' => $this->data['details']['url'],
             'rssUrl' => $rssUrl,
@@ -60,7 +60,7 @@ class Html extends FeedFormat
         $items = '';
 
         foreach ($this->data['videos'] as $video) {
-            $itemTitle = htmlspecialchars($this->buildTitle($video));
+            $itemTitle = htmlEntities($this->buildTitle($video), ENT_QUOTES);
             $itemUrl = $video['url'];
             $itemCategories = $this->buildCategories($video['tags']);
             $itemContent = $this->buildContent($video);
@@ -90,7 +90,7 @@ HTML;
         $itemCategories = '<strong>Categories:</strong><ul>';
 
         foreach ($categories as $category) {
-            $category = htmlspecialchars($category);
+            $category = htmlEntities($category, ENT_QUOTES);
             $itemCategories .=  sprintf('<li>%s</li>', $category);
         }
 

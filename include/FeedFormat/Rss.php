@@ -16,8 +16,8 @@ class Rss extends FeedFormat
      */
     public function build(): void
     {
-        $feedDescription = $this->xmlEncode($this->data['details']['description']);
         $feedTitle = $this->xmlEncode($this->data['details']['title']);
+        $feedDescription = $this->xmlEncode($this->data['details']['description']);
         $feedUrl = $this->xmlEncode($this->data['details']['url']);
         $feedUpdated = $this->xmlEncode(
             Convert::unixTime($this->data['updated'], 'r', $this->config->getTimezone())
@@ -132,6 +132,6 @@ class Rss extends FeedFormat
      */
     private function xmlEncode($text): string
     {
-        return htmlspecialchars($text, ENT_XML1);
+        return htmlentities($text, ENT_XML1);
     }
 }
