@@ -38,8 +38,8 @@ class Html extends FeedFormat
         );
 
         $html = new Template('feed.html', [
-            'feedTitle' => $this->data['details']['title'],
-            'feedDescription' => $feedDescription,
+            'feedTitle' => htmlspecialchars($this->data['details']['title']),
+            'feedDescription' => htmlspecialchars($feedDescription),
             'feedUrl' => $this->data['details']['url'],
             'rssUrl' => $rssUrl,
             'jsonUrl' => $jsonUrl,
