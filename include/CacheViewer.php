@@ -6,6 +6,7 @@ use App\Config;
 use App\Template;
 use App\Helper\File;
 use App\Helper\Convert;
+use App\Helper\Output;
 use App\Helper\Url;
 use Exception;
 
@@ -200,7 +201,10 @@ HTML;
             'tbody' => $tbody
         ]);
 
-        echo $html->render();
+        Output::html(
+            $html->render(),
+            $this->config->getCsp()
+        );
     }
 
     /**
