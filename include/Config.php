@@ -24,7 +24,7 @@ class Config
     private array $cspParts = [
         "default-src 'self'",
         "base-uri 'self'",
-        "img-src 'self' i.ytimg.com ggpht.com",
+        "img-src 'self' i.ytimg.com yt3.ggpht.com",
         "script-src 'none'",
         "connect-src 'none'",
         "upgrade-insecure-requests"
