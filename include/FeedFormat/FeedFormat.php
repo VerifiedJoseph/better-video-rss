@@ -95,7 +95,7 @@ abstract class FeedFormat
      */
     protected function buildContent(array $video): string
     {
-        $description = Convert::newlines($video['description']);
+        $description = Convert::newlines(strip_tags($video['description']));
         $description = Convert::urls($description);
         $thumbnailUrl = $video['thumbnail'];
         $published = Convert::unixTime(
