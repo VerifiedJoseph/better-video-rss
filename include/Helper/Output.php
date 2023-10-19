@@ -12,7 +12,7 @@ class Output
      * @param string $message Error message
      * @param int $code HTTP response code
      */
-    public static function error(string $message, int $code = 400): void
+    public static function error(string $message, int $code = 500): void
     {
         Log::error($message);
 
