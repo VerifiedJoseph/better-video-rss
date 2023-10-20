@@ -65,7 +65,7 @@ jobs:
           php-version: '8.1'
 
       - name: Run composer
-        run: composer install --no-dev
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Run build-dist.sh
         run: bash ./build/build-dist.sh
