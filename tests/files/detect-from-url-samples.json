@@ -1,0 +1,57 @@
+{
+    "channels": [
+        {
+            "url": "https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A",
+            "value" :"UCBa659QWEk1AI4Tg--mrJ2A"
+        }
+    ],
+    "usernames": [
+        {
+            "url": "https://www.youtube.com/c/TomScottGo",
+            "value" :"TomScottGo"
+        },
+        {
+            "url": "https://www.youtube.com/@TomScottGo",
+            "value" :"TomScottGo"
+        },
+        {
+            "url": "https://www.youtube.com/user/enyay",
+            "value" :"enyay"
+        }
+    ],
+    "playlists": [
+        {
+            "url": "https://www.youtube.com/playlist?list=PL96C35uN7xGI9HGKHsArwxiOejecVyNem",
+            "value" :"PL96C35uN7xGI9HGKHsArwxiOejecVyNem"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=UUBa659QWEk1AI4Tg--mrJ2A",
+            "value" :"UUBa659QWEk1AI4Tg--mrJ2A"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=TfVYxnhuEdU&list=UUBa659QWEk1AI4Tg--mrJ2A",
+            "value" :"UUBa659QWEk1AI4Tg--mrJ2A"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=ZNVuIU6UUiM&list=PL96C35uN7xGI9HGKHsArwxiOejecVyNem&index=1",
+            "value" :"PL96C35uN7xGI9HGKHsArwxiOejecVyNem"
+        }
+    ],
+    "feeds": [
+        {
+            "url": "https://www.youtube.com/feeds/videos.xml?user=enyay",
+            "type": "channel",
+            "value": "enyay"
+        },
+        {
+            "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A",
+            "type": "channel",
+            "value": "UCBa659QWEk1AI4Tg--mrJ2A"
+        },
+        {
+            "url": "https://www.youtube.com/feeds/videos.xml?playlist_id=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC",
+            "type": "playlist",
+            "value": "PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC"
+        }
+    ]
+}
