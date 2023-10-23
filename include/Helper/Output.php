@@ -41,19 +41,19 @@ class Output
      * Output feed
      *
      * @param string $data Feed data
-     * @param string $contentType Content-type header value
-     * @param string $lastModified Last-modified header value
+     * @param string $type Content-type header value
+     * @param string $modified Last-modified header value
      * @param string $csp Content-Security-Policy header value
      * @param bool $cspDisabled Content security policy disabled status
      */
-    public static function feed(string $data, string $contentType, string $lastModified, string $csp, bool $cspDisabled): void
+    public static function feed(string $data, string $type, string $modified, string $csp, bool $cspDisabled): void
     {
         if ($cspDisabled === false) {
             header('Content-Security-Policy:' . $csp);
         }
 
-        header('content-type: ' . $contentType);
-        header('last-modified:' . $lastModified);
+        header('content-type: ' . $type);
+        header('last-modified:' . $modified);
         echo $data;
     }
 
