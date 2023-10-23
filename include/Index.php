@@ -112,7 +112,8 @@ class Index
 
         Output::html(
             $html->render(minify: true),
-            $this->config->getCsp()
+            $this->config->getCsp(),
+            $this->config->getCspDisabledStatus()
         );
     }
 
