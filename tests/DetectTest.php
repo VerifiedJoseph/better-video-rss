@@ -5,60 +5,12 @@ use App\Detect;
 
 class DetectTest extends TestCase
 {
-    /** @var array<int, array<string, mixed>> $playlistUrls YouTube playlist URLs */
-    private array $playlistUrls = [
-        [
-            'url' => 'https://www.youtube.com/playlist?list=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC',
-            'value' => 'PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC'
-        ],
-        [
-            'url' => 'https://www.youtube.com/playlist?list=UUBa659QWEk1AI4Tg--mrJ2A',
-            'value' => 'UUBa659QWEk1AI4Tg--mrJ2A'
-        ],
-        [
-            'url' => 'https://www.youtube.com/watch?v=TfVYxnhuEdU&list=UUBa659QWEk1AI4Tg--mrJ2A',
-            'value' => 'UUBa659QWEk1AI4Tg--mrJ2A'
-        ],
-        [
-            'url' => 'https://www.youtube.com/watch?v=ZNVuIU6UUiM&list=PL96C35uN7xGI9HGKHsArwxiOejecVyNem&index=1',
-            'value' => 'PL96C35uN7xGI9HGKHsArwxiOejecVyNem'
-        ]
-    ];
+    private static stdClass $urls;
 
-    /** @var array<int, array<string, mixed>> $usernameUrls YouTube username URLs */
-    private array $usernameUrls = [
-        [
-            'url' => 'https://www.youtube.com/c/TomScottGo',
-            'value' => 'TomScottGo'
-        ],
-        [
-            'url' => 'https://www.youtube.com/user/enyay',
-            'value' => 'enyay'
-        ],
-        [
-            'url' => 'https://www.youtube.com/@TomScottGo',
-            'value' => 'TomScottGo'
-        ]
-    ];
-
-    /** @var array<int, array<string, mixed>> $rssFeedUrls YouTube RSS feed URLs */
-    private array $rssFeedUrls = [
-        [
-            'url' => 'https://www.youtube.com/feeds/videos.xml?user=enyay',
-            'type' => 'channel',
-            'value' => 'enyay'
-        ],
-        [
-            'url' => 'https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A',
-            'type' => 'channel',
-            'value' => 'UCBa659QWEk1AI4Tg--mrJ2A'
-        ],
-        [
-            'url' => 'https://www.youtube.com/feeds/videos.xml?playlist_id=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC',
-            'type' => 'playlist',
-            'value' => 'PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC'
-        ]
-    ];
+    public static function setUpBeforeClass(): void
+    {
+        self::$urls = json_decode((string) file_get_contents('tests/files/detect-from-url-samples.json'));
+    }
 
     /**
      * Test `fromUrl()` with a YouTube channel URL
@@ -67,7 +19,7 @@ class DetectTest extends TestCase
     {
         $detect = new Detect();
 
-        $this->assertTrue($detect->fromUrl('https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A'));
+        $this->assertTrue($detect->fromUrl(self::$urls->channels[0]->url));
         $this->assertEquals('channel', $detect->getType());
         $this->assertEquals('UCBa659QWEk1AI4Tg--mrJ2A', $detect->getValue());
     }
@@ -77,12 +29,12 @@ class DetectTest extends TestCase
      */
     public function testFromUrlWithPlaylistUrls(): void
     {
-        foreach ($this->playlistUrls as $item) {
+        foreach (self::$urls->playlists as $item) {
             $detect = new Detect();
 
-            $this->assertTrue($detect->fromUrl($item['url']));
+            $this->assertTrue($detect->fromUrl($item->url));
             $this->assertEquals('playlist', $detect->getType());
-            $this->assertEquals($item['value'], $detect->getValue());
+            $this->assertEquals($item->value, $detect->getValue());
         }
     }
 
@@ -91,12 +43,12 @@ class DetectTest extends TestCase
      */
     public function testFromUrlWithUsernameUrls(): void
     {
-        foreach ($this->usernameUrls as $item) {
+        foreach (self::$urls->usernames as $item) {
             $detect = new Detect();
 
-            $this->assertTrue($detect->fromUrl($item['url']));
+            $this->assertTrue($detect->fromUrl($item->url));
             $this->assertEquals('channel', $detect->getType());
-            $this->assertEquals($item['value'], $detect->getValue());
+            $this->assertEquals($item->value, $detect->getValue());
         }
     }
 
@@ -105,12 +57,12 @@ class DetectTest extends TestCase
      */
     public function testFromUrlWithRssFeedUrl(): void
     {
-        foreach ($this->rssFeedUrls as $item) {
+        foreach (self::$urls->feeds as $item) {
             $detect = new Detect();
 
-            $this->assertTrue($detect->fromUrl($item['url']));
-            $this->assertEquals($item['type'], $detect->getType());
-            $this->assertEquals($item['value'], $detect->getValue());
+            $this->assertTrue($detect->fromUrl($item->url));
+            $this->assertEquals($item->type, $detect->getType());
+            $this->assertEquals($item->value, $detect->getValue());
         }
     }
 }
