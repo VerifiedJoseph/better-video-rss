@@ -26,7 +26,7 @@ class Output
      *
      * @param string $html Page HTML
      * @param string $csp Content-Security-Policy header value
-     * @param string $cspDisabled Content-Security-Policy disabled status
+     * @param bool $cspDisabled Content-Security-Policy disabled status
      */
     public static function html(string $html, string $csp, bool $cspDisabled): void
     {
@@ -44,7 +44,7 @@ class Output
      * @param string $contentType Content-type header value
      * @param string $lastModified Last-modified header value
      * @param string $csp Content-Security-Policy header value
-     * @param string $cspDisabled Content security policy disabled status
+     * @param bool $cspDisabled Content security policy disabled status
      */
     public static function feed(string $data, string $contentType, string $lastModified, string $csp, bool $cspDisabled): void
     {
@@ -63,7 +63,7 @@ class Output
      * @param string $data Image data
      * @param string $contentType Content-type header value
      * @param string $csp Content-Security-Policy header value
-     * @param string $cspDisabled Content security policy disabled status
+     * @param bool $cspDisabled Content security policy disabled status
      */
     public static function image(string $data, string $contentType, string $csp, bool $cspDisabled): void
     {
