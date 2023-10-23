@@ -100,6 +100,10 @@ Environment variables are used to adjust the configuration. Alternatively, you c
 
 [`php-curl-class/php-curl-class`](https://github.com/php-curl-class/php-curl-class)
 
+## Changelog
+
+All notable changes to this project are documented in the [CHANGELOG](CHANGELOG.md).
+
 ## License
 
 MIT License. Please see [LICENSE](LICENSE) for more information.
