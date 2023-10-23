@@ -79,7 +79,8 @@ class Proxy
         Output::image(
             $this->image,
             'image/jpeg',
-            $this->config->getCsp()
+            $this->config->getCsp(),
+            $this->config->getCspDisabledStatus()
         );
     }
 

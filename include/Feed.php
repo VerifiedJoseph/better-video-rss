@@ -111,7 +111,8 @@ class Feed
             $format->get(),
             $format->getContentType(),
             $format->getLastModified(),
-            $this->config->getCsp()
+            $this->config->getCsp(),
+            $this->config->getCspDisabledStatus()
         );
     }
 

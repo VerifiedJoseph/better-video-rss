@@ -203,7 +203,8 @@ HTML;
 
         Output::html(
             $html->render(),
-            $this->config->getCsp()
+            $this->config->getCsp(),
+            $this->config->getCspDisabledStatus()
         );
     }
 

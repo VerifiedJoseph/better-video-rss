@@ -48,7 +48,8 @@ class Config
         'CACHE_DIR' => 'cache',
         'DISABLE_CACHE' => false,
         'ENABLE_CACHE_VIEWER' => false,
-        'ENABLE_IMAGE_PROXY' => false
+        'ENABLE_IMAGE_PROXY' => false,
+        'DISABLE_CSP' => false
     ];
 
     /** @var array<string, mixed> $config Loaded config parameters */
@@ -162,6 +163,10 @@ class Config
         if ($this->getEnv('ENABLE_IMAGE_PROXY') === 'true') {
             $this->config['ENABLE_IMAGE_PROXY'] = true;
         }
+
+        if ($this->getEnv('DISABLE_CSP') === 'true') {
+            $this->config['DISABLE_CSP'] = true;
+        }
     }
 
     /**
@@ -171,6 +176,15 @@ class Config
     public function getCsp(): string
     {
         return implode('; ', $this->cspParts);
+    }
+
+    /**
+     * Returns content security policy disabled status
+     * @return boolean
+     */
+    public function getCspDisabledStatus(): bool
+    {
+        return $this->config['DISABLE_CSP'];
     }
 
     /**

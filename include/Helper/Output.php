@@ -26,10 +26,14 @@ class Output
      *
      * @param string $html Page HTML
      * @param string $csp Content-Security-Policy header value
+     * @param bool $cspDisabled Content-Security-Policy disabled status
      */
-    public static function html(string $html, string $csp): void
+    public static function html(string $html, string $csp, bool $cspDisabled): void
     {
-        header('Content-Security-Policy:' . $csp);
+        if ($cspDisabled === false) {
+            header('Content-Security-Policy:' . $csp);
+        }
+
         echo $html;
     }
 
@@ -37,15 +41,19 @@ class Output
      * Output feed
      *
      * @param string $data Feed data
-     * @param string $contentType Content-type header value
-     * @param string $lastModified Last-modified header value
+     * @param string $type Content-type header value
+     * @param string $modified Last-modified header value
      * @param string $csp Content-Security-Policy header value
+     * @param bool $cspDisabled Content security policy disabled status
      */
-    public static function feed(string $data, string $contentType, string $lastModified, string $csp): void
+    public static function feed(string $data, string $type, string $modified, string $csp, bool $cspDisabled): void
     {
-        header('content-type: ' . $contentType);
-        header('last-modified:' . $lastModified);
-        header('Content-Security-Policy:' . $csp);
+        if ($cspDisabled === false) {
+            header('Content-Security-Policy:' . $csp);
+        }
+
+        header('content-type: ' . $type);
+        header('last-modified:' . $modified);
         echo $data;
     }
 
@@ -55,11 +63,15 @@ class Output
      * @param string $data Image data
      * @param string $contentType Content-type header value
      * @param string $csp Content-Security-Policy header value
+     * @param bool $cspDisabled Content security policy disabled status
      */
-    public static function image(string $data, string $contentType, string $csp): void
+    public static function image(string $data, string $contentType, string $csp, bool $cspDisabled): void
     {
+        if ($cspDisabled === false) {
+            header('Content-Security-Policy:' . $csp);
+        }
+
         header('content-type: ' . $contentType);
-        header('Content-Security-Policy:' . $csp);
         echo $data;
     }
 }
