@@ -36,3 +36,7 @@ putenv('BVRSS_ENABLE_CACHE_VIEWER=false');
 
 // Enable image proxy
 putenv('BVRSS_ENABLE_IMAGE_PROXY=false');
+
+// Disable content security policy
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+putenv('BVRSS_DISABLE_CSP=false');
