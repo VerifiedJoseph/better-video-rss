@@ -41,8 +41,7 @@ RUN mkdir -p /app/cache
 RUN chown -R nobody.nobody /run /app /var/lib/nginx /var/log/nginx
 
 # Remove setup files
-RUN rm -r /app/docker
-RUN rm /app/composer.*
+RUN rm -r /app/docker && rm /app/composer.*
 
 USER nobody
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
