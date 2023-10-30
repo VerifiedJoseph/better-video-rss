@@ -19,7 +19,7 @@ version: '3'
 
 services:
   app:
-    image: ghcr.io/verifiedjoseph/better-video-rss:1.1.0
+    image: ghcr.io/verifiedjoseph/better-video-rss:1.2.0
     container_name: BetterVideoRss
     environment:
       BVRSS_YOUTUBE_API_KEY: ''
