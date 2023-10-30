@@ -5,10 +5,13 @@ use App\Curl;
 
 class CurlTest extends TestCase
 {
+    /** @var string $httpBinUri httpbin URI */
     private string $httpBinUri = 'https://httpbingo.org';
 
+    /** @var string $useragent HTTP useragent */
     private string $useragent = 'PHPUnit';
 
+    /** @var array<string, string> $header */
     private array $header = [
         'key' => 'X-Test',
         'value' => 'Hello World'
@@ -26,6 +29,8 @@ class CurlTest extends TestCase
             $this->header['value']
         );
         $curl->get($this->getHttpBinUri() . '/get');
+
+        /** @var stdClass $response */
         $response = json_decode($curl->getResponse());
 
         $this->assertEquals(200, $curl->getStatusCode());
