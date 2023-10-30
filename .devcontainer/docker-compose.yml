@@ -8,6 +8,8 @@ services:
     volumes:
       - ../:/better-video-rss
     working_dir: /better-video-rss
+    env_file:
+      - .env
 
   nginx:
     build:
@@ -19,7 +21,6 @@ services:
     working_dir: /better-video-rss
 
   httpbin:
-    container_name: httpbin
     image: mccutchen/go-httpbin:v2.11.1
     ports:
       - "8081:80"
