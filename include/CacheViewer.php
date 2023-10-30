@@ -77,9 +77,6 @@ class CacheViewer
 
     /**
      * Load cache files
-     *
-     * @throws Exception If a cache file can not be opened.
-     * @throws Exception If a cache file can not be decoded.
      */
     private function loadFiles(): void
     {
@@ -90,11 +87,7 @@ class CacheViewer
 
         foreach ($cacheFiles as $file) {
             $contents = File::read($file->getPathname());
-            $data = Json::decode($contents, true);
-
-            if (is_null($data) === true) {
-                throw new Exception('Failed to decode file: ' . $file->getfilename());
-            }
+            $data = Json::decodeToArray($contents);
 
             $this->data[] = array(
                 'id' => $file->getBasename('.' . $this->config->getCacheFileExtension()),
