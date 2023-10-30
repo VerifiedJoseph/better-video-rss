@@ -97,10 +97,6 @@ Environment variables are used to adjust the configuration. Alternatively, you c
   - [`mbstring`](https://secure.php.net/manual/en/book.mbstring.php)
   - [`simplexml`](https://secure.php.net/manual/en/book.simplexml.php)
 
-## Dependencies
-
-[`php-curl-class/php-curl-class`](https://github.com/php-curl-class/php-curl-class)
-
 ## Changelog
 
 All notable changes to this project are documented in the [CHANGELOG](CHANGELOG.md).
