@@ -176,7 +176,7 @@ class Url
     private static function getApiEndpoint(string $name, string $var)
     {
         if (self::$apiEndpoints === []) {
-            self::$apiEndpoints = json_decode(
+            self::$apiEndpoints = Json::decode(
                 (string) file_get_contents('include/api-endpoints.json'),
                 associative: true
             );
