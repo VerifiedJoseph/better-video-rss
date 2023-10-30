@@ -75,7 +75,6 @@ Environment variables are used to adjust the configuration. Alternatively, you c
 
 | Name                        | Type      | Default value | Description                                                                                        |
 | --------------------------- | --------- | ------------- | -------------------------------------------------------------------------------------------------- |
-| `BVRSS_RAW_API_ERRORS`      | `boolean` | `false`       | Enables displaying of raw API errors.                                                              |
 | `BVRSS_TIMEZONE`            | `string`  | `UTC`         | Timezone ([php docs](https://www.php.net/manual/en/timezones.php))                                 |
 | `BVRSS_DATE_FORMAT`         | `string`  | `F j, Y`      | Date format ([php docs](https://www.php.net/manual/en/function.date.php))                          |
 | `BVRSS_TIME_FORMAT`         | `string`  | `H:i`         | Time format ([php docs](https://www.php.net/manual/en/function.date.php))                          |
@@ -83,7 +82,8 @@ Environment variables are used to adjust the configuration. Alternatively, you c
 | `BVRSS_DISABLE_CACHE`       | `boolean` | `false`       | Disables caching.                                                                                  |
 | `BVRSS_ENABLE_CACHE_VIEWER` | `boolean` | `false`       | Enables cache viewer.                                                                              |
 | `BVRSS_ENABLE_IMAGE_PROXY`  | `boolean` | `false`       | Enables video thumbnail image proxy.                                                               |
-| `BVRSS_DISABLE_CSP`         | `boolean` | `false`       | Disables setting [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). |
+| `BVRSS_DISABLE_CSP`         | `boolean` | `false`       | Disables [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).         |
+| `BVRSS_RAW_API_ERRORS`      | `boolean` | `false`       | Enables displaying of raw API errors.                                                              |
 
 ## Documentation
 
