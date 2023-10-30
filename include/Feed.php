@@ -96,9 +96,9 @@ class Feed
 
     public function output(): void
     {
-        $formatClass = 'App\FeedFormat\\' . ucfirst($this->getFeedFormat());
+        $formatClass = sprintf('App\FeedFormat\%sFormat', ucfirst($this->getFeedFormat()));
 
-        /** @var FeedFormat\Rss|FeedFormat\Json|FeedFormat\Html */
+        /** @var FeedFormat\RssFormat|FeedFormat\JsonFormat|FeedFormat\HtmlFormat */
         $format = new $formatClass(
             $this->getFeedData(),
             $this->getEmbedStatus(),

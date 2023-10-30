@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use App\Config;
-use App\FeedFormat\Json;
+use App\FeedFormat\JsonFormat;
 
 class JsonFormatTest extends TestCase
 {
@@ -38,7 +38,7 @@ class JsonFormatTest extends TestCase
      */
     public function testBuild(): void
     {
-        $format = new Json($this->data, false, $this->config);
+        $format = new JsonFormat($this->data, false, $this->config);
         $format->build();
 
         $expected = 'tests/files/FeedFormats/expected-json-feed.json';
@@ -53,7 +53,7 @@ class JsonFormatTest extends TestCase
      */
     public function testGetContentType(): void
     {
-        $format = new Json($this->data, false, $this->config);
+        $format = new JsonFormat($this->data, false, $this->config);
         $format->build();
 
         $this->assertEquals('application/json', $format->getContentType());
@@ -64,7 +64,7 @@ class JsonFormatTest extends TestCase
      */
     public function testGetLastModified(): void
     {
-        $format = new Json($this->data, false, $this->config);
+        $format = new JsonFormat($this->data, false, $this->config);
         $format->build();
 
         $this->assertEquals('Wed, 18 Oct 2023 11:22:06 BST', $format->getLastModified());

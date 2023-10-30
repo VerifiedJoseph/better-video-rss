@@ -5,7 +5,7 @@ namespace App\FeedFormat;
 use App\Template;
 use App\Helper\Url;
 
-class Html extends FeedFormat
+class HtmlFormat extends FeedFormat
 {
     /** @var string $contentType HTTP content-type header value */
     protected string $contentType = 'text/html; charset=UTF-8';

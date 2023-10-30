@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 use App\Config;
-use App\FeedFormat\Rss;
+use App\FeedFormat\RssFormat;
 
-class RssTest extends TestCase
+class RssFormatTest extends TestCase
 {
     private Config $config;
 
@@ -38,7 +38,7 @@ class RssTest extends TestCase
      */
     public function testBuild(): void
     {
-        $format = new Rss($this->data, false, $this->config);
+        $format = new RssFormat($this->data, false, $this->config);
         $format->build();
 
         $expected = 'tests/files/FeedFormats/expected-rss-feed.xml';
@@ -53,7 +53,7 @@ class RssTest extends TestCase
      */
     public function testGetContentType(): void
     {
-        $format = new Rss($this->data, false, $this->config);
+        $format = new RssFormat($this->data, false, $this->config);
         $format->build();
 
         $this->assertEquals('text/xml; charset=UTF-8', $format->getContentType());
@@ -64,7 +64,7 @@ class RssTest extends TestCase
      */
     public function testGetLastModified(): void
     {
-        $format = new Rss($this->data, false, $this->config);
+        $format = new RssFormat($this->data, false, $this->config);
         $format->build();
 
         $this->assertEquals('Wed, 18 Oct 2023 11:22:06 BST', $format->getLastModified());
