@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use App\Config;
 use App\FeedFormat\Json;
 
-class JsonTest extends TestCase
+class JsonFormatTest extends TestCase
 {
     private Config $config;
 

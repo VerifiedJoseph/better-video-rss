@@ -4,6 +4,7 @@ namespace App;
 
 use App\Config;
 use App\Helper\File;
+use App\Helper\Json;
 
 class Cache
 {
@@ -47,10 +48,9 @@ class Cache
     {
         if ($this->config->getCacheDisableStatus() === false) {
             $contents = File::read($this->path);
-            $decoded = json_decode($contents, true);
 
-            if (is_null($decoded) === false) {
-                $this->data = $decoded;
+            if ($contents !== '') {
+                $this->data = Json::decodeToArray($contents);
             }
         }
     }
@@ -65,7 +65,7 @@ class Cache
         $this->data = $data;
 
         if ($this->config->getCacheDisableStatus() === false) {
-            $data = (string) json_encode($data);
+            $data = Json::encode($data);
             File::write($this->path, $data);
         }
     }
