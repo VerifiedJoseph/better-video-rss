@@ -14,6 +14,20 @@ class JsonTest extends TestCase
     }
 
     /**
+     * Test `encode()` with `JSON_PRETTY_PRINT` option
+     */
+    public function testEncodeWitOption(): void
+    {
+        $expected = <<<EOD
+        {
+            "foo": "bar"
+        }
+        EOD;
+
+        self::assertEquals($expected, Json::encode(['foo' => 'bar'], JSON_PRETTY_PRINT));
+    }
+
+    /**
      * Test `decode()` with valid JSON
      */
     public function testDecodeValid(): void
