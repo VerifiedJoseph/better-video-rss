@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Curl\Curl;
 use App\Config;
 use App\Helper\Url;
 use stdClass;
@@ -109,16 +108,16 @@ class Api
         $curl->setUserAgent($this->config->getUserAgent());
         $curl->get($url);
 
-        if ($curl->getCurlErrorCode() !== 0) {
-            throw new Exception('Error: ' . $curl->getCurlErrorCode() . ': ' . $curl->getErrorMessage());
+        if ($curl->getErrorCode() !== 0) {
+            throw new Exception('Error: ' . $curl->getErrorCode() . ': ' . $curl->getErrorMessage());
         }
 
         $response = array();
         $response['data'] = $curl->getResponse();
-        $response['statusCode'] = $curl->getHttpStatusCode();
+        $response['statusCode'] = $curl->getStatusCode();
 
-        if (in_array($curl->getHttpStatusCode(), $this->expectedStatusCodes) === false) {
-            $this->handleError($curl->getResponse());
+        if (in_array($curl->getStatusCode(), $this->expectedStatusCodes) === false) {
+            $this->handleError(json_decode($curl->getResponse()));
         }
 
         return $response;
