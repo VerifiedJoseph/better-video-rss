@@ -1,5 +1,6 @@
 # BetterVideoRss
 
+[![Latest Version](https://img.shields.io/github/release/VerifiedJoseph/better-video-rss.svg?style=flat-square)](https://github.com/VerifiedJoseph/better-video-rss/releases/latest)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
 BetterVideoRss is a PHP script for generating YouTube channel and playlist RSS feeds using YouTube's [Data API](https://developers.google.com/youtube/v3/) and RSS feeds.
@@ -44,7 +45,7 @@ volumes:
 <details>
 <summary>Show/hide install details</summary>
 
-1) Download the [latest release](https://github.com/VerifiedJoseph/BetterVideoRss/releases/latest) to your web server and extract the zip archive.
+1) Download the [latest release](https://github.com/VerifiedJoseph/better-video-rss/releases/latest) to your web server and extract the zip archive.
 
 2) Configure the application using `config.php` copied from [`config.php-dist`](config.example.php).
 	
