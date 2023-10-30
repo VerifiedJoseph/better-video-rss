@@ -7,4 +7,4 @@
 /**
  * @const VERSION BetterVideoRss version
  */
-define('VERSION', '1.1.0');
+define('VERSION', '1.2.0');
