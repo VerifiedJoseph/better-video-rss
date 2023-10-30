@@ -12,6 +12,7 @@
 namespace App\FeedFormat;
 
 use App\Helper\Convert;
+use App\Helper\Json as JsonHelper;
 use App\Helper\Url;
 
 class Json extends FeedFormat
@@ -45,7 +46,7 @@ class Json extends FeedFormat
             'icon' => $feedImage,
             'items' => $items
         );
-        $this->feed = (string) json_encode($feed, JSON_PRETTY_PRINT);
+        $this->feed = JsonHelper::encode($feed, JSON_PRETTY_PRINT);
     }
 
     /**
