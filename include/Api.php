@@ -4,6 +4,7 @@ namespace App;
 
 use App\Config;
 use App\Helper\Url;
+use App\Helper\Json;
 use stdClass;
 use Exception;
 
@@ -113,11 +114,11 @@ class Api
         }
 
         $response = array();
-        $response['data'] = json_decode($curl->getResponse());
+        $response['data'] = Json::decode($curl->getResponse());
         $response['statusCode'] = $curl->getStatusCode();
 
         if (in_array($curl->getStatusCode(), $this->expectedStatusCodes) === false) {
-            $this->handleError(json_decode($curl->getResponse()));
+            $this->handleError(Json::decode($curl->getResponse()));
         }
 
         return $response;
@@ -134,7 +135,7 @@ class Api
         $error = $response->error->errors[0];
 
         if ($this->config->getRawApiErrorStatus() === true) {
-            $raw = json_encode($response->error, JSON_PRETTY_PRINT);
+            $raw = Json::encode($response->error, JSON_PRETTY_PRINT);
 
             throw new Exception(
                 "API Error \n"
