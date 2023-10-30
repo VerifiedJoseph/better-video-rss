@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Curl\Curl;
 use App\Config;
 use App\Helper\Url;
 use Exception;
@@ -39,15 +38,15 @@ class Fetch
         $curl->setUserAgent($this->config->getUserAgent());
         $curl->get($url);
 
-        if ($curl->getCurlErrorCode() !== 0) {
-            throw new Exception('Error: ' . $curl->getCurlErrorCode() . ': ' . $curl->errorMessage);
+        if ($curl->getErrorCode() !== 0) {
+            throw new Exception('Error: ' . $curl->getErrorCode() . ': ' . $curl->getErrorMessage());
         }
 
-        if ($curl->getHttpStatusCode() !== 200) {
-            throw new Exception('Failed to fetch: ' . $url . ' (' . $curl->getHttpStatusCode() . ')');
+        if ($curl->getStatusCode() !== 200) {
+            throw new Exception('Failed to fetch: ' . $url . ' (' . $curl->getStatusCode() . ')');
         }
 
-        return $curl->getRawResponse();
+        return $curl->getResponse();
     }
 
     /**
@@ -65,12 +64,12 @@ class Fetch
         $curl = new Curl();
         $curl->get($url);
 
-        if ($curl->getCurlErrorCode() !== 0) {
-            throw new Exception('Error: ' . $curl->getCurlErrorCode() . ': ' . $curl->errorMessage);
+        if ($curl->getErrorCode() !== 0) {
+            throw new Exception('Error: ' . $curl->getErrorCode() . ': ' . $curl->getErrorMessage());
         }
 
-        if ($curl->getHttpStatusCode() !== 200) {
-            throw new Exception('Failed to fetch: ' . $url . ' (' . $curl->getHttpStatusCode() . ')');
+        if ($curl->getStatusCode() !== 200) {
+            throw new Exception('Failed to fetch: ' . $url . ' (' . $curl->getStatusCode() . ')');
         }
 
         return $curl->getResponse();
