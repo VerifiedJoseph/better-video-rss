@@ -6,7 +6,7 @@ use App\Template;
 use App\Helper\Convert;
 use App\Helper\Url;
 
-class Rss extends FeedFormat
+class RssFormat extends FeedFormat
 {
     /** @var string $contentType HTTP content-type header value */
     protected string $contentType = 'text/xml; charset=UTF-8';
