@@ -7,6 +7,7 @@ use App\Template;
 use App\Helper\File;
 use App\Helper\Convert;
 use App\Helper\Output;
+use App\Helper\Json;
 use App\Helper\Url;
 use Exception;
 
@@ -89,7 +90,7 @@ class CacheViewer
 
         foreach ($cacheFiles as $file) {
             $contents = File::read($file->getPathname());
-            $data = json_decode($contents, true);
+            $data = Json::decode($contents, true);
 
             if (is_null($data) === true) {
                 throw new Exception('Failed to decode file: ' . $file->getfilename());
@@ -223,7 +224,7 @@ HTML;
         HTML;
 
         if ($this->showRaw === true) {
-            $json = json_encode($data['contents'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $json = Json::encode($data['contents'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             $tdData .= <<<HTML
                 <br><textarea cols="140" rows="50">{$json}</textarea>
