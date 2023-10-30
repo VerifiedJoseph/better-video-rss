@@ -12,10 +12,10 @@
 namespace App\FeedFormat;
 
 use App\Helper\Convert;
-use App\Helper\Json as JsonHelper;
+use App\Helper\Json as Json;
 use App\Helper\Url;
 
-class Json extends FeedFormat
+class JsonFormat extends FeedFormat
 {
     /** @var string $contentType HTTP content-type header value */
     protected string $contentType = 'application/json';
@@ -46,7 +46,7 @@ class Json extends FeedFormat
             'icon' => $feedImage,
             'items' => $items
         );
-        $this->feed = JsonHelper::encode($feed, JSON_PRETTY_PRINT);
+        $this->feed = Json::encode($feed, JSON_PRETTY_PRINT);
     }
 
     /**
