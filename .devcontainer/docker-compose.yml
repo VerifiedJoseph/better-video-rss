@@ -17,3 +17,10 @@ services:
     volumes:
       - ../:/better-video-rss:ro
     working_dir: /better-video-rss
+
+  httpbin:
+    container_name: httpbin
+    image: mccutchen/go-httpbin:v2.11.1
+    ports:
+      - "8081:80"
+    command: ["go-httpbin", "-port", "80"]
