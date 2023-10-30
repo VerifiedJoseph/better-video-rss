@@ -48,10 +48,9 @@ class Cache
     {
         if ($this->config->getCacheDisableStatus() === false) {
             $contents = File::read($this->path);
-            $decoded = Json::decode($contents, associative: true);
 
-            if (is_null($decoded) === false) {
-                $this->data = $decoded;
+            if ($contents !== '') {
+                $this->data = Json::decodeToArray($contents);
             }
         }
     }
