@@ -24,7 +24,7 @@ class Curl
     /** @var array<int, string> $headers HTTP request headers */
     private array $headers = [];
 
-    /** @var ?int $statusCode HTTP  status code */
+    /** @var ?int $statusCode HTTP status code */
     private ?int $statusCode = null;
 
     public function __construct()
@@ -42,6 +42,7 @@ class Curl
         curl_setopt_array($this->curl, [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
             CURLOPT_USERAGENT => $this->useragent,
             CURLOPT_HTTPHEADER => $this->headers
         ]);
