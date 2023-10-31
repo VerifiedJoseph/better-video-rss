@@ -6,6 +6,9 @@ use App\Config;
 use App\Helper\Url;
 use Exception;
 
+/**
+ * Class for fetching YouTube RSS feeds and thumbnails 
+ */
 class Fetch
 {
     /** @var Config Config class instance */
