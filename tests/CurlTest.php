@@ -39,6 +39,7 @@ class CurlTest extends TestCase
         $this->assertObjectHasProperty('headers', $response);
         $this->assertObjectHasProperty($this->header['key'], $response->headers);
         $this->assertObjectHasProperty('User-Agent', $response->headers);
+        $this->assertObjectHasProperty('Accept-Encoding', $response->headers);
 
         $headers = get_object_vars($response->headers);
         $this->assertEquals($this->header['value'], $headers[$this->header['key']][0]);
