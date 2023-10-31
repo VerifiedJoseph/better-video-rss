@@ -63,19 +63,6 @@ class Data
     }
 
     /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-        // Save data to cache file, if updated
-        if ($this->getUpdateStatus() === true) {
-            $this->cache->save(
-                $this->getData()
-            );
-        }
-    }
-
-    /**
      * Returns data
      *
      * @return array<string, array<mixed>> $data
@@ -83,6 +70,18 @@ class Data
     public function getData(): array
     {
         return $this->data;
+    }
+
+    /**
+     * Save data to cache
+     */
+    public function save(): void
+    {
+        if ($this->getUpdateStatus() === true) {
+            $this->cache->save(
+                $this->getData()
+            );
+        } 
     }
 
     /**
