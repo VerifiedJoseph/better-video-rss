@@ -6,6 +6,9 @@ use App\Config;
 use App\Helper\Url;
 use Exception;
 
+/**
+ * Class for fetching YouTube RSS feeds and thumbnails
+ */
 class Fetch
 {
     /** @var Config Config class instance */
@@ -24,44 +27,39 @@ class Fetch
      *
      * @param string $feedId Feed id (channel or playlist ID)
      * @param string $feedType Feed type (channel or playlist)
-     *
-     * @return string Response from Curl
-     *
-     * @throws Exception if a cURL error occurred.
-     * @throws Exception if RSS feed fetch failed.
+     * @return string Response body from Curl
      */
-    public function feed(string $feedId, string $feedType)
+    public function feed(string $feedId, string $feedType): string
     {
-        $url = Url::getRssFeed($feedType, $feedId);
-
-        $curl = new Curl();
-        $curl->setUserAgent($this->config->getUserAgent());
-        $curl->get($url);
-
-        if ($curl->getErrorCode() !== 0) {
-            throw new Exception('Error: ' . $curl->getErrorCode() . ': ' . $curl->getErrorMessage());
-        }
-
-        if ($curl->getStatusCode() !== 200) {
-            throw new Exception('Failed to fetch: ' . $url . ' (' . $curl->getStatusCode() . ')');
-        }
-
-        return $curl->getResponse();
+        return $this->fetch(
+            Url::getRssFeed($feedType, $feedId)
+        );
     }
 
     /**
      * Fetch YouTube thumbnail
      *
      * @param string $url YouTube thumbnail URL
+     * @return string Response body from Curl
+     */
+    public function thumbnail(string $url): string
+    {
+        return $this->fetch($url);
+    }
+
+    /**
+     * Fetch URL
      *
-     * @return string Response from Curl
+     * @param string $url URL
+     * @return string Response body from Curl
      *
      * @throws Exception if a cURL error occurred.
      * @throws Exception if image fetch failed.
      */
-    public function thumbnail(string $url)
+    private function fetch(string $url): string
     {
         $curl = new Curl();
+        $curl->setUserAgent($this->config->getUserAgent());
         $curl->get($url);
 
         if ($curl->getErrorCode() !== 0) {
