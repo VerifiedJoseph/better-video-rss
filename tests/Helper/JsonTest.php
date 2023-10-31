@@ -10,7 +10,7 @@ class JsonTest extends TestCase
      */
     public function testEncodeValid(): void
     {
-        self::assertEquals('{"foo":"bar"}', Json::encode(['foo' => 'bar']));
+        $this->assertEquals('{"foo":"bar"}', Json::encode(['foo' => 'bar']));
     }
 
     /**
@@ -18,7 +18,7 @@ class JsonTest extends TestCase
      */
     public function testEncodeWitOption(): void
     {
-        self::assertJsonStringEqualsJsonFile(
+        $this->assertJsonStringEqualsJsonFile(
             'tests/files/expected-pretty-print.json',
             Json::encode(['foo' => 'bar'], JSON_PRETTY_PRINT)
         );
@@ -31,7 +31,7 @@ class JsonTest extends TestCase
     {
         $expected = new stdClass();
         $expected->foo = 'bar';
-        self::assertEquals($expected, Json::decode('{"foo": "bar"}'));
+        $this->assertEquals($expected, Json::decode('{"foo": "bar"}'));
     }
 
     /**
@@ -49,7 +49,7 @@ class JsonTest extends TestCase
      */
     public function testDecodeToArrayValid(): void
     {
-        self::assertEquals(['foo' => 'bar'], Json::decodeToArray('{"foo": "bar"}'));
+        $this->assertEquals(['foo' => 'bar'], Json::decodeToArray('{"foo": "bar"}'));
     }
 
     /**
