@@ -18,13 +18,10 @@ class JsonTest extends TestCase
      */
     public function testEncodeWitOption(): void
     {
-        $expected = <<<EOD
-        {
-            "foo": "bar"
-        }
-        EOD;
-
-        self::assertEquals($expected, Json::encode(['foo' => 'bar'], JSON_PRETTY_PRINT));
+        self::assertJsonStringEqualsJsonFile(
+            'tests/files/expected-pretty-print.json',
+            Json::encode(['foo' => 'bar'], JSON_PRETTY_PRINT)
+        );
     }
 
     /**
