@@ -91,6 +91,7 @@ class Feed
             }
         }
 
+        $data->save();
         $this->feedData = $data->getData();
     }
 
