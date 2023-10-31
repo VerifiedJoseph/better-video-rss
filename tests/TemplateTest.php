@@ -7,7 +7,7 @@ use App\Exception\ConfigException;
 class TemplateTest extends TestCase
 {
     /**
-     * Test `fromUrl()` with a YouTube channel URL
+     * Test Template class
      */
     public function testTemplate(): void
     {
