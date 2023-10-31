@@ -7,63 +7,25 @@ class UrlTest extends TestCase
 {
     private string $selfUrl = 'https://example.com/';
 
-    /** @var array<int, array<string, mixed>> $feedUrls */
-    private array $feedUrls = [
-        [
-            'url' => 'https://example.com/feed.php?channel_id=UCBa659QWEk1AI4Tg--mrJ2A&format=html',
-            'type' => 'channel',
-            'id' => 'UCBa659QWEk1AI4Tg--mrJ2A',
-            'format' => 'html',
-            'embed' => false
-        ],
-        [
-            'url' => 'https://example.com/feed.php?channel_id=UCBa659QWEk1AI4Tg--mrJ2A&format=rss&embed_videos=true',
-            'type' => 'channel',
-            'id' => 'UCBa659QWEk1AI4Tg--mrJ2A',
-            'format' => 'rss',
-            'embed' => true
-        ],
-        [
-            'url' => 'https://example.com/feed.php?playlist_id=PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC&format=json',
-            'type' => 'playlist',
-            'id' => 'PLzJtNZQKmXCtHYHWR-uvUpGHbKKWBOARC',
-            'format' => 'json',
-            'embed' => false
-        ]
-    ];
+    private static stdClass $urls;
 
-    /** @var array<int, array<string, string>> $thumbnailTypes */
-    private array $thumbnailTypes = [
-        [
-            'url' => 'https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg',
-            'type' => 'hqdefault',
-        ],
-        [
-            'url' => 'https://i.ytimg.com/vi/jNQXAC9IVRw/sddefault.jpg',
-            'type' => 'sddefault',
-        ],
-        [
-            'url' => 'https://i.ytimg.com/vi/jNQXAC9IVRw/maxresdefault.jpg',
-            'type' => 'maxresdefault',
-        ],
-        [
-            'url' => 'https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg',
-            'type' => 'unsupported-use-fallback',
-        ]
-    ];
+    public static function setUpBeforeClass(): void
+    {
+        self::$urls = json_decode((string) file_get_contents('tests/files/helper-url-samples.json'));
+    }
 
     /**
      * Test `GetFeed()`
      */
     public function testGetFeed(): void
     {
-        foreach ($this->feedUrls as $item) {
-            $this->assertEquals($item['url'], Url::getFeed(
+        foreach (self::$urls->feeds as $item) {
+            $this->assertEquals($item->url, Url::getFeed(
                 $this->selfUrl,
-                $item['type'],
-                $item['id'],
-                $item['format'],
-                $item['embed']
+                $item->type,
+                $item->id,
+                $item->format,
+                $item->embed
             ));
         }
     }
@@ -144,15 +106,18 @@ class UrlTest extends TestCase
      */
     public function testGetThumbnail(): void
     {
-        foreach ($this->thumbnailTypes as $item) {
-            $this->assertEquals($item['url'], Url::getThumbnail('jNQXAC9IVRw', $item['type']));
+        foreach (self::$urls->thumbnails as $item) {
+            $this->assertEquals($item->url, Url::getThumbnail('jNQXAC9IVRw', $item->type));
         }
     }
 
     /**
      * Test `getApi()`
      */
-    /*public function tesGetApi(): void
+    public function tesGetApi(): void
     {
-    }*/
+        foreach (self::$urls->apis as $item) {
+            $this->assertEquals($item->url, Url::getApi($item->type, $item->value, 'ApiKeyHere'));
+        }
+    }
 }
