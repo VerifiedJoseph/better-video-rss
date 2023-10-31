@@ -13,7 +13,7 @@ class DetectTest extends TestCase
     }
 
     /**
-     * Test `fromUrl()` with a YouTube channel URL
+     * Test `fromUrl()` with YouTube channel URL
      */
     public function testFromUrlWithChannelUrl(): void
     {
@@ -25,7 +25,7 @@ class DetectTest extends TestCase
     }
 
     /**
-     * Test `fromUrl()` with a YouTube Playlist URLs
+     * Test `fromUrl()` with YouTube Playlist URLs
      */
     public function testFromUrlWithPlaylistUrls(): void
     {
@@ -39,7 +39,7 @@ class DetectTest extends TestCase
     }
 
     /**
-     * Test `fromUrl()` with a YouTube username URLs
+     * Test `fromUrl()` with YouTube username URLs
      */
     public function testFromUrlWithUsernameUrls(): void
     {
@@ -53,7 +53,7 @@ class DetectTest extends TestCase
     }
 
     /**
-     * Test `fromUrl()` with a YouTube RSS feed URLs
+     * Test `fromUrl()` with YouTube RSS feed URLs
      */
     public function testFromUrlWithRssFeedUrl(): void
     {
