@@ -81,7 +81,7 @@ class Data
             $this->cache->save(
                 $this->getData()
             );
-        } 
+        }
     }
 
     /**
