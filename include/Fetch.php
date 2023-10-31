@@ -7,7 +7,7 @@ use App\Helper\Url;
 use Exception;
 
 /**
- * Class for fetching YouTube RSS feeds and thumbnails 
+ * Class for fetching YouTube RSS feeds and thumbnails
  */
 class Fetch
 {
