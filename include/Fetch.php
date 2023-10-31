@@ -26,7 +26,7 @@ class Fetch
      * @param string $feedType Feed type (channel or playlist)
      * @return string Response body from Curl
      */
-    public function feed(string $feedId, string $feedType)
+    public function feed(string $feedId, string $feedType): string
     {
         return $this->fetch(
             Url::getRssFeed($feedType, $feedId)
@@ -39,7 +39,7 @@ class Fetch
      * @param string $url YouTube thumbnail URL
      * @return string Response body from Curl
      */
-    public function thumbnail(string $url)
+    public function thumbnail(string $url): string
     {
         return $this->fetch($url);
     }
