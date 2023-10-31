@@ -41,9 +41,8 @@ class JsonFormatTest extends TestCase
         $format = new JsonFormat($this->data, false, $this->config);
         $format->build();
 
-        $expected = 'tests/files/FeedFormats/expected-json-feed.json';
         $this->assertJsonStringEqualsJsonFile(
-            $expected,
+            'tests/files/FeedFormats/expected-json-feed.json',
             $format->get()
         );
     }

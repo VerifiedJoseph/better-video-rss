@@ -11,8 +11,6 @@ class TemplateTest extends TestCase
      */
     public function testTemplate(): void
     {
-        $file = file_get_contents('tests/files/template-feed-render.xml');
-
         $variables = [
             'feedTitle' => 'phpunit',
             'feedUrl' => 'https://example.com/feed.rss',
@@ -25,7 +23,7 @@ class TemplateTest extends TestCase
 
         $template = new Template('feed.xml', $variables);
 
-        $this->assertEquals($file, $template->render());
+        $this->assertXmlStringEqualsXmlFile('tests/files/expected-rss-feed.xml', $template->render());
     }
 
     /**
