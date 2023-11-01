@@ -114,7 +114,12 @@ class Api
         }
 
         $response = array();
-        $response['data'] = Json::decode($curl->getResponse());
+        $response['data'] = '';
+
+        if ($curl->getStatusCode() !== 304) {
+            $response['data'] = Json::decode($curl->getResponse());
+        }
+
         $response['statusCode'] = $curl->getStatusCode();
 
         if (in_array($curl->getStatusCode(), $this->expectedStatusCodes) === false) {
