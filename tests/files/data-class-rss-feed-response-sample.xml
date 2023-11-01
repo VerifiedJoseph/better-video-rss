@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+ <link rel="self" href="http://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A"/>
+ <id>yt:channel:Ba659QWEk1AI4Tg--mrJ2A</id>
+ <yt:channelId>Ba659QWEk1AI4Tg--mrJ2A</yt:channelId>
+ <title>jawed</title>
+ <link rel="alternate" href="https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A"/>
+ <author>
+  <name>Tom Scott's Channel</name>
+  <uri>https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A</uri>
+ </author>
+ <published>2005-04-24T03:20:54+00:00</published>
+ <entry>
+  <id>yt:video:CkZyZFa5qO0</id>
+  <yt:videoId>CkZyZFa5qO0</yt:videoId>
+  <yt:channelId>UCBa659QWEk1AI4Tg--mrJ2A</yt:channelId>
+  <title>Tom's Language Files: there’dn’t’ve</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=CkZyZFa5qO0"/>
+  <author>
+   <name>Tom Scott</name>
+   <uri>https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A</uri>
+  </author>
+  <published>2005-04-24T03:31:52+00:00</published>
+  <updated>2023-10-31T06:52:28+00:00</updated>
+  <media:group>
+   <media:title>Tom's Language Files: there’dn’t’ve</media:title>
+   <media:description>This script was a nightmare to pronounce.</media:description>
+  </media:group>
+ </entry>
+</feed>

@@ -85,18 +85,6 @@ class Data
     }
 
     /**
-     * Sets data
-     *
-     * @param array<mixed> $data
-     */
-    public function setData(array $data): void
-    {
-        if (empty($data) === false) {
-            $this->data = $data;
-        }
-    }
-
-    /**
      * Returns HTTP ETag for a part
      *
      * @param string $part
@@ -124,11 +112,13 @@ class Data
             return $this->parts;
         }
 
-        foreach ($this->data as $partName => $partData) {
-            if (isset($partData['expires']) === false) {
-                $expiredParts[] = $partName;
-            } elseif (time() >= $partData['expires']) {
-                $expiredParts[] = $partName;
+        foreach ($this->parts as $part) {
+            $data = $this->data[$part];
+
+            if (isset($data['expires']) === false) {
+                $expiredParts[] = $part;
+            } elseif (time() >= $data['expires']) {
+                $expiredParts[] = $part;
             }
         }
 
@@ -316,6 +306,18 @@ class Data
     private function getUpdateStatus(): bool
     {
         return $this->updated;
+    }
+
+    /**
+     * Sets data
+     *
+     * @param array<mixed> $data
+     */
+    private function setData(array $data): void
+    {
+        if (empty($data) === false) {
+            $this->data = $data;
+        }
     }
 
     /**

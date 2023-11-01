@@ -1,0 +1,35 @@
+{
+    "details": {
+        "etag": "4Ne4wiD1jZNePkDDxMHA",
+        "items": [
+            {
+                "snippet": {
+                    "title": "Tom Scott",
+                    "description": "Hi, I'm Tom Scott.",
+                    "thumbnails": {
+                        "default": {
+                            "url": "https://example.com/thumbnail.png"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "videos": {
+        "items": [
+            {
+                "id": "CkZyZFa5qO0", 
+                "contentDetails": {
+                    "duration": "PT3M45S"
+                },
+                "snippet": {
+                    "tags": ["Hello", "World"],
+                    "thumbnails": {
+                        "standard": ""
+                    },
+                    "liveBroadcastContent": "none"
+                }
+            }
+        ]
+    }
+}
