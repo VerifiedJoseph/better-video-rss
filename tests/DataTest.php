@@ -3,17 +3,16 @@
 use PHPUnit\Framework\TestCase;
 use App\Data;
 use App\Config;
-use App\Helper\Convert;
 
 class DataTest extends TestCase
 {
     private static Data $data;
 
+    /** @var array<string, mixed> $channelCacheData */
     private static array $channelCacheData;
+
     private static stdClass $apiResponses;
-
     private static string $cacheFilepath = '';
-
     private static string $feedId = 'UCBa659QWEk1AI4Tg--mrJ2A';
     private static string $feedType = 'channel';
 
@@ -152,7 +151,8 @@ class DataTest extends TestCase
 
         self::$data->updateFeed($rssFeedResponse);
         $data = self::$data->getData();
-        
+
+        /** @var \SimpleXMLElement $xml */
         $xml = simplexml_load_string($rssFeedResponse);
         $namespaces = $xml->getNamespaces(true);
 
