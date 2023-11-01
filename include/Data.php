@@ -282,7 +282,7 @@ class Data
             $video['published'] = strtotime((string)$entry->published);
 
             if ($key !== false) {
-                $videos[$key] = array_merge($video, $videos[$key]);
+                $videos[$key] = array_merge($videos[$key], $video);
             } else {
                 $videos[] = $video;
             }
