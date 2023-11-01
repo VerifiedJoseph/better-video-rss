@@ -170,4 +170,13 @@ class DataTest extends TestCase
         $this->assertGreaterThan(self::$channelCacheData['feed']['expires'], $data['feed']['expires']);
         $this->assertGreaterThan(self::$channelCacheData['feed']['fetched'], $data['feed']['fetched']);
     }
+
+    public function testSave(): void
+    {
+        $oldHash = hash_file('sha256', self::$cacheFilepath);
+
+        self::$data->save();
+
+        $this->assertNotEquals($oldHash, hash_file('sha256', self::$cacheFilepath));
+    }
 }
