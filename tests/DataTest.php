@@ -39,7 +39,7 @@ class DataTest extends TestCase
         );
 
         self::$apiResponses = json_decode(
-            (string) file_get_contents('tests/files/data-class-response-samples.json'),
+            (string) file_get_contents('tests/files/data-class-api-response-samples.json'),
         );
 
         self::$cacheFilepath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . hash('sha256', self::$feedId) . '.cache';
