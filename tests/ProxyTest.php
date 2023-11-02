@@ -40,7 +40,7 @@ class ProxyTest extends TestCase
     /**
      * Test class with Image proxy option disabled
      */
-    public function testExceptionImageProxyDisabled(): void
+    public function testClassWithImageProxyDisabled(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Image proxy is disabled.');
@@ -55,7 +55,7 @@ class ProxyTest extends TestCase
     /**
      * Test class with no video ID
      */
-    public function testExceptionNoVideoId(): void
+    public function testClassWithNoVideoId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No video ID parameter given.');
@@ -66,7 +66,7 @@ class ProxyTest extends TestCase
     /**
      * Test class with empty video ID
      */
-    public function testExceptionEmptyVideoId(): void
+    public function testClassWithEmptyVideoId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No video ID parameter given.');
@@ -81,7 +81,7 @@ class ProxyTest extends TestCase
     /**
      * Test class with empty channel ID
      */
-    public function testExceptionEmptyChannelId(): void
+    public function testClassWithEmptyChannelId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No channel ID parameter given.');
@@ -97,7 +97,7 @@ class ProxyTest extends TestCase
     /**
      * Test class with invalid channel ID
      */
-    public function testExceptionInvalidChannelId(): void
+    public function testClassWithInvalidChannelId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid channel ID parameter given.');
@@ -113,7 +113,7 @@ class ProxyTest extends TestCase
     /**
      * Test Proxy class with empty playlist ID
      */
-    public function testExceptionEmptyPlaylistId(): void
+    public function testClassWithEmptyPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No playlist ID parameter given.');
@@ -129,7 +129,7 @@ class ProxyTest extends TestCase
     /**
      * Test Proxy class with invalid playlist ID given
      */
-    public function testExceptionInvalidPlaylistId(): void
+    public function testClassWithInvalidPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid playlist ID parameter given.');
@@ -145,7 +145,7 @@ class ProxyTest extends TestCase
     /**
      * Test class with no channel or playlist ID given
      */
-    public function testExceptionNoFeedId(): void
+    public function testClassWithNoFeedId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No feed ID (channel or playlist) parameter given.');
@@ -162,7 +162,7 @@ class ProxyTest extends TestCase
      *
      * An exception should be thrown.
      */
-    public function testExceptionFeedIdNoInCache(): void
+    public function testGetImageWithFeedIdNoInCache(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Feed ID not in cache');
@@ -178,10 +178,8 @@ class ProxyTest extends TestCase
 
     /**
      * Test `getImage` with video ID not in cache
-     *
-     * An exception should be thrown.
      */
-    public function testExceptionVideoIdNotInCache(): void
+    public function testGetImageWithVideoIdNotInCache(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Video ID not in cache');
