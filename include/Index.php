@@ -175,14 +175,14 @@ class Index
                     $this->feedType = $detect->getType();
                     $this->query = $detect->getValue();
                 }
-    
+
                 if ($this->feedType === 'channel') {
                     $this->feedId = $this->findChannel($this->query);
                 } else {
                     $this->feedId = $this->findPlaylist($this->query);
                 }
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->error = true;
             $this->errorMessage = $e->getMessage();
         }
