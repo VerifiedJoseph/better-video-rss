@@ -159,10 +159,8 @@ class ProxyTest extends TestCase
 
     /**
      * Test `getImage` with feed ID not in cache
-     *
-     * An exception should be thrown.
      */
-    public function testGetImageWithFeedIdNoInCache(): void
+    public function testGetImageWithFeedIdNotInCache(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Feed ID not in cache');
