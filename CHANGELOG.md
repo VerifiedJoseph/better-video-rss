@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.3.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.3.0) - 2023-11-02
+
+- Added encoding setting in `Curl` class. ([#166](https://github.com/VerifiedJoseph/better-video-rss/pull/166), [`465fb58`](https://github.com/VerifiedJoseph/better-video-rss/commit/465fb584c681b7ad7a22ed171304284ec61ec495))
+- Refactored `Fetch` class. ([#171](https://github.com/VerifiedJoseph/better-video-rss/pull/171), [`9ea74a8`](https://github.com/VerifiedJoseph/better-video-rss/commit/9ea74a854a661468edaa52b44c32334472cf26f5))
+- Fixed HTTP 304 response handling in `Api` class ([#173](https://github.com/VerifiedJoseph/better-video-rss/pull/173), [`7679035`](https://github.com/VerifiedJoseph/better-video-rss/commit/76790359667ff3bec8af2b5025b72f8b83711dce))
+- Fixed updating video details in `Data` class method `updateFeed()`. ([#174](https://github.com/VerifiedJoseph/better-video-rss/pull/174), [`1453623`](https://github.com/VerifiedJoseph/better-video-rss/commit/14536231c149e9c0d29ce99663e71e762d4588b4))
+
 ## [1.2.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.2.0) - 2023-10-31
 
 - Removed dependency [`php-curl-class/php-curl-class`](https://github.com/php-curl-class/php-curl-class).
