@@ -38,9 +38,7 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with ImageProxy disabled
-     *
-     * An exception should be thrown.
+     * Test class with Image proxy option disabled
      */
     public function testExceptionImageProxyDisabled(): void
     {
@@ -55,9 +53,7 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with no video ID given with `$_GET`
-     *
-     * An exception should be thrown.
+     * Test class with no video ID
      */
     public function testExceptionNoVideoId(): void
     {
@@ -68,9 +64,7 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with empty video ID given with `$_GET`
-     *
-     * An exception should be thrown.
+     * Test class with empty video ID
      */
     public function testExceptionEmptyVideoId(): void
     {
@@ -85,9 +79,7 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with empty channel ID given with `$_GET`
-     *
-     * An exception should be thrown.
+     * Test class with empty channel ID
      */
     public function testExceptionEmptyChannelId(): void
     {
@@ -103,9 +95,7 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with empty channel ID given with `$_GET`
-     *
-     * An exception should be thrown.
+     * Test class with invalid channel ID
      */
     public function testExceptionInvalidChannelId(): void
     {
@@ -121,9 +111,7 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with empty playlist ID given with `$_GET`
-     *
-     * An exception should be thrown.
+     * Test Proxy class with empty playlist ID
      */
     public function testExceptionEmptyPlaylistId(): void
     {
@@ -139,9 +127,7 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with empty playlist ID given with `$_GET`
-     *
-     * An exception should be thrown.
+     * Test Proxy class with invalid playlist ID given
      */
     public function testExceptionInvalidPlaylistId(): void
     {
@@ -157,9 +143,7 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with no channel or playlist ID given with `$_GET`
-     *
-     * An exception should be thrown.
+     * Test class with no channel or playlist ID given
      */
     public function testExceptionNoFeedId(): void
     {
