@@ -19,7 +19,7 @@ class FeedTest extends TestCase
     /**
      * Test class with empty channel id
      */
-    public function testExceptionEmptyChannelId(): void
+    public function testClassWithEmptyChannelId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid channel ID parameter given.');
@@ -34,7 +34,7 @@ class FeedTest extends TestCase
     /**
      * Test class with invalid channel id
      */
-    public function testExceptionInvalidChannelId(): void
+    public function testClassWithInvalidChannelId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid channel ID parameter given.');
@@ -49,7 +49,7 @@ class FeedTest extends TestCase
     /**
      * Test class with empty playlist id
      */
-    public function testExceptionEmptyPlaylistId(): void
+    public function testClassWithEmptyPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid playlist ID parameter given.');
@@ -64,7 +64,7 @@ class FeedTest extends TestCase
     /**
      * Test class with invalid playlist ID
      */
-    public function testExceptionInvalidPlaylistId(): void
+    public function testClassWithInvalidPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid playlist ID parameter given.');
@@ -79,7 +79,7 @@ class FeedTest extends TestCase
     /**
      * Test class with no channel or playlist ID given
      */
-    public function testExceptionNoChannelOrPlaylistId(): void
+    public function testClassWithNoChannelOrPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No channel or playlist ID parameter given.');
