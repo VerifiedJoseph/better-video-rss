@@ -1,0 +1,89 @@
+<?php
+
+use PHPUnit\Framework\TestCase;
+use App\Config;
+use App\Api;
+use App\Feed;
+
+class FeedTest extends TestCase
+{
+    private static Config $config;
+    private static Api $api;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$config = new Config();
+        self::$api = new Api(self::$config);
+    }
+
+    /**
+     * Test class with empty channel id
+     */
+    public function testExceptionEmptyChannelId(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid channel ID parameter given.');
+
+        $inputs = [
+            'channel_id' => ''
+        ];
+
+        new Feed($inputs, self::$config, self::$api);
+    }
+
+    /**
+     * Test class with invalid channel id
+     */
+    public function testExceptionInvalidChannelId(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid channel ID parameter given.');
+
+        $inputs = [
+            'channel_id' => 'NoAChannelId'
+        ];
+
+        new Feed($inputs, self::$config, self::$api);
+    }
+
+    /**
+     * Test class with empty playlist id
+     */
+    public function testExceptionEmptyPlaylistId(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid playlist ID parameter given.');
+
+        $inputs = [
+            'playlist_id' => ''
+        ];
+
+        new Feed($inputs, self::$config, self::$api);
+    }
+
+    /**
+     * Test class with invalid playlist ID
+     */
+    public function testExceptionInvalidPlaylistId(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid playlist ID parameter given.');
+
+        $inputs = [
+            'playlist_id' => 'NoAPlaylistId'
+        ];
+
+        new Feed($inputs, self::$config, self::$api);
+    }
+
+    /**
+     * Test class with no channel or playlist ID given
+     */
+    public function testExceptionNoChannelOrPlaylistId(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('No channel or playlist ID parameter given.');
+
+        new Feed([], self::$config, self::$api);
+    }
+}
