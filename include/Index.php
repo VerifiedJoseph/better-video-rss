@@ -55,13 +55,8 @@ class Index
 
         $this->feedFormat = $this->config->getDefaultFeedFormat();
 
-        try {
-            $this->checkInputs($inputs);
-            $this->generate();
-        } catch (Exception $e) {
-            $this->error = true;
-            $this->errorMessage = $e->getMessage();
-        }
+        $this->checkInputs($inputs);
+        $this->generate();
     }
 
     /**
@@ -145,10 +140,6 @@ class Index
 
             if ($inputs['type'] === 'url') {
                 $this->fromUrl = true;
-
-                if (Validate::youTubeUrl($inputs['query']) === false) {
-                    throw new Exception('URL is not a valid YouTube URL.');
-                }
             }
 
             if (isset($inputs['format']) && in_array($inputs['format'], $this->config->getFeedFormats())) {
@@ -165,28 +156,35 @@ class Index
 
     /**
      * Generate feed URL
-     *
-     * @throws Exception if a query parameter is not a supported YouTube URL
      */
     private function generate(): void
     {
-        if (empty($this->query) === false) {
-            if ($this->fromUrl === true) {
-                $detect = new Detect();
+        try {
+            if (empty($this->query) === false) {
+                if ($this->fromUrl === true) {
+                    $detect = new Detect();
 
-                if ($detect->fromUrl($this->query) === false) {
-                    throw new Exception('Unsupported YouTube URL.');
+                    if (Validate::youTubeUrl($this->query) === false) {
+                        throw new Exception('URL is not a valid YouTube URL.');
+                    }
+
+                    if ($detect->fromUrl($this->query) === false) {
+                        throw new Exception('Unsupported YouTube URL.');
+                    }
+
+                    $this->feedType = $detect->getType();
+                    $this->query = $detect->getValue();
                 }
-
-                $this->feedType = $detect->getType();
-                $this->query = $detect->getValue();
+    
+                if ($this->feedType === 'channel') {
+                    $this->feedId = $this->findChannel($this->query);
+                } else {
+                    $this->feedId = $this->findPlaylist($this->query);
+                }
             }
-
-            if ($this->feedType === 'channel') {
-                $this->feedId = $this->findChannel($this->query);
-            } else {
-                $this->feedId = $this->findPlaylist($this->query);
-            }
+        } catch(Exception $e) {
+            $this->error = true;
+            $this->errorMessage = $e->getMessage();
         }
     }
 
