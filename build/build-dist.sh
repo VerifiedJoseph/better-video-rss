@@ -5,6 +5,7 @@ mkdir ./dist
 # Copy folders
 cp -r ./include ./dist/include
 cp -r ./vendor ./dist/vendor
+cp -r ./static ./dist/static
 
 # Copy files
 cp ./index.php ./dist/index.php
