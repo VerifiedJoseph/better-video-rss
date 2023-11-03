@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.3.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.3.0) - 2023-11-03
+
+- Fixed handling of error details in `Api` class method `handleError()`. ([#182](https://github.com/VerifiedJoseph/better-video-rss/pull/182), [`c70e58e`](https://github.com/VerifiedJoseph/better-video-rss/commit/c70e58e95d4e5df81637728484cb7b4c195bbac4))
+
 ## [1.3.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.3.0) - 2023-11-02
 
 - Added encoding setting in `Curl` class. ([#166](https://github.com/VerifiedJoseph/better-video-rss/pull/166), [`465fb58`](https://github.com/VerifiedJoseph/better-video-rss/commit/465fb584c681b7ad7a22ed171304284ec61ec495))
