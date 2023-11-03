@@ -123,7 +123,7 @@ class Api
         $response['statusCode'] = $curl->getStatusCode();
 
         if (in_array($curl->getStatusCode(), $this->expectedStatusCodes) === false) {
-            $this->handleError(Json::decode($curl->getResponse()));
+            $this->handleError($curl->getResponse());
         }
 
         return $response;
@@ -132,24 +132,24 @@ class Api
     /**
      * Handle API errors
      *
-     * @param stdClass $response API response
+     * @param string $response API response
      * @throws Exception
      */
-    private function handleError(stdClass $response): void
+    private function handleError(string $response): void
     {
-        $error = $response->error->errors[0];
+        $data = Json::decode($response);
+        $error = $data->error->errors[0];
+        $code = $data->error->code;
 
         if ($this->config->getRawApiErrorStatus() === true) {
-            $raw = Json::encode($response->error, JSON_PRETTY_PRINT);
-
             throw new Exception(
-                "API Error \n"
-                . "\n" . $raw
+                "API error: \n"
+                . "\n" . $response
             );
         }
 
         throw new Exception(
-            'API Error: ' . $error->message . ' (' . $error->reason . ')'
+            sprintf('Error: API returned code %s (%s: %s)', $code, $error->reason, $error->message)
         );
     }
 }
