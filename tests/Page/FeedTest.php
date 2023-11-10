@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use App\Config;
 use App\Api;
-use App\Feed;
+use App\Page\Feed;
 
 class FeedTest extends TestCase
 {

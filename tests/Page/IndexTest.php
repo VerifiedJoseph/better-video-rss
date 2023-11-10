@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use App\Config;
 use App\Api;
-use App\Index;
+use App\Page\Index;
 
 class IndexTest extends TestCase
 {
