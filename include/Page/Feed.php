@@ -102,7 +102,7 @@ class Feed
     {
         $formatClass = sprintf('App\FeedFormat\%sFormat', ucfirst($this->getFeedFormat()));
 
-        /** @var FeedFormat\RssFormat|FeedFormat\JsonFormat|FeedFormat\HtmlFormat */
+        /** @var \App\FeedFormat\RssFormat|\App\FeedFormat\JsonFormat|\App\FeedFormat\HtmlFormat */
         $format = new $formatClass(
             $this->getFeedData(),
             $this->getEmbedStatus(),
