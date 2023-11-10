@@ -5,7 +5,7 @@ require 'include/version.php';
 
 use App\Config;
 use App\Api;
-use App\Feed;
+use App\Page\Feed;
 use App\Helper\Output;
 
 try {

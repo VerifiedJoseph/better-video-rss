@@ -4,8 +4,8 @@ require 'vendor/autoload.php';
 require 'include/version.php';
 
 use App\Config;
-use App\Index;
 use App\Api;
+use App\Page\Index;
 use App\Helper\Output;
 
 try {
