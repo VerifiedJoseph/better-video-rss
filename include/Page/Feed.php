@@ -1,8 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Page;
 
 use App\Config;
+use App\Api;
+use App\Fetch;
+use App\Data;
 use App\Helper\Validate;
 use App\Helper\Output;
 use Exception;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Page;
 
 use App\Config;
 use App\Template;
