@@ -5,7 +5,7 @@ require 'include/version.php';
 
 use App\Config;
 use App\Helper\Output;
-use App\Proxy;
+use App\Page\Proxy;
 
 try {
     $config = new Config();
