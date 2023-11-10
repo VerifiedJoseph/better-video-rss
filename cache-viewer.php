@@ -5,7 +5,7 @@ require 'include/version.php';
 
 use App\Config;
 use App\Helper\Output;
-use App\CacheViewer;
+use App\Page\CacheViewer;
 
 try {
     $config = new Config();
