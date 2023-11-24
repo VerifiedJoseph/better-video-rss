@@ -2,7 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
-## [1.3.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.3.0) - 2023-11-03
+## [1.4.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.4.0) - 2023-11-24
+
+- Added `Page` namespace. ([#185](https://github.com/VerifiedJoseph/better-video-rss/pull/185), [`1922e38`](https://github.com/VerifiedJoseph/better-video-rss/commit/1922e38bccceea5494dcdd2b911b2246cf78d26d))
+
+## [1.3.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.3.1) - 2023-11-03
 
 - Fixed error details handling in `Api` class method `handleError()`. ([#182](https://github.com/VerifiedJoseph/better-video-rss/pull/182), [`c70e58e`](https://github.com/VerifiedJoseph/better-video-rss/commit/c70e58e95d4e5df81637728484cb7b4c195bbac4))
 
