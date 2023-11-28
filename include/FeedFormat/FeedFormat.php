@@ -164,7 +164,7 @@ HTML;
         if ($video['premiere'] === true) {
             $scheduled = $this->getFormattedScheduledDate($video['scheduled']);
 
-            return '[Premiere ' . $scheduled . '] ' . $video['title'] . ' (' . $video['duration'] . ')';
+            return sprintf('[Premiere %s] %s (%s)', $scheduled, $video['title'], $video['duration']);
         }
 
         if ($video['liveStream'] === true) {
@@ -173,10 +173,10 @@ HTML;
 
                 // deprecated: used by v1.4.0 and before
                 if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere
-                    return '[Premiere ' . $scheduled . '] ' . $video['title'] . ' (' . $video['duration'] . ')';
+                    return sprintf('[Premiere %s] %s (%s)', $scheduled, $video['title'], $video['duration']);
                 }
 
-                return '[Live Stream ' . $scheduled . '] ' . $video['title'];
+                return sprintf('[Live Stream %s] %s ', $scheduled, $video['title']);
             }
 
             if ($video['liveStreamStatus'] === 'live') {
@@ -184,7 +184,7 @@ HTML;
             }
         }
 
-        return $video['title'] . ' (' . $video['duration'] . ')';
+        return sprintf('%s (%s)', $video['title'], $video['duration']);
     }
 
     /**
