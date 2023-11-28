@@ -1,57 +1,121 @@
 {
     "details": {
-        "id": "UCBa659QWEk1AI4Tg--mrJ2A",
+        "id": "UCMufUaGlcuAvsSdzQV08BEA",
         "type": "channel",
         "etag": "Q4tjoKjLcrpOC7-WzcBdtCxY0kg",
-        "title": "Tom Scott",
-        "description": "Hi, I'm Tom Scott. These are some of the things I've made and done. They'll probably come back to haunt me in a few years' time.\n\nContact me: https://www.tomscott.com/contact/\n\n\u2022 \u2022 \u2022\n\nThis channel is a production of Pad 26 Limited, registered in England and Wales, \u2116 11662641.\nRegistered office: Amelia House, Crescent Road, Worthing, West Sussex, BN11 1QR\n(This address is only for legal documents; no other mail will be forwarded.)",
-        "url": "https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A",
-        "thumbnail": "https://yt3.ggpht.com/ytc/APkrFKbAM4yMQo1QLC5VYC1aoIf_49jnh4jEAMSXc9vM5g=s88-c-k-c0x00ffffff-no-rj",
+        "title": "Example Channel",
+        "description": "",
+        "url": "https://www.youtube.com/channel/UCMufUaGlcuAvsSdzQV08BEA",
+        "thumbnail": "https://yt3.ggpht.com/ytc/APkrFKa_zyQV8EMw0iOxEmPU3FgKrUtqWawD0F05JfEK=s176-c-k-c0x00ffffff-no-rj",
         "fetched": 1697553214,
         "expires": 1697628126
     },
     "feed": {
         "videos": [
-            "CkZyZFa5qO0",
-            "ZgDBIzClmPg"
+            "Owd0fCoJhiv",
+            "jVhUHba1WyK",
+            "e3bDAwuzUnd",
+            "MVsly5H30BO"
         ],
         "fetched": 1697624525,
         "expires": 1697625125
     },
     "videos": [
         {
-            "id": "CkZyZFa5qO0",
-            "url": "https://www.youtube.com/watch?v=CkZyZFa5qO0",
-            "title": "there\u2019dn\u2019t\u2019ve",
-            "description": "This script was a nightmare to pronounce. \u2022 \rWritten with Molly Ruhl and Gretchen McCulloch. Gretchen's podcast has an episode all about this: https://lingthusiasm.com/post/662535562508517376/lingthusiasm-episode-60-thats-the-kind-of \u2022 \rMore Language Files: https://www.youtube.com/playlist?list=PL96C35uN7xGLDEnHuhD7CTZES3KXFnwm0\n\nGretchen's book BECAUSE INTERNET, all about the evolution of internet language, is available:\n\ud83c\uddfa\ud83c\uddf8 US: https://amzn.to/30tLpjT\n\ud83c\udde8\ud83c\udde6 CA: https://amzn.to/2JsTYWH\n\ud83c\uddec\ud83c\udde7 UK: https://amzn.to/31K8eRD\n\n(Those are affiliate links that give a commission to me or Gretchen, depending on country!)\n\nGraphics by William Marler: https://wmad.co.uk\nAudio mix by Graham Haerther and Manuel Simon at Standard Studios: https://haerther.net\n\nREFERENCES:\nZwicky, Arnold M. 1977. On clitics. Bloomington: Indiana University Linguistics Club.\nAnderson, S. R. 2005. Aspects of the theory of Clitics. New York: Oxford University.\nPalmer, F., Huddleston, R., & Pullum, G. 2002. Inflectional morphology and related matters. In R. Huddleston & G. Pullum (Authors), The Cambridge Grammar of the English Language (pp. 1565-1620). Cambridge: Cambridge University Press. doi:10.1017/9781316423530.019\nZwicky, Arnold M. 1994. What is a clitic? In Nevis, Joel A. & Joseph, Brian D. & Wanner, Dieter & Zwicky, Arnold M. (eds.), Clitics: a comprehensive bibliography 1892-1991, xii\u2013xx. Amsterdam: Benjamins.\nPullum, G.K., & Zwicky, A.M. 1997. Licensing of prosodic features by syntactic rules: the key to auxiliary reduction.\nZwicky, A.M. 1970. Auxiliary Reduction in English. Linguistic Inquiry, 1(3), 323\u2013336.\nTraugott, Elizabeth Closs. 2003. \u2018Constructions in grammaticalization.\u2019 In Brian D. Joseph &\nRichard D. Janda (eds.) The Handbook of Historical Linguistics. Oxford: Blackwel\n\nI'm at https://tomscott.com\r\non Twitter at https://twitter.com/tomscott\r\non Facebook at https://facebook.com/tomscott\r\nand on Instagram as tomscottgo",
-            "author": "Tom Scott",
+            "id": "Owd0fCoJhiv",
+            "url": "https://www.youtube.com/watch?v=Owd0fCoJhiv",
+            "title": "Normal Video",
+            "description": "A normal YouTube video. https://example.com/testing.html",
+            "author": "Example Channel",
             "published": 1697468409,
             "duration": "04:35",
             "tags": [
-                "tom scott",
-                "tomscott"
+                "tag1",
+                "tag2"
             ],
             "stream": false,
             "premiere": false,
-            "thumbnail": "https://i.ytimg.com/vi/CkZyZFa5qO0/maxresdefault.jpg",
+            "thumbnail": "https://i.ytimg.com/vi/Owd0fCoJhiv/maxresdefault.jpg",
             "fetched": 1697624526,
             "expires": 1697628126
         },
         {
-            "id": "ZgDBIzClmPg",
-            "url": "https://www.youtube.com/watch?v=ZgDBIzClmPg",
-            "title": "I finally rode the weird, curved German elevator.",
-            "description": "At the New Town Hall, the Neues Rathaus, in Hanover, there's a strange elevator where the track curves unevenly. For years, people from Germany have been emailing me about it: well, I finally visited. \u25a0 More about the Hall: https://www.visit-hannover.com/en/Sightseeing-City-Tours/Tourist-Highlights/The-New-Town-Hall\n\nCamera: Maximilian Unger\nProducer: Viktor Sramo at Klein Aber\n\nI'm at https://tomscott.com\r\non Twitter at https://twitter.com/tomscott\r\non Facebook at https://facebook.com/tomscott\r\nand on Instagram as tomscottgo",
-            "author": "Tom Scott",
+            "id": "jVhUHba1WyK",
+            "url": "https://www.youtube.com/watch?v=jVhUHba1WyK",
+            "title": "Upcoming video premiere",
+            "description": "A upcoming video premiere \n https://example.com/testing/page.html",
+            "author": "Example Channel",
             "published": 1696863633,
             "duration": "03:31",
             "tags": [
-                "tom scott",
-                "tomscott"
+                "tag1",
+                "tag2"
             ],
             "stream": false,
+            "premiere": true,
+            "premiereStatus": "upcoming",
+            "scheduled": 1701202029,
+            "thumbnail": "https://i.ytimg.com/vi/jVhUHba1WyK/maxresdefault.jpg",
+            "fetched": 1697624526,
+            "expires": 1697628126
+        },
+        {
+            "id": "e3bDAwuzUnd",
+            "url": "https://www.youtube.com/watch?v=e3bDAwuzUnd",
+            "title": "A video premiere",
+            "description": "A video premiere",
+            "author": "Example Channel",
+            "published": 1696863633,
+            "duration": "03:31",
+            "tags": [
+                "tag1",
+                "tag2"
+            ],
+            "stream": false,
+            "premiere": true,
+            "premiereStatus": "live",
+            "scheduled": 1701202029,
+            "thumbnail": "https://i.ytimg.com/vi/e3bDAwuzUnd/maxresdefault.jpg",
+            "fetched": 1697624526,
+            "expires": 1697628126
+        },
+        {
+            "id": "zhuEQwTBPpo",
+            "url": "https://www.youtube.com/watch?v=zhuEQwTBPpo",
+            "title": "Upcoming live stream",
+            "description": "A upcoming live stream",
+            "author": "Example Channel",
+            "published": 1696863633,
+            "duration": "00:00",
+            "tags": [
+                "tag1",
+                "tag2"
+            ],
+            "stream": true,
+            "streamStatus": "upcoming",
+            "scheduled": 1701202029,
             "premiere": false,
-            "thumbnail": "https://i.ytimg.com/vi/ZgDBIzClmPg/maxresdefault.jpg",
+            "thumbnail": "https://i.ytimg.com/vi/zhuEQwTBPpo/maxresdefault.jpg",
+            "fetched": 1697624526,
+            "expires": 1697628126
+        },
+        {
+            "id": "MVsly5H30BO",
+            "url": "https://www.youtube.com/watch?v=MVsly5H30BO",
+            "title": "A live stream",
+            "description": "A live stream",
+            "author": "Example Channel",
+            "published": 1696863633,
+            "duration": "00:00",
+            "tags": [
+                "tag1",
+                "tag2"
+            ],
+            "stream": true,
+            "streamStatus": "live",
+            "premiere": false,
+            "scheduled": 1701202029,
+            "thumbnail": "https://i.ytimg.com/vi/MVsly5H30BO/maxresdefault.jpg",
             "fetched": 1697624526,
             "expires": 1697628126
         }
