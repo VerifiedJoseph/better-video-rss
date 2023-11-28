@@ -24,16 +24,20 @@ abstract class FeedFormat
     /** @var boolean $embedVideos Embed videos status */
     protected bool $embedVideos = false;
 
+    /** @var boolean $ignorePremieres Ignore upcoming video premieres */
+    protected bool $ignorePremieres = false;
+
     /**
      * @param array<string, mixed> $data Cache/fetch data
      * @param boolean $embedVideos Embed YouTube videos in feed
      * @param Config $config Config class instance
      */
-    public function __construct(array $data, bool $embedVideos, Config $config)
+    public function __construct(array $data, bool $embedVideos, bool $ignorePremieres, Config $config)
     {
         $this->config = $config;
         $this->data = $data;
         $this->embedVideos = $embedVideos;
+        $this->ignorePremieres = $ignorePremieres;
     }
 
     /**
@@ -157,6 +161,12 @@ HTML;
     {
         $emptyDuration = '00:00';
 
+        if ($video['premiere'] === true) {
+            $scheduled = $this->getFormattedScheduledDate($video['scheduled']);
+
+            return '[Premiere ' . $scheduled . '] ' . $video['title'] . ' (' . $video['duration'] . ')';
+        }
+
         if ($video['liveStream'] === true) {
             if ($video['liveStreamStatus'] === 'upcoming') {
                 $datetimeFormat = sprintf(
@@ -184,5 +194,20 @@ HTML;
         }
 
         return $video['title'] . ' (' . $video['duration'] . ')';
+    }
+
+    private function getFormattedScheduledDate(int $scheduled = 0): string
+    {
+        $datetimeFormat = sprintf(
+            '%s %s',
+            $this->config->getDateFormat(),
+            $this->config->getTimeFormat()
+        );
+
+        return Convert::unixTime(
+            $scheduled,
+            $datetimeFormat,
+            $this->config->getTimezone()
+        );
     }
 }
