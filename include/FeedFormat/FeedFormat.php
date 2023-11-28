@@ -24,16 +24,20 @@ abstract class FeedFormat
     /** @var boolean $embedVideos Embed videos status */
     protected bool $embedVideos = false;
 
+    /** @var boolean $ignorePremieres Ignore upcoming video premieres */
+    protected bool $ignorePremieres = false;
+
     /**
      * @param array<string, mixed> $data Cache/fetch data
      * @param boolean $embedVideos Embed YouTube videos in feed
      * @param Config $config Config class instance
      */
-    public function __construct(array $data, bool $embedVideos, Config $config)
+    public function __construct(array $data, bool $embedVideos, bool $ignorePremieres, Config $config)
     {
         $this->config = $config;
         $this->data = $data;
         $this->embedVideos = $embedVideos;
+        $this->ignorePremieres = $ignorePremieres;
     }
 
     /**
@@ -157,25 +161,22 @@ HTML;
     {
         $emptyDuration = '00:00';
 
+        if ($video['premiere'] === true) {
+            $scheduled = $this->getFormattedScheduledDate($video['scheduled']);
+
+            return sprintf('[Premiere %s] %s (%s)', $scheduled, $video['title'], $video['duration']);
+        }
+
         if ($video['liveStream'] === true) {
             if ($video['liveStreamStatus'] === 'upcoming') {
-                $datetimeFormat = sprintf(
-                    '%s %s',
-                    $this->config->getDateFormat(),
-                    $this->config->getTimeFormat()
-                );
+                $scheduled = $this->getFormattedScheduledDate($video['scheduled']);
 
-                $scheduled = Convert::unixTime(
-                    $video['liveStreamScheduled'],
-                    $datetimeFormat,
-                    $this->config->getTimezone()
-                );
-
+                // deprecated: used by v1.4.0 and before
                 if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere
-                    return '[Premiere ' . $scheduled . '] ' . $video['title'] . ' (' . $video['duration'] . ')';
+                    return sprintf('[Premiere %s] %s (%s)', $scheduled, $video['title'], $video['duration']);
                 }
 
-                return '[Live Stream ' . $scheduled . '] ' . $video['title'];
+                return sprintf('[Live Stream %s] %s ', $scheduled, $video['title']);
             }
 
             if ($video['liveStreamStatus'] === 'live') {
@@ -183,6 +184,26 @@ HTML;
             }
         }
 
-        return $video['title'] . ' (' . $video['duration'] . ')';
+        return sprintf('%s (%s)', $video['title'], $video['duration']);
+    }
+
+    /**
+     * Get formatted scheduled date string
+     *
+     * @param int $scheduled Unix timestamp
+     */
+    private function getFormattedScheduledDate(int $scheduled = 0): string
+    {
+        $datetimeFormat = sprintf(
+            '%s %s',
+            $this->config->getDateFormat(),
+            $this->config->getTimeFormat()
+        );
+
+        return Convert::unixTime(
+            $scheduled,
+            $datetimeFormat,
+            $this->config->getTimezone()
+        );
     }
 }

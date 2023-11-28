@@ -281,8 +281,14 @@ select {
 .checkbox-text {
     margin-top: 5px;
     margin-left: 5px;
-    width: 100px;
+    margin-right: 5px;
 }
+
+.checkbox-note {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
 
 .videoWrapper {
     position: relative;

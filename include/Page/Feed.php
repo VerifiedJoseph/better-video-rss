@@ -33,6 +33,9 @@ class Feed
     /** @var boolean $embedVideos Embed videos status */
     private bool $embedVideos = false;
 
+    /** @var boolean $ignorePremieres Ignore upcoming video premieres */
+    private bool $ignorePremieres = false;
+
     /**
      * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
      * @param Config $config Config class instance
@@ -106,6 +109,7 @@ class Feed
         $format = new $formatClass(
             $this->getFeedData(),
             $this->getEmbedStatus(),
+            $this->ignorePremieres,
             $this->config
         );
 
@@ -160,6 +164,10 @@ class Feed
 
         if (isset($inputs['embed_videos'])) {
             $this->embedVideos = filter_var($inputs['embed_videos'], FILTER_VALIDATE_BOOLEAN);
+        }
+
+        if (isset($inputs['ignore_premieres'])) {
+            $this->ignorePremieres = filter_var($inputs['ignore_premieres'], FILTER_VALIDATE_BOOLEAN);
         }
 
         if (empty($this->feedId) === true) {

@@ -38,7 +38,7 @@ class JsonFormatTest extends TestCase
      */
     public function testBuild(): void
     {
-        $format = new JsonFormat($this->data, false, $this->config);
+        $format = new JsonFormat($this->data, false, false, $this->config);
         $format->build();
 
         $this->assertJsonStringEqualsJsonFile(
@@ -52,7 +52,7 @@ class JsonFormatTest extends TestCase
      */
     public function testGetContentType(): void
     {
-        $format = new JsonFormat($this->data, false, $this->config);
+        $format = new JsonFormat($this->data, false, false, $this->config);
         $format->build();
 
         $this->assertEquals('application/json', $format->getContentType());
@@ -63,7 +63,7 @@ class JsonFormatTest extends TestCase
      */
     public function testGetLastModified(): void
     {
-        $format = new JsonFormat($this->data, false, $this->config);
+        $format = new JsonFormat($this->data, false, false, $this->config);
         $format->build();
 
         $this->assertEquals('Wed, 18 Oct 2023 11:22:06 BST', $format->getLastModified());

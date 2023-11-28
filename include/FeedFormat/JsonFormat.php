@@ -58,6 +58,10 @@ class JsonFormat extends FeedFormat
     {
         $items = array();
         foreach ($this->data['videos'] as $video) {
+            if ($video['premiere'] === true && $this->ignorePremieres === true) {
+                continue;
+            }
+
             $item = array();
             $item['id'] = $video['url'];
             $item['url'] = $video['url'];
