@@ -31,6 +31,7 @@ class CacheTest extends TestCase
         $config->method('getCacheDisableStatus')->willReturn(false);
         $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
         $config->method('getCacheFileExtension')->willReturn('cache');
+        $config->method('getVersion')->willReturn('v0.0.0');
         self::$config = $config;
     }
 
