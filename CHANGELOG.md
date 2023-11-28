@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.5.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.5.0) - 2023-11-28
+
+- Added option to ignore upcoming video premieres. ([#190](https://github.com/VerifiedJoseph/better-video-rss/pull/190), [`646f876`](https://github.com/VerifiedJoseph/better-video-rss/commit/646f8764782b68f324116279f66f9eb126fcc44d))
+
 ## [1.4.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.4.0) - 2023-11-24
 
 - Added `Page` namespace. ([#185](https://github.com/VerifiedJoseph/better-video-rss/pull/185), [`1922e38`](https://github.com/VerifiedJoseph/better-video-rss/commit/1922e38bccceea5494dcdd2b911b2246cf78d26d))
