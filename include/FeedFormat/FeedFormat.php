@@ -159,27 +159,24 @@ HTML;
      */
     protected function buildTitle(array $video): string
     {
-        $emptyDuration = '00:00';
-
         if ($video['premiere'] === true) {
             $scheduled = $this->getFormattedScheduledDate($video['scheduled']);
+
+            if ($video['premiereStatus'] === 'live') {
+                return sprintf('[Live Premiere] %s (%s)', $video['title'], $video['duration']);
+            }
 
             return sprintf('[Premiere %s] %s (%s)', $scheduled, $video['title'], $video['duration']);
         }
 
-        if ($video['liveStream'] === true) {
-            if ($video['liveStreamStatus'] === 'upcoming') {
+        if ($video['stream'] === true) {
+            if ($video['streamStatus'] === 'upcoming') {
                 $scheduled = $this->getFormattedScheduledDate($video['scheduled']);
-
-                // deprecated: used by v1.4.0 and before
-                if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere
-                    return sprintf('[Premiere %s] %s (%s)', $scheduled, $video['title'], $video['duration']);
-                }
 
                 return sprintf('[Live Stream %s] %s ', $scheduled, $video['title']);
             }
 
-            if ($video['liveStreamStatus'] === 'live') {
+            if ($video['streamStatus'] === 'live') {
                 return '[Live] ' . $video['title'];
             }
         }
