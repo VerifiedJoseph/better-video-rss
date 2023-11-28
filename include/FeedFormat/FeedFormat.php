@@ -169,18 +169,9 @@ HTML;
 
         if ($video['liveStream'] === true) {
             if ($video['liveStreamStatus'] === 'upcoming') {
-                $datetimeFormat = sprintf(
-                    '%s %s',
-                    $this->config->getDateFormat(),
-                    $this->config->getTimeFormat()
-                );
+                $scheduled = $this->getFormattedScheduledDate($video['scheduled']);
 
-                $scheduled = Convert::unixTime(
-                    $video['liveStreamScheduled'],
-                    $datetimeFormat,
-                    $this->config->getTimezone()
-                );
-
+                // deprecated: used by v1.4.0 and before
                 if ($video['duration'] !== $emptyDuration) { // Has duration, is a video premiere
                     return '[Premiere ' . $scheduled . '] ' . $video['title'] . ' (' . $video['duration'] . ')';
                 }
@@ -198,7 +189,7 @@ HTML;
 
     /**
      * Get formatted scheduled date string
-     * 
+     *
      * @param int $scheduled Unix timestamp
      */
     private function getFormattedScheduledDate(int $scheduled = 0): string
