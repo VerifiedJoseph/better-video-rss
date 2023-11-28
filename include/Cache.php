@@ -88,7 +88,7 @@ class Cache
     private function setPath(): void
     {
         $this->path = $this->config->getCacheDirPath() . DIRECTORY_SEPARATOR .
-        $this->name . '.' . $this->config->getCacheFileExtension();
+        $this->name . '.cache';
     }
 
     /**

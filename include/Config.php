@@ -36,9 +36,6 @@ class Config
     /** @var string $defaultFeedFormats Default feed format */
     private string $defaultFeedFormat = 'rss';
 
-    /** @var string $cacheFileExtension Cache filename extension */
-    private string $cacheFileExtension = 'cache';
-
     /** @var array<string, mixed> $defaults Default values for optional config parameters */
     private array $defaults = [
         'RAW_API_ERRORS' => false,
@@ -314,16 +311,6 @@ class Config
     public function getFeedFormats(): array
     {
         return $this->feedFormats;
-    }
-
-    /**
-     * Returns cache filename extension
-     *
-     * @return string
-     */
-    public function getCacheFileExtension(): string
-    {
-        return $this->cacheFileExtension;
     }
 
     /**

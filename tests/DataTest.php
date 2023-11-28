@@ -25,7 +25,6 @@ class DataTest extends TestCase
         $config = self::createStub(Config::class);
         $config->method('getCacheDisableStatus')->willReturn(false);
         $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
-        $config->method('getCacheFileExtension')->willReturn('cache');
         $config->method('getVersion')->willReturn('v0.0.0');
 
         return $config;
