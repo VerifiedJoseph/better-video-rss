@@ -30,14 +30,25 @@ class Url
      * @param string $id Feed id
      * @param string $format Feed format
      * @param boolean $embed Embed video status
+     * @param boolean $ignorePremieres Ignore premieres status
      * @return string
      */
-    public static function getFeed(string $selfUrl, string $type, string $id, string $format, bool $embed = false)
-    {
+    public static function getFeed(
+        string $selfUrl,
+        string $type,
+        string $id,
+        string $format,
+        bool $embed = false,
+        bool $ignorePremieres = false
+    ) {
         $url = $selfUrl . 'feed.php?' . $type . '_id=' . $id . '&format=' . $format;
 
         if ($embed === true) {
             $url .= '&embed_videos=true';
+        }
+
+        if ($ignorePremieres === true) {
+            $url .= '&ignore_premieres=true';
         }
 
         return $url;

@@ -25,7 +25,8 @@ class UrlTest extends TestCase
                 $item->type,
                 $item->id,
                 $item->format,
-                $item->embed
+                $item->embed,
+                $item->ignore_premieres
             ));
         }
     }
