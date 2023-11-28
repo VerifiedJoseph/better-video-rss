@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.5.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.5.1) - 2023-11-28
+
+- Cache: Invalidate data when cache and script version numbers do not match. ([#192](https://github.com/VerifiedJoseph/better-video-rss/pull/192), [`d74e295`](https://github.com/VerifiedJoseph/better-video-rss/commit/d74e29580c61fbd78ac6bb2c571c3e442c3b75f0))
+- Config: Removed method `getCacheFileExtension()`. ([#194](https://github.com/VerifiedJoseph/better-video-rss/pull/194), [`8c4c4d5`](https://github.com/VerifiedJoseph/better-video-rss/commit/8c4c4d5bb36c36abd9deb14d9c7aab694f8e7e41))
+
 ## [1.5.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.5.0) - 2023-11-28
 
 - Added option to ignore upcoming video premieres. ([#190](https://github.com/VerifiedJoseph/better-video-rss/pull/190), [`646f876`](https://github.com/VerifiedJoseph/better-video-rss/commit/646f8764782b68f324116279f66f9eb126fcc44d))
