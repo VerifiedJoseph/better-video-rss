@@ -207,15 +207,17 @@ class Data
 
                 $video['duration'] = Convert::videoDuration($item->contentDetails->duration);
                 $video['tags'] = array();
-                $video['liveStream'] = false;
                 $video['premiere'] = false;
+                $video['liveStream'] = false;
 
                 if ($item->snippet->liveBroadcastContent !== 'none') {
+                    $video['scheduled'] = 0;
+
                     if (isset($item->liveStreamingDetails->scheduledStartTime)) {
                         $video['scheduled'] = strtotime($item->liveStreamingDetails->scheduledStartTime);
                     }
 
-                    if ($item->snippet->liveBroadcastContent === 'upcoming' && $video['duration'] !== 0) {
+                    if ($item->snippet->liveBroadcastContent === 'upcoming' && $video['duration'] !== '00:00') {
                         $video['premiere'] = true;
                     } else {
                         $video['liveStream'] = true;
