@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.5.2](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.5.2) - 2023-11-28
+
+- Reworked detecting video premieres. ([#198](https://github.com/VerifiedJoseph/better-video-rss/pull/198), [`e88dff8`](https://github.com/VerifiedJoseph/better-video-rss/commit/e88dff88aafd14004e2e718d5820bfa1652eb2fd))
+
 ## [1.5.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.5.1) - 2023-11-28
 
 - Cache: Invalidate data when cache and script version numbers do not match. ([#192](https://github.com/VerifiedJoseph/better-video-rss/pull/192), [`d74e295`](https://github.com/VerifiedJoseph/better-video-rss/commit/d74e29580c61fbd78ac6bb2c571c3e442c3b75f0))
