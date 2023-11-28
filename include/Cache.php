@@ -63,13 +63,16 @@ class Cache
      */
     public function save(array $data = []): void
     {
-        $this->data = $data;
         $data['version'] = $this->config->getVersion();
 
         if ($this->config->getCacheDisableStatus() === false) {
-            $data = Json::encode($data);
-            File::write($this->path, $data);
+            File::write(
+                $this->path,
+                Json::encode($data)
+            );
         }
+
+        $this->data = $data;
     }
 
     /**
