@@ -13,7 +13,7 @@ class DataTest extends TestCase
 
     private static stdClass $apiResponses;
     private static string $cacheFilepath = '';
-    private static string $feedId = 'UCBa659QWEk1AI4Tg--mrJ2A';
+    private static string $feedId = 'UCMufUaGlcuAvsSdzQV08BEA';
     private static string $feedType = 'channel';
 
     /**
@@ -97,7 +97,7 @@ class DataTest extends TestCase
      */
     public function testGetExpiredVideos(): void
     {
-        $expected = 'CkZyZFa5qO0,ZgDBIzClmPg';
+        $expected = 'Owd0fCoJhiv,jVhUHba1WyK,e3bDAwuzUnd,MVsly5H30BO';
 
         $this->assertEquals($expected, self::$data->getExpiredVideos());
     }
