@@ -196,6 +196,11 @@ HTML;
         return $video['title'] . ' (' . $video['duration'] . ')';
     }
 
+    /**
+     * Get formatted scheduled date string
+     * 
+     * @param int $scheduled Unix timestamp
+     */
     private function getFormattedScheduledDate(int $scheduled = 0): string
     {
         $datetimeFormat = sprintf(
