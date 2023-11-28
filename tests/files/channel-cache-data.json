@@ -32,6 +32,7 @@
                 "tomscott"
             ],
             "liveStream": false,
+            "premiere": false,
             "thumbnail": "https://i.ytimg.com/vi/CkZyZFa5qO0/maxresdefault.jpg",
             "fetched": 1697624526,
             "expires": 1697628126
@@ -49,6 +50,7 @@
                 "tomscott"
             ],
             "liveStream": false,
+            "premiere": false,
             "thumbnail": "https://i.ytimg.com/vi/ZgDBIzClmPg/maxresdefault.jpg",
             "fetched": 1697624526,
             "expires": 1697628126
