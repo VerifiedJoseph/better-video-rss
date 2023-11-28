@@ -66,6 +66,24 @@ class CacheTest extends TestCase
     }
 
     /**
+     * Test `load()` with config version that does not match cache version
+     */
+    public function testLoadWithNoVersionMatch(): void
+    {
+        /** @var PHPUnit\Framework\MockObject\Stub&Config */
+        $config = self::createStub(Config::class);
+        $config->method('getCacheDisableStatus')->willReturn(false);
+        $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
+        $config->method('getCacheFileExtension')->willReturn('cache');
+        $config->method('getVersion')->willReturn('v1.0.0');
+
+        $cache = new Cache(self::$channelId, $config);
+        $cache->load();
+
+        $this->assertEquals([], $cache->getData());
+    }
+
+    /**
      * Test `save()`
      */
     public function testSave(): void
