@@ -60,6 +60,10 @@ class HtmlFormat extends FeedFormat
         $items = '';
 
         foreach ($this->data['videos'] as $video) {
+            if ($video['premiere'] === true && $this->ignorePremieres === true) {
+                continue;
+            }
+
             $itemTitle = htmlEntities($this->buildTitle($video), ENT_QUOTES);
             $itemUrl = $video['url'];
             $itemCategories = $this->buildCategories($video['tags']);
