@@ -80,17 +80,15 @@ class CacheViewer
      */
     private function loadFiles(): void
     {
-        $regex = '/.' . preg_quote($this->config->getCacheFileExtension()) . '$/';
-
         $cacheDirectory = new \RecursiveDirectoryIterator($this->config->getCacheDirPath());
-        $cacheFiles = new \RegexIterator($cacheDirectory, $regex);
+        $cacheFiles = new \RegexIterator($cacheDirectory, '/.cache$/');
 
         foreach ($cacheFiles as $file) {
             $contents = File::read($file->getPathname());
             $data = Json::decodeToArray($contents);
 
             $this->data[] = array(
-                'id' => $file->getBasename('.' . $this->config->getCacheFileExtension()),
+                'id' => $file->getBasename('.cache'),
                 'modified' => $file->getMTime(),
                 'size' => $file->getSize(),
                 'contents' => $data
