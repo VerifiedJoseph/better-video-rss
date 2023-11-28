@@ -31,6 +31,7 @@ class CacheTest extends TestCase
         $config->method('getCacheDisableStatus')->willReturn(false);
         $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
         $config->method('getCacheFileExtension')->willReturn('cache');
+        $config->method('getVersion')->willReturn('v0.0.0');
         self::$config = $config;
     }
 
@@ -59,6 +60,24 @@ class CacheTest extends TestCase
     public function testLoadWithFeedIdNotInCache(): void
     {
         $cache = new Cache('UC4QobU6STFB0P71PMvOGN5A', self::$config);
+        $cache->load();
+
+        $this->assertEquals([], $cache->getData());
+    }
+
+    /**
+     * Test `load()` with config version that does not match cache version
+     */
+    public function testLoadWithNoVersionMatch(): void
+    {
+        /** @var PHPUnit\Framework\MockObject\Stub&Config */
+        $config = self::createStub(Config::class);
+        $config->method('getCacheDisableStatus')->willReturn(false);
+        $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
+        $config->method('getCacheFileExtension')->willReturn('cache');
+        $config->method('getVersion')->willReturn('v1.0.0');
+
+        $cache = new Cache(self::$channelId, $config);
         $cache->load();
 
         $this->assertEquals([], $cache->getData());

@@ -29,6 +29,7 @@ class ProxyTest extends TestCase
         $config->method('getTimeFormat')->willReturn('H:i');
         $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
         $config->method('getCacheFileExtension')->willReturn('cache');
+        $config->method('getVersion')->willReturn('v0.0.0');
         self::$config = $config;
     }
 

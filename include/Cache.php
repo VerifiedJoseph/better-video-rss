@@ -51,6 +51,7 @@ class Cache
 
             if ($contents !== '') {
                 $this->data = Json::decodeToArray($contents);
+                $this->validateVersion();
             }
         }
     }
@@ -63,6 +64,7 @@ class Cache
     public function save(array $data = []): void
     {
         $this->data = $data;
+        $this->data['version'] = $this->config->getVersion();
 
         if ($this->config->getCacheDisableStatus() === false) {
             $data = Json::encode($data);
@@ -87,5 +89,19 @@ class Cache
     {
         $this->path = $this->config->getCacheDirPath() . DIRECTORY_SEPARATOR .
         $this->name . '.' . $this->config->getCacheFileExtension();
+    }
+
+    /**
+     * Check if better-video-rss version in cache matches current version. If not cache data array is emptied.
+     */
+    private function validateVersion(): void
+    {
+        if (array_key_exists('version', $this->data) === false) {
+            $this->data = [];
+        }
+
+        if ($this->data['version'] !== $this->config->getVersion()) {
+            $this->data = [];
+        }
     }
 }
