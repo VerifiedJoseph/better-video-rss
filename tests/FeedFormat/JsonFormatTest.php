@@ -48,6 +48,34 @@ class JsonFormatTest extends TestCase
     }
 
     /**
+     * Test `build()` with video premieres ignored
+     */
+    public function testBuildWithIgnoredPremieres(): void
+    {
+        $format = new JsonFormat($this->data, false, true, $this->config);
+        $format->build();
+
+        $this->assertJsonStringEqualsJsonFile(
+            'tests/files/FeedFormats/expected-json-feed-with-ignored-premieres.json',
+            $format->get()
+        );
+    }
+
+    /**
+     * Test `build()` with video iframes
+     */
+    public function testBuildWithIFrames(): void
+    {
+        $format = new JsonFormat($this->data, true, false, $this->config);
+        $format->build();
+
+        $this->assertJsonStringEqualsJsonFile(
+            'tests/files/FeedFormats/expected-json-feed-with-iframes.json',
+            $format->get()
+        );
+    }
+
+    /**
      * Test `getContentType()`
      */
     public function testGetContentType(): void
