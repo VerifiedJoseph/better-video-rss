@@ -57,6 +57,10 @@ class RssFormat extends FeedFormat
         $items = '';
 
         foreach ($this->data['videos'] as $video) {
+            if ($video['premiere'] === true && $this->ignorePremieres === true) {
+                continue;
+            }
+
             $itemTitle = $this->xmlEncode(
                 $this->buildTitle($video)
             );
