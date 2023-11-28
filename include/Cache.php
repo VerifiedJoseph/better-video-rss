@@ -64,7 +64,7 @@ class Cache
     public function save(array $data = []): void
     {
         $this->data = $data;
-        $this->data['version'] = $this->config->getVersion();
+        $data['version'] = $this->config->getVersion();
 
         if ($this->config->getCacheDisableStatus() === false) {
             $data = Json::encode($data);
@@ -98,9 +98,7 @@ class Cache
     {
         if (array_key_exists('version', $this->data) === false) {
             $this->data = [];
-        }
-
-        if ($this->data['version'] !== $this->config->getVersion()) {
+        } elseif ($this->data['version'] !== $this->config->getVersion()) {
             $this->data = [];
         }
     }
