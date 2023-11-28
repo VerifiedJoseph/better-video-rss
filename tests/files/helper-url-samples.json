@@ -5,21 +5,24 @@
             "type": "channel",
             "id": "UC4QobU6STFB0P71PMvOGN5A",
             "format": "html",
-            "embed": false
+            "embed": false,
+            "ignore_premieres": false
         },
         {
-            "url": "https://example.com/feed.php?channel_id=UC4QobU6STFB0P71PMvOGN5A&format=rss&embed_videos=true",
+            "url": "https://example.com/feed.php?channel_id=UC4QobU6STFB0P71PMvOGN5A&format=rss&embed_videos=true&ignore_premieres=true",
             "type": "channel",
             "id": "UC4QobU6STFB0P71PMvOGN5A",
             "format": "rss",
-            "embed": true
+            "embed": true,
+            "ignore_premieres": true
         },
         {
-            "url": "https://example.com/feed.php?playlist_id=PLuhl9TnQPDCnWIhy_KSbtFwXVQnNvgfSh&format=json",
+            "url": "https://example.com/feed.php?playlist_id=PLuhl9TnQPDCnWIhy_KSbtFwXVQnNvgfSh&format=json&ignore_premieres=true",
             "type": "playlist",
             "id": "PLuhl9TnQPDCnWIhy_KSbtFwXVQnNvgfSh",
             "format": "json",
-            "embed": false
+            "embed": false,
+            "ignore_premieres": true
         }
     ],
     "thumbnails": [
