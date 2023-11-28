@@ -25,6 +25,9 @@ class Index
     /** @var boolean $embedVideos Embed videos status */
     private bool $embedVideos = false;
 
+    /** @var boolean $ignorePremieres Ignore upcoming video premieres */
+    private bool $ignorePremieres = false;
+
     /** @var string $feedId YouTube channel or playlist ID */
     private string $feedId = '';
 
@@ -85,7 +88,8 @@ class Index
                 $this->feedType,
                 $this->feedId,
                 $this->feedFormat,
-                $this->embedVideos
+                $this->embedVideos,
+                $this->ignorePremieres
             );
 
             $link = sprintf('Feed URL: <a href="%s">%s</a>', $url, $url);
@@ -154,6 +158,10 @@ class Index
 
         if (isset($inputs['embed_videos'])) {
             $this->embedVideos = true;
+        }
+
+        if (isset($inputs['ignore_premieres'])) {
+            $this->ignorePremieres = filter_var($inputs['ignore_premieres'], FILTER_VALIDATE_BOOLEAN);
         }
     }
 
