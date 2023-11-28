@@ -98,7 +98,7 @@ class Cache
     {
         if (array_key_exists('version', $this->data) === false) {
             $this->data = [];
-        } else if ($this->data['version'] !== $this->config->getVersion()) {
+        } elseif ($this->data['version'] !== $this->config->getVersion()) {
             $this->data = [];
         }
     }
