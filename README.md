@@ -47,7 +47,7 @@ volumes:
 
 1) Download the [latest release](https://github.com/VerifiedJoseph/better-video-rss/releases/latest) to your web server and extract the zip archive.
 
-2) Configure the application using `config.php` copied from [`config.php-dist`](config.example.php).
+2) Configure the application using `config.php` copied from [`config.example.php`](config.example.php).
 	
 	```
 	cp config.php-dist config.php
@@ -62,7 +62,7 @@ The cache and vendor folders do not need to be reachable in the browser and acce
 
 ## Configuration
 
-Environment variables are used to adjust the configuration. Alternatively, you can use `config.php` (copied from [`config.php-dist`](config.php-dist)).
+Environment variables are used to adjust the configuration. Alternatively, you can use `config.php` (copied from [`config.example.php`](config.example.php)).
 
 ### Required variables
 
