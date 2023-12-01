@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.5.3](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.5.3) - 2023-12-01
+
+- Updated alpine from 3.18.4 to 3.18.5 ([#204](https://github.com/VerifiedJoseph/better-video-rss/pull/204), [`41a0675`](https://github.com/VerifiedJoseph/better-video-rss/commit/41a067550cb8586b8baca9c7f566fa1a0840f192))
+
 ## [1.5.2](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.5.2) - 2023-11-28
 
 - Reworked detecting video premieres. ([#198](https://github.com/VerifiedJoseph/better-video-rss/pull/198), [`e88dff8`](https://github.com/VerifiedJoseph/better-video-rss/commit/e88dff88aafd14004e2e718d5820bfa1652eb2fd))
