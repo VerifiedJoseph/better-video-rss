@@ -229,6 +229,7 @@ button {
 
 summary {
     margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 #error {
@@ -286,9 +287,7 @@ select {
 
 .checkbox-note {
     margin-top: 5px;
-    margin-left: 5px;
 }
-
 
 .videoWrapper {
     position: relative;
