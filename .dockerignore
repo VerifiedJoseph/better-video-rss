@@ -12,3 +12,4 @@
 !/composer.json
 !/composer.lock
 !/docker/config/*
+!/docker/entrypoint.sh
