@@ -221,6 +221,15 @@ class Config
     }
 
     /**
+     * Returns cache format version status
+     * @return boolean
+     */
+    public function getCacheFormatVersion(): int
+    {
+        return (string) constant('CACHE_FORMAT_VERSION');
+    }
+
+    /**
      * Returns image proxy status
      * @return boolean
      */
