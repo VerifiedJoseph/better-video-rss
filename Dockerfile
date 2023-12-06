@@ -15,7 +15,6 @@ FROM alpine:3.18.5
 # Install packages
 RUN apk add --no-cache \
   nginx \
-  supervisor \
   php82 \
   php82-curl \
   php82-mbstring \
@@ -28,8 +27,11 @@ COPY --chown=nobody /docker/config/nginx.conf /etc/nginx/nginx.conf
 # Copy php-fpm config
 COPY --chown=nobody /docker/config/fpm-pool.conf /etc/php82/php-fpm.d/www.conf
 
-# Copy supervisord config
-COPY --chown=nobody /docker/config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Copy nginx config
+COPY --chown=nobody /docker/config/nginx.conf /etc/nginx/nginx.conf
+
+# Copy entrypoint script
+COPY --chown=nobody /docker/entrypoint.sh /entrypoint.sh
 
 # Copy code
 COPY --chown=nobody --from=composer /app/ /app
@@ -44,4 +46,4 @@ RUN chown -R nobody.nobody /run /app /var/lib/nginx /var/log/nginx
 RUN rm -r /app/docker && rm /app/composer.*
 
 USER nobody
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+ENTRYPOINT ["/entrypoint.sh"]
