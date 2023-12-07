@@ -30,7 +30,7 @@ class CacheTest extends TestCase
         $config = self::createStub(Config::class);
         $config->method('getCacheDisableStatus')->willReturn(false);
         $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
-        $config->method('getVersion')->willReturn('v0.0.0');
+        $config->method('getCacheFormatVersion')->willReturn(1);
         self::$config = $config;
     }
 
@@ -73,7 +73,7 @@ class CacheTest extends TestCase
         $config = self::createStub(Config::class);
         $config->method('getCacheDisableStatus')->willReturn(false);
         $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
-        $config->method('getVersion')->willReturn('v1.0.0');
+        $config->method('getCacheFormatVersion')->willReturn(2);
 
         $cache = new Cache(self::$channelId, $config);
         $cache->load();
