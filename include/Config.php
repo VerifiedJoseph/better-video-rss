@@ -222,11 +222,11 @@ class Config
 
     /**
      * Returns cache format version
-     * @return boolean
+     * @return int
      */
     public function getCacheFormatVersion(): int
     {
-        return (string) constant('CACHE_FORMAT_VERSION');
+        return (int) constant('CACHE_FORMAT_VERSION');
     }
 
     /**
