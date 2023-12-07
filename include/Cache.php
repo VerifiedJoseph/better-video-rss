@@ -63,7 +63,7 @@ class Cache
      */
     public function save(array $data = []): void
     {
-        $data['version'] = $this->config->getVersion();
+        $data['version'] = $this->config->getCacheFormatVersion();
 
         if ($this->config->getCacheDisableStatus() === false) {
             File::write(
@@ -95,13 +95,13 @@ class Cache
     }
 
     /**
-     * Check if better-video-rss version in cache matches current version. If not cache data array is emptied.
+     * Check if format version in cache matches current version. If not cache data array is emptied.
      */
     private function validateVersion(): void
     {
         if (array_key_exists('version', $this->data) === false) {
             $this->data = [];
-        } elseif ($this->data['version'] !== $this->config->getVersion()) {
+        } elseif ($this->data['version'] !== $this->config->getCacheFormatVersion()) {
             $this->data = [];
         }
     }
