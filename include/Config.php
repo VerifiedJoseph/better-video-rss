@@ -221,7 +221,7 @@ class Config
     }
 
     /**
-     * Returns cache format version status
+     * Returns cache format version
      * @return boolean
      */
     public function getCacheFormatVersion(): int
