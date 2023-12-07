@@ -63,7 +63,7 @@ class Cache
      */
     public function save(array $data = []): void
     {
-        $data['version'] = $this->config->getVersion();
+        $data['version'] = $this->config->getCacheFormatVersion();
 
         if ($this->config->getCacheDisableStatus() === false) {
             File::write(
