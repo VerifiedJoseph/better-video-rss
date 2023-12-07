@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.6.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.0) - 2023-12-07
+
+- html: Updated checkbox text and layout on index page. ([#215](https://github.com/VerifiedJoseph/better-video-rss/pull/215), [`b9f67cb`](https://github.com/VerifiedJoseph/better-video-rss/commit/b9f67cb40a65c6357920177e0719029986e3fe4d))
+- dockerfile: Replaced supervisor with entrypoint script. ([#213](https://github.com/VerifiedJoseph/better-video-rss/pull/213), [`23ca57e`](https://github.com/VerifiedJoseph/better-video-rss/commit/23ca57e1608773225abef24328617418d4fc5049))
+- cache: Added cache format version number. ([#216](https://github.com/VerifiedJoseph/better-video-rss/pull/216), [`e0ff104`](https://github.com/VerifiedJoseph/better-video-rss/commit/e0ff104042467e948ad56e6af52f7ee5274f6bd2))
+
 ## [1.5.3](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.5.3) - 2023-12-01
 
 - Updated alpine from 3.18.4 to 3.18.5 ([#204](https://github.com/VerifiedJoseph/better-video-rss/pull/204), [`41a0675`](https://github.com/VerifiedJoseph/better-video-rss/commit/41a067550cb8586b8baca9c7f566fa1a0840f192))
