@@ -10,7 +10,7 @@ RUN composer install \
   --no-progress \
   --no-dev
 
-FROM alpine:3.18.5
+FROM alpine:3.19.0
 
 # Install packages
 RUN apk add --no-cache \
