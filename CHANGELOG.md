@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.6.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.1) - 2023-12-08
+
+- FeedFormat: Fixed creating feed format URLs. ([#218](https://github.com/VerifiedJoseph/better-video-rss/pull/218), [`57be490`](https://github.com/VerifiedJoseph/better-video-rss/commit/57be4901c669b1fce53f5aa7d03d09212abd913d))
+
 ## [1.6.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.0) - 2023-12-07
 
 - html: Updated checkbox text and layout on index page. ([#215](https://github.com/VerifiedJoseph/better-video-rss/pull/215), [`b9f67cb`](https://github.com/VerifiedJoseph/better-video-rss/commit/b9f67cb40a65c6357920177e0719029986e3fe4d))
