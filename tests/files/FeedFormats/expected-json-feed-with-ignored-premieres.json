@@ -3,7 +3,7 @@
     "title": "Example Channel",
     "description": "",
     "home_page_url": "https:\/\/www.youtube.com\/channel\/UCMufUaGlcuAvsSdzQV08BEA",
-    "feed_url": "https:\/\/example.com\/feed.php?channel_id=UCMufUaGlcuAvsSdzQV08BEA&format=json",
+    "feed_url": "https:\/\/example.com\/feed.php?channel_id=UCMufUaGlcuAvsSdzQV08BEA&format=json&ignore_premieres=true",
     "icon": "https:\/\/yt3.ggpht.com\/ytc\/APkrFKa_zyQV8EMw0iOxEmPU3FgKrUtqWawD0F05JfEK=s176-c-k-c0x00ffffff-no-rj",
     "items": [
         {
