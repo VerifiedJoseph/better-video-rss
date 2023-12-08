@@ -185,6 +185,23 @@ HTML;
     }
 
     /**
+     * Create feed URL for a given format (html, rss or json)
+     *
+     * @param string $format Feed format
+     */
+    protected function createFeedUrl(string $format): string
+    {
+        return Url::getFeed(
+            $this->config->getSelfUrl(),
+            $this->data['details']['type'],
+            $this->data['details']['id'],
+            $format,
+            $this->embedVideos,
+            $this->ignorePremieres
+        );
+    }
+
+    /**
      * Get formatted scheduled date string
      *
      * @param int $scheduled Unix timestamp
