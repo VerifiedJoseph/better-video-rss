@@ -17,25 +17,8 @@ class HtmlFormat extends FeedFormat
     {
         $feedDescription = htmlEntities($this->data['details']['description'], ENT_QUOTES);
 
-        $rssUrl = htmlEntities(
-            Url::getFeed(
-                $this->config->getSelfUrl(),
-                $this->data['details']['type'],
-                $this->data['details']['id'],
-                'rss',
-                $this->embedVideos
-            )
-        );
-
-        $jsonUrl = htmlEntities(
-            Url::getFeed(
-                $this->config->getSelfUrl(),
-                $this->data['details']['type'],
-                $this->data['details']['id'],
-                'json',
-                $this->embedVideos
-            )
-        );
+        $rssUrl = htmlEntities($this->createFeedUrl('rss'));
+        $jsonUrl = htmlEntities($this->createFeedUrl('json'));
 
         $html = new Template('feed.html', [
             'feedTitle' => htmlEntities($this->data['details']['title'], ENT_QUOTES),
@@ -112,14 +95,7 @@ HTML;
 
         foreach ($this->config->getFeedFormats() as $format) {
             $text = strtoupper($format);
-            $url = Url::getFeed(
-                $this->config->getSelfUrl(),
-                $this->data['details']['type'],
-                $this->data['details']['id'],
-                $format,
-                $this->embedVideos
-            );
-
+            $url = $this->createFeedUrl($format);
             $html .= sprintf('<a href="%s"><button>%s</button></a>', $url, $text);
         }
 
