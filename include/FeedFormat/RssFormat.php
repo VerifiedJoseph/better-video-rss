@@ -23,16 +23,7 @@ class RssFormat extends FeedFormat
             Convert::unixTime($this->data['updated'], 'r', $this->config->getTimezone())
         );
         $feedImage = $this->xmlEncode($this->data['details']['thumbnail']);
-
-        $selfUrl = $this->xmlEncode(
-            Url::getFeed(
-                $this->config->getSelfUrl(),
-                $this->data['details']['type'],
-                $this->data['details']['id'],
-                'rss',
-                $this->embedVideos
-            )
-        );
+        $selfUrl = $this->xmlEncode($this->createFeedUrl('rss'));
 
         $xml = new Template('feed.xml', [
             'feedTitle' => $feedTitle,
