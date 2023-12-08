@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.6.2](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.2) - 2023-12-08
+
+- Dockerfile: Added health check for php-fpm. ([#224](https://github.com/VerifiedJoseph/better-video-rss/pull/224), [`1dd2728`](https://github.com/VerifiedJoseph/better-video-rss/commit/1dd2728146d97ff986047b2f4fd39fa9c1f4bad7))
+- Dockerfile: Fixed entrypoint. ([#222](https://github.com/VerifiedJoseph/better-video-rss/pull/222), [`91186f8`](https://github.com/VerifiedJoseph/better-video-rss/commit/91186f8653139593e04ae5edceedc39c27cfe0dc))
+- Dockerfile: Updated alpine from 3.18.5 to 3.19.0 ([#226](https://github.com/VerifiedJoseph/better-video-rss/pull/226), [`0b5bb03`](https://github.com/VerifiedJoseph/better-video-rss/commit/0b5bb03580582ef6061a5335aab65f9005b4b970))
+
 ## [1.6.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.1) - 2023-12-08
 
 - FeedFormat: Fixed creating feed format URLs. ([#218](https://github.com/VerifiedJoseph/better-video-rss/pull/218), [`57be490`](https://github.com/VerifiedJoseph/better-video-rss/commit/57be4901c669b1fce53f5aa7d03d09212abd913d))
