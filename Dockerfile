@@ -15,6 +15,7 @@ FROM alpine:3.18.5
 # Install packages
 RUN apk add --no-cache \
   nginx \
+  curl \
   php82 \
   php82-curl \
   php82-mbstring \
@@ -44,6 +45,9 @@ RUN chown -R nobody.nobody /run /app /var/lib/nginx /var/log/nginx
 
 # Remove setup files
 RUN rm -r /app/docker && rm /app/composer.*
+
+# php-fpm hleath check
+HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
 
 USER nobody
 ENTRYPOINT ["/bin/sh", "entrypoint.sh"]
