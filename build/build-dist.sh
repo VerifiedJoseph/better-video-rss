@@ -13,6 +13,6 @@ cp ./feed.php ./dist/feed.php
 cp ./proxy.php ./dist/proxy.php
 cp ./cache-viewer.php ./dist/cache-viewer.php
 cp ./tools.html ./dist/tools.html
-cp ./config.php-dist ./dist/config.php-dist
+cp ./config.example.php ./dist/config.example.php
 cp ./README.md ./dist/README.md
 cp ./LICENSE ./dist/LICENSE
