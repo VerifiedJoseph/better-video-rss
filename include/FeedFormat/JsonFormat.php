@@ -28,13 +28,7 @@ class JsonFormat extends FeedFormat
         $feedDescription = $this->data['details']['description'];
         $feedTitle = $this->data['details']['title'];
         $feedHomePageUrl = $this->data['details']['url'];
-        $feedUrl = Url::getFeed(
-            $this->config->getSelfUrl(),
-            $this->data['details']['type'],
-            $this->data['details']['id'],
-            'json',
-            $this->embedVideos
-        );
+        $feedUrl = $this->createFeedUrl('json');
         $feedImage = $this->data['details']['thumbnail'];
         $items = $this->buildItems();
         $feed = array(
