@@ -50,7 +50,7 @@ volumes:
 2) Configure the application using `config.php` copied from [`config.example.php`](config.example.php).
 	
 	```
-	cp config.php-dist config.php
+	cp config.example.php config.php
 	```
 
 **Notes**
