@@ -46,4 +46,4 @@ RUN chown -R nobody.nobody /run /app /var/lib/nginx /var/log/nginx
 RUN rm -r /app/docker && rm /app/composer.*
 
 USER nobody
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "entrypoint.sh"]
