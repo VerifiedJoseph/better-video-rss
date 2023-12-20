@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.6.3](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.3) - 2023-12-20
+
+- Dockerfile: Updated composer from 2.6.5 to 2.6.6 ([#232](https://github.com/VerifiedJoseph/better-video-rss/pull/232), [`6c4a04c`](https://github.com/VerifiedJoseph/better-video-rss/commit/6c4a04c9b6ef9f5371cbe268ef6926c867a093eb))
+
 ## [1.6.2](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.2) - 2023-12-08
 
 - Dockerfile: Added health check for php-fpm. ([#224](https://github.com/VerifiedJoseph/better-video-rss/pull/224), [`1dd2728`](https://github.com/VerifiedJoseph/better-video-rss/commit/1dd2728146d97ff986047b2f4fd39fa9c1f4bad7))
