@@ -22,3 +22,8 @@ updates:
     directory: "/.devcontainer/nginx/"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "docker"
+    directory: "/.devcontainer/httpbin/"
+    schedule:
+      interval: "weekly"
