@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.6.3](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.3) - 2024-01-29
+
+- Dockerfile: Updated alpine from 3.19.0 to 3.19.1 ([#248](https://github.com/VerifiedJoseph/better-video-rss/pull/248), [`cf5145d`](https://github.com/VerifiedJoseph/better-video-rss/commit/cf5145d719bb864dcb33dbafe139f895fb7e8273))
+
 ## [1.6.3](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.3) - 2023-12-20
 
 - Dockerfile: Updated composer from 2.6.5 to 2.6.6 ([#232](https://github.com/VerifiedJoseph/better-video-rss/pull/232), [`6c4a04c`](https://github.com/VerifiedJoseph/better-video-rss/commit/6c4a04c9b6ef9f5371cbe268ef6926c867a093eb))
