@@ -7,6 +7,7 @@ services:
       - "9000"
     volumes:
       - ../:/better-video-rss
+      - vendor:/better-video-rss/vendor
     working_dir: /better-video-rss
     env_file:
       - .env
@@ -18,6 +19,7 @@ services:
       - 8080:8080
     volumes:
       - ../:/better-video-rss:ro
+      - vendor:/better-video-rss/vendor:ro
     working_dir: /better-video-rss
 
   httpbin:
@@ -26,3 +28,6 @@ services:
     ports:
       - "8081:80"
     command: ["go-httpbin", "-port", "80"]
+
+volumes:
+  vendor:
