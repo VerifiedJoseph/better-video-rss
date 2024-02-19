@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented in this file.
 
-## [1.6.4](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.5) - 2024-02-19
+## [1.6.5](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.6.5) - 2024-02-19
 
 - Dockerfile: Updated composer from 2.6.6 to 2.7.1 ([#253](https://github.com/VerifiedJoseph/better-video-rss/pull/253), [`14ab856`](https://github.com/VerifiedJoseph/better-video-rss/commit/14ab856a367bb770cdf10874cc0ddf7351dd57d0))
 
