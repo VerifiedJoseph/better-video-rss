@@ -132,4 +132,31 @@ class IndexTest extends TestCase
         $index = new Index($inputs, $config, $api);
         $index->display();
     }
+
+    /**
+     * test `display()` with URL query
+     */
+    public function testDisplayWithUrlQuery(): void
+    {
+        $this->expectOutputString(
+            file_get_contents('tests/files/Pages/expected-index-from-url-feed-url.html')
+        );
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Api */
+        $api = $this->createStub(Api::class);
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Config */
+        $config = $this->createStub(Config::class);
+        $config->method('getVersion')->willReturn('0.0.0');
+        $config->method('getDefaultFeedFormat')->willReturn('html');
+        $config->method('getFeedFormats')->willReturn(['rss', 'html', 'json']);
+
+        $inputs = [
+            'query' => 'https://www.youtube.com/channel/UCMufUaGlcuAvsSdzQV08BEA',
+            'type' => 'url'
+        ];
+
+        $index = new Index($inputs, $config, $api);
+        $index->display();
+    }
 }
