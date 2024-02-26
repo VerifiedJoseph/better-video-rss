@@ -62,4 +62,40 @@ class IndexTest extends TestCase
 
         new Index($inputs, self::$config, self::$api);
     }
+
+    /**
+     * test `display()` with channel query
+     */
+    public function testDisplayWithChannelQuery(): void
+    {
+        $this->expectOutputString(
+            file_get_contents('tests/files/Pages/expected-index-channel-feed-url.html')
+        );
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Api */
+        $api = $this->createStub(Api::class);
+        $api->method('searchChannels')->willReturn((object) [
+            'items' => [
+                (object) [
+                    'id' => (object) ['channelId' => 'UCMufUaGlcuAvsSdzQV08BEA'],
+                    'snippet' => (object) ['title' => 'Example channel']
+                ]
+            ]
+        ]);
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Config */
+        $config = $this->createStub(Config::class);
+        $config->method('getVersion')->willReturn('0.0.0');
+        $config->method('getDefaultFeedFormat')->willReturn('html');
+        $config->method('getFeedFormats')->willReturn(['rss', 'html', 'json']);
+
+        $inputs = [
+            'query' => 'Hello World',
+            'type' => 'channel'
+        ];
+
+        $index = new Index($inputs, $config, $api);
+        $index->display();
+    }
+
 }
