@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Exception;
+
 class Find
 {
     /** @var string $type Content type */
@@ -35,8 +37,16 @@ class Find
     {
         if ($this->type === 'channel') {
             $response = $this->api->searchChannels($query);
+
+            if (empty($response->items)) {
+                throw new Exception('Channel not found');
+            }
         } else {
             $response = $this->api->searchPlaylists($query);
+
+            if (empty($response->items)) {
+                throw new Exception('Playlist not found');
+            }
         }
 
         $this->title = $response->items[0]->snippet->title;
