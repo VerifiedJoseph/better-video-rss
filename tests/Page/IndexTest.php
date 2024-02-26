@@ -69,7 +69,7 @@ class IndexTest extends TestCase
     public function testDisplayWithChannelQuery(): void
     {
         $this->expectOutputString(
-            file_get_contents('tests/files/Pages/expected-index-channel-feed-url.html')
+            (string) file_get_contents('tests/files/Pages/expected-index-channel-feed-url.html')
         );
 
         /** @var PHPUnit\Framework\MockObject\Stub&Api */
@@ -104,7 +104,7 @@ class IndexTest extends TestCase
     public function testDisplayWithPlaylistQuery(): void
     {
         $this->expectOutputString(
-            file_get_contents('tests/files/Pages/expected-index-playlist-feed-url.html')
+            (string) file_get_contents('tests/files/Pages/expected-index-playlist-feed-url.html')
         );
 
         /** @var PHPUnit\Framework\MockObject\Stub&Api */
@@ -139,7 +139,7 @@ class IndexTest extends TestCase
     public function testDisplayWithUrlQuery(): void
     {
         $this->expectOutputString(
-            file_get_contents('tests/files/Pages/expected-index-from-url-feed-url.html')
+            (string) file_get_contents('tests/files/Pages/expected-index-from-url-feed-url.html')
         );
 
         /** @var PHPUnit\Framework\MockObject\Stub&Api */
