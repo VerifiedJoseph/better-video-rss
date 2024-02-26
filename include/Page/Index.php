@@ -4,6 +4,7 @@ namespace App\Page;
 
 use App\Config;
 use App\Api;
+use App\Find;
 use App\Detect;
 use App\Template;
 use App\Helper\Output;
@@ -27,6 +28,9 @@ class Index
 
     /** @var boolean $ignorePremieres Ignore upcoming video premieres */
     private bool $ignorePremieres = false;
+
+    /** @var string $feedTitle YouTube channel or playlist title */
+    private string $feedTitle = '';
 
     /** @var string $feedId YouTube channel or playlist ID */
     private string $feedId = '';
@@ -92,13 +96,13 @@ class Index
                 $this->ignorePremieres
             );
 
-            $link = sprintf('Feed URL: <a href="%s">%s</a>', $url, $url);
+            $link = $this->createFeedLink($url);
 
             if ($this->fromUrl === true) {
                 $fromUrlLink = $link;
             } elseif ($this->feedType === 'channel') {
                 $channelLink = $link;
-            } elseif ($this->feedType === 'playlist') {
+            } else {
                 $playlistLink = $link;
             }
         }
@@ -187,10 +191,14 @@ class Index
                     $this->query = $detect->getValue();
                 }
 
-                if ($this->feedType === 'channel') {
-                    $this->feedId = $this->findChannel($this->query);
+                if ($this->validateFeedId($this->query) === true) {
+                    $this->feedId = $this->query;
                 } else {
-                    $this->feedId = $this->findPlaylist($this->query);
+                    $find = new Find($this->feedType, $this->api);
+                    $find->lookup($this->query);
+
+                    $this->feedId = $find->getId();
+                    $this->feedTitle = $find->getTitle();
                 }
             }
         } catch (Exception $e) {
@@ -200,49 +208,21 @@ class Index
     }
 
     /**
-     * Find channel
+     * Validate a feed id
      *
      * @param string $query
-     * @return string Channel Id
-     *
-     * @throws Exception if channel is not found
      */
-    private function findChannel(string $query): string
+    private function validateFeedId(string $query): bool
     {
-        if (Validate::channelId($query) === true) {
-            return $query;
+        if ($this->feedType === 'channel') {
+            return Validate::channelId($query);
         }
 
-        $response = $this->api->searchChannels($query);
-
-        if (empty($response->items)) {
-            throw new Exception('Channel not found');
+        if ($this->feedType === 'playlist') {
+            return Validate::playlistId($query);
         }
 
-        return $response->items[0]->id->channelId;
-    }
-
-    /**
-     * Find playlist
-     *
-     * @param string $query
-     * @return string Playlist Id
-     *
-     * @throws Exception if playlist is not found
-     */
-    private function findPlaylist(string $query): string
-    {
-        if (Validate::playlistId($query) === true) {
-            return $query;
-        }
-
-        $response = $this->api->searchPlaylists($query);
-
-        if (empty($response->items)) {
-            throw new Exception('Playlist not found');
-        }
-
-        return $response->items[0]->id->playlistId;
+        return false;
     }
 
     /**
@@ -258,5 +238,25 @@ class Index
         }
 
         return sprintf('<select name="format">%s</select>', $options);
+    }
+
+    /**
+     * Create feed link
+     *
+     * @param $url $url Feed url
+     * @return string
+     */
+    private function createFeedLink(string $url): string
+    {
+        if ($this->feedTitle !== '') {
+            return sprintf(
+                'Feed URL for <strong>%s</strong>:<br><a href="%s">%s</a>',
+                htmlEntities($this->feedTitle, ENT_QUOTES),
+                $url,
+                $url,
+            );
+        }
+
+        return sprintf('Feed URL:<br><a href="%s">%s</a>', $url, $url);
     }
 }
