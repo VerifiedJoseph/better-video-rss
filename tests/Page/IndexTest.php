@@ -98,4 +98,38 @@ class IndexTest extends TestCase
         $index->display();
     }
 
+    /**
+     * test `display()` with playlist query
+     */
+    public function testDisplayWithPlaylistQuery(): void
+    {
+        $this->expectOutputString(
+            file_get_contents('tests/files/Pages/expected-index-playlist-feed-url.html')
+        );
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Api */
+        $api = $this->createStub(Api::class);
+        $api->method('searchPlaylists')->willReturn((object) [
+            'items' => [
+                (object) [
+                    'id' => (object) ['playlistId' => 'PLuQSJ2zY5-wSWuKSVrokXq7mDCRqGPsFW'],
+                    'snippet' => (object) ['title' => 'Example playlist']
+                ]
+            ]
+        ]);
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Config */
+        $config = $this->createStub(Config::class);
+        $config->method('getVersion')->willReturn('0.0.0');
+        $config->method('getDefaultFeedFormat')->willReturn('html');
+        $config->method('getFeedFormats')->willReturn(['rss', 'html', 'json']);
+
+        $inputs = [
+            'query' => 'Hello World',
+            'type' => 'playlist'
+        ];
+
+        $index = new Index($inputs, $config, $api);
+        $index->display();
+    }
 }
