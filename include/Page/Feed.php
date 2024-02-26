@@ -59,16 +59,16 @@ class Feed
         $fetch = new Fetch($this->config);
 
         $data = new Data(
-            $this->getFeedId(),
-            $this->getFeedType(),
+            $this->feedId,
+            $this->feedType,
             $this->config
         );
 
         foreach ($data->getExpiredParts() as $part) {
             if ($part === 'feed') {
                 $response = $fetch->feed(
-                    $this->getFeedId(),
-                    $this->getFeedType()
+                    $this->feedId,
+                    $this->feedType
                 );
 
                 $data->updateFeed($response);
@@ -76,8 +76,8 @@ class Feed
 
             if ($part === 'details') {
                 $response = $this->api->getDetails(
-                    $this->getFeedType(),
-                    $this->getFeedId(),
+                    $this->feedType,
+                    $this->feedId,
                     $data->getPartEtag($part)
                 );
 
@@ -103,12 +103,12 @@ class Feed
 
     public function output(): void
     {
-        $formatClass = sprintf('App\FeedFormat\%sFormat', ucfirst($this->getFeedFormat()));
+        $formatClass = sprintf('App\FeedFormat\%sFormat', ucfirst($this->feedFormat));
 
         /** @var \App\FeedFormat\RssFormat|\App\FeedFormat\JsonFormat|\App\FeedFormat\HtmlFormat */
         $format = new $formatClass(
-            $this->getFeedData(),
-            $this->getEmbedStatus(),
+            $this->feedData,
+            $this->embedVideos,
             $this->ignorePremieres,
             $this->config
         );
@@ -173,55 +173,5 @@ class Feed
         if (empty($this->feedId) === true) {
             throw new Exception('No channel or playlist ID parameter given.');
         }
-    }
-
-    /**
-     * Return feed data
-     *
-     * @return array<string, mixed>
-     */
-    private function getFeedData(): array
-    {
-        return $this->feedData;
-    }
-
-    /**
-     * Return feed type
-     *
-     * @return string
-     */
-    private function getFeedType(): string
-    {
-        return $this->feedType;
-    }
-
-    /**
-     * Return feed ID
-     *
-     * @return string
-     */
-    private function getFeedId(): string
-    {
-        return $this->feedId;
-    }
-
-    /**
-     * Return feed format
-     *
-     * @return string
-     */
-    private function getFeedFormat(): string
-    {
-        return $this->feedFormat;
-    }
-
-    /**
-     * Return embed video status
-     *
-     * @return boolean
-     */
-    private function getEmbedStatus(): bool
-    {
-        return $this->embedVideos;
     }
 }
