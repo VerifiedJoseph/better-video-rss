@@ -251,7 +251,7 @@ class Index
         if ($this->feedTitle !== '') {
             return sprintf(
                 'Feed URL for <strong>%s</strong>:<br><a href="%s">%s</a>',
-                $this->feedTitle,
+                htmlEntities($this->feedTitle, ENT_QUOTES),
                 $url,
                 $url,
             );
