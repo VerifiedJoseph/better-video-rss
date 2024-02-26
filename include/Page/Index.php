@@ -96,13 +96,13 @@ class Index
                 $this->ignorePremieres
             );
 
-            $link = sprintf('Feed URL: <a href="%s">%s</a>', $url, $url);
+            $link = $this->createFeedLink($url);
 
             if ($this->fromUrl === true) {
                 $fromUrlLink = $link;
             } elseif ($this->feedType === 'channel') {
                 $channelLink = $link;
-            } elseif ($this->feedType === 'playlist') {
+            } else {
                 $playlistLink = $link;
             }
         }
@@ -207,6 +207,11 @@ class Index
         }
     }
 
+    /**
+     * Validate a feed id
+     *
+     * @param string $query
+     */
     private function validateFeedId(string $query): bool
     {
         if ($this->feedType === 'channel') {
@@ -233,5 +238,25 @@ class Index
         }
 
         return sprintf('<select name="format">%s</select>', $options);
+    }
+
+    /**
+     * Create feed link
+     *
+     * @param $url $url Feed url
+     * @return string
+     */
+    private function createFeedLink(string $url): string
+    {
+        if ($this->feedTitle !== '') {
+            return sprintf(
+                'Feed URL for <strong>%s</strong>:<br><a href="%s">%s</a>',
+                $this->feedTitle,
+                $url,
+                $url,
+            );
+        }
+
+        return sprintf('Feed URL:<br><a href="%s">%s</a>', $url, $url);
     }
 }
