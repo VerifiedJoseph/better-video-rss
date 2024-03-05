@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 use App\Config;
 use App\Helper\Output;
-use App\Page\Proxy;
+use App\Proxy;
 
 try {
     $config = new Config();
