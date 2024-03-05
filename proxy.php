@@ -5,11 +5,10 @@ require 'include/version.php';
 
 use App\Config;
 use App\Helper\Output;
-use App\Page\Proxy;
+use App\Proxy;
 
 try {
     $config = new Config();
-    $config->checkInstall();
     $config->checkConfig();
 
     $proxy = new Proxy($_GET, $config);
