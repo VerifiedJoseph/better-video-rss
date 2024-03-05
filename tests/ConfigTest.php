@@ -12,6 +12,7 @@ class ConfigTest extends TestCase
         putenv('BVRSS_SELF_URL_PATH');
         putenv('BVRSS_YOUTUBE_API_KEY');
 
+        putenv('BVRSS_CACHE_DIR');
         putenv('BVRSS_DISABLE_CACHE');
         putenv('BVRSS_ENABLE_CACHE_VIEWER');
         putenv('BVRSS_DISABLE_CSP');
@@ -90,6 +91,13 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheDirPath(): void
     {
+        putenv('BVRSS_CACHE_DIR=cache');
+
+        $config = new Config();
+        $config->checkCache();
+
+        $path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache';
+        $this->assertEquals($path, $config->getCacheDirPath());
     }
 
     /**
@@ -111,6 +119,12 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheDirectory(): void
     {
+        putenv('BVRSS_CACHE_DIR=cache');
+
+        $config = new Config();
+        $config->checkCache();
+
+        $this->assertEquals('cache', $config->getCacheDirectory());
     }
 
     /**
