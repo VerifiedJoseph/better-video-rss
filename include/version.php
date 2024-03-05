@@ -7,7 +7,7 @@
 /**
  * @const VERSION BetterVideoRss version
  */
-define('VERSION', '1.6.5');
+define('VERSION', '1.7.0');
 
 /**
  * @const CACHE_FORMAT_VERSION Cache format version number
