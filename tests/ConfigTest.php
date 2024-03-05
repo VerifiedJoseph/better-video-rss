@@ -18,6 +18,7 @@ class ConfigTest extends TestCase
         putenv('BVRSS_ENABLE_IMAGE_PROXY');
         putenv('BVRSS_TIMEZONE');
         putenv('BVRSS_DATE_FORMAT');
+        putenv('BVRSS_TIME_FORMAT');
     }
 
     public function testGetCsp(): void
@@ -144,6 +145,19 @@ class ConfigTest extends TestCase
         $config->checkOptional();
 
         $this->assertEquals('c', $config->getDateFormat());
+    }
+
+    /**
+     * Test `getTimeFormat()`
+     */
+    public function testGetTimeFormat(): void
+    {
+        putenv('BVRSS_TIME_FORMAT=G:i:s');
+
+        $config = new Config();
+        $config->checkOptional();
+
+        $this->assertEquals('G:i:s', $config->getTimeFormat());
     }
 
     /**
