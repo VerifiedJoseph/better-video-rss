@@ -22,8 +22,13 @@ class ConfigTest extends TestCase
         putenv('BVRSS_RAW_API_ERRORS');
     }
 
+    /**
+     * Test `getCsp()`
+     */
     public function testGetCsp(): void
     {
+        $config = new Config();
+        $this->assertStringContainsString("default-src 'self';", $config->getCsp());
     }
 
     /**
@@ -71,6 +76,7 @@ class ConfigTest extends TestCase
         $this->assertEquals('rss', $config->getDefaultFeedFormat());
     }
 
+    /**
      * Test `getFeedFormats()`
      */
     public function tesGetFeedFormats(): void
