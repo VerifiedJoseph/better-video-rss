@@ -36,8 +36,8 @@ class Config
     /** @var string $defaultFeedFormats Default feed format */
     private string $defaultFeedFormat = 'rss';
 
-    /** @var array<string, mixed> $defaults Default values for optional config parameters */
-    private array $defaults = [
+    /** @var array<string, mixed> $config Config with default values for optional parameters */
+    private array $config = [
         'RAW_API_ERRORS' => false,
         'TIMEZONE' => 'UTC',
         'DATE_FORMAT' => 'F j, Y',
@@ -49,8 +49,10 @@ class Config
         'DISABLE_CSP' => false
     ];
 
-    /** @var array<string, mixed> $config Loaded config parameters */
-    private array $config = [];
+    public function __construct()
+    {
+        $this->checkInstall();
+    }
 
     /**
      * Check PHP version and loaded extensions
@@ -59,7 +61,7 @@ class Config
      * @throws Exception if a PHP extension is not loaded
      * @throws Exception if a api-endpoints.json is not found
      */
-    public function checkInstall(): void
+    private function checkInstall(): void
     {
         if (version_compare(PHP_VERSION, $this->minPhpVersion) === -1) {
             throw new Exception('BetterVideoRss requires at least PHP version ' . $this->minPhpVersion);
@@ -83,14 +85,10 @@ class Config
      * @throws ConfigException if self URL path does not end with a forward slash.
      * @throws ConfigException if self URL path does not start with http:// or https://.
      * @throws ConfigException if YouTube API key environment variable is not set.
-     * @throws ConfigException if timezone environment variable is invalid.
-     * @throws ConfigException if cache directory could not be created.
-     * @throws ConfigException if cache directory is not writable.
      */
     public function checkConfig(): void
     {
         $this->requireConfigFile();
-        $this->setDefaults();
 
         if ($this->hasEnv('SELF_URL_PATH') === false || $this->getEnv('SELF_URL_PATH') === '') {
             throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
@@ -112,6 +110,50 @@ class Config
 
         $this->config['YOUTUBE_API_KEY'] = $this->getEnv('YOUTUBE_API_KEY');
 
+        $this->checkOptional();
+        $this->checkCache();
+    }
+
+    /**
+     * Check cache parameters
+     *
+     * @throws ConfigException if cache directory could not be created.
+     * @throws ConfigException if cache directory is not writable.
+     */
+    public function checkCache(): void
+    {
+        if ($this->getEnv('DISABLE_CACHE') === 'true') {
+            $this->config['DISABLE_CACHE'] = true;
+        }
+
+        if ($this->getEnv('ENABLE_CACHE_VIEWER') === 'true') {
+            $this->config['ENABLE_CACHE_VIEWER'] = true;
+        }
+
+        if ($this->config['DISABLE_CACHE'] === false) {
+            if ($this->hasEnv('CACHE_DIR') === true && $this->getEnv('CACHE_DIR') !== '') {
+                $this->config['CACHE_DIR'] = $this->getEnv('CACHE_DIR');
+            }
+
+            $cacheDir = $this->getCacheDirPath();
+
+            if (is_dir($cacheDir) === false && mkdir($cacheDir, $this->mkdirMode) === false) {
+                throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
+            }
+
+            if (is_dir($cacheDir) && is_writable($cacheDir) === false) {
+                throw new ConfigException('Cache directory is not writable. [BVRSS_CACHE_DIR]');
+            }
+        }
+    }
+
+    /**
+     * Check optional parameters excluding cache (see `checkCache()`)
+     *
+     * @throws ConfigException if timezone environment variable is invalid.
+     */
+    public function checkOptional(): void
+    {
         if ($this->getEnv('RAW_API_ERRORS') === 'true') {
             $this->config['RAW_API_ERRORS'] = true;
         }
@@ -133,28 +175,6 @@ class Config
 
         if ($this->hasEnv('TIME_FORMAT') === true && $this->getEnv('TIME_FORMAT') !== '') {
             $this->config['TIME_FORMAT'] = $this->getEnv('TIME_FORMAT');
-        }
-
-        if ($this->hasEnv('CACHE_DIR') === true && $this->getEnv('CACHE_DIR') !== '') {
-            $this->config['CACHE_DIR'] = $this->getEnv('CACHE_DIR');
-        }
-
-        $cacheDir = $this->getCacheDirPath();
-
-        if (is_dir($cacheDir) === false && mkdir($cacheDir, $this->mkdirMode) === false) {
-            throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
-        }
-
-        if (is_dir($cacheDir) && is_writable($cacheDir) === false) {
-            throw new ConfigException('Cache directory is not writable. [BVRSS_CACHE_DIR]');
-        }
-
-        if ($this->getEnv('DISABLE_CACHE') === 'true') {
-            $this->config['DISABLE_CACHE'] = true;
-        }
-
-        if ($this->getEnv('ENABLE_CACHE_VIEWER') === 'true') {
-            $this->config['ENABLE_CACHE_VIEWER'] = true;
         }
 
         if ($this->getEnv('ENABLE_IMAGE_PROXY') === 'true') {
@@ -195,9 +215,9 @@ class Config
 
     /**
      * Returns cache directory
-     * @return boolean
+     * @return string
      */
-    public function getCacheDirectory(): bool
+    public function getCacheDirectory(): string
     {
         return $this->config['CACHE_DIR'];
     }
@@ -344,14 +364,6 @@ class Config
         if (file_exists('config.php') === true) {
             require 'config.php';
         }
-    }
-
-    /**
-     * Set defaults as config values
-     */
-    private function setDefaults(): void
-    {
-        $this->config = $this->defaults;
     }
 
     /**

@@ -8,7 +8,6 @@ use App\Page\CacheViewer;
 
 try {
     $config = new Config();
-    $config->checkInstall();
     $config->checkConfig();
 
     $viewer = new CacheViewer($_POST, $config);

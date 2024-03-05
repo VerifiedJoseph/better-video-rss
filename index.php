@@ -9,7 +9,6 @@ use App\Helper\Output;
 
 try {
     $config = new Config();
-    $config->checkInstall();
     $config->checkConfig();
 
     $api = new Api($config);

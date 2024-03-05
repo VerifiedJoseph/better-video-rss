@@ -8,7 +8,6 @@ use App\Proxy;
 
 try {
     $config = new Config();
-    $config->checkInstall();
     $config->checkConfig();
 
     $proxy = new Proxy($_GET, $config);
