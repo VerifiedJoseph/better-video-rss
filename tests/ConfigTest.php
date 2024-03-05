@@ -63,6 +63,15 @@ class ConfigTest extends TestCase
     }
 
     /**
+     * Test `getDefaultFeedFormat()`
+     */
+    public function testGetDefaultFeedFormat(): void
+    {
+        $config = new Config();
+        $this->assertEquals('rss', $config->getDefaultFeedFormat());
+    }
+
+    /**
      * Test `getSelfUrl()`
      */
     public function testGetSelfUrl(): void
