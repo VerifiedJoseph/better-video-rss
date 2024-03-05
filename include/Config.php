@@ -134,13 +134,13 @@ class Config
             if ($this->hasEnv('CACHE_DIR') === true && $this->getEnv('CACHE_DIR') !== '') {
                 $this->config['CACHE_DIR'] = $this->getEnv('CACHE_DIR');
             }
-    
+
             $cacheDir = $this->getCacheDirPath();
-    
+
             if (is_dir($cacheDir) === false && mkdir($cacheDir, $this->mkdirMode) === false) {
                 throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
             }
-    
+
             if (is_dir($cacheDir) && is_writable($cacheDir) === false) {
                 throw new ConfigException('Cache directory is not writable. [BVRSS_CACHE_DIR]');
             }
