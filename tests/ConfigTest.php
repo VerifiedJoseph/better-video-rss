@@ -1,0 +1,203 @@
+<?php
+
+use PHPUnit\Framework\TestCase;
+use App\Config;
+use App\Exception\ConfigException;
+
+class ConfigTest extends TestCase
+{
+    public function setUp(): void
+    {
+        // Unset environment variables before each test
+        putenv('BVRSS_SELF_URL_PATH');
+        putenv('BVRSS_YOUTUBE_API_KEY');
+
+        putenv('BVRSS_DISABLE_CACHE');
+        putenv('BVRSS_ENABLE_CACHE_VIEWER');
+        putenv('BVRSS_DISABLE_CSP');
+        putenv('BVRSS_ENABLE_IMAGE_PROXY');
+    }
+
+    public function testGetCsp(): void
+    {
+    }
+
+    /**
+     * Test `getCspDisabledStatus()`
+     */
+    public function testGetCspDisabledStatus(): void
+    {
+        putenv('BVRSS_DISABLE_CSP=true');
+
+        $config = new Config();
+        $config->checkOptional();
+
+        $this->assertTrue($config->getCspDisabledStatus());
+    }
+
+    /**
+     * Test `getSelfUrl()`
+     */
+    public function testGetSelfUrl(): void
+    {
+        putenv('BVRSS_SELF_URL_PATH=https://example.com/');
+        putenv('BVRSS_YOUTUBE_API_KEY=fake-key');
+
+        $config = new Config();
+        $config->checkConfig();
+
+        $this->assertEquals('https://example.com/', $config->getSelfUrl());
+    }
+
+    /**
+     * Test `getCacheDirectory()`
+     */
+    public function testGetCacheDirectory(): void
+    {
+    }
+
+    /**
+     * Test `getCacheDisableStatus()`
+     */
+    public function testGetCacheDisableStatus(): void
+    {
+        putenv('BVRSS_DISABLE_CACHE=true');
+
+        $config = new Config();
+        $config->checkCache();
+
+        $this->assertTrue($config->getCacheDisableStatus());
+    }
+
+    /**
+     * Test `getCacheViewerStatus()`
+     */
+    public function testGetCacheViewerStatus(): void
+    {
+        putenv('BVRSS_ENABLE_CACHE_VIEWER=true');
+
+        $config = new Config();
+        $config->checkCache();
+
+        $this->assertTrue($config->getCacheViewerStatus());
+    }
+
+    /**
+     * Test `getCacheFormatVersion()`
+     */
+    public function testGetCacheFormatVersion(): void
+    {
+        $config = new Config();
+        $this->assertGreaterThan(0, $config->getCacheFormatVersion());
+    }
+
+    /**
+     * Test `getImageProxyStatus()`
+     */
+    public function testGetImageProxyStatus(): void
+    {
+        putenv('BVRSS_ENABLE_IMAGE_PROXY=true');
+
+        $config = new Config();
+        $config->checkOptional();
+
+        $this->assertTrue($config->getImageProxyStatus());
+    }
+
+    /**
+     * Test `getApiKey()`
+     */
+    public function testGetApiKey(): void
+    {
+        putenv('BVRSS_SELF_URL_PATH=https://example.com/');
+        putenv('BVRSS_YOUTUBE_API_KEY=i3CAOMsuGbaP3aKttQf');
+
+        $config = new Config();
+        $config->checkConfig();
+
+        $this->assertEquals('i3CAOMsuGbaP3aKttQf', $config->getApiKey());
+    }
+
+    /**
+     * Test with no `BVRSS_SELF_URL_PATH`
+     */
+    public function testWithNoSelfUrlPath(): void
+    {
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Self URL path must be set');
+
+        $config = new Config();
+        $config->checkConfig();
+    }
+
+    /**
+     * Test with empty `BVRSS_SELF_URL_PATH`
+     */
+    public function testWithEmptySelfUrlPath(): void
+    {
+        putenv('BVRSS_SELF_URL_PATH=');
+
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Self URL path must be set');
+
+        $config = new Config();
+        $config->checkConfig();
+    }
+
+    /**
+     * Test `BVRSS_SELF_URL_PATH` with missing ending forward slash
+     */
+    public function testWithSelfUrlPathNoEndingForwardSlash(): void
+    {
+        putenv('BVRSS_SELF_URL_PATH=https://example.com');
+
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Self URL must end with a forward slash');
+
+        $config = new Config();
+        $config->checkConfig();
+    }
+
+    /**
+     * Test `BVRSS_SELF_URL_PATH` with missing HTTP protocol
+     */
+    public function testWithSelfUrlPathMissingProtocol(): void
+    {
+        putenv('BVRSS_SELF_URL_PATH=example.com/');
+
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Self URL must start with http:// or https://');
+
+        $config = new Config();
+        $config->checkConfig();
+    }
+
+    /**
+     * Test with missing `BVRSS_YOUTUBE_API_KEY`
+     */
+    public function testWithMissingYouTubeApiKey(): void
+    {
+        putenv('BVRSS_SELF_URL_PATH=https://example.com/');
+
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('YouTube API key must be set');
+
+        $config = new Config();
+        $config->checkConfig();
+    }
+
+    /**
+     * Test with empty `BVRSS_YOUTUBE_API_KEY`
+     */
+    public function testWithEmptyYouTubeApiKey(): void
+    {
+        putenv('BVRSS_SELF_URL_PATH=https://example.com/');
+        putenv('BVRSS_YOUTUBE_API_KEY=');
+
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('YouTube API key must be set');
+
+        $config = new Config();
+        $config->checkConfig();
+    }
+}
