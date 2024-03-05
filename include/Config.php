@@ -126,6 +126,10 @@ class Config
             $this->config['DISABLE_CACHE'] = true;
         }
 
+        if ($this->getEnv('ENABLE_CACHE_VIEWER') === 'true') {
+            $this->config['ENABLE_CACHE_VIEWER'] = true;
+        }
+
         if ($this->config['DISABLE_CACHE'] === false) {
             if ($this->hasEnv('CACHE_DIR') === true && $this->getEnv('CACHE_DIR') !== '') {
                 $this->config['CACHE_DIR'] = $this->getEnv('CACHE_DIR');
@@ -171,10 +175,6 @@ class Config
 
         if ($this->hasEnv('TIME_FORMAT') === true && $this->getEnv('TIME_FORMAT') !== '') {
             $this->config['TIME_FORMAT'] = $this->getEnv('TIME_FORMAT');
-        }
-
-        if ($this->getEnv('ENABLE_CACHE_VIEWER') === 'true') {
-            $this->config['ENABLE_CACHE_VIEWER'] = true;
         }
 
         if ($this->getEnv('ENABLE_IMAGE_PROXY') === 'true') {
