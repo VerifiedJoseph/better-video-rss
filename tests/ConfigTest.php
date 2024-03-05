@@ -71,6 +71,22 @@ class ConfigTest extends TestCase
         $this->assertEquals('rss', $config->getDefaultFeedFormat());
     }
 
+     * Test `getFeedFormats()`
+     */
+    public function tesGetFeedFormats(): void
+    {
+        $config = new Config();
+        $this->assertNotEmpty($config->getFeedFormats());
+    }
+
+    /**
+     * Test `getCacheDirPath()`
+     */
+    public function testGetCacheDirPath(): void
+    {
+
+    }
+
     /**
      * Test `getSelfUrl()`
      */
