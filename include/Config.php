@@ -215,9 +215,9 @@ class Config
 
     /**
      * Returns cache directory
-     * @return boolean
+     * @return string
      */
-    public function getCacheDirectory(): bool
+    public function getCacheDirectory(): string
     {
         return $this->config['CACHE_DIR'];
     }
