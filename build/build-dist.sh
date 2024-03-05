@@ -3,6 +3,7 @@
 mkdir ./dist
 
 # Copy folders
+cp -r ./docs ./dist/docs
 cp -r ./include ./dist/include
 cp -r ./vendor ./dist/vendor
 cp -r ./static ./dist/static
@@ -15,4 +16,5 @@ cp ./cache-viewer.php ./dist/cache-viewer.php
 cp ./tools.html ./dist/tools.html
 cp ./config.example.php ./dist/config.example.php
 cp ./README.md ./dist/README.md
+cp ./CHANGELOG.md ./dist/CHANGELOG.md
 cp ./LICENSE ./dist/LICENSE
