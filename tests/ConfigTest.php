@@ -90,7 +90,6 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheDirPath(): void
     {
-
     }
 
     /**
