@@ -49,6 +49,20 @@ class ConfigTest extends TestCase
     }
 
     /**
+     * Test `getUseragent()`
+     */
+    public function testGetUseragent(): void
+    {
+        $useragent = sprintf(
+            'BetterVideoRss/%s (+https://github.com/VerifiedJoseph/BetterVideoRss)',
+            constant('VERSION')
+        );
+
+        $config = new Config();
+        $this->assertEquals($useragent, $config->getUseragent());
+    }
+
+    /**
      * Test `getSelfUrl()`
      */
     public function testGetSelfUrl(): void
