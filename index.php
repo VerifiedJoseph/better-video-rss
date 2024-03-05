@@ -1,7 +1,6 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'include/version.php';
 
 use App\Config;
 use App\Api;

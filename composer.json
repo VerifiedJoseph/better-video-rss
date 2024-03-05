@@ -10,7 +10,10 @@
     "autoload": {
         "psr-4": {
             "App\\": "include/"
-        }
+        },
+        "files": [
+            "include/version.php"
+        ]
     },
     "scripts": {
         "lint": "phpstan && phpcs",
