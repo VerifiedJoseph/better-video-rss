@@ -19,6 +19,7 @@ class ConfigTest extends TestCase
         putenv('BVRSS_TIMEZONE');
         putenv('BVRSS_DATE_FORMAT');
         putenv('BVRSS_TIME_FORMAT');
+        putenv('BVRSS_RAW_API_ERRORS');
     }
 
     public function testGetCsp(): void
@@ -158,6 +159,19 @@ class ConfigTest extends TestCase
         $config->checkOptional();
 
         $this->assertEquals('G:i:s', $config->getTimeFormat());
+    }
+
+    /**
+     * Test `getRawApiErrorStatus()`
+     */
+    public function testGetRawApiErrorStatus(): void
+    {
+        putenv('BVRSS_RAW_API_ERRORS=true');
+
+        $config = new Config();
+        $config->checkOptional();
+
+        $this->assertTrue($config->getRawApiErrorStatus());
     }
 
     /**
