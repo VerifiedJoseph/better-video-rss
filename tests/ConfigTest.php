@@ -16,6 +16,7 @@ class ConfigTest extends TestCase
         putenv('BVRSS_ENABLE_CACHE_VIEWER');
         putenv('BVRSS_DISABLE_CSP');
         putenv('BVRSS_ENABLE_IMAGE_PROXY');
+        putenv('BVRSS_TIMEZONE');
     }
 
     public function testGetCsp(): void
@@ -116,6 +117,19 @@ class ConfigTest extends TestCase
         $config->checkConfig();
 
         $this->assertEquals('i3CAOMsuGbaP3aKttQf', $config->getApiKey());
+    }
+
+    /**
+     * Test `getTimezone()`
+     */
+    public function testGetTimezone(): void
+    {
+        putenv('BVRSS_TIMEZONE=Europe/London');
+
+        $config = new Config();
+        $config->checkOptional();
+
+        $this->assertEquals('Europe/London', $config->getTimezone());
     }
 
     /**
