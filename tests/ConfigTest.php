@@ -17,6 +17,7 @@ class ConfigTest extends TestCase
         putenv('BVRSS_DISABLE_CSP');
         putenv('BVRSS_ENABLE_IMAGE_PROXY');
         putenv('BVRSS_TIMEZONE');
+        putenv('BVRSS_DATE_FORMAT');
     }
 
     public function testGetCsp(): void
@@ -130,6 +131,19 @@ class ConfigTest extends TestCase
         $config->checkOptional();
 
         $this->assertEquals('Europe/London', $config->getTimezone());
+    }
+
+    /**
+     * Test `getDateFormat()`
+     */
+    public function testGetDateFormat(): void
+    {
+        putenv('BVRSS_DATE_FORMAT=c');
+
+        $config = new Config();
+        $config->checkOptional();
+
+        $this->assertEquals('c', $config->getDateFormat());
     }
 
     /**
