@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.7.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.7.1) - 2024-03-18
+
+- Dockerfile: Updated composer from 2.7.1 to 2.7.2 ([#274](https://github.com/VerifiedJoseph/better-video-rss/pull/274), [`ddfcd71`](https://github.com/VerifiedJoseph/better-video-rss/commit/ddfcd71d07da998a730e471fd5407f12c2649cba))
+
 ## [1.7.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.7.0) - 2024-03-05
 
 - Fixed proxy.php ([#267](https://github.com/VerifiedJoseph/better-video-rss/pull/267), [`5c86c0b`](https://github.com/VerifiedJoseph/better-video-rss/commit/5c86c0b2f172acdb68e22ad6e5b3c35695f3b7da))
