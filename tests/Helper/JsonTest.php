@@ -1,8 +1,10 @@
 <?php
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use App\Helper\Json;
 
+#[CoversClass(Json::class)]
 class JsonTest extends TestCase
 {
     /**
@@ -22,6 +24,13 @@ class JsonTest extends TestCase
             'tests/files/expected-pretty-print.json',
             Json::encode(['foo' => 'bar'], JSON_PRETTY_PRINT)
         );
+    }
+
+    public function testEncodeInvalid(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('JSON Error: Malformed UTF-8 characters, possibly incorrectly encoded');
+        Json::encode("\xB1\x31");
     }
 
     /**
