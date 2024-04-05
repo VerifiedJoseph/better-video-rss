@@ -35,10 +35,10 @@ jobs:
       run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
     - name: Install dependencies with composer
-      run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
+      run: composer install --prefer-dist
 
     - name: Run phpunit
-      run: composer test
+      run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@c16abc29c95fcf9174b58eb7e1abf4c866893bc8 # v4.1.1
