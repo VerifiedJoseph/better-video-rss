@@ -9,3 +9,4 @@
 
 # phpunit cache
 .phpunit.cache/*
+coverage-reports/
