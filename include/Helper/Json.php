@@ -14,13 +14,13 @@ final class Json
     /**
      * Encode JSON
      *
-     * @param array<mixed> $data
+     * @param mixed $data
      * @param int $flags Bitmask of JSON options
      * @return string
      *
      * @throws Exception if array could not be encoded
      */
-    public static function encode(array $data, int $flags = 0): string
+    public static function encode(mixed $data, int $flags = 0): string
     {
         $flags = $flags | JSON_THROW_ON_ERROR;
 
