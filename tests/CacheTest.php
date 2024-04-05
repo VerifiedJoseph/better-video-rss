@@ -65,7 +65,7 @@ class CacheTest extends TestCase
     }
 
     /**
-     * Test `load()` with config version that does not match cache version
+     * Test `load()` with cache version that does not match current cache version
      */
     public function testLoadWithNoVersionMatch(): void
     {
