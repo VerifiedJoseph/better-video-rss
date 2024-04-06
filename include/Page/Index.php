@@ -80,8 +80,6 @@ class Index
         $playlistLink = '';
         $fromUrlLink = '';
 
-        $version = $this->config->getVersion();
-
         if ($this->error === true) {
             $error = sprintf('<div id="error"><strong>%s</strong></div>', $this->errorMessage);
         }
@@ -113,7 +111,7 @@ class Index
             'channelLink' => $channelLink,
             'playlistLink' => $playlistLink,
             'fromUrlLink' => $fromUrlLink,
-            'version' => $version
+            'version' => $this->config->getVersion()
         ]);
 
         Output::html(
