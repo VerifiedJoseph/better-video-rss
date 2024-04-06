@@ -52,7 +52,7 @@ class ConfigTest extends TestCase
     public function testGetVersion(): void
     {
         $config = new Config();
-        $this->assertEquals(constant('VERSION'), $config->getVersion());
+        $this->assertEquals(Version::getVersion(), $config->getVersion());
     }
 
     /**
