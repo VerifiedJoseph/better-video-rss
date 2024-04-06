@@ -9,7 +9,6 @@ class Version
 
     /**
      * Returns script version
-     * @return string
      */
     public static function getVersion(): string
     {
@@ -18,9 +17,8 @@ class Version
 
     /**
      * Returns cache format version
-     * @return string
      */
-    public static function getCacheFormatVersion(): string
+    public static function getCacheFormatVersion(): int
     {
         return self::$acheFormatVersion;
     }
