@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use App\Config;
+use App\Version;
 use App\Exception\ConfigException;
 
 class ConfigTest extends TestCase
@@ -61,7 +62,7 @@ class ConfigTest extends TestCase
     {
         $useragent = sprintf(
             'BetterVideoRss/%s (+https://github.com/VerifiedJoseph/BetterVideoRss)',
-            constant('VERSION')
+            Version::getVersion()
         );
 
         $config = new Config();
