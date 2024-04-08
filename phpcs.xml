@@ -3,9 +3,10 @@
   <file>./</file>
 
   <exclude-pattern>./vendor</exclude-pattern>
+  <exclude-pattern>./vendor</exclude-pattern>
 
   <rule ref="PSR12"/>
   <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
-    <exclude-pattern>./tests/*</exclude-pattern>
+    <exclude-pattern>./coverage-reports/*</exclude-pattern>
   </rule>
 </ruleset>
