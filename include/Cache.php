@@ -47,10 +47,10 @@ class Cache
     public function load(): void
     {
         if ($this->config->getCacheDisableStatus() === false) {
-            $contents = File::read($this->path);
-
-            if ($contents !== '') {
+            if (file::exists($this->path) === true) {
+                $contents = File::read($this->path);
                 $this->data = Json::decodeToArray($contents);
+
                 $this->validateVersion();
             }
         }

@@ -5,7 +5,8 @@
     "require-dev": {
         "phpstan/phpstan": "^1.0",
         "squizlabs/php_codesniffer": "^3.0",
-        "phpunit/phpunit": "^10.4"
+        "phpunit/phpunit": "^10.4",
+        "bizurkur/mockfs": "^0.2.0"
     },
     "autoload": {
         "psr-4": {
@@ -13,7 +14,7 @@
         }
     },
     "scripts": {
-        "lint": "phpstan && phpcs",
+        "lint": "phpstan --memory-limit=150M && phpcs",
         "lint-phpstan": "phpstan",
         "lint-phpcs": "phpcs",
         "lint-phpcs-gh-action": "phpcs --report=checkstyle | cs2pr",
