@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Request
 {
     /** @var string $useragent HTTP request user-agent */
