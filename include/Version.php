@@ -5,7 +5,7 @@ namespace App;
 class Version
 {
     private static string $version = '1.7.1';
-    private static int $acheFormatVersion = 1;
+    private static int $cacheFormatVersion = 1;
 
     /**
      * Returns script version
@@ -20,6 +20,6 @@ class Version
      */
     public static function getCacheFormatVersion(): int
     {
-        return self::$acheFormatVersion;
+        return self::$cacheFormatVersion;
     }
 }
