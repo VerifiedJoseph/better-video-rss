@@ -4,7 +4,6 @@ namespace App\Page;
 
 use App\Config;
 use App\Api;
-use App\Fetch;
 use App\Data;
 use App\Http\Request;
 use App\Helper\Url;
