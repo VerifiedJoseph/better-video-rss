@@ -12,7 +12,8 @@ try {
     $config = new Config();
     $config->checkConfig();
 
-    $api = new Api($config, new Request($config->getUserAgent()));
+    $request = new Request($config->getUserAgent());
+    $api = new Api($config, $request);
     $index = new Index($_POST, $config, $api);
     $index->display();
 } catch (Exception $e) {
