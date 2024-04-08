@@ -3,17 +3,20 @@
 use PHPUnit\Framework\TestCase;
 use App\Config;
 use App\Api;
+use App\Http\Request;
 use App\Page\Feed;
 
 class FeedTest extends TestCase
 {
     private static Config $config;
+    private static Request $request;
     private static Api $api;
 
     public static function setUpBeforeClass(): void
     {
         self::$config = new Config();
         self::$api = new Api(self::$config);
+        self::$request = new Request(self::$config->getUserAgent());
     }
 
     /**
@@ -28,7 +31,7 @@ class FeedTest extends TestCase
             'channel_id' => ''
         ];
 
-        new Feed($inputs, self::$config, self::$api);
+        new Feed($inputs, self::$config, self::$request, self::$api);
     }
 
     /**
@@ -43,7 +46,7 @@ class FeedTest extends TestCase
             'channel_id' => 'NoAChannelId'
         ];
 
-        new Feed($inputs, self::$config, self::$api);
+        new Feed($inputs, self::$config, self::$request, self::$api);
     }
 
     /**
@@ -58,7 +61,7 @@ class FeedTest extends TestCase
             'playlist_id' => ''
         ];
 
-        new Feed($inputs, self::$config, self::$api);
+        new Feed($inputs, self::$config, self::$request, self::$api);
     }
 
     /**
@@ -73,7 +76,7 @@ class FeedTest extends TestCase
             'playlist_id' => 'NoAPlaylistId'
         ];
 
-        new Feed($inputs, self::$config, self::$api);
+        new Feed($inputs, self::$config, self::$request, self::$api);
     }
 
     /**
@@ -84,6 +87,6 @@ class FeedTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No channel or playlist ID parameter given.');
 
-        new Feed([], self::$config, self::$api);
+        new Feed([], self::$config, self::$request, self::$api);
     }
 }
