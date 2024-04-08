@@ -7,30 +7,38 @@ use Exception;
 class File
 {
     /**
-     * Read a file
+     * Open a file handler
      *
      * @param string $path File path
-     * @return string $contents File contents
+     * @param string $mode Mode
      *
-     * @throws Exception if file was not read.
-     * @throws Exception if file was not opened.
+     * @throws Exception if file is not opened.
      */
-    public static function read(string $path): string
+    public static function open(string $path, string $mode): mixed
     {
-        // Return empty string if file does not exist
-        if (file_exists($path) === false) {
-            return '';
-        }
-
-        $handle = fopen($path, 'r');
+        $handle = @fopen($path, $mode);
 
         if ($handle === false) {
             throw new Exception('File not opened: ' . $path);
         }
 
+        return $handle;
+    }
+
+    /**
+     * Read a file
+     *
+     * @param string $path File path
+     * @return string $contents File contents
+     *
+     * @throws Exception if file is not read.
+     */
+    public static function read(string $path): string
+    {
+        $handle = File::open($path, 'r');
         $contents = fread($handle, (int) filesize($path));
 
-        if ($contents === false) {
+        if ($contents === false || $contents === '') {
             throw new Exception('File not read: ' . $path);
         }
 
@@ -45,23 +53,29 @@ class File
      * @param string $path File path
      * @param string $data Data to write
      *
-     * @throws Exception if file was not opened.
-     * @throws Exception if data was not written to file.
+     * @throws Exception if data is not written to file.
      */
     public static function write(string $path, string $data): void
     {
-        $handle = fopen($path, 'w');
-
-        if ($handle === false) {
-            throw new Exception('File not opened: ' . $path);
-        }
-
+        $handle = File::open($path, 'w');
         $status = fwrite($handle, $data);
 
-        if ($status === false) {
+        if ($status === false || $status === 0) {
             throw new Exception('File not written: ' . $path);
         }
 
         fclose($handle);
+    }
+
+    /**
+     * Checks whether a file exists
+     *
+     * @param string $path File path
+     * @return bool
+     */
+    public static function exists(string $path)
+    {
+        clearstatcache();
+        return file_exists($path);
     }
 }
