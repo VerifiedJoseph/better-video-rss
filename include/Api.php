@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Config;
+use App\Http\Request;
+use App\Http\Response;
 use App\Helper\Url;
 use App\Helper\Json;
 use Exception;
@@ -12,15 +14,20 @@ class Api
     /** @var Config Config class instance */
     private Config $config;
 
+    /** @var Request Request class instance */
+    private Request $request;
+
     /** @var array<int, int> $expectedStatusCodes Non-error HTTP status codes returned by the API */
     private array $expectedStatusCodes = [200, 304];
 
     /**
      * @param Config $config Config class instance
+     * @param Request $request Request class instance
      */
-    public function __construct(Config $config)
+    public function __construct(Config $config, Request $request)
     {
         $this->config = $config;
+        $this->request = $request;
     }
 
     /**
@@ -35,14 +42,25 @@ class Api
      */
     public function getDetails(string $type, string $parameter, string $eTag)
     {
-        $url = Url::getApi($type, $parameter, $this->config->getApiKey());
+        $url = Url::getApi(
+            $type,
+            $parameter,
+            $this->config->getApiKey()
+        );
+
         $response = $this->fetch($url, $eTag);
 
-        if ($response['statusCode'] === 200 && empty($response['data']->items)) {
+        if ($response->getStatusCode() === 304) {
+            return $response->getBody();
+        }
+
+        $body = Json::decode($response->getBody());
+
+        if ($response->getStatusCode() === 200 && empty($body->items)) {
             throw new Exception(ucfirst($type) . ' not found');
         }
 
-        return $response['data'];
+        return $body;
     }
 
     /**
@@ -56,7 +74,7 @@ class Api
         $url = Url::getApi('videos', $parameter, $this->config->getApiKey());
         $response = $this->fetch($url);
 
-        return $response['data'];
+        return Json::decode($response->getBody());
     }
 
     /**
@@ -70,7 +88,7 @@ class Api
         $url = Url::getApi('searchChannels', $parameter, $this->config->getApiKey());
         $response = $this->fetch($url);
 
-        return $response['data'];
+        return Json::decode($response->getBody());
     }
 
     /**
@@ -84,7 +102,7 @@ class Api
         $url = Url::getApi('searchPlaylists', $parameter, $this->config->getApiKey());
         $response = $this->fetch($url);
 
-        return $response['data'];
+        return Json::decode($response->getBody());
     }
 
     /**
@@ -92,37 +110,21 @@ class Api
      *
      * @param string $url Request URL
      * @param string $eTag Request ETag
-     * @return array<string, mixed>
+     * @return Response
      *
      * @throws Exception If a cURL error occurred.
      */
-    private function fetch(string $url, string $eTag = ''): array
+    private function fetch(string $url, string $eTag = ''): Response
     {
-        $curl = new Curl();
-
-        // Set if-Match header
+        $headers = [];
         if (empty($eTag) === false) {
-            $curl->setHeader('If-None-Match', $eTag);
+            $headers['If-None-Match'] = $eTag;
         }
 
-        $curl->setUserAgent($this->config->getUserAgent());
-        $curl->get($url);
+        $response = $this->request->get($url, $headers);
 
-        if ($curl->getErrorCode() !== 0) {
-            throw new Exception('Error: ' . $curl->getErrorCode() . ': ' . $curl->getErrorMessage());
-        }
-
-        $response = array();
-        $response['data'] = '';
-
-        if ($curl->getStatusCode() !== 304) {
-            $response['data'] = Json::decode($curl->getResponse());
-        }
-
-        $response['statusCode'] = $curl->getStatusCode();
-
-        if (in_array($curl->getStatusCode(), $this->expectedStatusCodes) === false) {
-            $this->handleError($curl->getResponse());
+        if (in_array($response->getStatusCode(), $this->expectedStatusCodes) === false) {
+            $this->handleError($response->getBody());
         }
 
         return $response;
