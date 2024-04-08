@@ -246,7 +246,7 @@ class Config
      */
     public function getCacheFormatVersion(): int
     {
-        return (int) constant('CACHE_FORMAT_VERSION');
+        return Version::getCacheFormatVersion();
     }
 
     /**
@@ -309,7 +309,7 @@ class Config
      */
     public function getVersion(): string
     {
-        return (string) constant('VERSION');
+        return Version::getVersion();
     }
 
     /**
