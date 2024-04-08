@@ -15,8 +15,8 @@ class FeedTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         self::$config = new Config();
-        self::$api = new Api(self::$config);
         self::$request = new Request(self::$config->getUserAgent());
+        self::$api = new Api(self::$config, self::$request);
     }
 
     /**
