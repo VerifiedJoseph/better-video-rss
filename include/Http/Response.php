@@ -18,7 +18,7 @@ class Response
         return $this->body;
     }
 
-    public function getStatusCode(): string
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }

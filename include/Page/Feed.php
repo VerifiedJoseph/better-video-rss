@@ -63,8 +63,6 @@ class Feed
      */
     public function generate(): void
     {
-        $fetch = new Fetch($this->config);
-
         $data = new Data(
             $this->feedId,
             $this->feedType,
@@ -77,7 +75,7 @@ class Feed
                     Url::getRssFeed($this->feedType, $this->feedId)
                 );
 
-                $data->updateFeed($response['body']);
+                $data->updateFeed($response->getBody());
             }
 
             if ($part === 'details') {

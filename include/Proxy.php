@@ -72,7 +72,8 @@ class Proxy
         $key = array_search($this->videoId, $videos);
         $url = $data['videos'][$key]['thumbnail'];
 
-        $this->image = $this->request->get($url);
+        $response = $this->request->get($url);
+        $this->image = $response->getBody();
     }
 
     /**

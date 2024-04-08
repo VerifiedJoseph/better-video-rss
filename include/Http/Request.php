@@ -40,7 +40,7 @@ class Request
             curl_setopt($ch, CURLOPT_HTTPHEADER, $this->formatHeaders($headers));
         }
 
-        $body = curl_exec($ch);
+        $body = (string) curl_exec($ch);
         $errorCode = curl_errno($ch);
         $errorMessage = curl_error($ch);
         $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -56,7 +56,7 @@ class Request
 
     /**
      * Convert headers into format required by cURL
-     * @param array<string, mixed> $headers 
+     * @param array<string, mixed> $headers
      * @return array<int, string>
      */
     private function formatHeaders(array $headers): array
