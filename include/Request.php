@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Exception;
+
 class Request
 {
     /** @var string $useragent HTTP request user-agent */
