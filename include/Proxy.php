@@ -5,12 +5,16 @@ namespace App;
 use App\Config;
 use App\Helper\Validate;
 use App\Helper\Output;
+use App\Http\Request;
 use Exception;
 
 class Proxy
 {
     /** @var Config Config class instance */
     private Config $config;
+
+    /** @var Request Request class instance */
+    private Request $request;
 
     /** @var string $feedId YouTube channel or playlist ID */
     private string $feedId = '';
@@ -27,9 +31,10 @@ class Proxy
      *
      * @throws Exception if ENABLE_IMAGE_PROXY is false
      */
-    public function __construct(array $inputs, Config $config)
+    public function __construct(array $inputs, Config $config, Request $request)
     {
         $this->config = $config;
+        $this->request = $request;
 
         if ($this->config->getImageProxyStatus() === false) {
             throw new Exception('Image proxy is disabled.');
@@ -46,7 +51,6 @@ class Proxy
      */
     public function getImage(): void
     {
-        $fetch = new Fetch($this->config);
         $cache = new Cache(
             $this->feedId,
             $this->config
@@ -68,7 +72,7 @@ class Proxy
         $key = array_search($this->videoId, $videos);
         $url = $data['videos'][$key]['thumbnail'];
 
-        $this->image = $fetch->thumbnail($url);
+        $this->image = $this->request->get($url);
     }
 
     /**
