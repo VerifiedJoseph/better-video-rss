@@ -23,7 +23,7 @@ class Request
      * @param string $url Request URL
      * @param array<string, mixed> $headers HTTP headers
      * @return Response Response
-     * @throws Exception if an error occurs
+     * @throws Exception if an cURL error occurs
      */
     public function get(string $url, array $headers = []): Response
     {
