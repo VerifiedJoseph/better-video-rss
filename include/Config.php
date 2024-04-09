@@ -2,12 +2,15 @@
 
 namespace App;
 
-use App\Helper\Validate;
+use App\Config\Validate;
+//use App\Helper\Validate;
 use App\Exception\ConfigException;
 use Exception;
 
 class Config
 {
+    private Validate $validate;
+
     /** @var string $minPhpVersion Minimum PHP version */
     private string $minPhpVersion = '8.0.0';
 
@@ -51,6 +54,10 @@ class Config
 
     public function __construct()
     {
+        $this->validate = new Validate($this->config);
+        $this->validate->version(PHP_VERSION, $this->minPhpVersion);
+        $this->validate->extensions($this->extensions);
+
         $this->checkInstall();
     }
 
@@ -86,7 +93,7 @@ class Config
      * @throws ConfigException if self URL path does not start with http:// or https://.
      * @throws ConfigException if YouTube API key environment variable is not set.
      */
-    public function checkConfig(): void
+    /*public function checkConfig(): void
     {
         $this->requireConfigFile();
 
@@ -112,7 +119,7 @@ class Config
 
         $this->checkOptional();
         $this->checkCache();
-    }
+    }*/
 
     /**
      * Check cache parameters
