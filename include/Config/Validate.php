@@ -138,7 +138,7 @@ class Validate extends Base
      * - `BVRSS_DISABLE_CACHE`
      * - `BVRSS_CACHE_DIR`
      *
-     * @throws ConfigException if cache directory can't be created 
+     * @throws ConfigException if cache directory can't be created
      */
     public function cache(): void
     {
