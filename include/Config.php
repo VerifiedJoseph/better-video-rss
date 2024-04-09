@@ -65,16 +65,6 @@ class Config
      */
     private function checkInstall(): void
     {
-        if (version_compare(PHP_VERSION, $this->minPhpVersion) === -1) {
-            throw new Exception('BetterVideoRss requires at least PHP version ' . $this->minPhpVersion);
-        }
-
-        foreach ($this->extensions as $ext) {
-            if (extension_loaded($ext) === false) {
-                throw new Exception(sprintf('Extension Error: %s extension not loaded.', $ext));
-            }
-        }
-
         if (file_exists('include/api-endpoints.json') == false) {
             throw throw new Exception('File not found: include/api-endpoints.json');
         }
