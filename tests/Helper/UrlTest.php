@@ -115,7 +115,7 @@ class UrlTest extends TestCase
     /**
      * Test `getApi()`
      */
-    public function tesGetApi(): void
+    public function testGetApi(): void
     {
         foreach (self::$urls->apis as $item) {
             $this->assertEquals($item->url, Url::getApi($item->type, $item->value, 'ApiKeyHere'));
