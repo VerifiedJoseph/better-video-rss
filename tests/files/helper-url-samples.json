@@ -60,12 +60,12 @@
             "value" :"jNQXAC9IVRw"
         },
         {
-            "url": "https://www.googleapis.com/youtube/v3/search?part=id&fields=items(id(channelId))&q=jawed&type=channel&maxResults=1&prettyPrint=false&key=ApiKeyHere",
+            "url": "https://www.googleapis.com/youtube/v3/search?part=id,snippet&fields=items(id(channelId),snippet(title))&q=jawed&type=channel&maxResults=1&prettyPrint=false&key=ApiKeyHere",
             "type": "searchChannels",
             "value" :"jawed"
         },
         {
-            "url": "https://www.googleapis.com/youtube/v3/search?part=id&fields=items(id(playlistId))&q=YouTube+Rewind+2018&type=playlist&maxResults=1&prettyPrint=false&key=ApiKeyHere",
+            "url": "https://www.googleapis.com/youtube/v3/search?part=id,snippet&fields=items(id(playlistId),snippet(title))&q=YouTube+Rewind+2018&type=playlist&maxResults=1&prettyPrint=false&key=ApiKeyHere",
             "type": "searchPlaylists",
             "value" :"YouTube Rewind 2018"
         }
