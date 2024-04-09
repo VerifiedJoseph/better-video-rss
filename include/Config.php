@@ -251,20 +251,6 @@ class Config
     }
 
     /**
-     * Returns cache directory as an absolute path
-     *
-     * @return string
-     */
-    public function getCacheDirPath(): string
-    {
-        if (Helper\Validate::absolutePath($this->config['CACHE_DIR']) === false) {
-            return dirname(__DIR__) . DIRECTORY_SEPARATOR . $this->config['CACHE_DIR'];
-        }
-
-        return $this->config['CACHE_DIR'];
-    }
-
-    /**
      * Include (require) config file
      */
     private function requireConfigFile(): void

@@ -86,17 +86,6 @@ class ConfigTest extends TestCase
     }
 
     /**
-     * Test `getCacheDirPath()`
-     */
-    public function testGetCacheDirPath(): void
-    {
-        $config = new Config();
-        $path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache';
-
-        $this->assertEquals($path, $config->getCacheDirPath());
-    }
-
-    /**
      * Test `getSelfUrl()`
      */
     public function testGetSelfUrl(): void

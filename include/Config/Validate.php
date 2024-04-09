@@ -137,6 +137,8 @@ class Validate extends Base
      * Validate cache environment variables
      * - `BVRSS_DISABLE_CACHE`
      * - `BVRSS_CACHE_DIR`
+     *
+     * @throws ConfigException if cache directory can't be created 
      */
     public function cache(): void
     {
@@ -153,10 +155,6 @@ class Validate extends Base
                 if (mkdir($this->config['CACHE_DIR']) === false) {
                     throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
                 }
-            }
-
-            if (is_dir($this->config['CACHE_DIR']) && is_writable($this->config['CACHE_DIR']) === false) {
-                throw new ConfigException('Cache directory is not writable. [BVRSS_CACHE_DIR]');
             }
         }
     }
