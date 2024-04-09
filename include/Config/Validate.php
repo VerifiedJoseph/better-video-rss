@@ -70,10 +70,6 @@ class Validate extends Base
             throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
         }
 
-        if ($this->hasEnv('SELF_URL_PATH') === false || $this->getEnv('SELF_URL_PATH') === '') {
-            throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
-        }
-
         if (Helper\Validate::selfUrlSlash((string) $this->getEnv('SELF_URL_PATH')) === false) {
             throw new ConfigException('Self URL must end with a forward slash. [BVRSS_SELF_URL_PATH]');
         }
