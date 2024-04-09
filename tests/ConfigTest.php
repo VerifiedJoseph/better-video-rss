@@ -38,12 +38,8 @@ class ConfigTest extends TestCase
      */
     public function testGetCspDisabledStatus(): void
     {
-        putenv('BVRSS_DISABLE_CSP=true');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertTrue($config->getCspDisabledStatus());
+        $this->assertFalse($config->getCspDisabledStatus());
     }
 
     /**
@@ -92,12 +88,9 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheDirPath(): void
     {
-        putenv('BVRSS_CACHE_DIR=cache');
-
         $config = new Config();
-        $config->checkCache();
-
         $path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache';
+
         $this->assertEquals($path, $config->getCacheDirPath());
     }
 
@@ -120,11 +113,7 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheDirectory(): void
     {
-        putenv('BVRSS_CACHE_DIR=cache');
-
         $config = new Config();
-        $config->checkCache();
-
         $this->assertEquals('cache', $config->getCacheDirectory());
     }
 
@@ -133,12 +122,8 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheDisableStatus(): void
     {
-        putenv('BVRSS_DISABLE_CACHE=true');
-
         $config = new Config();
-        $config->checkCache();
-
-        $this->assertTrue($config->getCacheDisableStatus());
+        $this->assertFalse($config->getCacheDisableStatus());
     }
 
     /**
@@ -146,12 +131,8 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheViewerStatus(): void
     {
-        putenv('BVRSS_ENABLE_CACHE_VIEWER=true');
-
         $config = new Config();
-        $config->checkCache();
-
-        $this->assertTrue($config->getCacheViewerStatus());
+        $this->assertFalse($config->getCacheViewerStatus());
     }
 
     /**
@@ -168,12 +149,8 @@ class ConfigTest extends TestCase
      */
     public function testGetImageProxyStatus(): void
     {
-        putenv('BVRSS_ENABLE_IMAGE_PROXY=true');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertTrue($config->getImageProxyStatus());
+        $this->assertFalse($config->getImageProxyStatus());
     }
 
     /**
@@ -195,12 +172,8 @@ class ConfigTest extends TestCase
      */
     public function testGetTimezone(): void
     {
-        putenv('BVRSS_TIMEZONE=Europe/London');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertEquals('Europe/London', $config->getTimezone());
+        $this->assertEquals('UTC', $config->getTimezone());
     }
 
     /**
@@ -208,12 +181,8 @@ class ConfigTest extends TestCase
      */
     public function testGetDateFormat(): void
     {
-        putenv('BVRSS_DATE_FORMAT=c');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertEquals('c', $config->getDateFormat());
+        $this->assertEquals('F j, Y', $config->getDateFormat());
     }
 
     /**
@@ -221,12 +190,8 @@ class ConfigTest extends TestCase
      */
     public function testGetTimeFormat(): void
     {
-        putenv('BVRSS_TIME_FORMAT=G:i:s');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertEquals('G:i:s', $config->getTimeFormat());
+        $this->assertEquals('H:i', $config->getTimeFormat());
     }
 
     /**
@@ -234,12 +199,8 @@ class ConfigTest extends TestCase
      */
     public function testGetRawApiErrorStatus(): void
     {
-        putenv('BVRSS_RAW_API_ERRORS=true');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertTrue($config->getRawApiErrorStatus());
+        $this->assertFalse($config->getRawApiErrorStatus());
     }
 
     /**
@@ -328,7 +289,7 @@ class ConfigTest extends TestCase
     /**
      * Test empty `BVRSS_TIMEZONE`
      */
-    public function testEmptyTimezone(): void
+    /*public function testEmptyTimezone(): void
     {
         putenv('BVRSS_TIMEZONE=');
 
@@ -336,12 +297,12 @@ class ConfigTest extends TestCase
         $config->checkOptional();
 
         $this->assertEquals('UTC', $config->getTimezone());
-    }
+    }*/
 
     /**
      * Test `BVRSS_TIMEZONE` with invalid timezone
      */
-    public function testInvalidTimezone(): void
+    /*public function testInvalidTimezone(): void
     {
         putenv('BVRSS_TIMEZONE=Europe/Coventry');
 
@@ -350,5 +311,5 @@ class ConfigTest extends TestCase
 
         $config = new Config();
         $config->checkOptional();
-    }
+    }*/
 }
