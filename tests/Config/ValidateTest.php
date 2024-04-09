@@ -343,4 +343,18 @@ class ValidateTest extends TestCase
 
         $this->assertTrue($config['ENABLE_IMAGE_PROXY']);
     }
+
+    /**
+     * Test `cspStatus()`
+     */
+    public function testCspStatus(): void
+    {
+        putenv('BVRSS_DISABLE_CSP=true');
+
+        $validate = new Validate(self::$defaults);
+        $validate->cspStatus();
+        $config = $validate->getConfig();
+
+        $this->assertTrue($config['DISABLE_CSP']);
+    }
 }
