@@ -33,6 +33,7 @@ class ValidateTest extends TestCase
         putenv('BVRSS_TIME_FORMAT');
         putenv('BVRSS_DISABLE_CACHE');
         putenv('BVRSS_ENABLE_CACHE_VIEWER');
+        putenv('BVRSS_ENABLE_IMAGE_PROXY');
     }
 
     public function tearDown(): void
@@ -327,5 +328,19 @@ class ValidateTest extends TestCase
         $config = $validate->getConfig();
 
         $this->assertTrue($config['ENABLE_CACHE_VIEWER']);
+    }
+
+    /**
+     * Test `imageProxy()`
+     */
+    public function testImageProxy(): void
+    {
+        putenv('BVRSS_ENABLE_IMAGE_PROXY=true');
+
+        $validate = new Validate(self::$defaults);
+        $validate->imageProxy();
+        $config = $validate->getConfig();
+
+        $this->assertTrue($config['ENABLE_IMAGE_PROXY']);
     }
 }
