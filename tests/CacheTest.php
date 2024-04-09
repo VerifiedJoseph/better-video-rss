@@ -73,7 +73,7 @@ class CacheTest extends TestCase
         /** @var PHPUnit\Framework\MockObject\Stub&Config */
         $config = self::createStub(Config::class);
         $config->method('getCacheDisableStatus')->willReturn(false);
-        $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
+        $config->method('getCacheDirPath')->willReturn(mockfs::getUrl('/'));
         $config->method('getCacheFormatVersion')->willReturn(2);
 
         $cache = new Cache(self::$channelId, $config);
