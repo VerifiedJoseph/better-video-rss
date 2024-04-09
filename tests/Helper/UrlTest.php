@@ -1,8 +1,10 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use App\Helper\Url;
 
+#[CoversClass(Url::class)]
 class UrlTest extends TestCase
 {
     private string $selfUrl = 'https://example.com/';
