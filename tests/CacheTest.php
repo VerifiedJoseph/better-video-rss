@@ -1,9 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use App\Config;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Cache;
+use App\Config;
 
+#[CoversClass(Cache::class)]
+#[UsesClass(Config::class)]
 class CacheTest extends TestCase
 {
     private static Config $config;
