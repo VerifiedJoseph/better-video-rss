@@ -149,8 +149,10 @@ class Validate extends Base
                 $this->config['CACHE_DIR'] = $this->getEnv('CACHE_DIR');
             }
 
-            if (is_dir($this->config['CACHE_DIR']) === false && mkdir($this->config['CACHE_DIR']) === false) {
-                throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
+            if (file_exists($this->config['CACHE_DIR']) === false) {
+                if (mkdir($this->config['CACHE_DIR']) === false) {
+                    throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
+                }
             }
 
             if (is_dir($this->config['CACHE_DIR']) && is_writable($this->config['CACHE_DIR']) === false) {
