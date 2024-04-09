@@ -139,6 +139,8 @@ class Validate extends Base
 
     /**
      * Validate cache environment variables
+     * - `BVRSS_DISABLE_CACHE`
+     * - `BVRSS_CACHE_DIR`
      */
     public function cache(): void
     {
