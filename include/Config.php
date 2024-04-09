@@ -44,7 +44,7 @@ class Config
         'TIMEZONE' => 'UTC',
         'DATE_FORMAT' => 'F j, Y',
         'TIME_FORMAT' => 'H:i',
-        'CACHE_DIR' => './cache',
+        'CACHE_DIR' => 'cache',
         'DISABLE_CACHE' => false,
         'ENABLE_CACHE_VIEWER' => false,
         'ENABLE_IMAGE_PROXY' => false,
@@ -89,9 +89,23 @@ class Config
      */
     public function checkConfig(): void
     {
+        $this->requireConfigFile();
+
+        // Required parameters
         $this->validate->selfUrlPath();
         $this->validate->apiKey();
-        $this->checkOptional();
+
+        // Optional parameters
+        $this->validate->timezone();
+        $this->validate->dateFormat();
+        $this->validate->timeFormat();
+        $this->validate->cache();
+        $this->validate->cacheViewer();
+        $this->validate->imageProxy();
+        $this->validate->cspStatus();
+        $this->validate->rawApiErrors();
+
+        $this->config = $this->validate->getConfig();
     }
 
 
