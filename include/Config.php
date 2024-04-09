@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Config\Validate;
-use App\Exception\ConfigException;
 use Exception;
 
 class Config
@@ -11,15 +10,12 @@ class Config
     private Validate $validate;
 
     /** @var string $minPhpVersion Minimum PHP version */
-    private string $minPhpVersion = '8.0.0';
+    private string $minPhpVersion = '8.1.0';
 
     /** @var array<int, string> $extensions Required PHP extensions */
     private array $extensions = ['curl', 'json', 'mbstring', 'simplexml'];
 
-    /** @var int $mkdirMode mkdir() access mode */
-    private int $mkdirMode = 0775;
-
-    /** @var string $userAgent User agent used for Curl requests */
+    /** @var string $userAgent User agent used for HTTP requests */
     private string $userAgent = 'BetterVideoRss/%s (+https://github.com/VerifiedJoseph/BetterVideoRss)';
 
     /** @var array<int, string> $cspParts Content Security Policy header parts */
