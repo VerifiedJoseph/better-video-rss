@@ -24,7 +24,7 @@ class DataTest extends TestCase
         /** @var PHPUnit\Framework\MockObject\Stub&Config */
         $config = self::createStub(Config::class);
         $config->method('getCacheDisableStatus')->willReturn(false);
-        $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
+        $config->method('getCacheDirectory')->willReturn(sys_get_temp_dir());
         $config->method('getCacheFormatVersion')->willReturn(1);
 
         return $config;
