@@ -34,6 +34,7 @@ class ValidateTest extends TestCase
         putenv('BVRSS_DISABLE_CACHE');
         putenv('BVRSS_ENABLE_CACHE_VIEWER');
         putenv('BVRSS_ENABLE_IMAGE_PROXY');
+        putenv('BVRSS_RAW_API_ERRORS');
     }
 
     public function tearDown(): void
@@ -46,7 +47,7 @@ class ValidateTest extends TestCase
             ]
         );
     }
-    
+
     /**
      * Test `getConfig`
      */
@@ -356,5 +357,19 @@ class ValidateTest extends TestCase
         $config = $validate->getConfig();
 
         $this->assertTrue($config['DISABLE_CSP']);
+    }
+
+    /**
+     * Test `rawApiErrors()`
+     */
+    public function testRawApiErrors(): void
+    {
+        putenv('BVRSS_RAW_API_ERRORS=true');
+
+        $validate = new Validate(self::$defaults);
+        $validate->rawApiErrors();
+        $config = $validate->getConfig();
+
+        $this->assertTrue($config['RAW_API_ERRORS']);
     }
 }
