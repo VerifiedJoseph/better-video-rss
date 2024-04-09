@@ -28,6 +28,8 @@ class ValidateTest extends TestCase
         putenv('BVRSS_SELF_URL_PATH');
         putenv('BVRSS_YOUTUBE_API_KEY');
         putenv('BVRSS_TIMEZONE');
+        putenv('BVRSS_DATE_FORMAT');
+        putenv('BVRSS_TIME_FORMAT');
     }
 
     /**
@@ -211,5 +213,33 @@ class ValidateTest extends TestCase
 
         $validate = new Validate(self::$defaults);
         $validate->timezone();
+    }
+
+    /**
+     * Test `dateFormat()`
+     */
+    public function testDateFormat(): void
+    {
+        putenv('BVRSS_DATE_FORMAT=c');
+
+        $validate = new Validate(self::$defaults);
+        $validate->dateFormat();
+        $config = $validate->getConfig();
+
+        $this->assertEquals('c', $config['DATE_FORMAT']);
+    }
+
+    /**
+     * Test `timeFormat()`
+     */
+    public function testTimeFormat(): void
+    {
+        putenv('BVRSS_TIME_FORMAT=G:i:s');
+
+        $validate = new Validate(self::$defaults);
+        $validate->timeFormat();
+        $config = $validate->getConfig();
+
+        $this->assertEquals('G:i:s', $config['TIME_FORMAT']);
     }
 }
