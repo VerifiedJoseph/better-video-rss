@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use App\Config;
 use App\Api;
+use App\Http\Request;
 use App\Page\Index;
 
 class IndexTest extends TestCase
@@ -13,7 +14,7 @@ class IndexTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         self::$config = new Config();
-        self::$api = new Api(self::$config);
+        self::$api = new Api(self::$config, new Request(self::$config->getUserAgent()));
     }
 
     /**

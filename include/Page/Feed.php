@@ -4,8 +4,9 @@ namespace App\Page;
 
 use App\Config;
 use App\Api;
-use App\Fetch;
 use App\Data;
+use App\Http\Request;
+use App\Helper\Url;
 use App\Helper\Validate;
 use App\Helper\Output;
 use Exception;
@@ -14,6 +15,9 @@ class Feed
 {
     /** @var Config Config class instance */
     private Config $config;
+
+    /** @var Request Request class instance */
+    private Request $request;
 
     /** @var Api Api class instance */
     private Api $api;
@@ -39,11 +43,13 @@ class Feed
     /**
      * @param array<string, mixed> $inputs Inputs parameters from `$_GET`
      * @param Config $config Config class instance
+     * @param Request $request Request class instance
      * @param Api $api Api class instance
      */
-    public function __construct(array $inputs, Config $config, Api $api)
+    public function __construct(array $inputs, Config $config, Request $request, Api $api)
     {
         $this->config = $config;
+        $this->request = $request;
         $this->api = $api;
 
         $this->feedFormat = $this->config->getDefaultFeedFormat();
@@ -56,8 +62,6 @@ class Feed
      */
     public function generate(): void
     {
-        $fetch = new Fetch($this->config);
-
         $data = new Data(
             $this->feedId,
             $this->feedType,
@@ -66,12 +70,11 @@ class Feed
 
         foreach ($data->getExpiredParts() as $part) {
             if ($part === 'feed') {
-                $response = $fetch->feed(
-                    $this->feedId,
-                    $this->feedType
+                $response = $this->request->get(
+                    Url::getRssFeed($this->feedType, $this->feedId)
                 );
 
-                $data->updateFeed($response);
+                $data->updateFeed($response->getBody());
             }
 
             if ($part === 'details') {

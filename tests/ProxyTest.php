@@ -3,10 +3,12 @@
 use PHPUnit\Framework\TestCase;
 use App\Config;
 use App\Proxy;
+use App\Http\Request;
 
 class ProxyTest extends TestCase
 {
     private static Config $config;
+    private static Request $request;
 
     private string $videoId = 'CkZyZFa5qO0';
     private static string $channelId = 'UCBa659QWEk1AI4Tg--mrJ2A';
@@ -30,6 +32,8 @@ class ProxyTest extends TestCase
         $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
         $config->method('getCacheFormatVersion')->willReturn(1);
         self::$config = $config;
+
+        self::$request = new Request('test');
     }
 
     public static function tearDownAfterClass(): void
@@ -49,7 +53,7 @@ class ProxyTest extends TestCase
         $config = $this->createStub(Config::class);
         $config->method('getImageProxyStatus')->willReturn(false);
 
-        new Proxy([], $config);
+        new Proxy([], $config, self::$request);
     }
 
     /**
@@ -60,7 +64,7 @@ class ProxyTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No video ID parameter given.');
 
-        new Proxy([], self::$config);
+        new Proxy([], self::$config, self::$request);
     }
 
     /**
@@ -75,7 +79,7 @@ class ProxyTest extends TestCase
             'video_id' => ''
         ];
 
-        new Proxy($inputs, self::$config);
+        new Proxy($inputs, self::$config, self::$request);
     }
 
     /**
@@ -91,7 +95,7 @@ class ProxyTest extends TestCase
             'channel_id' => ''
         ];
 
-        new Proxy($inputs, self::$config);
+        new Proxy($inputs, self::$config, self::$request);
     }
 
     /**
@@ -107,7 +111,7 @@ class ProxyTest extends TestCase
             'channel_id' => 'NoAChannelId'
         ];
 
-        new Proxy($inputs, self::$config);
+        new Proxy($inputs, self::$config, self::$request);
     }
 
     /**
@@ -123,7 +127,7 @@ class ProxyTest extends TestCase
             'playlist_id' => ''
         ];
 
-        new Proxy($inputs, self::$config);
+        new Proxy($inputs, self::$config, self::$request);
     }
 
     /**
@@ -139,7 +143,7 @@ class ProxyTest extends TestCase
             'playlist_id' => 'NoAPlaylistId'
         ];
 
-        new Proxy($inputs, self::$config);
+        new Proxy($inputs, self::$config, self::$request);
     }
 
     /**
@@ -154,7 +158,7 @@ class ProxyTest extends TestCase
             'video_id' => $this->videoId
         ];
 
-        new Proxy($inputs, self::$config);
+        new Proxy($inputs, self::$config, self::$request);
     }
 
     /**
@@ -170,7 +174,7 @@ class ProxyTest extends TestCase
             'channel_id' => 'UCChannelIdNotInCache'
         ];
 
-        $proxy = new Proxy($inputs, self::$config);
+        $proxy = new Proxy($inputs, self::$config, self::$request);
         $proxy->getImage();
     }
 
@@ -187,7 +191,7 @@ class ProxyTest extends TestCase
             'channel_id' => self::$channelId
         ];
 
-        $proxy = new Proxy($inputs, self::$config);
+        $proxy = new Proxy($inputs, self::$config, self::$request);
         $proxy->getImage();
     }
 }
