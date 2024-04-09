@@ -108,24 +108,6 @@ class Config
         $this->config = $this->validate->getConfig();
     }
 
-
-    /**
-     * Check optional parameters excluding cache (see `checkCache()`)
-     *
-     * @throws ConfigException if timezone environment variable is invalid.
-     */
-    public function checkOptional(): void
-    {
-        $this->validate->timezone();
-        $this->validate->dateFormat();
-        $this->validate->timeFormat();
-        $this->validate->cache();
-        $this->validate->cacheViewer();
-        $this->validate->imageProxy();
-        $this->validate->cspStatus();
-        $this->validate->rawApiErrors();
-    }
-
     /**
      * Returns Content Security Policy header value
      * @return string
