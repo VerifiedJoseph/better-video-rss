@@ -204,31 +204,4 @@ class ConfigTest extends TestCase
         $config = new Config();
         $this->assertFalse($config->getRawApiErrorStatus());
     }
-
-    /**
-     * Test empty `BVRSS_TIMEZONE`
-     */
-    /*public function testEmptyTimezone(): void
-    {
-        putenv('BVRSS_TIMEZONE=');
-
-        $config = new Config();
-        $config->checkOptional();
-
-        $this->assertEquals('UTC', $config->getTimezone());
-    }*/
-
-    /**
-     * Test `BVRSS_TIMEZONE` with invalid timezone
-     */
-    /*public function testInvalidTimezone(): void
-    {
-        putenv('BVRSS_TIMEZONE=Europe/Coventry');
-
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid timezone given');
-
-        $config = new Config();
-        $config->checkOptional();
-    }*/
 }
