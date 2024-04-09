@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Config\Validate;
-//use App\Helper\Validate;
 use App\Exception\ConfigException;
 use Exception;
 
@@ -45,7 +44,7 @@ class Config
         'TIMEZONE' => 'UTC',
         'DATE_FORMAT' => 'F j, Y',
         'TIME_FORMAT' => 'H:i',
-        'CACHE_DIR' => 'cache',
+        'CACHE_DIR' => './cache',
         'DISABLE_CACHE' => false,
         'ENABLE_CACHE_VIEWER' => false,
         'ENABLE_IMAGE_PROXY' => false,
@@ -86,73 +85,15 @@ class Config
     }
 
     /**
-     * Check config constants
-     *
-     * @throws ConfigException if self URL path environment variable is not set.
-     * @throws ConfigException if self URL path does not end with a forward slash.
-     * @throws ConfigException if self URL path does not start with http:// or https://.
-     * @throws ConfigException if YouTube API key environment variable is not set.
+     * Check config
      */
-    /*public function checkConfig(): void
+    public function checkConfig(): void
     {
-        $this->requireConfigFile();
-
-        if ($this->hasEnv('SELF_URL_PATH') === false || $this->getEnv('SELF_URL_PATH') === '') {
-            throw new ConfigException('Self URL path must be set. [BVRSS_SELF_URL_PATH]');
-        }
-
-        if (Validate::selfUrlSlash((string) $this->getEnv('SELF_URL_PATH')) === false) {
-            throw new ConfigException('Self URL must end with a forward slash. [BVRSS_SELF_URL_PATH]');
-        }
-
-        if (Validate::selfUrlHttp((string) $this->getEnv('SELF_URL_PATH')) === false) {
-            throw new ConfigException('Self URL must start with http:// or https:// [BVRSS_SELF_URL_PATH]');
-        }
-
-        $this->config['SELF_URL_PATH'] = $this->getEnv('SELF_URL_PATH');
-
-        if ($this->hasEnv('YOUTUBE_API_KEY') === false || $this->getEnv('YOUTUBE_API_KEY') === '') {
-            throw new ConfigException('YouTube API key must be set. [BVRSS_YOUTUBE_API_KEY]');
-        }
-
-        $this->config['YOUTUBE_API_KEY'] = $this->getEnv('YOUTUBE_API_KEY');
-
+        $this->validate->selfUrlPath();
+        $this->validate->apiKey();
         $this->checkOptional();
-        $this->checkCache();
-    }*/
-
-    /**
-     * Check cache parameters
-     *
-     * @throws ConfigException if cache directory could not be created.
-     * @throws ConfigException if cache directory is not writable.
-     */
-    public function checkCache(): void
-    {
-        if ($this->getEnv('DISABLE_CACHE') === 'true') {
-            $this->config['DISABLE_CACHE'] = true;
-        }
-
-        if ($this->getEnv('ENABLE_CACHE_VIEWER') === 'true') {
-            $this->config['ENABLE_CACHE_VIEWER'] = true;
-        }
-
-        if ($this->config['DISABLE_CACHE'] === false) {
-            if ($this->hasEnv('CACHE_DIR') === true && $this->getEnv('CACHE_DIR') !== '') {
-                $this->config['CACHE_DIR'] = $this->getEnv('CACHE_DIR');
-            }
-
-            $cacheDir = $this->getCacheDirPath();
-
-            if (is_dir($cacheDir) === false && mkdir($cacheDir, $this->mkdirMode) === false) {
-                throw new ConfigException('Could not create cache directory [BVRSS_CACHE_DIR]');
-            }
-
-            if (is_dir($cacheDir) && is_writable($cacheDir) === false) {
-                throw new ConfigException('Cache directory is not writable. [BVRSS_CACHE_DIR]');
-            }
-        }
     }
+
 
     /**
      * Check optional parameters excluding cache (see `checkCache()`)
@@ -161,36 +102,14 @@ class Config
      */
     public function checkOptional(): void
     {
-        if ($this->getEnv('RAW_API_ERRORS') === 'true') {
-            $this->config['RAW_API_ERRORS'] = true;
-        }
-
-        if ($this->hasEnv('TIMEZONE') === true && $this->getEnv('TIMEZONE') !== '') {
-            if (Validate::timezone((string) $this->getEnv('TIMEZONE')) === false) {
-                throw new ConfigException(sprintf(
-                    'Invalid timezone given (%s). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]',
-                    $this->getEnv('TIMEZONE')
-                ));
-            }
-
-            $this->config['TIMEZONE'] = $this->getEnv('TIMEZONE');
-        }
-
-        if ($this->hasEnv('DATE_FORMAT') === true && $this->getEnv('DATE_FORMAT') !== '') {
-            $this->config['DATE_FORMAT'] = $this->getEnv('DATE_FORMAT');
-        }
-
-        if ($this->hasEnv('TIME_FORMAT') === true && $this->getEnv('TIME_FORMAT') !== '') {
-            $this->config['TIME_FORMAT'] = $this->getEnv('TIME_FORMAT');
-        }
-
-        if ($this->getEnv('ENABLE_IMAGE_PROXY') === 'true') {
-            $this->config['ENABLE_IMAGE_PROXY'] = true;
-        }
-
-        if ($this->getEnv('DISABLE_CSP') === 'true') {
-            $this->config['DISABLE_CSP'] = true;
-        }
+        $this->validate->timezone();
+        $this->validate->dateFormat();
+        $this->validate->timeFormat();
+        $this->validate->cache();
+        $this->validate->cacheViewer();
+        $this->validate->imageProxy();
+        $this->validate->cspStatus();
+        $this->validate->rawApiErrors();
     }
 
     /**
@@ -356,7 +275,7 @@ class Config
      */
     public function getCacheDirPath(): string
     {
-        if (Validate::absolutePath($this->config['CACHE_DIR']) === false) {
+        if (Helper\Validate::absolutePath($this->config['CACHE_DIR']) === false) {
             return dirname(__DIR__) . DIRECTORY_SEPARATOR . $this->config['CACHE_DIR'];
         }
 
@@ -371,29 +290,5 @@ class Config
         if (file_exists('config.php') === true) {
             require 'config.php';
         }
-    }
-
-    /**
-     * Check for an environment variable
-     *
-     * @param string $name Variable name excluding prefix
-     */
-    private function hasEnv(string $name): bool
-    {
-        if (getenv('BVRSS_' . $name) === false) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Get an environment variable
-     *
-     * @param string $name Variable name excluding prefix
-     */
-    private function getEnv(string $name): mixed
-    {
-        return getenv('BVRSS_' . $name);
     }
 }
