@@ -32,6 +32,7 @@ class ValidateTest extends TestCase
         putenv('BVRSS_DATE_FORMAT');
         putenv('BVRSS_TIME_FORMAT');
         putenv('BVRSS_DISABLE_CACHE');
+        putenv('BVRSS_ENABLE_CACHE_VIEWER');
     }
 
     public function tearDown(): void
@@ -312,5 +313,19 @@ class ValidateTest extends TestCase
 
         $validate = new Validate(self::$defaults);
         $validate->cache();
+    }
+
+    /**
+     * Test `cacheViewer()`
+     */
+    public function testCacheViewer(): void
+    {
+        putenv('BVRSS_ENABLE_CACHE_VIEWER=true');
+
+        $validate = new Validate(self::$defaults);
+        $validate->cacheViewer();
+        $config = $validate->getConfig();
+
+        $this->assertTrue($config['ENABLE_CACHE_VIEWER']);
     }
 }
