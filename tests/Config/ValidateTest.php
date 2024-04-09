@@ -27,6 +27,7 @@ class ValidateTest extends TestCase
         // Unset environment variables before each test
         putenv('BVRSS_SELF_URL_PATH');
         putenv('BVRSS_YOUTUBE_API_KEY');
+        putenv('BVRSS_TIMEZONE');
     }
 
     /**
@@ -168,5 +169,47 @@ class ValidateTest extends TestCase
 
         $validate = new Validate(self::$defaults);
         $validate->apiKey();
+    }
+
+    /**
+     * Test `timezone()`
+     */
+    public function testTimezone(): void
+    {
+        putenv('BVRSS_TIMEZONE=Europe/London');
+
+        $validate = new Validate(self::$defaults);
+        $validate->timezone();
+        $config = $validate->getConfig();
+
+        $this->assertEquals('Europe/London', $config['TIMEZONE']);
+    }
+
+    /**
+     * Test `timezone()` with empty timezone
+     */
+    public function testEmptyTimezone(): void
+    {
+        putenv('BVRSS_TIMEZONE=');
+
+        $validate = new Validate(self::$defaults);
+        $validate->timezone();
+        $config = $validate->getConfig();
+
+        $this->assertEquals(self::$defaults['TIMEZONE'], $config['TIMEZONE']);
+    }
+
+    /**
+     * Test `timezone()` with invalid timezone
+     */
+    public function testInvalidTimezone(): void
+    {
+        putenv('BVRSS_TIMEZONE=Europe/Coventry');
+
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Invalid timezone given');
+
+        $validate = new Validate(self::$defaults);
+        $validate->timezone();
     }
 }
