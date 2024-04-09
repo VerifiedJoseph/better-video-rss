@@ -99,9 +99,7 @@ class Cache
      */
     private function validateVersion(): void
     {
-        if (array_key_exists('version', $this->data) === false) {
-            $this->data = [];
-        } elseif ($this->data['version'] !== $this->config->getCacheFormatVersion()) {
+        if ($this->data['version'] !== $this->config->getCacheFormatVersion()) {
             $this->data = [];
         }
     }
