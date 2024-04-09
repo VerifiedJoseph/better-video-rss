@@ -1,9 +1,14 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use App\Config;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use MockFileSystem\MockFileSystem as mockfs;
 use App\Cache;
+use App\Config;
 
+#[CoversClass(Cache::class)]
+#[UsesClass(Config::class)]
 class CacheTest extends TestCase
 {
     private static Config $config;
@@ -22,21 +27,17 @@ class CacheTest extends TestCase
             associative: true
         );
 
-        self::$cacheFilepath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . hash('sha256', self::$channelId) . '.cache';
+        mockfs::create();
+        self::$cacheFilepath = mockfs::getUrl('/' . hash('sha256', self::$channelId) . '.cache');
 
         copy('tests/files/channel-cache-data.json', self::$cacheFilepath);
 
         /** @var PHPUnit\Framework\MockObject\Stub&Config */
         $config = self::createStub(Config::class);
         $config->method('getCacheDisableStatus')->willReturn(false);
-        $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
+        $config->method('getCacheDirPath')->willReturn(mockfs::getUrl('/'));
         $config->method('getCacheFormatVersion')->willReturn(1);
         self::$config = $config;
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        unlink(self::$cacheFilepath);
     }
 
     /**
@@ -72,7 +73,7 @@ class CacheTest extends TestCase
         /** @var PHPUnit\Framework\MockObject\Stub&Config */
         $config = self::createStub(Config::class);
         $config->method('getCacheDisableStatus')->willReturn(false);
-        $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
+        $config->method('getCacheDirPath')->willReturn(mockfs::getUrl('/'));
         $config->method('getCacheFormatVersion')->willReturn(2);
 
         $cache = new Cache(self::$channelId, $config);
