@@ -103,7 +103,7 @@ class ValidateTest extends TestCase
     }
 
     /**
-     * Test `selfUrlPath()` with self URL path missing ending forward 
+     * Test `selfUrlPath()` with self URL path missing ending forward
      */
     public function testSelfUrlPathNoEndingForwardSlash(): void
     {

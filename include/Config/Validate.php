@@ -17,7 +17,7 @@ class Validate extends Base
     {
         $this->config = $defaults;
     }
-    
+
     /**
      * Returns config
      *
@@ -102,7 +102,7 @@ class Validate extends Base
     public function timezone(): void
     {
         if ($this->hasEnv('TIMEZONE') === true && $this->getEnv('TIMEZONE') !== '') {
-            if (Validate::timezone((string) $this->getEnv('TIMEZONE')) === false) {
+            if (Helper\Validate::timezone((string) $this->getEnv('TIMEZONE')) === false) {
                 throw new ConfigException(sprintf(
                     'Invalid timezone given (%s). See: https://www.php.net/manual/en/timezones.php [BVRSS_TIMEZONE]',
                     $this->getEnv('TIMEZONE')
