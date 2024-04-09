@@ -5,6 +5,7 @@ namespace Test\Config;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
+use MockFileSystem\MockFileSystem as mockfs;
 use App\Config\Validate;
 use App\Config;
 use App\Exception\ConfigException;
@@ -30,8 +31,20 @@ class ValidateTest extends TestCase
         putenv('BVRSS_TIMEZONE');
         putenv('BVRSS_DATE_FORMAT');
         putenv('BVRSS_TIME_FORMAT');
+        putenv('BVRSS_DISABLE_CACHE');
     }
 
+    public function tearDown(): void
+    {
+        stream_context_set_default(
+            [
+                'mfs' => [
+                    'mkdir_fail' => false
+                ]
+            ]
+        );
+    }
+    
     /**
      * Test `getConfig`
      */
@@ -241,5 +254,63 @@ class ValidateTest extends TestCase
         $config = $validate->getConfig();
 
         $this->assertEquals('G:i:s', $config['TIME_FORMAT']);
+    }
+
+    /**
+     * Test `cache()` with `BVRSS_DISABLE_CACHE=true`
+     */
+    public function testDisableCache(): void
+    {
+        putenv('BVRSS_DISABLE_CACHE=true');
+
+        $validate = new Validate(self::$defaults);
+        $validate->cache();
+        $config = $validate->getConfig();
+
+        $this->assertTrue($config['DISABLE_CACHE']);
+    }
+
+    /**
+     * Test `cache()` with `BVRSS_DISABLE_DIR`
+     */
+    public function testCacheDir(): void
+    {
+        mockfs::create();
+        $folder = mockfs::getUrl('/cache');
+
+        mkdir($folder);
+
+        putenv('BVRSS_CACHE_DIR=' . $folder);
+
+        $validate = new Validate(self::$defaults);
+        $validate->cache();
+        $config = $validate->getConfig();
+
+        $this->assertEquals($folder, $config['CACHE_DIR']);
+    }
+
+    /**
+     * Test cache folder creation failure
+     */
+    public function testCacheDirCreationFailure(): void
+    {
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Could not create cache directory [BVRSS_CACHE_DIR]');
+
+        mockfs::create();
+        $folder = mockfs::getUrl('/data');
+
+        stream_context_set_default(
+            [
+                'mfs' => [
+                    'mkdir_fail' => true,
+                ]
+            ]
+        );
+
+        putenv('BVRSS_CACHE_DIR=' . $folder);
+
+        $validate = new Validate(self::$defaults);
+        $validate->cache();
     }
 }
