@@ -52,22 +52,6 @@ class Config
         $this->validate = new Validate($this->config);
         $this->validate->version(PHP_VERSION, $this->minPhpVersion);
         $this->validate->extensions($this->extensions);
-
-        $this->checkInstall();
-    }
-
-    /**
-     * Check PHP version and loaded extensions
-     *
-     * @throws Exception if PHP version is not supported
-     * @throws Exception if a PHP extension is not loaded
-     * @throws Exception if a api-endpoints.json is not found
-     */
-    private function checkInstall(): void
-    {
-        if (file_exists('include/api-endpoints.json') == false) {
-            throw throw new Exception('File not found: include/api-endpoints.json');
-        }
     }
 
     /**
