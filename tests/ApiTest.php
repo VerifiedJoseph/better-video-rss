@@ -12,6 +12,20 @@ class ApiTest extends TestCase
 {
     private static Config $config;
 
+    private string $errorResponseBody = '{
+        "error": {
+          "code": 400,
+          "message": "API key not valid. Please pass a valid API key.",
+          "errors": [
+            {
+              "message": "API key not valid. Please pass a valid API key.",
+              "domain": "global",
+              "reason": "badRequest"
+            }
+          ]
+        }
+      }';
+
     public static function setupBeforeClass(): void
     {
         /** @var PHPUnit\Framework\MockObject\Stub&Config */
@@ -21,6 +35,9 @@ class ApiTest extends TestCase
         self::$config = $config;
     }
 
+    /**
+     * Test `getDetails()`
+     */
     public function testGetDetails(): void
     {
         /** @var PHPUnit\Framework\MockObject\Stub&Request */
@@ -66,5 +83,42 @@ class ApiTest extends TestCase
         $body = $api->getDetails('channel', 'UCBa659QWEk1AI4Tg--mrJ2A', 'e-tag');
 
         $this->assertInstanceOf(stdClass::class, $body);
+    }
+
+    /**
+     * Test `handleError()`
+     */
+    public function testHandleError(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Error: API returned code 400 (badRequest: API key not valid.');
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Request */
+        $request = self::createStub(Request::class);
+        $request->method('get')->willReturn(new Response($this->errorResponseBody, 400));
+
+        $api = new Api(self::$config, $request);
+        $api->getDetails('channel', 'UCBa659QWEk1AI4Tg--mrJ2A', 'e-tag');
+    }
+
+    /**
+     * Test `handleError()` with raw API errors enabled
+     */
+    public function testHandleErrorRawApiErrors(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('API error:');
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Config */
+        $config = self::createStub(Config::class);
+        $config->method('getApiKey')->willReturn('qwerty');
+        $config->method('getRawApiErrorStatus')->willReturn(true);
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Request */
+        $request = self::createStub(Request::class);
+        $request->method('get')->willReturn(new Response($this->errorResponseBody, 400));
+
+        $api = new Api($config, $request);
+        $api->getDetails('channel', 'UCBa659QWEk1AI4Tg--mrJ2A', 'e-tag');
     }
 }
