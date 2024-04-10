@@ -86,6 +86,54 @@ class ApiTest extends TestCase
     }
 
     /**
+     * Test `getVideos()`
+     */
+    public function testGetVideos(): void
+    {
+        /** @var PHPUnit\Framework\MockObject\Stub&Request */
+        $request = self::createStub(Request::class);
+        $request->method('get')->willReturn(new Response('{"items": [{}]}', 200));
+
+        $api = new Api(self::$config, $request);
+        $body = $api->getVideos('CkZyZFa5qO0');
+
+        $this->assertInstanceOf(stdClass::class, $body);
+        $this->assertObjectHasProperty('items', $body);
+    }
+
+    /**
+     * Test `searchChannels()`
+     */
+    public function testSearchChannels(): void
+    {
+        /** @var PHPUnit\Framework\MockObject\Stub&Request */
+        $request = self::createStub(Request::class);
+        $request->method('get')->willReturn(new Response('{"items": [{}]}', 200));
+
+        $api = new Api(self::$config, $request);
+        $body = $api->searchChannels('Tom Scott');
+
+        $this->assertInstanceOf(stdClass::class, $body);
+        $this->assertObjectHasProperty('items', $body);
+    }
+
+    /**
+     * Test `searchPlaylists()`
+     */
+    public function testSearchPlaylists(): void
+    {
+        /** @var PHPUnit\Framework\MockObject\Stub&Request */
+        $request = self::createStub(Request::class);
+        $request->method('get')->willReturn(new Response('{"items": [{}]}', 200));
+
+        $api = new Api(self::$config, $request);
+        $body = $api->searchPlaylists('Things You Might Not Know');
+
+        $this->assertInstanceOf(stdClass::class, $body);
+        $this->assertObjectHasProperty('items', $body);
+    }
+
+    /**
      * Test `handleError()`
      */
     public function testHandleError(): void
