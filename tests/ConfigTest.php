@@ -79,7 +79,7 @@ class ConfigTest extends TestCase
     /**
      * Test `getFeedFormats()`
      */
-    public function tesGetFeedFormats(): void
+    public function testGetFeedFormats(): void
     {
         $config = new Config();
         $this->assertNotEmpty($config->getFeedFormats());
