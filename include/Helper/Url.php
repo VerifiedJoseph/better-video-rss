@@ -45,7 +45,6 @@ class Url
         ],
         'videos' => [
             'endpoint' => 'videos',
-            'id' => '',
             'query' => [
                 'id' => '',
                 'part' => [
