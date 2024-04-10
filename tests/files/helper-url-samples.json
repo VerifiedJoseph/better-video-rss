@@ -45,27 +45,27 @@
     ],
     "apis": [
         {
-            "url": "https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails&id=UC4QobU6STFB0P71PMvOGN5A&fields=etag,items(snippet(title,description,thumbnails(default(url))))&prettyPrint=false&key=ApiKeyHere",
+            "url": "https://www.googleapis.com/youtube/v3/channels?id=UC4QobU6STFB0P71PMvOGN5A&part=snippet%2CcontentDetails&fields=etag%2Citems%28snippet%28title%2Cdescription%2Cthumbnails%28default%28url%29%29%29%29&prettyPrint=true&key=ApiKeyHere",
             "type": "channel",
             "value" :"UC4QobU6STFB0P71PMvOGN5A"
         },
         {
-            "url": "https://www.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&id=PLuhl9TnQPDCnWIhy_KSbtFwXVQnNvgfSh&fields=etag,items(snippet(title,description,thumbnails(default(url))))&prettyPrint=false&key=ApiKeyHere",
+            "url": "https://www.googleapis.com/youtube/v3/playlists?id=PLuhl9TnQPDCnWIhy_KSbtFwXVQnNvgfSh&part=snippet%2CcontentDetails&fields=etag%2Citems%28snippet%28title%2Cdescription%2Cthumbnails%28default%28url%29%29%29%29&prettyPrint=true&key=ApiKeyHere",
             "type": "playlist",
             "value" :"PLuhl9TnQPDCnWIhy_KSbtFwXVQnNvgfSh"
         },
         {
-            "url": "https://www.googleapis.com/youtube/v3/videos?part=id,snippet,contentDetails,liveStreamingDetails&id=jNQXAC9IVRw&fields=etag,items(id,snippet(tags,liveBroadcastContent,thumbnails(standard(url),maxres(url))),contentDetails(duration),liveStreamingDetails(scheduledStartTime))&prettyPrint=false&key=ApiKeyHere",
+            "url": "https://www.googleapis.com/youtube/v3/videos?id=jNQXAC9IVRw&part=id%2Csnippet%2CcontentDetails%2CliveStreamingDetails&fields=etag%2Citems%28id%2Csnippet%28tags%2CliveBroadcastContent%2Cthumbnails%28standard%28url%29%2Cmaxres%28url%29%29%29%2CcontentDetails%28duration%29%2CliveStreamingDetails%28scheduledStartTime%29%29&prettyPrint=true&key=ApiKeyHere",
             "type": "videos",
             "value" :"jNQXAC9IVRw"
         },
         {
-            "url": "https://www.googleapis.com/youtube/v3/search?part=id,snippet&fields=items(id(channelId),snippet(title))&q=jawed&type=channel&maxResults=1&prettyPrint=false&key=ApiKeyHere",
+            "url": "https://www.googleapis.com/youtube/v3/search?part=id%2Csnippet&fields=items%28id%28channelId%29%2Csnippet%28title%29%29&q=jawed&type=jawed&maxResults=jawed&prettyPrint=true&key=ApiKeyHere",
             "type": "searchChannels",
             "value" :"jawed"
         },
         {
-            "url": "https://www.googleapis.com/youtube/v3/search?part=id,snippet&fields=items(id(playlistId),snippet(title))&q=YouTube+Rewind+2018&type=playlist&maxResults=1&prettyPrint=false&key=ApiKeyHere",
+            "url": "https://www.googleapis.com/youtube/v3/search?part=id%2Csnippet&fields=items%28id%28playlistId%29%2Csnippet%28title%29%29&q=YouTube%2BRewind%2B2018&type=YouTube+Rewind+2018&maxResults=YouTube+Rewind+2018&prettyPrint=true&key=ApiKeyHere",
             "type": "searchPlaylists",
             "value" :"YouTube Rewind 2018"
         }
