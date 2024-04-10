@@ -72,10 +72,6 @@ class Config
                 throw new Exception(sprintf('Extension Error: %s extension not loaded.', $ext));
             }
         }
-
-        if (file_exists('include/api-endpoints.json') == false) {
-            throw throw new Exception('File not found: include/api-endpoints.json');
-        }
     }
 
     /**
