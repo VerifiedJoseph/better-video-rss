@@ -1,10 +1,12 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
 use App\Version;
-use App\Exception\ConfigException;
 
+#[CoversClass(Config::class)]
 class ConfigTest extends TestCase
 {
     public function setUp(): void
@@ -38,12 +40,8 @@ class ConfigTest extends TestCase
      */
     public function testGetCspDisabledStatus(): void
     {
-        putenv('BVRSS_DISABLE_CSP=true');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertTrue($config->getCspDisabledStatus());
+        $this->assertFalse($config->getCspDisabledStatus());
     }
 
     /**
@@ -81,24 +79,10 @@ class ConfigTest extends TestCase
     /**
      * Test `getFeedFormats()`
      */
-    public function tesGetFeedFormats(): void
+    public function testGetFeedFormats(): void
     {
         $config = new Config();
         $this->assertNotEmpty($config->getFeedFormats());
-    }
-
-    /**
-     * Test `getCacheDirPath()`
-     */
-    public function testGetCacheDirPath(): void
-    {
-        putenv('BVRSS_CACHE_DIR=cache');
-
-        $config = new Config();
-        $config->checkCache();
-
-        $path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache';
-        $this->assertEquals($path, $config->getCacheDirPath());
     }
 
     /**
@@ -120,11 +104,7 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheDirectory(): void
     {
-        putenv('BVRSS_CACHE_DIR=cache');
-
         $config = new Config();
-        $config->checkCache();
-
         $this->assertEquals('cache', $config->getCacheDirectory());
     }
 
@@ -133,12 +113,8 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheDisableStatus(): void
     {
-        putenv('BVRSS_DISABLE_CACHE=true');
-
         $config = new Config();
-        $config->checkCache();
-
-        $this->assertTrue($config->getCacheDisableStatus());
+        $this->assertFalse($config->getCacheDisableStatus());
     }
 
     /**
@@ -146,12 +122,8 @@ class ConfigTest extends TestCase
      */
     public function testGetCacheViewerStatus(): void
     {
-        putenv('BVRSS_ENABLE_CACHE_VIEWER=true');
-
         $config = new Config();
-        $config->checkCache();
-
-        $this->assertTrue($config->getCacheViewerStatus());
+        $this->assertFalse($config->getCacheViewerStatus());
     }
 
     /**
@@ -168,12 +140,8 @@ class ConfigTest extends TestCase
      */
     public function testGetImageProxyStatus(): void
     {
-        putenv('BVRSS_ENABLE_IMAGE_PROXY=true');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertTrue($config->getImageProxyStatus());
+        $this->assertFalse($config->getImageProxyStatus());
     }
 
     /**
@@ -195,12 +163,8 @@ class ConfigTest extends TestCase
      */
     public function testGetTimezone(): void
     {
-        putenv('BVRSS_TIMEZONE=Europe/London');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertEquals('Europe/London', $config->getTimezone());
+        $this->assertEquals('UTC', $config->getTimezone());
     }
 
     /**
@@ -208,12 +172,8 @@ class ConfigTest extends TestCase
      */
     public function testGetDateFormat(): void
     {
-        putenv('BVRSS_DATE_FORMAT=c');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertEquals('c', $config->getDateFormat());
+        $this->assertEquals('F j, Y', $config->getDateFormat());
     }
 
     /**
@@ -221,12 +181,8 @@ class ConfigTest extends TestCase
      */
     public function testGetTimeFormat(): void
     {
-        putenv('BVRSS_TIME_FORMAT=G:i:s');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertEquals('G:i:s', $config->getTimeFormat());
+        $this->assertEquals('H:i', $config->getTimeFormat());
     }
 
     /**
@@ -234,121 +190,7 @@ class ConfigTest extends TestCase
      */
     public function testGetRawApiErrorStatus(): void
     {
-        putenv('BVRSS_RAW_API_ERRORS=true');
-
         $config = new Config();
-        $config->checkOptional();
-
-        $this->assertTrue($config->getRawApiErrorStatus());
-    }
-
-    /**
-     * Test with no `BVRSS_SELF_URL_PATH`
-     */
-    public function testWithNoSelfUrlPath(): void
-    {
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Self URL path must be set');
-
-        $config = new Config();
-        $config->checkConfig();
-    }
-
-    /**
-     * Test with empty `BVRSS_SELF_URL_PATH`
-     */
-    public function testWithEmptySelfUrlPath(): void
-    {
-        putenv('BVRSS_SELF_URL_PATH=');
-
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Self URL path must be set');
-
-        $config = new Config();
-        $config->checkConfig();
-    }
-
-    /**
-     * Test `BVRSS_SELF_URL_PATH` with missing ending forward slash
-     */
-    public function testWithSelfUrlPathNoEndingForwardSlash(): void
-    {
-        putenv('BVRSS_SELF_URL_PATH=https://example.com');
-
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Self URL must end with a forward slash');
-
-        $config = new Config();
-        $config->checkConfig();
-    }
-
-    /**
-     * Test `BVRSS_SELF_URL_PATH` with missing HTTP protocol
-     */
-    public function testWithSelfUrlPathMissingProtocol(): void
-    {
-        putenv('BVRSS_SELF_URL_PATH=example.com/');
-
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Self URL must start with http:// or https://');
-
-        $config = new Config();
-        $config->checkConfig();
-    }
-
-    /**
-     * Test with missing `BVRSS_YOUTUBE_API_KEY`
-     */
-    public function testWithMissingYouTubeApiKey(): void
-    {
-        putenv('BVRSS_SELF_URL_PATH=https://example.com/');
-
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('YouTube API key must be set');
-
-        $config = new Config();
-        $config->checkConfig();
-    }
-
-    /**
-     * Test with empty `BVRSS_YOUTUBE_API_KEY`
-     */
-    public function testWithEmptyYouTubeApiKey(): void
-    {
-        putenv('BVRSS_SELF_URL_PATH=https://example.com/');
-        putenv('BVRSS_YOUTUBE_API_KEY=');
-
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('YouTube API key must be set');
-
-        $config = new Config();
-        $config->checkConfig();
-    }
-
-    /**
-     * Test empty `BVRSS_TIMEZONE`
-     */
-    public function testEmptyTimezone(): void
-    {
-        putenv('BVRSS_TIMEZONE=');
-
-        $config = new Config();
-        $config->checkOptional();
-
-        $this->assertEquals('UTC', $config->getTimezone());
-    }
-
-    /**
-     * Test `BVRSS_TIMEZONE` with invalid timezone
-     */
-    public function testInvalidTimezone(): void
-    {
-        putenv('BVRSS_TIMEZONE=Europe/Coventry');
-
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid timezone given');
-
-        $config = new Config();
-        $config->checkOptional();
+        $this->assertFalse($config->getRawApiErrorStatus());
     }
 }

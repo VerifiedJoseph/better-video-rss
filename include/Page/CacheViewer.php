@@ -80,7 +80,7 @@ class CacheViewer
      */
     private function loadFiles(): void
     {
-        $cacheDirectory = new \RecursiveDirectoryIterator($this->config->getCacheDirPath());
+        $cacheDirectory = new \RecursiveDirectoryIterator($this->config->getCacheDirectory());
         $cacheFiles = new \RegexIterator($cacheDirectory, '/.cache$/');
 
         foreach ($cacheFiles as $file) {

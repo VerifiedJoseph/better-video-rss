@@ -29,7 +29,7 @@ class ProxyTest extends TestCase
         $config->method('getTimezone')->willReturn('Europe/London');
         $config->method('getDateFormat')->willReturn('F j, Y');
         $config->method('getTimeFormat')->willReturn('H:i');
-        $config->method('getCacheDirPath')->willReturn(sys_get_temp_dir());
+        $config->method('getCacheDirectory')->willReturn(sys_get_temp_dir());
         $config->method('getCacheFormatVersion')->willReturn(1);
         self::$config = $config;
 
