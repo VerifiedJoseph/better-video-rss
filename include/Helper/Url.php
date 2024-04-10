@@ -13,8 +13,88 @@ class Url
         'api' => 'https://www.googleapis.com/youtube/v3/'
     ];
 
-    /** @var array<string, string> $apiEndpoints YouTube API endpoints */
-    private static array $apiEndpoints = [];
+    /** @var array<string, array<mixed>> $apiEndpoints YouTube API endpoints and query components */
+    private static array $apiEndpoints = [
+        'channel' => [
+            'endpoint' => 'channels',
+            'query' => [
+                'id' => '',
+                'part' => [
+                    'snippet',
+                    'contentDetails'
+                ],
+                'fields' => [
+                    'etag',
+                    'items(snippet(title,description,thumbnails(default(url))))'
+                ]
+            ],
+        ],
+        'playlist' => [
+            'endpoint' => 'playlists',
+            'query' => [
+                'id' => '',
+                'part' => [
+                    'snippet' ,
+                    'contentDetails'
+                ],
+                'fields' => [
+                    'etag',
+                    'items(snippet(title,description,thumbnails(default(url))))'
+                ],
+            ],
+        ],
+        'videos' => [
+            'endpoint' => 'videos',
+            'id' => '',
+            'query' => [
+                'id' => '',
+                'part' => [
+                    'id',
+                    'snippet',
+                    'contentDetails' ,
+                    'liveStreamingDetails',
+                ],
+                'fields' => [
+                    'etag',
+                    'items(id,snippet(tags,liveBroadcastContent,thumbnails(standard(url),maxres(url)))',
+                    'contentDetails(duration)',
+                    'liveStreamingDetails(scheduledStartTime))'
+                ]
+            ],
+        ],
+        'searchChannels' => [
+            'endpoint' => 'search',
+            'query' => [
+                'part' => [
+                    'id',
+                    'snippet',
+                ],
+                'fields' => [
+                    'items(id(channelId)',
+                    'snippet(title))'
+                ],
+                'q' => '',
+                'type' => 'channel',
+                'maxResults' => 1
+            ],
+        ],
+        'searchPlaylists' => [
+            'endpoint' => 'search',
+            'query' => [
+                'part' => [
+                    'id',
+                    'snippet',
+                ],
+                'fields' => [
+                    'items(id(playlistId)',
+                    'snippet(title))'
+                ],
+                'q' => '',
+                'type' => 'playlist',
+                'maxResults' => 1
+            ],
+        ]
+    ];
 
     /** @var array<int, string> $thumbnailTypes Supported YouTube thumbnail types */
     private static array $thumbnailTypes = [
@@ -150,20 +230,23 @@ class Url
     public static function getApi(string $type, string $parameter, string $apiKey)
     {
         $url = self::getEndpoint('api');
+        $endpoint = self::$apiEndpoints[$type]['endpoint'];
+        $query = [];
 
-        switch ($type) {
-            case 'channel':
-            case 'playlist':
-            case 'videos':
-                $url .= self::getApiEndpoint($type, $parameter);
-                break;
-            case 'searchChannels':
-            case 'searchPlaylists':
-                $url .= self::getApiEndpoint($type, urlencode($parameter));
-                break;
+        foreach (self::$apiEndpoints[$type]['query'] as $name => $section) {
+            if (is_array($section) === true) {
+                $query[$name] = implode(',', $section);
+            } elseif ($name === 'q') {
+                $query[$name] = urlencode($parameter);
+            } else {
+                $query[$name] = $parameter;
+            }
         }
 
-        return $url . '&prettyPrint=false&key=' . $apiKey;
+        $query['prettyPrint'] = 'true';
+        $query['key'] = $apiKey;
+
+        return $url . $endpoint . '?' . http_build_query($query);
     }
 
     /**
@@ -175,23 +258,5 @@ class Url
     private static function getEndpoint(string $name)
     {
         return self::$endpoints[$name];
-    }
-
-    /**
-     * Returns YouTube API endpoint URL with parameters
-     *
-     * @param string $name Endpoint name
-     * @param string $var Endpoint variable
-     * @return string
-     */
-    private static function getApiEndpoint(string $name, string $var)
-    {
-        if (self::$apiEndpoints === []) {
-            self::$apiEndpoints = Json::decodeToArray(
-                (string) file_get_contents('include/api-endpoints.json'),
-            );
-        }
-
-        return str_replace('{param}', $var, self::$apiEndpoints[$name]);
     }
 }
