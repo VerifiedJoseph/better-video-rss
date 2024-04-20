@@ -65,4 +65,13 @@ class DetectTest extends TestCase
             $this->assertEquals($item->value, $detect->getValue());
         }
     }
+
+    /**
+     * Test `fromUrl()` with an unsupported URL
+     */
+    public function testFromUrlWithUnsupportedUrl(): void
+    {
+        $detect = new Detect();
+        $this->assertFalse($detect->fromUrl('https://example.com'));
+    }
 }
