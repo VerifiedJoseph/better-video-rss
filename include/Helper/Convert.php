@@ -44,7 +44,7 @@ class Convert
      * @param boolean $allowNegative Allow a negative duration
      * @return boolean|string
      */
-    public static function videoDuration($duration, $allowNegative = true)
+    public static function videoDuration(string $duration, bool $allowNegative = true)
     {
         $matches = array();
         $text = 'Unknown';
