@@ -44,9 +44,10 @@ class Convert
      * @param boolean $allowNegative Allow a negative duration
      * @return boolean|string
      */
-    public static function videoDuration($duration, $allowNegative = true)
+    public static function videoDuration(string $duration, bool $allowNegative = true)
     {
         $matches = array();
+        $text = 'Unknown';
 
         if (preg_match(self::$iso8601Regex, $duration, $matches)) {
             foreach ($matches as &$match) {
@@ -78,17 +79,15 @@ class Convert
             }
 
             if ($result['day'] > 0) {
-                $result = $result['day'] . ':' . $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
+                $text = $result['day'] . ':' . $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
             } elseif ($result['hour'] > 0) {
-                $result = $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
+                $text = $result['hour'] . ':' . $result['minute'] . ':' . $result['second'];
             } else {
-                $result = $result['minute'] . ':' . $result['second'];
+                $text = $result['minute'] . ':' . $result['second'];
             }
-
-            return $result;
         }
 
-        return false;
+        return $text;
     }
 
     /**
