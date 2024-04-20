@@ -74,6 +74,15 @@ class ValidateTest extends TestCase
     }
 
     /**
+     * Test `selfUrlSlash()`
+     */
+    public function testSelfUrlSlash(): void
+    {
+        $this->assertTrue(Validate::selfUrlSlash('https://example.com/'));
+        $this->assertFalse(Validate::selfUrlSlash('https://example.com'));
+    }
+
+    /**
      * Test `absolutePath()`
      */
     public function testAbsolutePath(): void
