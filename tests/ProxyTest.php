@@ -83,6 +83,21 @@ class ProxyTest extends TestCase
     }
 
     /**
+     * Test class with invalid video ID
+     */
+    public function testClassWithInvalidVideoId(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid video ID parameter given.');
+
+        $inputs = [
+            'video_id' => 'hello&world',
+        ];
+
+        new Proxy($inputs, self::$config, self::$request);
+    }
+
+    /**
      * Test class with empty channel ID
      */
     public function testClassWithEmptyChannelId(): void
