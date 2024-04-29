@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.8.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.0) - 2024-04-29
+
+- Add `Version` class. ([#286](https://github.com/VerifiedJoseph/better-video-rss/pull/286), [`92c047b`](https://github.com/VerifiedJoseph/better-video-rss/commit/92c047b99d9071ee5e15a64a65bb6f0d812cedfc))
+- Reworked `Config` class. ([#293](https://github.com/VerifiedJoseph/better-video-rss/pull/293), [`2eafc04`](https://github.com/VerifiedJoseph/better-video-rss/commit/2eafc04a689c59732fe92dffab2b4f21608a3d51))
+- Reworked `Helper\Url` class method `getApi()`. ([#294](https://github.com/VerifiedJoseph/better-video-rss/pull/294), [`b9c8446`](https://github.com/VerifiedJoseph/better-video-rss/commit/b9c8446cad952ff2a548307873e8ce2c87b54dcc))
+- Replaced `Curl` class with `Http\Request` & `Http\Response`. ([#290](https://github.com/VerifiedJoseph/better-video-rss/pull/290), [`313e225`](https://github.com/VerifiedJoseph/better-video-rss/commit/313e2251a8b7cd22f352e4dd401357e1e19d3cad))
+- Dockerfile: Updated composer from 2.7.2 to 2.7.4 ([#305](https://github.com/VerifiedJoseph/better-video-rss/pull/305), [`083e00d`](https://github.com/VerifiedJoseph/better-video-rss/commit/083e00de689194387bfece6e82891daaa5b2f220))
+
 ## [1.7.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.7.1) - 2024-03-18
 
 - Dockerfile: Updated composer from 2.7.1 to 2.7.2 ([#274](https://github.com/VerifiedJoseph/better-video-rss/pull/274), [`ddfcd71`](https://github.com/VerifiedJoseph/better-video-rss/commit/ddfcd71d07da998a730e471fd5407f12c2649cba))
