@@ -23,11 +23,10 @@ services:
     working_dir: /better-video-rss
 
   httpbin:
-    build:
-      context: ./httpbin
+    image: mccutchen/go-httpbin:v2.13.4
+    command: ["go-httpbin", "-port", "80"]
     ports:
       - "8081:80"
-    command: ["go-httpbin", "-port", "80"]
 
 volumes:
   vendor:
