@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.8.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.1) - 2024-05-13
+
+- Fixed creating YouTube API URLs for channel and playlist searches. ([#324](https://github.com/VerifiedJoseph/better-video-rss/pull/324), [`c512be1`](https://github.com/VerifiedJoseph/better-video-rss/commit/c512be16d9502cd7ebfbfb33f2551e2ef6172620))
+- Dockerfile: Updated composer from 2.7.4 to 2.7.6 ([#318](https://github.com/VerifiedJoseph/better-video-rss/pull/318), [`ad1d511`](https://github.com/VerifiedJoseph/better-video-rss/commit/ad1d511d7fd223d457e2f57c8dd8e43b6356e399))
+
 ## [1.8.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.0) - 2024-04-29
 
 - Add `Version` class. ([#286](https://github.com/VerifiedJoseph/better-video-rss/pull/286), [`92c047b`](https://github.com/VerifiedJoseph/better-video-rss/commit/92c047b99d9071ee5e15a64a65bb6f0d812cedfc))
