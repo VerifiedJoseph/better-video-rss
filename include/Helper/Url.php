@@ -64,6 +64,7 @@ class Url
         'searchChannels' => [
             'endpoint' => 'search',
             'query' => [
+                'q' => '',
                 'part' => [
                     'id',
                     'snippet',
@@ -72,7 +73,6 @@ class Url
                     'items(id(channelId)',
                     'snippet(title))'
                 ],
-                'q' => '',
                 'type' => 'channel',
                 'maxResults' => 1
             ],
@@ -80,6 +80,7 @@ class Url
         'searchPlaylists' => [
             'endpoint' => 'search',
             'query' => [
+                'q' => '',
                 'part' => [
                     'id',
                     'snippet',
@@ -88,7 +89,6 @@ class Url
                     'items(id(playlistId)',
                     'snippet(title))'
                 ],
-                'q' => '',
                 'type' => 'playlist',
                 'maxResults' => 1
             ],
@@ -235,10 +235,10 @@ class Url
         foreach (self::$apiEndpoints[$type]['query'] as $name => $section) {
             if (is_array($section) === true) {
                 $query[$name] = implode(',', $section);
-            } elseif ($name === 'q') {
-                $query[$name] = urlencode($parameter);
-            } else {
+            } elseif ($name === 'q' || $name === 'id') {
                 $query[$name] = $parameter;
+            } else {
+                $query[$name] = $section;
             }
         }
 
