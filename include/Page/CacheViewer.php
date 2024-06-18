@@ -84,6 +84,10 @@ class CacheViewer
         $cacheFiles = new \RegexIterator($cacheDirectory, '/.cache$/');
 
         foreach ($cacheFiles as $file) {
+            if ($file->getSize() === 0) {
+                continue;
+            }
+
             $contents = File::read($file->getPathname());
             $data = Json::decodeToArray($contents);
 
