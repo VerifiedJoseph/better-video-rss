@@ -47,7 +47,7 @@ class Cache
     public function load(): void
     {
         if ($this->config->getCacheDisableStatus() === false) {
-            if (file::exists($this->path) === true) {
+            if (file::exists($this->path) === true && filesize($this->path) > 0) {
                 $contents = File::read($this->path);
                 $this->data = Json::decodeToArray($contents);
 
