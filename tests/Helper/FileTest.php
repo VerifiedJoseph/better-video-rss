@@ -32,10 +32,13 @@ class FileTest extends TestCase
     public function testOpen(): void
     {
         $file = mockfs::getUrl('/test.file');
-        file_put_contents($file, uniqid());
+
+        $data = uniqid();
+        file_put_contents($file, $data);
+        $size = strlen($data);
 
         $handler = File::open($file, 'r');
-        $contents = fread($handler, (int) filesize($file));
+        $contents = fread($handler, $size);
 
         $this->assertIsString($contents);
     }
