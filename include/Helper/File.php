@@ -32,11 +32,18 @@ class File
      * @return string $contents File contents
      *
      * @throws Exception if file is not read.
+     * @throws Exception if file is empty.
      */
     public static function read(string $path): string
     {
         $handle = File::open($path, 'r');
-        $contents = fread($handle, (int) filesize($path));
+        $size = (int) filesize($path);
+
+        if ($size === 0) {
+            throw new Exception('File is empty: ' . $path);
+        }
+
+        $contents = @fread($handle, $size);
 
         if ($contents === false || $contents === '') {
             throw new Exception('File not read: ' . $path);
