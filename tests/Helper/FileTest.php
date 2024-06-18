@@ -68,6 +68,20 @@ class FileTest extends TestCase
     }
 
     /**
+     * Test read() with an empty file
+     */
+    public function testReadEmptyFile(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('File is empty');
+
+        $file = mockfs::getUrl('/test.file');
+        touch($file);
+
+        File::read($file);
+    }
+
+    /**
      * Test `read()` file not read exception.
      */
     public function testReadNotReadException(): void
