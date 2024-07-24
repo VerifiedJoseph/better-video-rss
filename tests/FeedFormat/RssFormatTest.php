@@ -54,8 +54,6 @@ class RssFormatTest extends AbstractTestCase
         $format = new RssFormat($this->data, false, true, $this->config);
         $format->build();
 
-        file_put_contents('tests/files/FeedFormats/expected-xml-feed-with-ignored-premieres.xml', $format->get());
-
         $this->assertXmlStringEqualsXmlFile(
             'tests/files/FeedFormats/expected-xml-feed-with-ignored-premieres.xml',
             $format->get()
