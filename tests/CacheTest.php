@@ -9,6 +9,8 @@ use App\Config;
 
 #[CoversClass(Cache::class)]
 #[UsesClass(Config::class)]
+#[UsesClass(App\Helper\File::class)]
+#[UsesClass(App\Helper\Json::class)]
 class CacheTest extends TestCase
 {
     private static Config $config;
