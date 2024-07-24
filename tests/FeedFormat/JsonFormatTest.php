@@ -1,9 +1,18 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
 use App\FeedFormat\JsonFormat;
 
+#[CoversClass(JsonFormat::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(App\FeedFormat\FeedFormat::class)]
+#[UsesClass(App\Helper\Convert::class)]
+#[UsesClass(App\Helper\Format::class)]
+#[UsesClass(App\Helper\Json::class)]
+#[UsesClass(App\Helper\Url::class)]
 class JsonFormatTest extends TestCase
 {
     private Config $config;
