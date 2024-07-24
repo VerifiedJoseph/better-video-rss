@@ -39,8 +39,7 @@ class TemplateTest extends TestCase
     public function testRenderWithMinification(): void
     {
         $expected = Format::minify((string)
-            file_get_contents('tests/files/expected-rss-feed.xml')
-        );
+            file_get_contents('tests/files/expected-rss-feed.xml'));
 
         $variables = [
             'feedTitle' => 'phpunit',
