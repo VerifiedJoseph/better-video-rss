@@ -1,11 +1,21 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
 use App\Proxy;
 use App\Http\Request;
 use App\Http\Response;
 
+#[CoversClass(Proxy::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(Request::class)]
+#[UsesClass(Response::class)]
+#[UsesClass(App\Cache::class)]
+#[UsesClass(App\Helper\File::class)]
+#[UsesClass(App\Helper\Json::class)]
+#[UsesClass(App\Helper\Validate::class)]
 class ProxyTest extends TestCase
 {
     private static Config $config;
