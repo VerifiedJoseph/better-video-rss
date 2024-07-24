@@ -1,11 +1,23 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
 use App\Api;
 use App\Http\Request;
 use App\Page\Index;
 
+#[CoversClass(Index::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(App\Find::class)]
+#[UsesClass(App\Detect::class)]
+#[UsesClass(App\Template::class)]
+#[UsesClass(App\Helper\File::class)]
+#[UsesClass(App\Helper\Format::class)]
+#[UsesClass(App\Helper\Output::class)]
+#[UsesClass(App\Helper\Url::class)]
+#[UsesClass(App\Helper\Validate::class)]
 class IndexTest extends TestCase
 {
     private static Config $config;
