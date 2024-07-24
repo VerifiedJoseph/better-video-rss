@@ -4,14 +4,15 @@ use PHPUnit\Framework\TestCase;
 use App\Config;
 use App\Proxy;
 use App\Http\Request;
+use App\Http\Response;
 
 class ProxyTest extends TestCase
 {
     private static Config $config;
     private static Request $request;
 
-    private string $videoId = 'CkZyZFa5qO0';
-    private static string $channelId = 'UCBa659QWEk1AI4Tg--mrJ2A';
+    private string $videoId = 'Owd0fCoJhiv';
+    private static string $channelId = 'UCMufUaGlcuAvsSdzQV08BEA';
 
     private static string $cacheFilepath = '';
 
@@ -77,6 +78,21 @@ class ProxyTest extends TestCase
 
         $inputs = [
             'video_id' => ''
+        ];
+
+        new Proxy($inputs, self::$config, self::$request);
+    }
+
+    /**
+     * Test class with invalid video ID
+     */
+    public function testClassWithInvalidVideoId(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid video ID parameter given.');
+
+        $inputs = [
+            'video_id' => 'hello&world',
         ];
 
         new Proxy($inputs, self::$config, self::$request);
@@ -159,6 +175,28 @@ class ProxyTest extends TestCase
         ];
 
         new Proxy($inputs, self::$config, self::$request);
+    }
+
+    /**
+     * Test `getImage`
+     */
+    public function testGetImage(): void
+    {
+        $responseBody = 'test';
+
+        $request = self::createStub(Request::class);
+        $request->method('get')->willReturn(new Response($responseBody, 200));
+
+        $inputs = [
+            'video_id' => $this->videoId,
+            'channel_id' => self::$channelId
+        ];
+
+        $proxy = new Proxy($inputs, self::$config, $request);
+        $proxy->getImage();
+
+        $reflection = new \ReflectionClass($proxy);
+        $this->assertEquals($responseBody, $reflection->getProperty('image')->getValue($proxy));
     }
 
     /**
