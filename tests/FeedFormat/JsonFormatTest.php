@@ -23,15 +23,14 @@ class JsonFormatTest extends TestCase
     /**
      * @return PHPUnit\Framework\MockObject\Stub&Config
      */
-    private function createConfigStub(): Config
+    private function createConfigStub(array $methods): Config
     {
         /** @var PHPUnit\Framework\MockObject\Stub&Config */
         $config = $this->createStub(Config::class);
-        $config->method('getImageProxyStatus')->willReturn(false);
-        $config->method('getSelfUrl')->willReturn('https://example.com/');
-        $config->method('getTimezone')->willReturn('Europe/London');
-        $config->method('getDateFormat')->willReturn('F j, Y');
-        $config->method('getTimeFormat')->willReturn('H:i');
+
+        foreach ($methods as $method => $value) {
+            $config->method($method)->willReturn($value);
+        }
 
         return $config;
     }
@@ -39,7 +38,13 @@ class JsonFormatTest extends TestCase
     public function setUp(): void
     {
         $this->data = (array) json_decode((string) file_get_contents('tests/files/channel-cache-data.json'), true);
-        $this->config = $this->createConfigStub();
+        $this->config = $this->createConfigStub([
+            'getImageProxyStatus' => false,
+            'getSelfUrl' => 'https://example.com/',
+            'getTimezone' => 'Europe/London',
+            'getDateFormat' => 'F j, Y',
+            'getTimeFormat' => 'H:i'
+        ]);
     }
 
     /**
@@ -80,6 +85,30 @@ class JsonFormatTest extends TestCase
 
         $this->assertJsonStringEqualsJsonFile(
             'tests/files/FeedFormats/expected-json-feed-with-iframes.json',
+            $format->get()
+        );
+    }
+
+    /**
+     * Test `build()` with Image proxy
+     */
+    public function testBuildWithImageProxy(): void
+    {
+        $config = $this->createConfigStub([
+            'getImageProxyStatus' => true,
+            'getSelfUrl' => 'https://example.com/',
+            'getTimezone' => 'Europe/London',
+            'getDateFormat' => 'F j, Y',
+            'getTimeFormat' => 'H:i'
+        ]);
+
+        $format = new JsonFormat($this->data, false, false, $config);
+        $format->build();
+
+        file_put_contents('test.json', $format->get());
+
+        $this->assertJsonStringEqualsJsonFile(
+            'tests/files/FeedFormats/expected-json-feed-with-image-proxy.json',
             $format->get()
         );
     }
