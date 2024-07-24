@@ -3,7 +3,6 @@
 namespace App\FeedFormat;
 
 use App\Template;
-use App\Helper\Url;
 
 class HtmlFormat extends FeedFormat
 {
@@ -30,7 +29,7 @@ class HtmlFormat extends FeedFormat
             'items' => $this->buildItems()
         ]);
 
-        $this->feed = $html->render(minify: true);
+        $this->feed = $html->render();
     }
 
     /**
