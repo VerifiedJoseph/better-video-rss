@@ -4,6 +4,7 @@
   xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
   displayDetailsOnTestsThatTriggerWarnings="true"
   beStrictAboutCoverageMetadata="true"
+  requireCoverageMetadata="true"
   cacheDirectory=".phpunit.cache">
   <testsuites>
     <testsuite name="better-video-rss">
