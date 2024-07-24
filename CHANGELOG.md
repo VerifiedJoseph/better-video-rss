@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.8.3](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.3) - 2024-07-24
+
+- Dropped support for php 8.1 ([#355](https://github.com/VerifiedJoseph/better-video-rss/pull/355), [`b2911c3`](https://github.com/VerifiedJoseph/better-video-rss/commit/b2911c34d1a0964a985f4ad9b9e794a9c2aecdd3))
+- Dockerfile: Updated alpine from 3.20.0 to 3.20.1 ([#343](https://github.com/VerifiedJoseph/better-video-rss/pull/343), [`36d0409`](https://github.com/VerifiedJoseph/better-video-rss/commit/36d0409e1fecd6d4bee2fd95f3a5749f8c75cb32))
+- Dockerfile: Updated alpine from 3.20.1 to 3.20.2 ([#356](https://github.com/VerifiedJoseph/better-video-rss/pull/356), [`2dc232b`](https://github.com/VerifiedJoseph/better-video-rss/commit/2dc232b18d345394f4ab961e88125d6b732d2248))
+
 ## [1.8.2](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.2) - 2024-06-19
 
 - Dockerfile: Updated composer from 2.7.6 to 2.7.7 ([#338](https://github.com/VerifiedJoseph/better-video-rss/pull/338), [`215fc5c`](https://github.com/VerifiedJoseph/better-video-rss/commit/215fc5c9069cbc448d2307c699a0d662bf0fa7d3))
