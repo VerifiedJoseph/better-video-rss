@@ -1,7 +1,6 @@
 <?php
 
 use PHPUnit\Framework\TestCase as TestCase;
-
 use App\Config;
 
 abstract class AbstractTestCase extends TestCase
