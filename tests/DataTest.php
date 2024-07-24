@@ -1,9 +1,18 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Data;
 use App\Config;
 
+#[CoversClass(Data::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(App\Cache::class)]
+#[UsesClass(App\Helper\Url::class)]
+#[UsesClass(App\Helper\File::class)]
+#[UsesClass(App\Helper\Json::class)]
+#[UsesClass(App\Helper\Convert::class)]
 class DataTest extends TestCase
 {
     private static Data $data;
