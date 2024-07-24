@@ -1,6 +1,5 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use App\Data;
@@ -13,7 +12,7 @@ use App\Config;
 #[UsesClass(App\Helper\File::class)]
 #[UsesClass(App\Helper\Json::class)]
 #[UsesClass(App\Helper\Convert::class)]
-class DataTest extends TestCase
+class DataTest extends AbstractTestCase
 {
     private static Data $data;
 
@@ -24,20 +23,6 @@ class DataTest extends TestCase
     private static string $cacheFilepath = '';
     private static string $feedId = 'UCMufUaGlcuAvsSdzQV08BEA';
     private static string $feedType = 'channel';
-
-    /**
-     * @return PHPUnit\Framework\MockObject\Stub&Config
-     */
-    private static function createConfigStub(): Config
-    {
-        /** @var PHPUnit\Framework\MockObject\Stub&Config */
-        $config = self::createStub(Config::class);
-        $config->method('getCacheDisableStatus')->willReturn(false);
-        $config->method('getCacheDirectory')->willReturn(sys_get_temp_dir());
-        $config->method('getCacheFormatVersion')->willReturn(1);
-
-        return $config;
-    }
 
     private static function createCacheFile(): void
     {
@@ -59,7 +44,11 @@ class DataTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         self::createCacheFile();
-        $config = self::createConfigStub();
+        $config = self::createConfigStub([
+            'getCacheDisableStatus' => false,
+            'getCacheDirectory' => sys_get_temp_dir(),
+            'getCacheFormatVersion' => 1
+        ]);
 
         self::$data = new Data(
             self::$feedId,

@@ -13,10 +13,10 @@ abstract class AbstractTestCase extends TestCase
      * @param array<string, mixed> $methods
      * @return PHPUnit\Framework\MockObject\Stub&Config
      */
-    protected function createConfigStub(array $methods): Config
+    protected static function createConfigStub(array $methods): Config
     {
         /** @var PHPUnit\Framework\MockObject\Stub&Config */
-        $config = $this->createStub(Config::class);
+        $config = self::createStub(Config::class);
 
         foreach ($methods as $method => $value) {
             $config->method($method)->willReturn($value);

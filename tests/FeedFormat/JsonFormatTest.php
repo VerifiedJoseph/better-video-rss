@@ -22,7 +22,7 @@ class JsonFormatTest extends AbstractTestCase
     public function setUp(): void
     {
         $this->data = (array) json_decode((string) file_get_contents('tests/files/channel-cache-data.json'), true);
-        $this->config = $this->createConfigStub([
+        $this->config = self::createConfigStub([
             'getImageProxyStatus' => false,
             'getSelfUrl' => 'https://example.com/',
             'getTimezone' => 'Europe/London',
