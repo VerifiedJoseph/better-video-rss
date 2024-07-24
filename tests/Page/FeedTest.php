@@ -1,11 +1,18 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
 use App\Api;
 use App\Http\Request;
 use App\Page\Feed;
 
+#[CoversClass(Feed::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(Api::class)]
+#[UsesClass(Request::class)]
+#[UsesClass(App\Helper\Validate::class)]
 class FeedTest extends TestCase
 {
     private static Config $config;
