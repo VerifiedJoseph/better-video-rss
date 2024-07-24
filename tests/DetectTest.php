@@ -1,8 +1,10 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use App\Detect;
 
+#[CoversClass(Detect::class)]
 class DetectTest extends TestCase
 {
     private static stdClass $urls;
