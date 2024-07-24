@@ -1,6 +1,5 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
@@ -16,13 +15,14 @@ use App\Http\Response;
 #[UsesClass(App\Helper\File::class)]
 #[UsesClass(App\Helper\Json::class)]
 #[UsesClass(App\Helper\Validate::class)]
-class ProxyTest extends TestCase
+class ProxyTest extends AbstractTestCase
 {
     private static Config $config;
     private static Request $request;
 
     private string $videoId = 'Owd0fCoJhiv';
     private static string $channelId = 'UCMufUaGlcuAvsSdzQV08BEA';
+    private string $playlistId = 'PLMufUaGlcuAvsSdzQV08BEA';
 
     private static string $cacheFilepath = '';
 
@@ -53,9 +53,52 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test class with Image proxy option disabled
+     * Test checkInputs() with playlist ID
      */
-    public function testClassWithImageProxyDisabled(): void
+    public function testCheckInputs(): void
+    {
+        $inputs = [
+            'video_id' => $this->videoId,
+            'channel_id' => self::$channelId
+        ];
+
+        $proxy = new Proxy($inputs, self::$config, self::$request);
+        $reflection = new ReflectionClass($proxy);
+
+        $this->assertEquals(
+            $inputs['video_id'],
+            $reflection->getProperty('videoId')->getValue($proxy)
+        );
+
+        $this->assertEquals(
+            $inputs['channel_id'],
+            $reflection->getProperty('feedId')->getValue($proxy)
+        );
+    }
+
+    /**
+     * Test checkInputs() with playlist ID
+     */
+    public function testCheckInputsWithPlaylistId(): void
+    {
+        $inputs = [
+            'video_id' => $this->videoId,
+            'playlist_id' => $this->playlistId
+        ];
+
+        $proxy = new Proxy($inputs, self::$config, self::$request);
+        $reflection = new ReflectionClass($proxy);
+
+        $this->assertEquals(
+            $inputs['playlist_id'],
+            $reflection->getProperty('feedId')->getValue($proxy)
+        );
+    }
+
+    /**
+     * Test checkInputs() with Image proxy option disabled
+     */
+    public function testCheckInputsWithImageProxyDisabled(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Image proxy is disabled.');
@@ -68,9 +111,9 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test class with no video ID
+     * Test checkInputs() with no video ID
      */
-    public function testClassWithNoVideoId(): void
+    public function testCheckInputsWithNoVideoId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No video ID parameter given.');
@@ -79,9 +122,9 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test class with empty video ID
+     * Test checkInputs() with empty video ID
      */
-    public function testClassWithEmptyVideoId(): void
+    public function testCheckInputsWithEmptyVideoId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No video ID parameter given.');
@@ -94,9 +137,9 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test class with invalid video ID
+     * Test checkInputs() with invalid video ID
      */
-    public function testClassWithInvalidVideoId(): void
+    public function testCheckInputsWithInvalidVideoId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid video ID parameter given.');
@@ -109,9 +152,9 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test class with empty channel ID
+     * Test checkInputs() with empty channel ID
      */
-    public function testClassWithEmptyChannelId(): void
+    public function testCheckInputsWithEmptyChannelId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No channel ID parameter given.');
@@ -125,9 +168,9 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test class with invalid channel ID
+     * Test checkInputs() with invalid channel ID
      */
-    public function testClassWithInvalidChannelId(): void
+    public function testCheckInputsWithInvalidChannelId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid channel ID parameter given.');
@@ -141,9 +184,9 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with empty playlist ID
+     * Test checkInputs() class with empty playlist ID
      */
-    public function testClassWithEmptyPlaylistId(): void
+    public function testCheckInputsWithEmptyPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No playlist ID parameter given.');
@@ -157,9 +200,9 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test Proxy class with invalid playlist ID given
+     * Test checkInputs() with invalid playlist ID given
      */
-    public function testClassWithInvalidPlaylistId(): void
+    public function testCheckInputsWithInvalidPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid playlist ID parameter given.');
@@ -173,9 +216,9 @@ class ProxyTest extends TestCase
     }
 
     /**
-     * Test class with no channel or playlist ID given
+     * Test checkInputs() with no channel or playlist ID given
      */
-    public function testClassWithNoFeedId(): void
+    public function testCheckInputsWithNoFeedId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No feed ID (channel or playlist) parameter given.');
