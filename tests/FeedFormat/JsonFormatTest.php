@@ -1,6 +1,5 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
@@ -13,28 +12,12 @@ use App\FeedFormat\JsonFormat;
 #[UsesClass(App\Helper\Format::class)]
 #[UsesClass(App\Helper\Json::class)]
 #[UsesClass(App\Helper\Url::class)]
-class JsonFormatTest extends TestCase
+class JsonFormatTest extends AbstractTestCase
 {
     private Config $config;
 
     /** @var array<string, mixed> $data */
     private array $data = [];
-
-    /**
-     * @param array<string, mixed> $methods
-     * @return PHPUnit\Framework\MockObject\Stub&Config
-     */
-    private function createConfigStub(array $methods): Config
-    {
-        /** @var PHPUnit\Framework\MockObject\Stub&Config */
-        $config = $this->createStub(Config::class);
-
-        foreach ($methods as $method => $value) {
-            $config->method($method)->willReturn($value);
-        }
-
-        return $config;
-    }
 
     public function setUp(): void
     {
@@ -105,8 +88,6 @@ class JsonFormatTest extends TestCase
 
         $format = new JsonFormat($this->data, false, false, $config);
         $format->build();
-
-        file_put_contents('test.json', $format->get());
 
         $this->assertJsonStringEqualsJsonFile(
             'tests/files/FeedFormats/expected-json-feed-with-image-proxy.json',
