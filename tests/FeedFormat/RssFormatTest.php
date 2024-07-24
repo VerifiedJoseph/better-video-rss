@@ -40,9 +40,46 @@ class RssFormatTest extends AbstractTestCase
         $format = new RssFormat($this->data, false, false, $this->config);
         $format->build();
 
-        $expected = 'tests/files/FeedFormats/expected-rss-feed.xml';
         $this->assertXmlStringEqualsXmlFile(
-            $expected,
+            'tests/files/FeedFormats/expected-rss-feed.xml',
+            $format->get()
+        );
+    }
+
+    /**
+     * Test `build()` with video premieres ignored
+     */
+    public function testBuildWithIgnoredPremieres(): void
+    {
+        $format = new RssFormat($this->data, false, true, $this->config);
+        $format->build();
+
+        file_put_contents('tests/files/FeedFormats/expected-xml-feed-with-ignored-premieres.xml', $format->get());
+
+        $this->assertXmlStringEqualsXmlFile(
+            'tests/files/FeedFormats/expected-xml-feed-with-ignored-premieres.xml',
+            $format->get()
+        );
+    }
+
+    /**
+     * Test `build()` with image proxy enabled
+     */
+    public function testBuildWithImageProxy(): void
+    {
+        $config = $this->createConfigStub([
+            'getImageProxyStatus' => true,
+            'getSelfUrl' => 'https://example.com/',
+            'getTimezone' => 'Europe/London',
+            'getDateFormat' => 'F j, Y',
+            'getTimeFormat' => 'H:i'
+        ]);
+
+        $format = new RssFormat($this->data, false, false, $config);
+        $format->build();
+
+        $this->assertXmlStringEqualsXmlFile(
+            'tests/files/FeedFormats/expected-rss-feed-with-image-proxy.xml',
             $format->get()
         );
     }
