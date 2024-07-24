@@ -1,9 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Find;
 use App\Api;
 
+#[CoversClass(Find::class)]
+#[UsesClass(Api::class)]
 class FindTest extends TestCase
 {
     /**
