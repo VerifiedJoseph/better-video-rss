@@ -21,6 +21,7 @@ class JsonFormatTest extends TestCase
     private array $data = [];
 
     /**
+     * @param array<string, mixed> $methods
      * @return PHPUnit\Framework\MockObject\Stub&Config
      */
     private function createConfigStub(array $methods): Config
