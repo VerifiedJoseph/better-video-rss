@@ -13,6 +13,11 @@
             "App\\": "include/"
         }
     },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
     "scripts": {
         "lint": "phpstan --memory-limit=150M && phpcs",
         "lint-phpstan": "phpstan",
