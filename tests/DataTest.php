@@ -123,7 +123,7 @@ class DataTest extends AbstractTestCase
         $data = new Data(
             self::$feedId,
             self::$feedType,
-           self::$config
+            self::$config
         );
 
         $this->assertEquals(
