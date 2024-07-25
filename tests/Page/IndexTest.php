@@ -160,4 +160,31 @@ class IndexTest extends TestCase
         $index = new Index($inputs, $config, $api);
         $index->display();
     }
+
+    /**
+     * test `display()` with error message
+     */
+    public function testDisplayWithErrorMessage(): void
+    {
+        $this->expectOutputString(
+            (string) file_get_contents('tests/files/Pages/expected-index-with-error-message.html')
+        );
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Api */
+        $api = $this->createStub(Api::class);
+
+        /** @var PHPUnit\Framework\MockObject\Stub&Config */
+        $config = $this->createStub(Config::class);
+        $config->method('getVersion')->willReturn('0.0.0');
+        $config->method('getDefaultFeedFormat')->willReturn('html');
+        $config->method('getFeedFormats')->willReturn(['rss', 'html', 'json']);
+
+        $inputs = [
+            'query' => 'https://www.example.com/channel/UCMufUaGlcuAvsSdzQV08BEA',
+            'type' => 'url'
+        ];
+
+        $index = new Index($inputs, $config, $api);
+        $index->display();
+    }
 }
