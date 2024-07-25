@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Depends;
 use MockFileSystem\MockFileSystem as mockfs;
 use App\Data;
 use App\Config;
@@ -26,27 +27,21 @@ class DataTest extends AbstractTestCase
     private static string $feedId = 'UCMufUaGlcuAvsSdzQV08BEA';
     private static string $feedType = 'channel';
 
-    private static function createCacheFile(): void
+    public static function setUpBeforeClass(): void
     {
+        mockfs::create();
+        self::$cacheFilepath = mockfs::getUrl('/' . hash('sha256', self::$feedId) . '.cache');
+
         self::$channelCacheData = (array) json_decode(
             (string)
             file_get_contents('tests/files/channel-cache-data.json'),
             associative: true
         );
 
-        mockfs::create();
-        self::$cacheFilepath = mockfs::getUrl('/' . hash('sha256', self::$feedId) . '.cache');
-
-        copy('tests/files/channel-cache-data.json', self::$cacheFilepath);
-    }
-
-    public static function setUpBeforeClass(): void
-    {
         self::$apiResponses = json_decode(
             (string) file_get_contents('tests/files/data-class-api-response-samples.json'),
         );
 
-        self::createCacheFile();
         self::$config = self::createConfigStub([
             'getCacheDisableStatus' => false,
             'getCacheDirectory' => mockfs::getUrl('/'),
@@ -60,12 +55,24 @@ class DataTest extends AbstractTestCase
         );
     }
 
+    public function setUp(): void
+    {
+        // Reset cache file data
+        copy('tests/files/channel-cache-data.json', self::$cacheFilepath);
+    }
+
     /**
      * Test `getData()`
      */
     public function testGetData(): void
     {
-        $this->assertEquals(self::$channelCacheData, self::$data->getData());
+        $data = new Data(
+            self::$feedId,
+            self::$feedType,
+            self::$config
+        );
+
+        $this->assertEquals(self::$channelCacheData, $data->getData());
     }
 
     /**
@@ -73,9 +80,15 @@ class DataTest extends AbstractTestCase
      */
     public function testGetPartEtag(): void
     {
+        $data = new Data(
+            self::$feedId,
+            self::$feedType,
+            self::$config
+        );
+
         $this->assertEquals(
             self::$channelCacheData['details']['etag'],
-            self::$data->getPartEtag('details')
+            $data->getPartEtag('details')
         );
     }
 
@@ -107,9 +120,15 @@ class DataTest extends AbstractTestCase
      */
     public function testGetExpiredParts(): void
     {
+        $data = new Data(
+            self::$feedId,
+            self::$feedType,
+           self::$config
+        );
+
         $this->assertEquals(
             ['details', 'feed', 'videos'],
-            self::$data->getExpiredParts()
+            $data->getExpiredParts()
         );
     }
 
@@ -141,9 +160,15 @@ class DataTest extends AbstractTestCase
      */
     public function testGetExpiredVideos(): void
     {
+        $data = new Data(
+            self::$feedId,
+            self::$feedType,
+            self::$config
+        );
+
         $expected = 'Owd0fCoJhiv,jVhUHba1WyK,e3bDAwuzUnd,MVsly5H30BO';
 
-        $this->assertEquals($expected, self::$data->getExpiredVideos());
+        $this->assertEquals($expected, $data->getExpiredVideos());
     }
 
     /**
@@ -192,8 +217,14 @@ class DataTest extends AbstractTestCase
      */
     public function testUpdateVideos(): void
     {
-        self::$data->updateVideos(self::$apiResponses->videos);
-        $data = self::$data->getData();
+        $data = new Data(
+            self::$feedId,
+            self::$feedType,
+            self::$config
+        );
+
+        $data->updateVideos(self::$apiResponses->videos);
+        $data = $data->getData();
 
         $duration = '03:45';
         $tags = self::$apiResponses->videos->items[0]->snippet->tags;
@@ -235,10 +266,12 @@ class DataTest extends AbstractTestCase
         $this->assertGreaterThan(self::$channelCacheData['feed']['fetched'], $data['feed']['fetched']);
     }
 
+    #[Depends('testUpdateVideos')]
     public function testSave(): void
     {
         $oldHash = hash_file('sha256', self::$cacheFilepath);
 
+        self::$data->updateVideos(self::$apiResponses->videos);
         self::$data->save();
 
         $this->assertNotEquals($oldHash, hash_file('sha256', self::$cacheFilepath));
