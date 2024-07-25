@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
+use MockFileSystem\MockFileSystem as mockfs;
 use App\Data;
 use App\Config;
 
@@ -32,21 +33,22 @@ class DataTest extends AbstractTestCase
             associative: true
         );
 
-        self::$apiResponses = json_decode(
-            (string) file_get_contents('tests/files/data-class-api-response-samples.json'),
-        );
-
-        self::$cacheFilepath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . hash('sha256', self::$feedId) . '.cache';
+        mockfs::create();
+        self::$cacheFilepath = mockfs::getUrl('/' . hash('sha256', self::$feedId) . '.cache');
 
         copy('tests/files/channel-cache-data.json', self::$cacheFilepath);
     }
 
     public static function setUpBeforeClass(): void
     {
+        self::$apiResponses = json_decode(
+            (string) file_get_contents('tests/files/data-class-api-response-samples.json'),
+        );
+
         self::createCacheFile();
         $config = self::createConfigStub([
             'getCacheDisableStatus' => false,
-            'getCacheDirectory' => sys_get_temp_dir(),
+            'getCacheDirectory' => mockfs::getUrl('/'),
             'getCacheFormatVersion' => 1
         ]);
 
@@ -59,7 +61,7 @@ class DataTest extends AbstractTestCase
 
     public static function tearDownAfterClass(): void
     {
-        unlink(self::$cacheFilepath);
+        //unlink(self::$cacheFilepath);
     }
 
     /**
