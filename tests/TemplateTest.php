@@ -30,7 +30,10 @@ class TemplateTest extends TestCase
 
         $template = new Template('feed.xml', $variables);
 
-        $this->assertXmlStringEqualsXmlFile('tests/files/expected-rss-feed.xml', $template->render());
+        $this->assertXmlStringEqualsXmlFile(
+            'tests/files/expected-rss-feed.xml',
+            $template->render()
+        );
     }
 
     /**
@@ -64,6 +67,7 @@ class TemplateTest extends TestCase
     public function testFileNotFoundException(): void
     {
         $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Template file not found');
 
         new Template('missing-file.html', []);
     }
