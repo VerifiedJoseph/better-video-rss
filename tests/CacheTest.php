@@ -11,7 +11,7 @@ use App\Config;
 #[UsesClass(Config::class)]
 #[UsesClass(App\Helper\File::class)]
 #[UsesClass(App\Helper\Json::class)]
-class CacheTest extends TestCase
+class CacheTest extends AbstractTestCase
 {
     private static Config $config;
 
@@ -34,12 +34,11 @@ class CacheTest extends TestCase
 
         copy('tests/files/channel-cache-data.json', self::$cacheFilepath);
 
-        /** @var PHPUnit\Framework\MockObject\Stub&Config */
-        $config = self::createStub(Config::class);
-        $config->method('getCacheDisableStatus')->willReturn(false);
-        $config->method('getCacheDirectory')->willReturn(mockfs::getUrl('/'));
-        $config->method('getCacheFormatVersion')->willReturn(1);
-        self::$config = $config;
+        self::$config = self::createConfigStub([
+            'getCacheDisableStatus' => false,
+            'getCacheDirectory' => mockfs::getUrl('/'),
+            'getCacheFormatVersion' => 1
+        ]);
     }
 
     /**
