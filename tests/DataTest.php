@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\Depends;
 use MockFileSystem\MockFileSystem as mockfs;
 use App\Data;
 use App\Config;
+use App\Helper\Convert;
 
 #[CoversClass(Data::class)]
 #[UsesClass(Config::class)]
@@ -226,15 +227,18 @@ class DataTest extends AbstractTestCase
         $data->updateVideos(self::$apiResponses->videos);
         $data = $data->getData();
 
-        $duration = '03:45';
-        $tags = self::$apiResponses->videos->items[0]->snippet->tags;
-        $thumbnail = 'https://i.ytimg.com/vi/CkZyZFa5qO0/sddefault.jpg';
+        $duration = Convert::videoDuration(self::$apiResponses->videos->items[2]->contentDetails->duration);
+        $tags = self::$apiResponses->videos->items[2]->snippet->tags;
+        $thumbnail = 'https://i.ytimg.com/vi/9WCkRFYnHfM/maxresdefault.jpg';
 
         $this->assertEquals($duration, $data['videos'][0]['duration']);
         $this->assertEquals($tags, $data['videos'][0]['tags']);
         $this->assertEquals($thumbnail, $data['videos'][0]['thumbnail']);
         $this->assertGreaterThan(self::$channelCacheData['videos'][0]['expires'], $data['videos'][0]['expires']);
         $this->assertGreaterThan(self::$channelCacheData['videos'][0]['fetched'], $data['videos'][0]['fetched']);
+
+        $this->assertTrue($data['videos'][1]['premiere']);
+        $this->assertEquals('upcoming', $data['videos'][1]['premiereStatus']);
     }
 
     /**
