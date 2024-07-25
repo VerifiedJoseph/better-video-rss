@@ -15,6 +15,7 @@ use App\Config;
 #[UsesClass(App\Helper\Convert::class)]
 class DataTest extends AbstractTestCase
 {
+    private static Config $config;
     private static Data $data;
 
     /** @var array<string, mixed> $channelCacheData */
@@ -46,7 +47,7 @@ class DataTest extends AbstractTestCase
         );
 
         self::createCacheFile();
-        $config = self::createConfigStub([
+        self::$config = self::createConfigStub([
             'getCacheDisableStatus' => false,
             'getCacheDirectory' => mockfs::getUrl('/'),
             'getCacheFormatVersion' => 1
@@ -55,13 +56,8 @@ class DataTest extends AbstractTestCase
         self::$data = new Data(
             self::$feedId,
             self::$feedType,
-            $config
+            self::$config
         );
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        //unlink(self::$cacheFilepath);
     }
 
     /**
@@ -77,9 +73,33 @@ class DataTest extends AbstractTestCase
      */
     public function testGetPartEtag(): void
     {
-        $expected = 'Q4tjoKjLcrpOC7-WzcBdtCxY0kg';
+        $this->assertEquals(
+            self::$channelCacheData['details']['etag'],
+            self::$data->getPartEtag('details')
+        );
+    }
 
-        $this->assertEquals($expected, self::$data->getPartEtag('details'));
+    /**
+     * Test `getPartEtag()` with caching disabled
+     */
+    public function testGetPartEtagWithCachingDisabled(): void
+    {
+        $config = self::createConfigStub([
+            'getCacheDisableStatus' => true,
+            'getCacheDirectory' => mockfs::getUrl('/'),
+            'getCacheFormatVersion' => 1
+        ]);
+
+        $data = new Data(
+            self::$feedId,
+            self::$feedType,
+            $config
+        );
+
+        $this->assertEquals(
+            '',
+            $data->getPartEtag('details')
+        );
     }
 
     /**
@@ -87,9 +107,33 @@ class DataTest extends AbstractTestCase
      */
     public function testGetExpiredParts(): void
     {
-        $expected = ['details', 'feed', 'videos'];
+        $this->assertEquals(
+            ['details', 'feed', 'videos'],
+            self::$data->getExpiredParts()
+        );
+    }
 
-        $this->assertEquals($expected, self::$data->getExpiredParts());
+    /**
+     * Test `getExpiredParts()` with caching is disabled
+     */
+    public function testGetExpiredPartsWithCachingDisabled(): void
+    {
+        $config = self::createConfigStub([
+            'getCacheDisableStatus' => true,
+            'getCacheDirectory' => mockfs::getUrl('/'),
+            'getCacheFormatVersion' => 1
+        ]);
+
+        $data = new Data(
+            self::$feedId,
+            self::$feedType,
+            $config
+        );
+
+        $this->assertEquals(
+            ['details', 'feed', 'videos'],
+            $data->getExpiredParts()
+        );
     }
 
     /**
@@ -100,6 +144,26 @@ class DataTest extends AbstractTestCase
         $expected = 'Owd0fCoJhiv,jVhUHba1WyK,e3bDAwuzUnd,MVsly5H30BO';
 
         $this->assertEquals($expected, self::$data->getExpiredVideos());
+    }
+
+    /**
+     * Test `getExpiredVideos()` with caching disabled
+     */
+    public function testGetExpiredVideosWithCachingDisabled(): void
+    {
+        $config = self::createConfigStub([
+            'getCacheDisableStatus' => true,
+            'getCacheDirectory' => mockfs::getUrl('/'),
+            'getCacheFormatVersion' => 1
+        ]);
+
+        $data = new Data(
+            self::$feedId,
+            self::$feedType,
+            $config
+        );
+
+        $this->assertEquals('', $data->getExpiredVideos());
     }
 
     /**
