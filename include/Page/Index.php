@@ -212,15 +212,11 @@ class Index
      */
     private function validateFeedId(string $query): bool
     {
-        if ($this->feedType === 'channel') {
-            return Validate::channelId($query);
-        }
-
         if ($this->feedType === 'playlist') {
             return Validate::playlistId($query);
         }
 
-        return false;
+        return Validate::channelId($query);
     }
 
     /**
