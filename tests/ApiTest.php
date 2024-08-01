@@ -9,6 +9,11 @@ use App\Http\Request;
 use App\Http\Response;
 
 #[CoversClass(Api::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(Request::class)]
+#[UsesClass(Response::class)]
+#[UsesClass(App\Helper\Json::class)]
+#[UsesClass(App\Helper\Url::class)]
 class ApiTest extends TestCase
 {
     private static Config $config;

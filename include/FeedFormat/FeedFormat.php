@@ -173,7 +173,7 @@ HTML;
             if ($video['streamStatus'] === 'upcoming') {
                 $scheduled = $this->getFormattedScheduledDate($video['scheduled']);
 
-                return sprintf('[Live Stream %s] %s ', $scheduled, $video['title']);
+                return sprintf('[Live Stream %s] %s', $scheduled, $video['title']);
             }
 
             if ($video['streamStatus'] === 'live') {

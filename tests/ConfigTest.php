@@ -7,6 +7,10 @@ use App\Config;
 use App\Version;
 
 #[CoversClass(Config::class)]
+#[CoversClass(Version::class)]
+#[UsesClass(App\Config\Base::class)]
+#[UsesClass(App\Config\Validate::class)]
+#[UsesClass(App\Helper\Validate::class)]
 class ConfigTest extends TestCase
 {
     public function setUp(): void

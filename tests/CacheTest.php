@@ -1,6 +1,5 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use MockFileSystem\MockFileSystem as mockfs;
@@ -9,7 +8,9 @@ use App\Config;
 
 #[CoversClass(Cache::class)]
 #[UsesClass(Config::class)]
-class CacheTest extends TestCase
+#[UsesClass(App\Helper\File::class)]
+#[UsesClass(App\Helper\Json::class)]
+class CacheTest extends AbstractTestCase
 {
     private static Config $config;
 
@@ -21,23 +22,26 @@ class CacheTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
+        mockfs::create();
+        self::$cacheFilepath = mockfs::getUrl('/' . hash('sha256', self::$channelId) . '.cache');
+
         self::$data = (array) json_decode(
             (string)
             file_get_contents('tests/files/channel-cache-data.json'),
             associative: true
         );
 
-        mockfs::create();
-        self::$cacheFilepath = mockfs::getUrl('/' . hash('sha256', self::$channelId) . '.cache');
+        self::$config = self::createConfigStub([
+            'getCacheDisableStatus' => false,
+            'getCacheDirectory' => mockfs::getUrl('/'),
+            'getCacheFormatVersion' => 1
+        ]);
+    }
 
+    public function setUp(): void
+    {
+        // Reset cache file data
         copy('tests/files/channel-cache-data.json', self::$cacheFilepath);
-
-        /** @var PHPUnit\Framework\MockObject\Stub&Config */
-        $config = self::createStub(Config::class);
-        $config->method('getCacheDisableStatus')->willReturn(false);
-        $config->method('getCacheDirectory')->willReturn(mockfs::getUrl('/'));
-        $config->method('getCacheFormatVersion')->willReturn(1);
-        self::$config = $config;
     }
 
     /**
@@ -70,11 +74,11 @@ class CacheTest extends TestCase
      */
     public function testLoadWithNoVersionMatch(): void
     {
-        /** @var PHPUnit\Framework\MockObject\Stub&Config */
-        $config = self::createStub(Config::class);
-        $config->method('getCacheDisableStatus')->willReturn(false);
-        $config->method('getCacheDirectory')->willReturn(mockfs::getUrl('/'));
-        $config->method('getCacheFormatVersion')->willReturn(2);
+        $config = self::createConfigStub([
+            'getCacheDisableStatus' => false,
+            'getCacheDirectory' => mockfs::getUrl('/'),
+            'getCacheFormatVersion' => 2
+        ]);
 
         $cache = new Cache(self::$channelId, $config);
         $cache->load();

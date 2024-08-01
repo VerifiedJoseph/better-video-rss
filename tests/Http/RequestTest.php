@@ -2,10 +2,12 @@
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Http\Request;
 use App\Http\Response;
 
 #[CoversClass(Request::class)]
+#[UsesClass(Response::class)]
 class RequestTest extends TestCase
 {
     private string $useragent = 'phpunit-test';

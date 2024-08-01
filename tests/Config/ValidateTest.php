@@ -12,6 +12,9 @@ use App\Exception\ConfigException;
 
 #[CoversClass(Validate::class)]
 #[UsesClass(Config::class)]
+#[UsesClass(ConfigException::class)]
+#[UsesClass(\App\Config\Base::class)]
+#[UsesClass(\App\Helper\Validate::class)]
 class ValidateTest extends TestCase
 {
     /** @var array<string, mixed> $defaults */
