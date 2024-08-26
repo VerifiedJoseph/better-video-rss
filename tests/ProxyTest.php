@@ -21,8 +21,8 @@ class ProxyTest extends AbstractTestCase
     private static Request $request;
 
     private string $videoId = 'Owd0fCoJhiv';
-    private static string $channelId = 'UCMufUaGlcuAvsSdzQV08BEA';
     private string $playlistId = 'PLMufUaGlcuAvsSdzQV08BEA';
+    private static string $channelId = 'UCMufUaGlcuAvsSdzQV08BEA';
 
     private static string $cacheFilepath = '';
 
@@ -228,6 +228,25 @@ class ProxyTest extends AbstractTestCase
         ];
 
         new Proxy($inputs, self::$config, self::$request);
+    }
+
+    /**
+     * Test class with playlist ID
+     */
+    public function testClassWithPlaylistId(): void
+    {
+        $inputs = [
+            'playlist_id' => $this->playlistId,
+            'video_id' => $this->videoId
+        ];
+
+        $proxy = new Proxy($inputs, self::$config, self::$request);
+
+        $reflection = new \ReflectionClass($proxy);
+        $this->assertEquals(
+            $this->playlistId,
+            $reflection->getProperty('feedId')->getValue($proxy)
+        );
     }
 
     /**
