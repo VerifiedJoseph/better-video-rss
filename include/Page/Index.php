@@ -159,7 +159,7 @@ class Index
         }
 
         if (isset($inputs['embed_videos'])) {
-            $this->embedVideos = true;
+            $this->embedVideos = filter_var($inputs['embed_videos'], FILTER_VALIDATE_BOOLEAN);
         }
 
         if (isset($inputs['ignore_premieres'])) {
