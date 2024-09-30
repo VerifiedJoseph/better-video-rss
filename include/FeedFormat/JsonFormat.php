@@ -64,14 +64,6 @@ class JsonFormat extends FeedFormat
             );
             $item['title'] = $this->buildTitle($video);
             $attachmentUrl = $video['thumbnail'];
-            if ($this->config->getImageProxyStatus() === true) {
-                $attachmentUrl = Url::getImageProxy(
-                    $this->config->getSelfUrl(),
-                    $video['id'],
-                    $this->data['details']['type'],
-                    $this->data['details']['id']
-                );
-            }
 
             $item['date_published'] = Convert::unixTime(
                 $video['published'],
