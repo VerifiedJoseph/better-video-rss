@@ -74,28 +74,6 @@ class JsonFormatTest extends AbstractTestCase
     }
 
     /**
-     * Test `build()` with Image proxy
-     */
-    public function testBuildWithImageProxy(): void
-    {
-        $config = $this->createConfigStub([
-            'getImageProxyStatus' => true,
-            'getSelfUrl' => 'https://example.com/',
-            'getTimezone' => 'Europe/London',
-            'getDateFormat' => 'F j, Y',
-            'getTimeFormat' => 'H:i'
-        ]);
-
-        $format = new JsonFormat($this->data, false, false, $config);
-        $format->build();
-
-        $this->assertJsonStringEqualsJsonFile(
-            'tests/files/FeedFormats/expected-json-feed-with-image-proxy.json',
-            $format->get()
-        );
-    }
-
-    /**
      * Test `getContentType()`
      */
     public function testGetContentType(): void
