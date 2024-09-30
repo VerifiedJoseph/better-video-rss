@@ -24,7 +24,6 @@ class RssFormatTest extends AbstractTestCase
     {
         $this->data = (array) json_decode((string) file_get_contents('tests/files/channel-cache-data.json'), true);
         $this->config = self::createConfigStub([
-            'getImageProxyStatus' => false,
             'getSelfUrl' => 'https://example.com/',
             'getTimezone' => 'Europe/London',
             'getDateFormat' => 'F j, Y',
