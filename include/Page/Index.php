@@ -159,7 +159,7 @@ class Index
         }
 
         if (isset($inputs['embed_videos'])) {
-            $this->embedVideos = true;
+            $this->embedVideos = filter_var($inputs['embed_videos'], FILTER_VALIDATE_BOOLEAN);
         }
 
         if (isset($inputs['ignore_premieres'])) {
@@ -212,15 +212,11 @@ class Index
      */
     private function validateFeedId(string $query): bool
     {
-        if ($this->feedType === 'channel') {
-            return Validate::channelId($query);
-        }
-
         if ($this->feedType === 'playlist') {
             return Validate::playlistId($query);
         }
 
-        return false;
+        return Validate::channelId($query);
     }
 
     /**

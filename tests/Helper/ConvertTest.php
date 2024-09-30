@@ -1,8 +1,10 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use App\Helper\Convert;
 
+#[CoversClass(Convert::class)]
 class ConvertTest extends TestCase
 {
     /**

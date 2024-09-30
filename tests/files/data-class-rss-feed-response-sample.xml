@@ -27,4 +27,38 @@
    <media:description>This script was a nightmare to pronounce.</media:description>
   </media:group>
  </entry>
+ <entry>
+  <id>yt:video:H7gjUbq3HvIj</id>
+  <yt:videoId>H7gjUbq3HvIj</yt:videoId>
+  <yt:channelId>UCBa659QWEk1AI4Tg--mrJ2A</yt:channelId>
+  <title>Upcomeing video premiere</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=H7gjUbq3HvIj"/>
+  <author>
+   <name>User</name>
+   <uri>https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A</uri>
+  </author>
+  <published>2005-04-24T03:31:52+00:00</published>
+  <updated>2023-10-31T06:52:28+00:00</updated>
+  <media:group>
+   <media:title>Upcomeing video premiere</media:title>
+   <media:description>Upcomeing video premiere.</media:description>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:9WCkRFYnHfM</id>
+  <yt:videoId>9WCkRFYnHfM</yt:videoId>
+  <yt:channelId>UCBa659QWEk1AI4Tg--mrJ2A</yt:channelId>
+  <title>Another Video</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=9WCkRFYnHfM"/>
+  <author>
+   <name>User</name>
+   <uri>https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A</uri>
+  </author>
+  <published>2005-04-24T03:31:52+00:00</published>
+  <updated>2023-10-31T06:52:28+00:00</updated>
+  <media:group>
+   <media:title>Another Video</media:title>
+   <media:description>description here</media:description>
+  </media:group>
+ </entry>
 </feed>

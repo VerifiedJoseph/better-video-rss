@@ -1,36 +1,35 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
 use App\FeedFormat\RssFormat;
 
-class RssFormatTest extends TestCase
+#[CoversClass(RssFormat::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(App\FeedFormat\FeedFormat::class)]
+#[UsesClass(App\Helper\Convert::class)]
+#[UsesClass(App\Helper\Format::class)]
+#[UsesClass(App\Helper\Url::class)]
+#[UsesClass(App\Helper\File::class)]
+#[UsesClass(App\Template::class)]
+class RssFormatTest extends AbstractTestCase
 {
     private Config $config;
 
     /** @var array<string, mixed> $data */
     private array $data = [];
 
-    /**
-     * @return PHPUnit\Framework\MockObject\Stub&Config
-     */
-    private function createConfigStub(): Config
-    {
-        /** @var PHPUnit\Framework\MockObject\Stub&Config */
-        $config = $this->createStub(Config::class);
-        $config->method('getImageProxyStatus')->willReturn(false);
-        $config->method('getSelfUrl')->willReturn('https://example.com/');
-        $config->method('getTimezone')->willReturn('Europe/London');
-        $config->method('getDateFormat')->willReturn('F j, Y');
-        $config->method('getTimeFormat')->willReturn('H:i');
-
-        return $config;
-    }
-
     public function setUp(): void
     {
         $this->data = (array) json_decode((string) file_get_contents('tests/files/channel-cache-data.json'), true);
-        $this->config = $this->createConfigStub();
+        $this->config = self::createConfigStub([
+            'getImageProxyStatus' => false,
+            'getSelfUrl' => 'https://example.com/',
+            'getTimezone' => 'Europe/London',
+            'getDateFormat' => 'F j, Y',
+            'getTimeFormat' => 'H:i'
+        ]);
     }
 
     /**
@@ -41,9 +40,44 @@ class RssFormatTest extends TestCase
         $format = new RssFormat($this->data, false, false, $this->config);
         $format->build();
 
-        $expected = 'tests/files/FeedFormats/expected-rss-feed.xml';
         $this->assertXmlStringEqualsXmlFile(
-            $expected,
+            'tests/files/FeedFormats/expected-rss-feed.xml',
+            $format->get()
+        );
+    }
+
+    /**
+     * Test `build()` with video premieres ignored
+     */
+    public function testBuildWithIgnoredPremieres(): void
+    {
+        $format = new RssFormat($this->data, false, true, $this->config);
+        $format->build();
+
+        $this->assertXmlStringEqualsXmlFile(
+            'tests/files/FeedFormats/expected-xml-feed-with-ignored-premieres.xml',
+            $format->get()
+        );
+    }
+
+    /**
+     * Test `build()` with image proxy enabled
+     */
+    public function testBuildWithImageProxy(): void
+    {
+        $config = $this->createConfigStub([
+            'getImageProxyStatus' => true,
+            'getSelfUrl' => 'https://example.com/',
+            'getTimezone' => 'Europe/London',
+            'getDateFormat' => 'F j, Y',
+            'getTimeFormat' => 'H:i'
+        ]);
+
+        $format = new RssFormat($this->data, false, false, $config);
+        $format->build();
+
+        $this->assertXmlStringEqualsXmlFile(
+            'tests/files/FeedFormats/expected-rss-feed-with-image-proxy.xml',
             $format->get()
         );
     }

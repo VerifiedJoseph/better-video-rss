@@ -1,12 +1,18 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
 use App\Api;
 use App\Http\Request;
 use App\Page\Feed;
 
-class FeedTest extends TestCase
+#[CoversClass(Feed::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(Api::class)]
+#[UsesClass(Request::class)]
+#[UsesClass(App\Helper\Validate::class)]
+class FeedTest extends AbstractTestCase
 {
     private static Config $config;
     private static Request $request;
@@ -20,9 +26,66 @@ class FeedTest extends TestCase
     }
 
     /**
-     * Test class with empty channel id
+     * Test checkInputs()
      */
-    public function testClassWithEmptyChannelId(): void
+    public function testCheckInputs(): void
+    {
+        $inputs = [
+            'channel_id' => 'UCMufUaGlcuAvsSdzQV08BEA',
+            'format' => 'html',
+            'embed_videos' => 'true',
+            'ignore_premieres' => 'false'
+        ];
+
+        $feed = new Feed($inputs, self::$config, self::$request, self::$api);
+        $reflection = new ReflectionClass($feed);
+
+        $this->assertEquals(
+            $inputs['channel_id'],
+            $reflection->getProperty('feedId')->getValue($feed)
+        );
+
+        $this->assertEquals(
+            'channel',
+            $reflection->getProperty('feedType')->getValue($feed)
+        );
+
+        $this->assertEquals(
+            $inputs['format'],
+            $reflection->getProperty('feedFormat')->getValue($feed)
+        );
+
+        $this->assertTrue($reflection->getProperty('embedVideos')->getValue($feed));
+        $this->assertFalse($reflection->getProperty('ignorePremieres')->getValue($feed));
+    }
+
+    /**
+     * Test checkInputs() with playlist Id
+     */
+    public function testCheckInputsWithPlaylistId(): void
+    {
+        $inputs = [
+            'playlist_id' => 'PLMufUaGlcuAvsSdzQV08BEA'
+        ];
+
+        $feed = new Feed($inputs, self::$config, self::$request, self::$api);
+        $reflection = new ReflectionClass($feed);
+
+        $this->assertEquals(
+            $inputs['playlist_id'],
+            $reflection->getProperty('feedId')->getValue($feed)
+        );
+
+        $this->assertEquals(
+            'playlist',
+            $reflection->getProperty('feedType')->getValue($feed)
+        );
+    }
+
+    /**
+     * Test checkInputs() with empty channel id
+     */
+    public function testCheckInputsWithEmptyChannelId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid channel ID parameter given.');
@@ -35,9 +98,9 @@ class FeedTest extends TestCase
     }
 
     /**
-     * Test class with invalid channel id
+     * Test checkInputs() with invalid channel id
      */
-    public function testClassWithInvalidChannelId(): void
+    public function testCheckInputsWithInvalidChannelId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid channel ID parameter given.');
@@ -50,9 +113,9 @@ class FeedTest extends TestCase
     }
 
     /**
-     * Test class with empty playlist id
+     * Test checkInputs() with empty playlist id
      */
-    public function testClassWithEmptyPlaylistId(): void
+    public function testCheckInputsWithEmptyPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid playlist ID parameter given.');
@@ -65,9 +128,9 @@ class FeedTest extends TestCase
     }
 
     /**
-     * Test class with invalid playlist ID
+     * Test checkInputs() with invalid playlist ID
      */
-    public function testClassWithInvalidPlaylistId(): void
+    public function testCheckInputsWithInvalidPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid playlist ID parameter given.');
@@ -80,13 +143,28 @@ class FeedTest extends TestCase
     }
 
     /**
-     * Test class with no channel or playlist ID given
+     * Test checkInputs() with no channel or playlist ID given
      */
-    public function testClassWithNoChannelOrPlaylistId(): void
+    public function testCheckInputsWithNoChannelOrPlaylistId(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No channel or playlist ID parameter given.');
 
         new Feed([], self::$config, self::$request, self::$api);
+    }
+
+    /**
+     * Test checkInputs() with unsupported feed format
+     */
+    public function testCheckInputsWithUnsupportedFormat(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid format parameter given.');
+
+        $inputs = [
+            'format' => 'yaml'
+        ];
+
+        new Feed($inputs, self::$config, self::$request, self::$api);
     }
 }

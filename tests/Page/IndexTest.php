@@ -1,11 +1,23 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use App\Config;
 use App\Api;
 use App\Http\Request;
 use App\Page\Index;
 
+#[CoversClass(Index::class)]
+#[UsesClass(Config::class)]
+#[UsesClass(App\Find::class)]
+#[UsesClass(App\Detect::class)]
+#[UsesClass(App\Template::class)]
+#[UsesClass(App\Helper\File::class)]
+#[UsesClass(App\Helper\Format::class)]
+#[UsesClass(App\Helper\Output::class)]
+#[UsesClass(App\Helper\Url::class)]
+#[UsesClass(App\Helper\Validate::class)]
 class IndexTest extends TestCase
 {
     private static Config $config;
@@ -18,9 +30,34 @@ class IndexTest extends TestCase
     }
 
     /**
-     * Test class with empty query
+     * Test checkInputs()
      */
-    public function testClassWithEmptyQuery(): void
+    public function testCheckInputs(): void
+    {
+        $inputs = [
+            'query' => 'UCBa659QWEk1AI4Tg--mrJ2A',
+            'type' => 'channel',
+            'format' => 'html',
+            'embed_videos' => 'true',
+            'ignore_premieres' => 'false'
+        ];
+
+        $index = new Index($inputs, self::$config, self::$api);
+        $reflection = new ReflectionClass($index);
+
+        $this->assertEquals(
+            $inputs['format'],
+            $reflection->getProperty('feedFormat')->getValue($index)
+        );
+
+        $this->assertTrue($reflection->getProperty('embedVideos')->getValue($index));
+        $this->assertFalse($reflection->getProperty('ignorePremieres')->getValue($index));
+    }
+
+    /**
+     * Test checkInputs() with empty query
+     */
+    public function testCheckInputsWithEmptyQuery(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Query parameter not given.');
@@ -33,9 +70,9 @@ class IndexTest extends TestCase
     }
 
     /**
-     * Test class with empty type
+     * Test checkInputs() with empty type
      */
-    public function testClassWithEmptyType(): void
+    public function testCheckInputsWithEmptyType(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Type parameter not given.');
@@ -49,9 +86,9 @@ class IndexTest extends TestCase
     }
 
     /**
-     * Test class with unsupported type
+     * Test checkInputs() with unsupported type
      */
-    public function testClassWithUnsupportedType(): void
+    public function testCheckInputsWithUnsupportedType(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Unknown type parameter given.');
@@ -62,6 +99,46 @@ class IndexTest extends TestCase
         ];
 
         new Index($inputs, self::$config, self::$api);
+    }
+
+    /**
+     * Test generate() with invalid YouTube URL
+     */
+    public function testGenerateWithInvalidYouTubeUrl(): void
+    {
+        $inputs = [
+            'query' => 'https://example.com',
+            'type' => 'url'
+        ];
+
+        $index = new Index($inputs, self::$config, self::$api);
+        $reflection = new \ReflectionClass($index);
+
+        $this->assertTrue($reflection->getProperty('error')->getValue($index));
+        $this->assertEquals(
+            'URL is not a valid YouTube URL.',
+            $reflection->getProperty('errorMessage')->getValue($index)
+        );
+    }
+
+    /**
+     * Test generate() with unsupported YouTube URL
+     */
+    public function testGenerateWithUnsupportedYouTubeUrl(): void
+    {
+        $inputs = [
+            'query' => 'https://youtube.com/channel/',
+            'type' => 'url'
+        ];
+
+        $index = new Index($inputs, self::$config, self::$api);
+        $reflection = new \ReflectionClass($index);
+
+        $this->assertTrue($reflection->getProperty('error')->getValue($index));
+        $this->assertEquals(
+            'Unsupported YouTube URL.',
+            $reflection->getProperty('errorMessage')->getValue($index)
+        );
     }
 
     /**
