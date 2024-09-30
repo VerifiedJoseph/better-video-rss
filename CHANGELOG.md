@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.8.4](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.4) - 2024-09-30
+
+- Removed image proxy ([#392](https://github.com/VerifiedJoseph/better-video-rss/pull/392), [`6acffeb`](https://github.com/VerifiedJoseph/better-video-rss/commit/6acffebeb2d04258dba81decdbb6d753357c9142))
+- Dockerfile: Updated composer from 2.7.7 to 2.7.8 ([#373](https://github.com/VerifiedJoseph/better-video-rss/pull/373), [`b111c8f`](https://github.com/VerifiedJoseph/better-video-rss/commit/b111c8f58385058fd5dfe3a6e4b387133dca5069))
+- Dockerfile: Updated composer from 2.7.8 to 2.7.9 ([#385](https://github.com/VerifiedJoseph/better-video-rss/pull/385), [`10f1c4b`](https://github.com/VerifiedJoseph/better-video-rss/commit/10f1c4b614b0762b4d698f65c850b7b03364b6c4))
+- Dockerfile: Updated alpine from 3.20.2 to 3.20.3 ([#386](https://github.com/VerifiedJoseph/better-video-rss/pull/386), [`1e010f8`](https://github.com/VerifiedJoseph/better-video-rss/commit/1e010f85e0f8e3541af7dae601bc1aa667b3cf86))
+
 ## [1.8.3](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.3) - 2024-07-24
 
 - Dropped support for php 8.1 ([#355](https://github.com/VerifiedJoseph/better-video-rss/pull/355), [`b2911c3`](https://github.com/VerifiedJoseph/better-video-rss/commit/b2911c34d1a0964a985f4ad9b9e794a9c2aecdd3))
