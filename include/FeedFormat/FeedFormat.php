@@ -113,15 +113,6 @@ abstract class FeedFormat
             $this->config->getTimezone()
         );
 
-        if ($this->config->getImageProxyStatus() === true && $this->config->getCacheDisableStatus() === false) {
-            $thumbnailUrl = Url::getImageProxy(
-                $this->config->getSelfUrl(),
-                $video['id'],
-                $this->data['details']['type'],
-                $this->data['details']['id']
-            );
-        }
-
         $media = <<<HTML
 <a target="_blank" title="Watch on YouTube" href="{$video['url']}">
 <img title="video thumbnail" src="{$thumbnailUrl}" loading="lazy"/>
