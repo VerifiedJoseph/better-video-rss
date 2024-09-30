@@ -134,19 +134,6 @@ class Url
     }
 
     /**
-     * Create a proxy URL for an image
-     *
-     * @param string $videoId Video id
-     * @param string $feedType Feed type
-     * @param string $feedId Feed id
-     * @return string
-     */
-    public static function getImageProxy(string $selfUrl, string $videoId, string $feedType, string $feedId)
-    {
-        return $selfUrl . 'proxy.php?video_id=' . $videoId . '&' . $feedType . '_id=' . $feedId;
-    }
-
-    /**
      * Create a YouTube RSS feed URL (https://www.youtube.com/feeds/videos.xml)
      *
      * @param string $type Feed type
