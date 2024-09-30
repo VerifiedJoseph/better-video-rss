@@ -81,7 +81,6 @@ Environment variables are used to adjust the configuration. Alternatively, you c
 | `BVRSS_CACHE_DIR`           | `string`  | `cache`       | Cache directory path.                                                                              |
 | `BVRSS_DISABLE_CACHE`       | `boolean` | `false`       | Disables caching.                                                                                  |
 | `BVRSS_ENABLE_CACHE_VIEWER` | `boolean` | `false`       | Enables cache viewer.                                                                              |
-| `BVRSS_ENABLE_IMAGE_PROXY`  | `boolean` | `false`       | Enables video thumbnail image proxy.                                                               |
 | `BVRSS_DISABLE_CSP`         | `boolean` | `false`       | Disables [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).         |
 | `BVRSS_RAW_API_ERRORS`      | `boolean` | `false`       | Enables displaying of raw API errors.                                                              |
 

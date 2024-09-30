@@ -24,7 +24,6 @@ class RssFormatTest extends AbstractTestCase
     {
         $this->data = (array) json_decode((string) file_get_contents('tests/files/channel-cache-data.json'), true);
         $this->config = self::createConfigStub([
-            'getImageProxyStatus' => false,
             'getSelfUrl' => 'https://example.com/',
             'getTimezone' => 'Europe/London',
             'getDateFormat' => 'F j, Y',
@@ -56,28 +55,6 @@ class RssFormatTest extends AbstractTestCase
 
         $this->assertXmlStringEqualsXmlFile(
             'tests/files/FeedFormats/expected-xml-feed-with-ignored-premieres.xml',
-            $format->get()
-        );
-    }
-
-    /**
-     * Test `build()` with image proxy enabled
-     */
-    public function testBuildWithImageProxy(): void
-    {
-        $config = $this->createConfigStub([
-            'getImageProxyStatus' => true,
-            'getSelfUrl' => 'https://example.com/',
-            'getTimezone' => 'Europe/London',
-            'getDateFormat' => 'F j, Y',
-            'getTimeFormat' => 'H:i'
-        ]);
-
-        $format = new RssFormat($this->data, false, false, $config);
-        $format->build();
-
-        $this->assertXmlStringEqualsXmlFile(
-            'tests/files/FeedFormats/expected-rss-feed-with-image-proxy.xml',
             $format->get()
         );
     }

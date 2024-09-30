@@ -34,21 +34,6 @@ class UrlTest extends TestCase
     }
 
     /**
-     * Test `getImageProxy()`
-     */
-    public function testGetImageProxy(): void
-    {
-        $url = 'https://example.com/proxy.php?video_id=jNQXAC9IVRw&channel_id=UC4QobU6STFB0P71PMvOGN5A';
-
-        $this->assertEquals($url, Url::getImageProxy(
-            $this->selfUrl,
-            'jNQXAC9IVRw',
-            'channel',
-            'UC4QobU6STFB0P71PMvOGN5A',
-        ));
-    }
-
-    /**
      * Test `getRssFeed()`
      */
     public function testGetRssFeed(): void

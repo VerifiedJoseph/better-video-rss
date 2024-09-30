@@ -170,16 +170,6 @@ class Validate extends Base
     }
 
     /**
-     * Validate `BVRSS_ENABLE_IMAGE_PROXY` environment variable
-     */
-    public function imageProxy(): void
-    {
-        if ($this->getEnv('ENABLE_IMAGE_PROXY') === 'true') {
-            $this->config['ENABLE_IMAGE_PROXY'] = true;
-        }
-    }
-
-    /**
      * Validate `BVRSS_DISABLE_CSP` environment variable
      */
     public function cspStatus(): void

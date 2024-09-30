@@ -23,7 +23,6 @@ class ConfigTest extends TestCase
         putenv('BVRSS_DISABLE_CACHE');
         putenv('BVRSS_ENABLE_CACHE_VIEWER');
         putenv('BVRSS_DISABLE_CSP');
-        putenv('BVRSS_ENABLE_IMAGE_PROXY');
         putenv('BVRSS_TIMEZONE');
         putenv('BVRSS_DATE_FORMAT');
         putenv('BVRSS_TIME_FORMAT');
@@ -137,15 +136,6 @@ class ConfigTest extends TestCase
     {
         $config = new Config();
         $this->assertGreaterThan(0, $config->getCacheFormatVersion());
-    }
-
-    /**
-     * Test `getImageProxyStatus()`
-     */
-    public function testGetImageProxyStatus(): void
-    {
-        $config = new Config();
-        $this->assertFalse($config->getImageProxyStatus());
     }
 
     /**

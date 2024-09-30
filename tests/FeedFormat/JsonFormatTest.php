@@ -23,7 +23,6 @@ class JsonFormatTest extends AbstractTestCase
     {
         $this->data = (array) json_decode((string) file_get_contents('tests/files/channel-cache-data.json'), true);
         $this->config = self::createConfigStub([
-            'getImageProxyStatus' => false,
             'getSelfUrl' => 'https://example.com/',
             'getTimezone' => 'Europe/London',
             'getDateFormat' => 'F j, Y',
@@ -69,28 +68,6 @@ class JsonFormatTest extends AbstractTestCase
 
         $this->assertJsonStringEqualsJsonFile(
             'tests/files/FeedFormats/expected-json-feed-with-iframes.json',
-            $format->get()
-        );
-    }
-
-    /**
-     * Test `build()` with Image proxy
-     */
-    public function testBuildWithImageProxy(): void
-    {
-        $config = $this->createConfigStub([
-            'getImageProxyStatus' => true,
-            'getSelfUrl' => 'https://example.com/',
-            'getTimezone' => 'Europe/London',
-            'getDateFormat' => 'F j, Y',
-            'getTimeFormat' => 'H:i'
-        ]);
-
-        $format = new JsonFormat($this->data, false, false, $config);
-        $format->build();
-
-        $this->assertJsonStringEqualsJsonFile(
-            'tests/files/FeedFormats/expected-json-feed-with-image-proxy.json',
             $format->get()
         );
     }

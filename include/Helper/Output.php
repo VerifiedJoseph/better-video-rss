@@ -56,22 +56,4 @@ class Output
         header('last-modified:' . $modified);
         echo $data;
     }
-
-    /**
-     * Output image
-     *
-     * @param string $data Image data
-     * @param string $contentType Content-type header value
-     * @param string $csp Content-Security-Policy header value
-     * @param bool $cspDisabled Content security policy disabled status
-     */
-    public static function image(string $data, string $contentType, string $csp, bool $cspDisabled): void
-    {
-        if ($cspDisabled === false) {
-            header('Content-Security-Policy:' . $csp);
-        }
-
-        header('content-type: ' . $contentType);
-        echo $data;
-    }
 }

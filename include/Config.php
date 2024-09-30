@@ -43,7 +43,6 @@ class Config
         'CACHE_DIR' => 'cache',
         'DISABLE_CACHE' => false,
         'ENABLE_CACHE_VIEWER' => false,
-        'ENABLE_IMAGE_PROXY' => false,
         'DISABLE_CSP' => false
     ];
 
@@ -71,7 +70,6 @@ class Config
         $this->validate->timeFormat();
         $this->validate->cache();
         $this->validate->cacheViewer();
-        $this->validate->imageProxy();
         $this->validate->cspStatus();
         $this->validate->rawApiErrors();
 
@@ -139,15 +137,6 @@ class Config
     public function getCacheFormatVersion(): int
     {
         return Version::getCacheFormatVersion();
-    }
-
-    /**
-     * Returns image proxy status
-     * @return boolean
-     */
-    public function getImageProxyStatus(): bool
-    {
-        return $this->config['ENABLE_IMAGE_PROXY'];
     }
 
     /**
