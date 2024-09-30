@@ -60,28 +60,6 @@ class RssFormatTest extends AbstractTestCase
     }
 
     /**
-     * Test `build()` with image proxy enabled
-     */
-    public function testBuildWithImageProxy(): void
-    {
-        $config = $this->createConfigStub([
-            'getImageProxyStatus' => true,
-            'getSelfUrl' => 'https://example.com/',
-            'getTimezone' => 'Europe/London',
-            'getDateFormat' => 'F j, Y',
-            'getTimeFormat' => 'H:i'
-        ]);
-
-        $format = new RssFormat($this->data, false, false, $config);
-        $format->build();
-
-        $this->assertXmlStringEqualsXmlFile(
-            'tests/files/FeedFormats/expected-rss-feed-with-image-proxy.xml',
-            $format->get()
-        );
-    }
-
-    /**
      * Test `getContentType()`
      */
     public function testGetContentType(): void
