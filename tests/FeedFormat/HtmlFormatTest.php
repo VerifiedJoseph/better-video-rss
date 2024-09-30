@@ -27,7 +27,6 @@ class HtmlFormatTest extends AbstractTestCase
     {
         $this->data = (array) json_decode((string) file_get_contents('tests/files/channel-cache-data.json'), true);
         $this->config = self::createConfigStub([
-            'getImageProxyStatus' => false,
             'getSelfUrl' => 'https://example.com/',
             'getTimezone' => 'Europe/London',
             'getDateFormat' => 'F j, Y',
@@ -77,31 +76,6 @@ class HtmlFormatTest extends AbstractTestCase
         $format->build();
 
         $expected = (string) file_get_contents('tests/files/FeedFormats/expected-html-feed-with-iframes.html');
-
-        $this->assertStringEqualsStringIgnoringLineEndings(
-            $expected,
-            $format->get()
-        );
-    }
-
-    /**
-     * Test `build()` with Image proxy
-     */
-    public function testBuildWithImageProxy(): void
-    {
-        $config = $this->createConfigStub([
-            'getImageProxyStatus' => true,
-            'getSelfUrl' => 'https://example.com/',
-            'getTimezone' => 'Europe/London',
-            'getDateFormat' => 'F j, Y',
-            'getTimeFormat' => 'H:i',
-            'getFeedFormats' => ['html','json']
-        ]);
-
-        $format = new HtmlFormat($this->data, false, false, $config);
-        $format->build();
-
-        $expected = (string) file_get_contents('tests/files/FeedFormats/expected-html-feed-with-image-proxy.html');
 
         $this->assertStringEqualsStringIgnoringLineEndings(
             $expected,
