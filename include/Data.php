@@ -205,7 +205,7 @@ class Data
                 $key = array_search($item->id, array_column($this->data['videos'], 'id'));
                 $video = $this->data['videos'][$key];
 
-                $video['duration'] = Convert::videoDuration($item->contentDetails->duration);
+                $video['duration'] = Convert::videoDuration($item->contentDetails->duration ?? '');
                 $video['tags'] = array();
                 $video['premiere'] = false;
                 $video['stream'] = false;
