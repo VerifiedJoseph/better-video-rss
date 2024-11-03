@@ -47,7 +47,7 @@ class Convert
     public static function videoDuration(string $duration, bool $allowNegative = true)
     {
         $matches = array();
-        $text = 'Unknown';
+        $text = 'Unknown duration';
 
         if (preg_match(self::$iso8601Regex, $duration, $matches)) {
             foreach ($matches as &$match) {
