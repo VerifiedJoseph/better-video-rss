@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.8.5](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.5) - 2024-10-03
+
+- Fixed error when YouTube API doesn't return video duration ([#412](https://github.com/VerifiedJoseph/better-video-rss/pull/412), [`9f2223f`](https://github.com/VerifiedJoseph/better-video-rss/commit/9f2223f8ed27f468fd7e4eb21c08f0e7e6c12b46))
+- Dockerfile: Updated composer from 2.7.9 to 2.8.1 ([#401](https://github.com/VerifiedJoseph/better-video-rss/pull/401), [`a597b1f`](https://github.com/VerifiedJoseph/better-video-rss/commit/a597b1f34cf4c0fafa0c15e7a3a3b8c0037b7ffc))
+- Dockerfile: Updated composer from 2.8.1 to 2.8.2 ([#413](https://github.com/VerifiedJoseph/better-video-rss/pull/413), [`131d75f`](https://github.com/VerifiedJoseph/better-video-rss/commit/131d75f00dd86e7a10878f7e87c9457bd71ee1d9))
+
 ## [1.8.4](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.4) - 2024-09-30
 
 - Removed image proxy ([#392](https://github.com/VerifiedJoseph/better-video-rss/pull/392), [`6acffeb`](https://github.com/VerifiedJoseph/better-video-rss/commit/6acffebeb2d04258dba81decdbb6d753357c9142))
