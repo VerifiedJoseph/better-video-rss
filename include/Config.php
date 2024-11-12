@@ -58,7 +58,7 @@ class Config
      */
     public function checkConfig(): void
     {
-        $this->requireConfigFile();
+        $this->includeConfigFile();
 
         // Required parameters
         $this->validate->selfUrlPath();
@@ -224,9 +224,9 @@ class Config
     }
 
     /**
-     * Include (require) config file
+     * Include config file
      */
-    private function requireConfigFile(): void
+    private function includeConfigFile(): void
     {
         if (file_exists('config.php') === true) {
             include_once 'config.php';
