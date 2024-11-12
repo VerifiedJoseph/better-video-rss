@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Config\Validate;
-use Exception;
 
 class Config
 {
