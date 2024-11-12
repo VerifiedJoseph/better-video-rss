@@ -4,3 +4,6 @@ parameters:
 		- ./
 	excludePaths:
 		- vendor/
+	ignoreErrors:
+		- identifier: includeOnce.fileNotFound
+		  path: src/Config.php

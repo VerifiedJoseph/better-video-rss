@@ -229,7 +229,7 @@ class Config
     private function requireConfigFile(): void
     {
         if (file_exists('config.php') === true) {
-            require 'config.php';
+            include_once 'config.php';
         }
     }
 }
