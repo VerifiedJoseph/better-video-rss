@@ -6,4 +6,4 @@ parameters:
 		- vendor/
 	ignoreErrors:
 		- identifier: includeOnce.fileNotFound
-		  path: src/Config.php
+		  path: include/Config.php
