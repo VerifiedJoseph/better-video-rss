@@ -13,7 +13,6 @@ namespace App\FeedFormat;
 
 use App\Helper\Convert;
 use App\Helper\Json as Json;
-use App\Helper\Url;
 
 class JsonFormat extends FeedFormat
 {
@@ -46,7 +45,7 @@ class JsonFormat extends FeedFormat
     /**
      * Build feed items
      *
-     * @return array<int, array<string, string>> Items an an array
+     * @return array<int, array<string, mixed>> Items an an array
      */
     protected function buildItems(): array
     {
@@ -56,26 +55,31 @@ class JsonFormat extends FeedFormat
                 continue;
             }
 
-            $item = array();
-            $item['id'] = $video['url'];
-            $item['url'] = $video['url'];
-            $item['author'] = array(
-                'name' => $video['author']
-            );
-            $item['title'] = $this->buildTitle($video);
             $attachmentUrl = $video['thumbnail'];
-
-            $item['date_published'] = Convert::unixTime(
+            $datePublished = Convert::unixTime(
                 $video['published'],
                 'Y-m-d\TH:i:s\Z',
                 $this->config->getTimezone()
             );
-            $item['content_html'] = $this->buildContent($video);
-            $item['tags'] = $this->buildCategories($video['tags']);
-            $item['attachments'][] = array(
-                'url' => $attachmentUrl,
-                'mime_type' => 'image/jpeg',
-            );
+
+            $item = [
+                'id' => $video['url'],
+                'url' => $video['url'],
+                'author' => [
+                    'name' => $video['author']
+                ],
+                'title' => $this->buildTitle($video),
+                'date_published' => $datePublished,
+                'content_html' => $this->buildContent($video),
+                'tags' => $this->buildCategories($video['tags']),
+                'attachments' => [
+                    [
+                        'url' => $attachmentUrl,
+                        'mime_type' => 'image/jpeg',
+                    ]
+                ]
+            ];
+
             $items[] = $item;
         }
 
