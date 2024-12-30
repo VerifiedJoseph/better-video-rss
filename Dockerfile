@@ -40,13 +40,13 @@ COPY --chown=nobody --from=composer /app/ /app
 # Create cache folder
 RUN mkdir -p /app/cache
 
-# Make files accessable to nobody user
-RUN chown -R nobody.nobody /run /app /var/lib/nginx /var/log/nginx
+# Make files accessible to nobody user
+RUN chown -R nobody:nobody /run /app /var/lib/nginx /var/log/nginx
 
 # Remove setup files
 RUN rm -r /app/docker && rm /app/composer.*
 
-# php-fpm hleath check
+# php-fpm heath check
 HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
 
 USER nobody
