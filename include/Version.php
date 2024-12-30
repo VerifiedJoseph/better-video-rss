@@ -4,7 +4,7 @@ namespace App;
 
 class Version
 {
-    private static string $version = '1.8.6';
+    private static string $version = '1.8.7';
     private static int $cacheFormatVersion = 1;
 
     /**

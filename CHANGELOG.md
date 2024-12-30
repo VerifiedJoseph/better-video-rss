@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.8.7](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.7) - 2024-12-30
+
+- Dockerfile: Fixed setting file ownership ([#436](https://github.com/VerifiedJoseph/better-video-rss/pull/436), [`eb3ec4e`](https://github.com/VerifiedJoseph/better-video-rss/commit/eb3ec4e3cf07772f5574d11b2f6c594979bfaba3))
+
 ## [1.8.6](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.6) - 2024-12-30
 
 - Dockerfile: Updated alpine from 3.20.3 to 3.21.0 ([#428](https://github.com/VerifiedJoseph/better-video-rss/pull/428), [`b06cdfd`](https://github.com/VerifiedJoseph/better-video-rss/commit/b06cdfd8dba064998f9c2cab2e1131b306608b9e))
