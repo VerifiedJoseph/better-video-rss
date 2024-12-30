@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.8.6](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.6) - 2024-12-30
+
+- Dockerfile: Updated alpine from 3.20.3 to 3.21.0 ([#428](https://github.com/VerifiedJoseph/better-video-rss/pull/428), [`b06cdfd`](https://github.com/VerifiedJoseph/better-video-rss/commit/b06cdfd8dba064998f9c2cab2e1131b306608b9e))
+- Dockerfile: Updated composer from 2.8.2 to 2.8.3 ([#419](https://github.com/VerifiedJoseph/better-video-rss/pull/419), [`f9e8366`](https://github.com/VerifiedJoseph/better-video-rss/commit/f9e8366f4bf82543f515bf4c54e48b27a35d41bd))
+- Dockerfile: Updated composer from 2.8.3 to 2.8.4 ([#429](https://github.com/VerifiedJoseph/better-video-rss/pull/429), [`8d7903d`](https://github.com/VerifiedJoseph/better-video-rss/commit/8d7903d36df5bd1ee83a8fcb96b74ccb7d4ac18d))
+
 ## [1.8.5](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.5) - 2024-10-03
 
 - Fixed error when YouTube API doesn't return video duration ([#412](https://github.com/VerifiedJoseph/better-video-rss/pull/412), [`9f2223f`](https://github.com/VerifiedJoseph/better-video-rss/commit/9f2223f8ed27f468fd7e4eb21c08f0e7e6c12b46))
