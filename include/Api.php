@@ -150,7 +150,7 @@ class Api
         }
 
         throw new Exception(
-            sprintf('Error: API returned code %s (%s: %s)', $code, $error->reason, $error->message)
+            sprintf('Error: API returned code %s (%s: %s)', $code, $error->reason, strip_tags($error->message))
         );
     }
 }
