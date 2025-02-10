@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.8.8](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.8) - 2025-02-10
+
+- Api: Strip html tags from YouTube Data API error messages. ([#457](https://github.com/VerifiedJoseph/better-video-rss/pull/457), [`21968f5`](https://github.com/VerifiedJoseph/better-video-rss/commit/21968f56a0a7d1bcc9acd4e603e0b7eddf252cf7))
+- Dockerfile: Updated composer from 2.8.4 to 2.8.5 ([#451](https://github.com/VerifiedJoseph/better-video-rss/pull/451), [`29d866d`](https://github.com/VerifiedJoseph/better-video-rss/commit/29d866dcd4970d31387776f6b3f1a113e41a6534))
+- Dockerfile: Updated alpine from 3.21.0 to 3.21.2 ([#447](https://github.com/VerifiedJoseph/better-video-rss/pull/447), [`1271276`](https://github.com/VerifiedJoseph/better-video-rss/commit/1271276001521c3d9bafca7091041edce7a4acf6))
+
 ## [1.8.7](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.7) - 2024-12-30
 
 - Dockerfile: Fixed setting file ownership ([#436](https://github.com/VerifiedJoseph/better-video-rss/pull/436), [`eb3ec4e`](https://github.com/VerifiedJoseph/better-video-rss/commit/eb3ec4e3cf07772f5574d11b2f6c594979bfaba3))
