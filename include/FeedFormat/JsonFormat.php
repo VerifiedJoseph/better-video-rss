@@ -9,6 +9,8 @@
  * https://json-feed-validator.herokuapp.com/validate
  */
 
+declare(strict_types=1);
+
 namespace App\FeedFormat;
 
 use App\Helper\Convert;

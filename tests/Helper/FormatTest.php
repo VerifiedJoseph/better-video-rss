@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use App\Helper\Format;
 use PHPUnit\Framework\Attributes\CoversClass;
