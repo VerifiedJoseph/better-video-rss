@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\FeedFormat;
 
 use App\Template;
 use App\Helper\Convert;
-use App\Helper\Url;
 
 class RssFormat extends FeedFormat
 {
