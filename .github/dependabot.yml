@@ -25,8 +25,7 @@ updates:
         update-types: ["version-update:semver-minor"]
 
   - package-ecosystem: "docker-compose"
-    directories:
-      - "/.devcontainer/"
+    directory: "/.devcontainer/"
     schedule:
       interval: "monthly"
 
