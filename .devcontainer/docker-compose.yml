@@ -8,6 +8,7 @@ services:
     volumes:
       - ../:/better-video-rss
       - vendor:/better-video-rss/vendor
+      - ./workspace/php.ini:/usr/local/etc/php/php.ini:ro
     working_dir: /better-video-rss
     env_file:
       - .env
