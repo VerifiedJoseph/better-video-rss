@@ -79,7 +79,9 @@ class Feed
                 );
 
                 if ($response->getStatusCode() !== 200) {
-                    throw new Exception('YouTube RSS feed endpoint retuned HTTP error code ' . $response->getStatusCode());
+                    throw new Exception(
+                        'YouTube RSS feed endpoint retuned HTTP error code ' . $response->getStatusCode()
+                    );
                 }
 
                 $data->updateFeed($response->getBody());
