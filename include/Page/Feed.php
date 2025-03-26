@@ -61,6 +61,8 @@ class Feed
 
     /**
      * Generate feed
+     *
+     * @throws Exception if YouTube RSS feed endpoint retuned HTTP error code.
      */
     public function generate(): void
     {
@@ -75,6 +77,10 @@ class Feed
                 $response = $this->request->get(
                     Url::getRssFeed($this->feedType, $this->feedId)
                 );
+
+                if ($response->getStatusCode() !== 200) {
+                    throw new Exception('YouTube RSS feed endpoint retuned HTTP error code ' . $response->getStatusCode());
+                }
 
                 $data->updateFeed($response->getBody());
             }
