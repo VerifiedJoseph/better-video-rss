@@ -5,6 +5,7 @@ All notable changes to this project are documented in this file.
 ## [1.9.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.9.0) - 2025-03-31
 
 - Handle HTTP errors returned by YouTube's RSS feed endpoint. ([#478](https://github.com/VerifiedJoseph/better-video-rss/pull/478), [`b35c98f`](https://github.com/VerifiedJoseph/better-video-rss/commit/b35c98f4863730e4f7453e51d452951f52012ea7))
+- Dockerfile: Updated alpine from 3.21.2 to 3.21.3 ([#462](https://github.com/VerifiedJoseph/better-video-rss/pull/462), [`af3330e`](https://github.com/VerifiedJoseph/better-video-rss/commit/af3330ead6b958f9412042a90465303acba82da6))
 
 ## [1.8.8](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.8) - 2025-02-10
 
