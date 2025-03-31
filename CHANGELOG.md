@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.9.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.9.0) - 2025-03-31
+
+- Handle HTTP errors returned by YouTube's RSS feed endpoint. ([#478](https://github.com/VerifiedJoseph/better-video-rss/pull/478), [`b35c98f`](https://github.com/VerifiedJoseph/better-video-rss/commit/b35c98f4863730e4f7453e51d452951f52012ea7))
+
 ## [1.8.8](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.8.8) - 2025-02-10
 
 - Api: Strip html tags from YouTube Data API error messages. ([#457](https://github.com/VerifiedJoseph/better-video-rss/pull/457), [`21968f5`](https://github.com/VerifiedJoseph/better-video-rss/commit/21968f56a0a7d1bcc9acd4e603e0b7eddf252cf7))
