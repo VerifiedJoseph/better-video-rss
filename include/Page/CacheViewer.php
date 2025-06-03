@@ -194,7 +194,7 @@ HTML;
         }
 
         $html = new Template('cache-viewer.html', [
-            'fileCount' => $fileCount,
+            'fileCount' => strval($fileCount),
             'cacheSize' => $cacheSize,
             'tbody' => $tbody
         ]);
