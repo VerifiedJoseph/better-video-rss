@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.9.1](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.9.1) - 2025-06-03
+
+- Fixed variable type error in CacheViewer class ([#503](https://github.com/VerifiedJoseph/better-video-rss/pull/503), [`3e04d1e`](https://github.com/VerifiedJoseph/better-video-rss/commit/3e04d1e4d6023bf4a23bfe9924cb5094d476821b))
+- Dockerfile: Updated alpine from 3.21.3 to 3.22.0 ([#502](https://github.com/VerifiedJoseph/better-video-rss/pull/502), [`3dcebc5`](https://github.com/VerifiedJoseph/better-video-rss/commit/3dcebc573f5207ae2b203f12f287210e15f0ff32))
+
 ## [1.9.0](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.9.0) - 2025-03-31
 
 - Handle HTTP errors returned by YouTube's RSS feed endpoint. ([#478](https://github.com/VerifiedJoseph/better-video-rss/pull/478), [`b35c98f`](https://github.com/VerifiedJoseph/better-video-rss/commit/b35c98f4863730e4f7453e51d452951f52012ea7))
