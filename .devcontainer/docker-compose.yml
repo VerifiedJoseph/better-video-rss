@@ -14,7 +14,7 @@ services:
       - .env
 
   nginx:
-    image: nginx:1.27-alpine3.20-slim
+    image: nginx:1.29-alpine3.22-slim
     ports:
       - 8080:8080
     volumes:
