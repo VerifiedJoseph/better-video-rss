@@ -47,6 +47,12 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
+      - name: Install dependencies with composer
+        run: composer install --prefer-dist
+
+      - name: Run phpunit
+        run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
         with:
