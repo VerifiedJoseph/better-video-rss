@@ -24,7 +24,7 @@ services:
     working_dir: /better-video-rss
 
   httpbin:
-    image: ghcr.io/mccutchen/go-httpbin:2.18
+    image: ghcr.io/mccutchen/go-httpbin:2.19
     command: ["go-httpbin", "-port", "80"]
     ports:
       - "8081:80"
