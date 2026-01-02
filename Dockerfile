@@ -26,7 +26,7 @@ RUN apk add --no-cache \
 COPY --chown=nobody /docker/config/nginx.conf /etc/nginx/nginx.conf
 
 # Copy php-fpm config
-COPY --chown=nobody /docker/config/fpm-pool.conf /etc/php82/php-fpm.d/www.conf
+COPY --chown=nobody /docker/config/fpm-pool.conf /etc/php83/php-fpm.d/www.conf
 
 # Copy nginx config
 COPY --chown=nobody /docker/config/nginx.conf /etc/nginx/nginx.conf
