@@ -90,7 +90,7 @@ Environment variables are used to adjust the configuration. Alternatively, you c
 
 ## Requirements
 
-- PHP >= 8.2
+- PHP >= 8.3
 - Composer
 - PHP Extensions:
   - [`curl`](https://secure.php.net/manual/en/book.curl.php)
