@@ -16,11 +16,11 @@ FROM alpine:3.23.2
 RUN apk add --no-cache \
   nginx \
   curl \
-  php82 \
-  php82-curl \
-  php82-mbstring \
-  php82-simplexml \
-  php82-fpm
+  php83 \
+  php83-curl \
+  php83-mbstring \
+  php83-simplexml \
+  php83-fpm
 
 # Copy nginx config
 COPY --chown=nobody /docker/config/nginx.conf /etc/nginx/nginx.conf
