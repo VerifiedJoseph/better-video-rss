@@ -9,11 +9,11 @@ use Exception;
 
 class Request
 {
-    /** @var string $useragent HTTP request user-agent */
+    /** @var non-empty-string $useragent HTTP request user-agent */
     private string $useragent;
 
     /**
-     * @param string $useragent HTTP request user-agent
+     * @param non-empty-string $useragent HTTP request user-agent
      */
     public function __construct(string $useragent)
     {
@@ -29,10 +29,9 @@ class Request
      */
     public function get(string $url, array $headers = []): Response
     {
-        $ch = curl_init();
+        $ch = curl_init($url);
 
         curl_setopt_array($ch, [
-            CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_USERAGENT => $this->useragent
