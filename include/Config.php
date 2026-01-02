@@ -16,7 +16,7 @@ class Config
     /** @var array<int, string> $extensions Required PHP extensions */
     private array $extensions = ['curl', 'json', 'mbstring', 'simplexml'];
 
-    /** @var string $userAgent User agent used for HTTP requests */
+    /** @var non-empty-string $userAgent User agent used for HTTP requests */
     private string $userAgent = 'BetterVideoRss/%s (+https://github.com/VerifiedJoseph/BetterVideoRss)';
 
     /** @var array<int, string> $cspParts Content Security Policy header parts */
@@ -187,7 +187,7 @@ class Config
 
     /**
      * Returns version string
-     * @return string
+     * @return non-empty-string
      */
     public function getVersion(): string
     {
