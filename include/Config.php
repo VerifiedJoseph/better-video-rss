@@ -197,7 +197,7 @@ class Config
     /**
      * Returns user agent string
      *
-     * @return string
+     * @return non-empty-string
      */
     public function getUserAgent(): string
     {
