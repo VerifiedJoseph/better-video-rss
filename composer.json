@@ -21,7 +21,7 @@
         ]
     },
     "scripts": {
-        "lint": "phpstan --memory-limit=150M && phpcs",
+        "lint": "phpstan --memory-limit=200M && phpcs",
         "lint-phpstan": "phpstan",
         "lint-phpcs": "phpcs",
         "lint-phpcs-gh-action": "phpcs --report=checkstyle | cs2pr",
