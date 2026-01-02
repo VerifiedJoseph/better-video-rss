@@ -12,6 +12,7 @@ use App\Http\Response;
 #[UsesClass(Response::class)]
 class RequestTest extends TestCase
 {
+    /** @var non-empty-string */
     private string $useragent = 'phpunit-test';
 
     /**
