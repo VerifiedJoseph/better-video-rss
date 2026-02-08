@@ -11,7 +11,6 @@ use App\FeedFormat\HtmlFormat;
 #[CoversClass(FeedFormat::class)]
 #[CoversClass(HtmlFormat::class)]
 #[UsesClass(Config::class)]
-#[UsesClass(App\FeedFormat\FeedFormat::class)]
 #[UsesClass(App\Helper\Convert::class)]
 #[UsesClass(App\Helper\Format::class)]
 #[UsesClass(App\Helper\Json::class)]
