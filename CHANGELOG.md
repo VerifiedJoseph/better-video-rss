@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.9.4](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.9.4) - 2026-03-02
+
+- Updated minimum php version from 8.2 to 8.3 ([#548](https://github.com/VerifiedJoseph/better-video-rss/pull/548), [`2f01e7d`](https://github.com/VerifiedJoseph/better-video-rss/commit/2f01e7deba175d68279ef9f7b08bc8c541a57893))
+- Dockerfile: Updated composer from 2.8 to 2.9 ([#536](https://github.com/VerifiedJoseph/better-video-rss/pull/536), [`d69eeec`](https://github.com/VerifiedJoseph/better-video-rss/commit/d69eeec34913acb44348c13736b74ea9ef86fe87))
+- Dockerfile: Updated alpine from 3.23.2 to 3.23.3 ([#561](https://github.com/VerifiedJoseph/better-video-rss/pull/561), [`3cf6903`](https://github.com/VerifiedJoseph/better-video-rss/commit/3cf69039abb97c6f5e0d2f83825ad7ebbfa6ead1))
+- Dockerfile: Updated alpine from 3.22.2 to 3.23.2 ([#538](https://github.com/VerifiedJoseph/better-video-rss/pull/538), [`a21e78f`](https://github.com/VerifiedJoseph/better-video-rss/commit/a21e78fca66af4b65e2104d0a281a2f408c9dd81))
+
 ## [1.9.3](https://github.com/VerifiedJoseph/better-video-rss/releases/tag/v1.9.3) - 2025-10-20
 
 - Dockerfile: Updated alpine from 3.22.1 to 3.22.2 ([#531](https://github.com/VerifiedJoseph/better-video-rss/pull/531), [`5e24801`](https://github.com/VerifiedJoseph/better-video-rss/commit/5e2480150a60c81c0c80d181de20389c95aa3f98))
