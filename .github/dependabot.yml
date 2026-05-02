@@ -4,6 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "composer"
     directory: "/"
@@ -14,11 +16,15 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "phpstan/phpstan"
         update-types: ["version-update:semver-major"]
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
 
   # dev container
   - package-ecosystem: "docker"
@@ -28,9 +34,13 @@ updates:
     ignore:
       - dependency-name: "php"
         update-types: ["version-update:semver-minor"]
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "docker-compose"
     directory: "/.devcontainer/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
 
