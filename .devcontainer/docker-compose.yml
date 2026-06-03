@@ -14,7 +14,7 @@ services:
       - XDEBUG_MODE=coverage
 
   nginx:
-    image: nginx:1.29-alpine3.22-slim
+    image: nginx:1.29.3-alpine3.22-slim
     ports:
       - 8080:8080
     volumes:
