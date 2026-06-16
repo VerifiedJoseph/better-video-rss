@@ -43,9 +43,6 @@ updates:
     directory: "/.devcontainer/"
     schedule:
       interval: "monthly"
-    ignore:
-      - dependency-name: "nginx"
-        update-types: ["version-update:semver-patch"]
     cooldown:
       default-days: 7
 
