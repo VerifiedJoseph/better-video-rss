@@ -33,7 +33,9 @@ updates:
       interval: "monthly"
     ignore:
       - dependency-name: "php"
-        update-types: ["version-update:semver-minor"]
+        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
+      - dependency-name: "composer"
+        update-types: ["version-update:semver-patch"]
     cooldown:
       default-days: 7
 
@@ -41,6 +43,9 @@ updates:
     directory: "/.devcontainer/"
     schedule:
       interval: "monthly"
+    ignore:
+      - dependency-name: "nginx"
+        update-types: ["version-update:semver-patch"]
     cooldown:
       default-days: 7
 
