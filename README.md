@@ -9,41 +9,23 @@ BetterVideoRss is a PHP script for generating YouTube channel and playlist RSS f
 
 ## Installation
 
-### docker-compose
+### Docker Compose
 
 <details>
 <summary>Show/hide details</summary>
 
-```yaml
-version: '3'
+1) Clone the repository: `git clone https://github.com/VerifiedJoseph/better-video-rss`
 
-services:
-  app:
-    image: ghcr.io/verifiedjoseph/better-video-rss:1.9.4
-    container_name: BetterVideoRss
-    environment:
-      BVRSS_YOUTUBE_API_KEY: ''
-      BVRSS_SELF_URL_PATH: 'https://example.com/'
-      BVRSS_TIMEZONE: 'Europe/London'
-    ports:
-      - '127.0.0.1:8080:8080'
-    volumes:
-      - cache:/app/cache
-    cap_drop:
-      - ALL
-    security_opt:
-      - no-new-privileges:true
+2) Configure the container using the included [docker-compose.yml](docker-compose.yml) file.
 
-volumes:
-  cache:
-```
+3) Build and start the container: `docker compose up -d --build`
 
 </details>
 
 ### Manually
 
 <details>
-<summary>Show/hide install details</summary>
+<summary>Show/hide details</summary>
 
 1) Download the [latest release](https://github.com/VerifiedJoseph/better-video-rss/releases/latest) to your web server and extract the zip archive.
 
@@ -61,8 +43,6 @@ The cache and vendor folders do not need to be reachable in the browser and acce
 
 
 ## Configuration
-
-Environment variables are used to adjust the configuration. Alternatively, you can use `config.php` (copied from [`config.example.php`](config.example.php)).
 
 ### Required variables
 
