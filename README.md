@@ -16,7 +16,7 @@ BetterVideoRss is a PHP script for generating YouTube channel and playlist RSS f
 
 1) Clone the repository: `git clone https://github.com/VerifiedJoseph/better-video-rss`
 
-2) Configure the container using the included [docker-compose.yml](docker-compose.yml) file.
+2) Configure the container using the included [docker-compose](docker-compose.yml) file.
 
 3) Build and start the container: `docker compose up -d --build`
 
